@@ -1,0 +1,353 @@
+var win_html = `<div style="display: flex;">
+    <span style="cursor: -webkit-grab;">
+        <div id="chats">
+            <div style="margin: 5px;">
+                <button id="language" style="width:100px">Русский</button>
+                <button id="clean" style="margin: 0 0 0 25px">Clean</button>
+            </div>
+            <div style="margin: 15px 5px 5px 5px;">
+                <button id="Hello">Приветствие</button>    
+                <button style="margin: 0 5px 0 5px;" id="la">long ans</button>
+            </div>
+            <div style="margin: 5px;">
+                <button id="lesson_NS">Урок NS</button>
+                <button  style="margin: 0 5px 0 5px;" id="call-test">Тест связи</button>
+            </div>
+            <div style="margin: 5px;">
+                <input id="ticket_number" placeholder="Тикет" autocomplete="off" type="text" style="text-align: center; width: 100px; color: black;">
+                <button id="ticket_str">строка</button>
+            </div>
+            <div style="margin: 5px;">
+                <button id="tc">tc + РГ</button>
+                <button style="margin: 0 0 0 5px;"id="ph">Телефония</button>
+            </div>
+            <div style="margin: 5px;">
+                <button id="duty_why" style="width:100px; text-align:center;">Телефония</button>
+                <button id="tag_duty">зовём 2Л</button>
+            </div>
+        </div>
+    </span>
+</div>`;
+
+
+var win_html2 =  
+    `<div style="display: flex;">
+        <span style="cursor: -webkit-grab;">
+            <div id="timer" style="margin:5px;">
+                <center><span id="my_timer" style="color: #f00; font-size: 150%; font-weight: bold;">00:00</span></center>
+            </div> 
+        </span>
+    </div>`;
+//Добавляем стили
+let mstl = document.createElement('style');
+document.body.append(mstl);
+var style = `.win_btn {
+    background-color: #768d87;
+    border-radius: 10px;
+    border: 1px solid #566963;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 3px 2px;
+    margin: -2px 1px;
+}
+button {
+    background-color:#768d87;
+    border-radius:5px; 
+    border:1px solid #566963; 
+    color:#ffffff; 
+    padding:2px 2px;
+}`
+mstl.innerHTML = style;
+
+//Сохранение позиции окна
+if (localStorage.getItem('winTop1') == null) {
+    localStorage.setItem('winTop1', '120');
+    localStorage.setItem('winLeft1', '295');
+}
+if (localStorage.getItem('winTop2') == null) {
+    localStorage.setItem('winTop2', '120');
+    localStorage.setItem('winLeft2', '295');
+}
+if (localStorage.getItem('time') == null) {
+    var curTime = new Date();
+    localStorage.setItem('time', Number(curTime));
+}
+
+// Создаем само окно
+let wint = document.createElement('div');
+document.body.append(wint);
+wint.style = 'min-height: 68px; max-height: 750px; min-width: 76px; max-width: 370px; background: wheat; top: ' + localStorage.getItem('winTop1') + 'px; left: ' + localStorage.getItem('winLeft1') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black;';
+wint.setAttribute('id' ,'main_es_chat_win');
+wint.innerHTML = win_html;
+
+// Создаем 2 окно
+let wint2 = document.createElement('div');
+document.body.append(wint2);
+wint2.style = 'min-height: 25px; max-height: 750px; min-width: 65px; max-width: 370px; background: wheat; top: ' + localStorage.getItem('winTop2') + 'px; left: ' + localStorage.getItem('winLeft2') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black;';
+wint2.setAttribute('id' ,'main_timer');
+wint2.innerHTML = win_html2;    
+
+function move_again() {
+    
+    let wint = document.getElementById('main_es_chat_win');
+
+    //Перемещение окна
+    var listener = function(e , a) {
+        wint.style.left = Number(e.clientX - myX) + "px";
+        wint.style.top = Number(e.clientY - myY) + "px";
+        localStorage.setItem('winTop1', String(Number(e.clientY - myY)));
+        localStorage.setItem('winLeft1', String(Number(e.clientX - myX)));
+    };
+    wint.firstElementChild.firstElementChild.onmousedown = function (a) {
+        window.myX = a.layerX; 
+        window.myY = a.layerY; 
+        document.addEventListener('mousemove', listener);
+    }
+    wint.onmouseup = function () {document.removeEventListener('mousemove', listener);}
+    
+    
+    var listener2 = function(e , a) {
+        wint2.style.left = Number(e.clientX - myX2) + "px";
+        wint2.style.top = Number(e.clientY - myY2) + "px";
+        localStorage.setItem('winTop2', String(Number(e.clientY - myY2)));
+        localStorage.setItem('winLeft2', String(Number(e.clientX - myX2)));
+    };
+    wint2.firstElementChild.firstElementChild.onmousedown = function (a) {
+        window.myX2 = a.layerX; 
+        window.myY2 = a.layerY; 
+        document.addEventListener('mousemove', listener2);
+    }
+    wint2.onmouseup = function () {document.removeEventListener('mousemove', listener2);}
+    
+    
+    document.getElementById('language').onclick = function () {
+        if(this.innerHTML == "Русский") {
+            this.innerHTML = "Английский";
+        } else {
+            this.innerHTML = "Русский";
+        }
+    };  
+    document.getElementById('Hello').onclick = function () {
+        if (document.getElementById('language').innerHTML == 'Русский') {
+            copyToComment("Здравствуйте, Александр на связи!");
+        } else {
+            copyToComment("Hello, Alexandr in touch!");
+        }
+    };    
+    document.getElementById('lesson_NS').onclick = function () {
+        if (document.getElementById('language').innerHTML == 'Русский') {
+            copyToComment("Воспользуйтесь данной инструкцией, а затем напишите, удалось ли вам наладить связь \n\
+\n\
+1. Завершаете урок через Finish\n\
+2. Создаете урок через New Student - http://joxi.ru/v298jgeTzKyKYm  \n\
+3. Копируете ссылку и отправляете в чат ученику, заранее предупредив его об этом, так как кнопка войти в класс уже не будет функционировать.\
+");
+        } else {
+            copyToComment("Use this instruction, and then write if you managed to establish a connection \n \
+\n \
+1. End the lesson by clicking Finish \n \
+2. Create a lesson through New Student - http://joxi.ru/v298jgeTzKyKYm \n \
+3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function.");
+        }
+    }; 
+    document.getElementById('ticket_str').onclick = function () {
+        let tckt = document.getElementById('ticket_number').value;
+        while(tckt[0] < '0' || tckt[0] > '9')
+            tckt = tckt.slice(1);
+        l = tckt.length - 1;
+        while(tckt[l] < '0' || tckt[l] > '9') {
+            tckt = tckt.slice(0, -1);
+            l = l - 1;   
+        }
+        if (document.getElementById('language').innerHTML == 'Русский') {
+            copyToComment('Создал обращение ' + tckt + '. ' + "Информация о проделанной работе будет дублироваться вам на корпоративную почту.");
+        } else {
+            copyToComment('I am creating a ticket to resolve the issue. \nTicket number is ' + tckt + '. ' + "All information about the work done will be duplicated to you by mail.");
+        }
+        document.body.removeChild(l);
+        document.body.removeChild(tckt);
+    };
+    document.getElementById('tc').onclick = function () {
+        if (document.getElementById('language').innerHTML == 'Русский') {
+            copyToComment("Обратитесь с этим вопросом в teachers care или к вашему руководителю.");
+        } else {
+            copyToComment("Contact teachers care or your group manager with this question.");
+        }
+    }; 
+    document.getElementById('la').onclick = function () {
+        if (document.getElementById('language').innerHTML == 'Русский') {
+            copyToComment("Извините за долгий ответ.");
+        } else {
+            copyToComment("I apologize for not responding for a long time.");
+        }
+    }; 
+    document.getElementById('call-test').onclick = function () {
+        if (document.getElementById('language').innerHTML == 'Русский') {
+            copyToComment("Перейдите, пожалуйста, сейчас в тест видеосвязи и скажите, слышите ли вы себя на этой вкладке: http://joxi.ru/LmGoXwQTJN08dm");
+        } else {
+            copyToComment("Please go to the video call test now and tell me if you hear yourself on this tab: http://joxi.ru/KAgLvw9TXGdZjr");
+        }
+    }; 
+    document.getElementById('ph').onclick = function () {
+        copyToComment("Воспользуйтесь этой инструкцией: http://bvl.usedocs.com/collection/1686");
+    }; 
+    document.getElementById('tag_duty').onclick = function () {
+        let d = document.getElementById('duty_why').innerHTML;
+        copyToClipboard("@2duty \n" + window.location.href + "\n" + d);
+        copyToComment("Зову коллег");
+		document.body.removeChild(d);
+    };
+    document.getElementById('duty_why').onclick = function () {
+        if(this.innerHTML == "Телефония") {
+            this.innerHTML = "БД";
+        } else {
+            this.innerHTML = "Телефония";
+        }
+    }
+    document.getElementById('clean').onclick = function () {
+        copyToComment("");
+        document.getElementById('ticket_number').value = "";
+    }; 
+    if (window.location.href.indexOf('chat') === -1) {
+        document.getElementById('main_es_chat_win').style.display='none';
+    } else {
+        var buttons = document.getElementsByClassName("btn_add_reply");
+        buttons[0].onclick = function() {
+            if(buttons[0].classList.contains('active')) {
+                var curTime = new Date();
+                localStorage.setItem('time', Number(curTime));
+            }
+        }
+        var closebt = document.getElementById('chat_close').childNodes[0];
+        closebt.onclick = function() {
+            var curTime = new Date();
+            localStorage.setItem('time', Number(curTime));
+        }
+    }
+    if(window.location.href.indexOf('record') !== -1) {
+        var chosen = document.getElementById('case_staff_id_chosen').childNodes[0].childNodes[0].textContent;
+        var button_update = document.getElementsByClassName("alpha3_mod_wrap");
+        button_update[0].onclick = function() {
+            var curTime = new Date();
+            localStorage.setItem('time', Number(curTime));
+        }        
+        button_update[1].onclick = function() {
+            var curTime = new Date();
+            localStorage.setItem('time', Number(curTime));
+        }
+        var note_save = document.getElementsByClassName("_save_note_button");
+        note_save[0].onclick = function() {
+            if(!note_save[0].classList.contains('disabled')) {
+                var curTime = new Date();
+                localStorage.setItem('time', Number(curTime));
+            }
+        }
+        var lbl_staff = document.getElementsByClassName("set_staff");
+        lbl_staff[0].onclick = function() {
+            var chosen2 = document.getElementById('case_staff_id_chosen').childNodes[0].childNodes[0].textContent;
+            if(chosen != chosen2) {
+                var curTime = new Date();
+                localStorage.setItem('time', Number(curTime));
+            }
+        }
+        
+        var newbuttons = document.getElementsByClassName('fl-right req-status-action')[0];
+        let secLine = document.createElement('span');
+        secLine.innerHTML = "На 2Л";
+        secLine.classList.add('inl');
+        secLine.style.marginRight = "15px";
+        secLine.onclick = function() {
+            document.getElementById('case_staff_id').value = '0';
+            document.getElementById('case_group_id').value = '35949';
+            document.getElementById('case_staff_id_chosen').childNodes[0].childNodes[0].textContent = "Не назначен";
+            document.getElementById('case_group_id_chosen').childNodes[0].childNodes[0].textContent = "Техподдержка: 2-я линия";
+            
+            document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl active-item";
+            document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl";
+            document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl";
+        
+            var button_update1 = document.getElementsByClassName("alpha3_mod_wrap");
+            console.log(button_update1[0] + '\n' + button_update[1].style.display);
+            if(button_update1[1].style.display == 'none') {
+                button_update1[0].style.display = 'block'
+                document.getElementsByClassName('alpha3_mod_btn')[0].removeAttribute('disabled');
+            }
+        }        
+        let inBox = document.createElement('span');
+        inBox.innerHTML = "В бокс";
+        inBox.classList.add('inl');
+        inBox.style.marginRight = "15px";
+        inBox.onclick = function() {
+            document.getElementById('case_staff_id').value = '0';
+            document.getElementById('case_group_id').value = '35950';
+            document.getElementById('case_staff_id_chosen').childNodes[0].childNodes[0].textContent = "Не назначен";
+            document.getElementById('case_group_id_chosen').childNodes[0].childNodes[0].textContent = "Техподдержка: 1-я линия";
+            
+            document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl active-item";
+            document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl";
+            document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl";
+        
+            var button_update1 = document.getElementsByClassName("alpha3_mod_wrap");
+            if(button_update1[1].style.display == 'none') {
+                button_update1[0].style.display = 'block'
+                document.getElementsByClassName('alpha3_mod_btn')[0].removeAttribute('disabled');
+            }
+        }
+        newbuttons.insertBefore(inBox, newbuttons.children[0]);
+        newbuttons.insertBefore(secLine, newbuttons.children[0]);
+    }
+}
+move_again();
+let audio = new Audio("https://ustyugov.net/tmp/msg.mp3");
+  function startTimer() {
+    var time = localStorage.getItem('time');
+    var cT = new Date();
+    var curTime1 = Number(time);
+    var curTime2 = Number(cT);
+    var curTime3 = (15 * 60) - Math.floor((curTime2 - curTime1) / 1000);
+    if(curTime3 < 0) {
+        setTimeout(startTimer, 1000);
+        return;
+    }
+    if(curTime3 == 300) {
+        audio.play()
+    }
+    var m = Math.floor(curTime3 / 60);
+    var s = Math.floor(curTime3 % 60);
+    var curTime4 = "";    
+    if(Number(m) < 10) {
+        curTime4 = "0";
+    }
+    curTime4 = curTime4 + String(m) + ":";
+    if(Number(s) < 10) {
+        curTime4 = curTime4 + "0";
+    }
+    curTime4 = curTime4 + String(s);
+    document.getElementById("my_timer").innerHTML = curTime4;
+    setTimeout(startTimer, 1000);
+  }
+startTimer();
+
+const copyToClipboard = str => {
+    const el = document.createElement('textarea');
+    el.value = str;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+};
+
+const copyToComment = str => {
+    var buttons = document.getElementsByClassName("btn_add_reply");
+    var tabttl = document.getElementsByClassName("tab-title req-status-waiting inl");
+
+	document.getElementById('comment').value = str;
+	document.getElementById('comment').focus();
+	if(str == "") {
+	    buttons[0].className = "btn_add_reply";
+	    tabttl[0].className = "tab-title req-status-waiting inl";
+	} else {
+	    buttons[0].className = "btn_add_reply active";
+	    tabttl[0].className = "tab-title req-status-waiting inl active-item";
+	}
+};
