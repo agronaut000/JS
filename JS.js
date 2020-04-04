@@ -196,7 +196,7 @@ function move_again() {
             l = l - 1;   
         }
         if (document.getElementById('language').innerHTML == 'Русский') {
-            copyToComment('Работа будет проводится в обращении #' + tckt + ", Информация о проделанной работе будет дублироваться вам на корпоративную почту.");
+            copyToComment('Работа будет проводится в обращении #' + tckt + ", информация о проделанной работе будет дублироваться вам на корпоративную почту.");
         } else {
             copyToComment('I am creating a ticket to resolve the issue. \nTicket number is ' + tckt + '. ' + "All information about the work done will be duplicated to you by mail.");
         }
