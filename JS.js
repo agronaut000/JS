@@ -3,7 +3,8 @@ var win_html = `<div style="display: flex;">
         <div id="chats">
             <div style="margin: 5px;">
                 <button id="language" style="width:100px">Русский</button>
-                <button id="clean" style="margin: 0 0 0 25px">Clean</button>
+                <button id="settings" style="margin: 0 0 0 5px">s</button>
+                <button id="clean" style="margin: 0 0 0 5px">Clean</button>
             </div>
             <div style="margin: 15px 5px 5px 5px;">
                 <button id="Hello">Приветствие</button>    
@@ -11,7 +12,7 @@ var win_html = `<div style="display: flex;">
             </div>
             <div style="margin: 5px;">
                 <button id="lesson_NS">Урок NS</button>
-                <button  style="margin: 0 5px 0 5px;" id="call-test">Тест связи</button>
+                <button style="margin: 0 5px 0 5px;" id="call-test">Тест связи</button>
             </div>
             <div style="margin: 5px;">
                 <input id="ticket_number" placeholder="Тикет" autocomplete="off" type="text" style="text-align: center; width: 100px; color: black;">
@@ -27,6 +28,20 @@ var win_html = `<div style="display: flex;">
             </div>
         </div>
     </span>
+	<span style="border: 2px double black; display: none" id="set">
+        <div style="margin: 5px;">
+            <input id="name1_in" placeholder="Имя" autocomplete="off" type="text" style="text-align: center; width: 100px; color: black;">
+		</div>
+        <div style="margin: 5px;">
+            <input id="name2_in" placeholder="Name" autocomplete="off" type="text" style="text-align: center; width: 100px; color: black;">
+		</div>
+		<div style="margin: 5px;">
+		    <center><button id="name_save">save</button></center>
+		</div>
+		<div>
+			<center><p style="color: #f00; font-size: 110%; font-weight: bold; display:none" id="name_error">Введите имя!!</p></center>
+		</div>
+	</span>
 </div>`;
 
 
@@ -127,11 +142,31 @@ function move_again() {
             this.innerHTML = "Русский";
         }
     };  
-    document.getElementById('Hello').onclick = function () {
-        if (document.getElementById('language').innerHTML == 'Русский') {
-            copyToComment("Здравствуйте, Александр на связи!");
+    document.getElementById('name_save').onclick = function () {
+        let name1 = document.getElementById('name1_in').value;
+        localStorage.setItem('name1', name1);
+        let name2 = document.getElementById('name2_in').value;
+        localStorage.setItem('name2', name2);
+        document.getElementById('set').style.display = "none";
+    }
+    document.getElementById('settings').onclick = function () {
+        if(document.getElementById('set').style.display == "none") {
+            document.getElementById('set').style.display = "block";
         } else {
-            copyToComment("Hello, Alexandr in touch!");
+            document.getElementById('set').style.display = "none";
+        }
+    }
+    document.getElementById('Hello').onclick = function () {
+		if(localStorage.getItem('name1') == null || localStorage.getItem('name2') == null ||
+		localStorage.getItem('name1') == "" || localStorage.getItem('name2') == "") {
+            document.getElementById('set').style.display = "block";
+			document.getElementById('name_error').style.display = "block";
+			return;
+		}
+        if (document.getElementById('language').innerHTML == 'Русский') {
+            copyToComment("Здравствуйте, " + localStorage.getItem('name1') + " на связи!");
+        } else {
+            copyToComment("Hello, " + localStorage.getItem('name2') + " in touch!");
         }
     };    
     document.getElementById('lesson_NS').onclick = function () {
@@ -160,7 +195,7 @@ function move_again() {
             l = l - 1;   
         }
         if (document.getElementById('language').innerHTML == 'Русский') {
-            copyToComment('Создал обращение ' + tckt + '. ' + "Информация о проделанной работе будет дублироваться вам на корпоративную почту.");
+            copyToComment('Работа будет проводится в обращении #' + tckt + ", Информация о проделанной работе будет дублироваться вам на корпоративную почту.");
         } else {
             copyToComment('I am creating a ticket to resolve the issue. \nTicket number is ' + tckt + '. ' + "All information about the work done will be duplicated to you by mail.");
         }
