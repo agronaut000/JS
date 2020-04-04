@@ -148,6 +148,7 @@ function move_again() {
         let name2 = document.getElementById('name2_in').value;
         localStorage.setItem('name2', name2);
         document.getElementById('set').style.display = "none";
+		document.getElementById('name_error').style.display = "none";
     }
     document.getElementById('settings').onclick = function () {
         if(document.getElementById('set').style.display == "none") {
