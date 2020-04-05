@@ -252,7 +252,7 @@ function move_again() {
             if(buttons[0].classList.contains('active')) {
                 var curTime = new Date();
                 localStorage.setItem('time', Number(curTime));
-				document.getElementById("ticket_number").value = "";
+		document.getElementById("ticket_number").value = "";
             }
         }
         var closebt = document.getElementById('chat_close').childNodes[0];
