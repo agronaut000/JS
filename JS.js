@@ -190,7 +190,7 @@ function move_again() {
         let tckt = document.getElementById('ticket_number').value;
         while(tckt[0] < '0' || tckt[0] > '9')
             tckt = tckt.slice(1);
-        l = tckt.length - 1;
+        var l = tckt.length - 1;
         while(tckt[l] < '0' || tckt[l] > '9') {
             tckt = tckt.slice(0, -1);
             l = l - 1;   
