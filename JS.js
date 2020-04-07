@@ -372,6 +372,7 @@ function move_again() {
         newbuttons.insertBefore(inBox, newbuttons.children[0]);
         newbuttons.insertBefore(secLine, newbuttons.children[0]);
         newbuttons.insertBefore(tck_dbl, newbuttons.children[0]);
+		
     }
 }
 move_again();
@@ -404,6 +405,27 @@ let audio = new Audio("https://ustyugov.net/tmp/msg.mp3");
     setTimeout(startTimer, 1000);
   }
 startTimer();
+
+
+function create_high_btn() {
+    const menu = document.getElementsByClassName('footer-toolbar-inner')[0];
+    const btn1 = document.createElement('span');
+    menu.insertBefore(btn1, menu.children[2]);
+    btn1.id = 'chat_edit';
+    btn1.innerHTML = '<a style="float: left; margin-right: 15px; margin-top: 10px; color: DarkKhaki; cursor: pointer;">Высокий</a>';
+    btn1.setAttribute('onClick', 'document.getElementById(\'priority-select\').value = 3; UpdateCaseParams();')
+};
+
+localStorage.getItem(['chat_high'], function(result) {
+    if (result['chat_high'] === undefined) { localStorage.setItem({chat_high: true}, function() {}); }
+    if (result['chat_high'] === true) {
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        script.innerHTML = '(' + create_high_btn.toString() + ")();"
+        document.getElementsByTagName("head")[0].appendChild(script);
+    }
+});
+create_high_btn()
 
 const copyToClipboard = str => {
     const el = document.createElement('textarea');
