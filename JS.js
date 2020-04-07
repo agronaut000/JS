@@ -245,6 +245,7 @@ function move_again() {
     if (window.location.href.indexOf('chat') === -1) {
         document.getElementById('main_es_chat_win').style.display='none';
     } else {
+		create_high_btn()
         var buttons = document.getElementsByClassName("btn_add_reply");
 		var bool = 0;
 		window.onkeydown = function(e) {
@@ -421,7 +422,6 @@ localStorage.getItem(['chat_high'], function(result) {
         document.getElementsByTagName("head")[0].appendChild(script);
     }
 });
-create_high_btn()
 
 const copyToClipboard = str => {
     const el = document.createElement('textarea');
