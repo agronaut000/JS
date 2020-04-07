@@ -200,8 +200,6 @@ function move_again() {
         } else {
             copyToComment('I am creating a ticket to resolve the issue. \nTicket number is ' + tckt + '. ' + "All information about the work done will be duplicated to you by mail.");
         }
-        document.body.removeChild(l);
-        document.body.removeChild(tckt);
     };
     document.getElementById('tc').onclick = function () {
         if (document.getElementById('language').innerHTML == 'Русский') {
@@ -248,11 +246,31 @@ function move_again() {
         document.getElementById('main_es_chat_win').style.display='none';
     } else {
         var buttons = document.getElementsByClassName("btn_add_reply");
+		var bool = 0;
+		window.onkeydown = function(e) {
+				if(e.key == 'Control') {
+						bool = 1;
+				}
+				if(e.key == 'Enter' && bool == 1 && buttons[0].classList.contains('active')) {
+					var curTime = new Date();
+					localStorage.setItem('time', Number(curTime));
+					if(!document.getElementsByClassName('chat_msg_win_box_wrap')[0].classList.contains('bg-add-note')) {
+						document.getElementById("ticket_number").value = "";
+					}
+				}
+			}
+		window.onkeyup = function(e) {
+			if(e.key == 'Control') {
+				bool = 0;
+			}
+		}
         buttons[0].onclick = function() {
             if(buttons[0].classList.contains('active')) {
                 var curTime = new Date();
                 localStorage.setItem('time', Number(curTime));
-		document.getElementById("ticket_number").value = "";
+				if(!document.getElementsByClassName('chat_msg_win_box_wrap')[0].classList.contains('bg-add-note')) {
+					document.getElementById("ticket_number").value = "";
+				}
             }
         }
         var closebt = document.getElementById('chat_close').childNodes[0];
@@ -267,18 +285,20 @@ function move_again() {
         button_update[0].onclick = function() {
             var curTime = new Date();
             localStorage.setItem('time', Number(curTime));
-        }        
-        button_update[1].onclick = function() {
-            var curTime = new Date();
-            localStorage.setItem('time', Number(curTime));
-        }
-        var note_save = document.getElementsByClassName("_save_note_button");
-        note_save[0].onclick = function() {
-            if(!note_save[0].classList.contains('disabled')) {
-                var curTime = new Date();
-                localStorage.setItem('time', Number(curTime));
-            }
-        }
+        }  		
+        if(window.location.href.indexOf('parent') === -1) {
+			button_update[1].onclick = function() {
+				var curTime = new Date();
+				localStorage.setItem('time', Number(curTime));
+			}
+			var note_save = document.getElementsByClassName("_save_note_button");
+			note_save[0].onclick = function() {
+				if(!note_save[0].classList.contains('disabled')) {
+					var curTime = new Date();
+					localStorage.setItem('time', Number(curTime));
+				}
+			}
+		}
         var lbl_staff = document.getElementsByClassName("set_staff");
         lbl_staff[0].onclick = function() {
             var chosen2 = document.getElementById('case_staff_id_chosen').childNodes[0].childNodes[0].textContent;
@@ -289,6 +309,32 @@ function move_again() {
         }
         
         var newbuttons = document.getElementsByClassName('fl-right req-status-action')[0];
+		
+		
+        let tck_dbl = document.createElement('span');
+        tck_dbl.innerHTML = "Дубль";
+        tck_dbl.classList.add('inl');
+        tck_dbl.style.marginRight = "15px";
+        tck_dbl.onclick = function() {
+			let text = "Дубль";
+			localStorage.setItem('label', text);
+			all_labels_list.forEach( function (a) {
+				if (a.text == text) {AddLabels(a.id.slice(2))}
+			})
+			document.getElementsByClassName('case_update_button')[0].removeAttribute('disabled');
+			
+            document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl";
+            document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl";
+            document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl active-item";
+			if(window.location.href.indexOf('parent') === -1) {
+				document.getElementsByClassName("icheckbox_square-blue")[6].className = "icheckbox_square-blue checked";
+			} else {
+				document.getElementsByClassName("icheckbox_square-blue")[3].className = "icheckbox_square-blue checked";
+			}
+
+		}
+		
+		
         let secLine = document.createElement('span');
         secLine.innerHTML = "На 2Л";
         secLine.classList.add('inl');
@@ -299,16 +345,12 @@ function move_again() {
             document.getElementById('case_staff_id_chosen').childNodes[0].childNodes[0].textContent = "Не назначен";
             document.getElementById('case_group_id_chosen').childNodes[0].childNodes[0].textContent = "Техподдержка: 2-я линия";
             
+			document.getElementsByClassName('case-staff-colorful')[0].setAttribute('data-current-staff', "0");
             document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl active-item";
             document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl";
             document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl";
         
-            var button_update1 = document.getElementsByClassName("alpha3_mod_wrap");
-            console.log(button_update1[0] + '\n' + button_update[1].style.display);
-            if(button_update1[1].style.display == 'none') {
-                button_update1[0].style.display = 'block'
-                document.getElementsByClassName('alpha3_mod_btn')[0].removeAttribute('disabled');
-            }
+			document.getElementsByClassName('case_update_button')[0].removeAttribute('disabled');
         }        
         let inBox = document.createElement('span');
         inBox.innerHTML = "В бокс";
@@ -320,18 +362,16 @@ function move_again() {
             document.getElementById('case_staff_id_chosen').childNodes[0].childNodes[0].textContent = "Не назначен";
             document.getElementById('case_group_id_chosen').childNodes[0].childNodes[0].textContent = "Техподдержка: 1-я линия";
             
-            document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl active-item";
-            document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl";
+			document.getElementsByClassName('case-staff-colorful')[0].setAttribute('data-current-staff', "0");
+            document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl";
+            document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl active-item";
             document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl";
         
-            var button_update1 = document.getElementsByClassName("alpha3_mod_wrap");
-            if(button_update1[1].style.display == 'none') {
-                button_update1[0].style.display = 'block'
-                document.getElementsByClassName('alpha3_mod_btn')[0].removeAttribute('disabled');
-            }
+			document.getElementsByClassName('case_update_button')[0].removeAttribute('disabled');
         }
         newbuttons.insertBefore(inBox, newbuttons.children[0]);
         newbuttons.insertBefore(secLine, newbuttons.children[0]);
+        newbuttons.insertBefore(tck_dbl, newbuttons.children[0]);
     }
 }
 move_again();
@@ -382,9 +422,7 @@ const copyToComment = str => {
 	document.getElementById('comment').focus();
 	if(str == "") {
 	    buttons[0].className = "btn_add_reply";
-	    tabttl[0].className = "tab-title req-status-waiting inl";
 	} else {
 	    buttons[0].className = "btn_add_reply active";
-	    tabttl[0].className = "tab-title req-status-waiting inl active-item";
 	}
 };
