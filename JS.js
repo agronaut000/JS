@@ -326,11 +326,7 @@ function move_again() {
             document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl";
             document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl";
             document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl active-item";
-			if(window.location.href.indexOf('parent') === -1) {
-				document.getElementsByClassName("icheckbox_square-blue")[6].className = "icheckbox_square-blue checked";
-			} else {
-				document.getElementsByClassName("icheckbox_square-blue")[3].className = "icheckbox_square-blue checked";
-			}
+			update_form.field_2483.parentNode.className = "icheckbox_square-blue checked";
 
 		}
 		
