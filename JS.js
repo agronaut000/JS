@@ -322,12 +322,16 @@ function move_again() {
 			all_labels_list.forEach( function (a) {
 				if (a.text == text) {AddLabels(a.id.slice(2))}
 			})
-			document.getElementsByClassName('case_update_button')[0].removeAttribute('disabled');
+            	document.getElementsByClassName('case_update_button')[0].removeAttribute('disabled');
 			
-            document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl";
-            document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl";
-            document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl active-item";
-	    update_form.field_2483.parentNode.className = "icheckbox_square-blue checked";
+           	document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl";
+            	document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl";
+            	document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl active-item";
+			if(update_form.field_2483.parentNode.className == "icheckbox_square-blue checked")
+				return;
+			else 
+				update_form.field_2483.parentNode.click();
+	    
 
 		}
 		
@@ -342,12 +346,12 @@ function move_again() {
             document.getElementById('case_staff_id_chosen').childNodes[0].childNodes[0].textContent = "Не назначен";
             document.getElementById('case_group_id_chosen').childNodes[0].childNodes[0].textContent = "Техподдержка: 2-я линия";
             
-			document.getElementsByClassName('case-staff-colorful')[0].setAttribute('data-current-staff', "0");
+            document.getElementsByClassName('case-staff-colorful')[0].setAttribute('data-current-staff', "0");
             document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl active-item";
             document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl";
             document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl";
         
-			document.getElementsByClassName('case_update_button')[0].removeAttribute('disabled');
+            document.getElementsByClassName('case_update_button')[0].removeAttribute('disabled');
         }        
         let inBox = document.createElement('span');
         inBox.innerHTML = "В бокс";
@@ -359,16 +363,16 @@ function move_again() {
             document.getElementById('case_staff_id_chosen').childNodes[0].childNodes[0].textContent = "Не назначен";
             document.getElementById('case_group_id_chosen').childNodes[0].childNodes[0].textContent = "Техподдержка: 1-я линия";
             
-			document.getElementsByClassName('case-staff-colorful')[0].setAttribute('data-current-staff', "0");
+            document.getElementsByClassName('case-staff-colorful')[0].setAttribute('data-current-staff', "0");
             document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl";
             document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl active-item";
             document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl";
         
-			document.getElementsByClassName('case_update_button')[0].removeAttribute('disabled');
+            document.getElementsByClassName('case_update_button')[0].removeAttribute('disabled');
         }
         newbuttons.insertBefore(inBox, newbuttons.children[0]);
         newbuttons.insertBefore(secLine, newbuttons.children[0]);
-        //newbuttons.insertBefore(tck_dbl, newbuttons.children[0]);
+        newbuttons.insertBefore(tck_dbl, newbuttons.children[0]);
 		
     }
 }
