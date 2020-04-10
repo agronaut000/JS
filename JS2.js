@@ -208,12 +208,12 @@ function move_again() {
 
   
     document.getElementById('testTeacher').onclick = function () {
-        chrome.runtime.sendMessage({name: "ChM", question: 'get_login_link', id: "6673311"}, function(response) {
+        chrome.runtime.sendMessage('ppnhofmogidhccmfjojekbaegejeaboi', {name: "ChM", question: 'get_login_link', id: "6673311"}, function(response) {
             copyToClipboard(response.answer.data.link);
         });
     }
     document.getElementById('testStudent').onclick = function () {
-        chrome.runtime.sendMessage({name: "ChM", question: 'get_login_link', id: "6673259"}, function(response) {
+        chrome.runtime.sendMessage('ppnhofmogidhccmfjojekbaegejeaboi', {name: "ChM", question: 'get_login_link', id: "6673259"}, function(response) {
             copyToClipboard(response.answer.data.link);
         });
     }
