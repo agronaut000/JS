@@ -58,15 +58,6 @@ var win_html = `<div style="display: flex;">
 		<div style="margin: 5px;">
 		    <center><button id="srv_save">save</button></center>
 		</div>
-		<div style="margin: 5px;">
-			<input id="tteacherID" placeholder="Препод" autocomplete="off" type="text" style="text-align: center; width: 100px; color: black;">
-		</div>
-		<div style="margin: 5px;">
-			<input id="tstudentID" placeholder="Ученик" autocomplete="off" type="text" style="text-align: center; width: 100px; color: black;">
-		</div>
-		<div style="margin: 5px;">
-		    <center><button id="usrs_save">save</button></center>
-		</div>
 	</span>
 </div>`;
 
@@ -169,11 +160,6 @@ function move_again() {
             this.innerHTML = "Русский";
         }
     };  
-    document.getElementById('usrs_save').onclick = function () {
-		localStorage.setItem('teachID', tteacherID);
-		localStorage.setItem('studID', tstudentID);
-        document.getElementById('set').style.display = "none";
-	}
     document.getElementById('name_save').onclick = function () {
         let name1 = document.getElementById('name1_in').value;
         localStorage.setItem('name1', name1);
