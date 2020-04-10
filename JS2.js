@@ -92,12 +92,6 @@ button {
 }`
 mstl.innerHTML = style;
 
-var win_html3 = `<div style="display: flex;">
-<span style="cursor: -webkit-grab;">
-                <button id="testStudent" style="width:75px">Тест У</button>
-                <button id="testTeacher" style="width:75px">Тест П</button>
-        </span>
-            </div>`;
 //Сохранение позиции окна
 if (localStorage.getItem('winTop1') == null) {
     localStorage.setItem('winTop1', '120');
@@ -110,10 +104,6 @@ if (localStorage.getItem('winTop2') == null) {
 if (localStorage.getItem('time') == null) {
     var curTime = new Date();
     localStorage.setItem('time', Number(curTime));
-}
-if (localStorage.getItem('winTop3') == null) {
-    localStorage.setItem('winTop3', '120');
-    localStorage.setItem('winLeft3', '295');
 }
 
 
@@ -131,11 +121,6 @@ wint2.style = 'min-height: 25px; max-height: 750px; min-width: 65px; max-width: 
 wint2.setAttribute('id' ,'main_timer');
 wint2.innerHTML = win_html2; 
 
-let wint3 = document.createElement('div');
-document.body.append(wint3);
-wint3.style = 'min-height: 25px; max-height: 750px; min-width: 65px; max-width: 370px; background: wheat; top: ' + localStorage.getItem('winTop3') + 'px; left: ' + localStorage.getItem('winLeft3') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black;';
-wint3.setAttribute('id', 'testUsers');
-wint3.innerHTML = win_html3;    
 function move_again() {
     
     let wint = document.getElementById('main_es_chat_win');
@@ -166,19 +151,6 @@ function move_again() {
         document.addEventListener('mousemove', listener2);
     }
 	
-    wint3.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
-    var listener3 = function(e , a) {
-        wint3.style.left = Number(e.clientX - myX3) + "px";
-        wint3.style.top = Number(e.clientY - myY3) + "px";
-        localStorage.setItem('winTop3', String(Number(e.clientY - myY3)));
-        localStorage.setItem('winLeft3', String(Number(e.clientX - myX3)));
-    };
-    wint3.firstElementChild.firstElementChild.onmousedown = function (a) {
-        window.myX3 = a.layerX; 
-        window.myY3 = a.layerY; 
-        document.addEventListener('mousemove', listener3);
-    }
-    wint3.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
     
     
     document.getElementById('language').onclick = function () {
@@ -202,20 +174,6 @@ function move_again() {
         } else {
             document.getElementById('set').style.display = "none";
         }
-    }
-
-
-
-  
-    document.getElementById('testTeacher').onclick = function () {
-        chrome.runtime.sendMessage('ppnhofmogidhccmfjojekbaegejeaboi', {name: "ChM", question: 'get_login_link', id: "6673311"}, function(response) {
-            copyToClipboard(response.answer.data.link);
-        });
-    }
-    document.getElementById('testStudent').onclick = function () {
-        chrome.runtime.sendMessage('ppnhofmogidhccmfjojekbaegejeaboi', {name: "ChM", question: 'get_login_link', id: "6673259"}, function(response) {
-            copyToClipboard(response.answer.data.link);
-        });
     }
 	
     document.getElementById('Hello').onclick = function () {
