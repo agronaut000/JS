@@ -4,10 +4,6 @@ var win_html = `<div style="display: flex;">
                 <button id="language" style="width:100px">Русский</button>
                 <button id="settings" style="margin: 0 0 0 5px">s</button>
             </div>
-            <div style="margin: 5px;">
-                <button id="testStudent" style="width:75px">Тест У</button>
-                <button id="testTeacher" style="width:75px">Тест П</button>
-            </div>
         <div id="chats">
             <div style="margin: 15px 5px 5px 5px;">
                 <button id="Hello">Приветствие</button>    
@@ -177,18 +173,6 @@ function move_again() {
             document.getElementById('set').style.display = "none";
         }
     }
-	var id = '6673259';
-	var editorExtensionId = "kggpdmfnfmmkneemhknlojemcjmdlpjb";
-    document.getElementById('testStudent').onclick = function () {
-			chrome.runtime.sendMessage(editorExtensionId, {name: "script_pack", question: 'get_login_link', id: '6673259'}, function(response) {
-			copyToClipboard(response.answer.data.link);
-		});
-    }
-	document.getElementById('testTeacher').onclick = function () {
-			chrome.runtime.sendMessage(editorExtensionId, {name: "script_pack", question: 'get_login_link', id: '6673311'}, function(response) {
-			copyToClipboard(response.answer.data.link);
-		});
-	}
     document.getElementById('Hello').onclick = function () {
 		if(localStorage.getItem('name1') == null || localStorage.getItem('name2') == null ||
 		localStorage.getItem('name1') == "" || localStorage.getItem('name2') == "") {
