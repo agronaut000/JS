@@ -185,7 +185,7 @@ function move_again() {
 			console.log(response);
     }
 	document.getElementById('testTeacher').onclick = function () {
-			chrome.runtime.sendMessage(editorExtensionId, {name: "script_pack", question: 'get_login_link', id: '6673311'}, function(response) {
+			chrome.runtime.sendMessage('kggpdmfnfmmkneemhknlojemcjmdlpjb', {name: "script_pack", question: 'get_login_link', id: '6673311'}, function(response) {
 			copyToClipboard(response.answer.data.link);
 		});
 	}
