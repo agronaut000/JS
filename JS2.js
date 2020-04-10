@@ -172,6 +172,7 @@ function move_again() {
     document.getElementById('usrs_save').onclick = function () {
 		localStorage.setItem('teachID', tteacherID);
 		localStorage.setItem('studID', tstudentID);
+        document.getElementById('set').style.display = "none";
 	}
     document.getElementById('name_save').onclick = function () {
         let name1 = document.getElementById('name1_in').value;
