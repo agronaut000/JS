@@ -65,7 +65,7 @@ var win_html = `<div style="display: flex;">
 var win_html2 =  
     `<div style="display: flex;">
         <span style="cursor: -webkit-grab;">
-            <div id="timer" style="margin:5px;">
+            <div id="timer" style="margin:6px;">
                 <center><span id="my_timer" style="color: #f00; font-size: 150%; font-weight: bold;">00:00</span></center>
             </div> 
         </span>
