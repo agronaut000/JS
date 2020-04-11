@@ -524,7 +524,7 @@ function tckts_cmd() {
 			if(document.getElementById('nedozvon_who').innerHTML == "У"){
 				copyToRedactor("﻿Здравствуйте!\nНе удалось дозвониться до ученика, чтобы проверить связь.\nБуду продолжать попытки связаться.\nТакже пишу ученику письмо на почту.");
 			} else {	
-				copyToRedactor("﻿Здравствуйте!\nНе удалось дозвониться до преподавателя, чтобы проверить связь.\nБуду продолжать попытки связаться.\nТакже пишу ученику письмо на почту.");
+				copyToRedactor("﻿Здравствуйте!\nНе удалось дозвониться до преподавателя, чтобы проверить связь.\nБуду продолжать попытки связаться.\nТакже пишу преподавателю письмо на почту.");
 			}
 		} else {
             copyToRedactor("﻿Hello!\nI was unable to get through to the student to check the connection.\nI will continue to try to contact.\nI also write a letter to the student.");
