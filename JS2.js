@@ -543,10 +543,10 @@ function tckts_cmd() {
 		let d = new Date();
 		let d1 = d.getDate();
 		let d2 = d.getMonth();
-		let d3 = d.getUTCHours() + 3;
+		let d3 = (d.getUTCHours() + 3) % 24;
 		let d4 = d.getFullYear();
 		let daysInCurMnth = 32 - new Date(d4, d2, 32).getDate();
-		if(d3 < 6) {
+		if(d3 < 3) {
 			d1 = d1 + 1;
 		} else {
 			d1 = (d1 + 2) % daysInCurMnth;
@@ -569,8 +569,12 @@ function tckts_cmd() {
 		}
 		dstr = "<strong>" + dstr + String(d2 + 1) + "</strong>" + '.' + d4;
 			
-        if (document.getElementById('language').innerHTML == 'Русский') {
-			copyToRedactor("Здравствуйте!\n\nМеня зовут " + localStorage.getItem('name1') + ", я сотрудник техподдержки школы Skyeng. Мы получили информацию о трудностях, которые возникли во время урока. Не удалось до вас дозвониться.\nПожалуйста, напишите в ответном письме <strong>несколько временных промежутков</strong>, в которые вам будет удобно провести проверку связи, начиная с " + dstr + ". Мы работаем с 8:00 до 23:00 по Московскому времени.\nЖду вашего ответа.");
+		let neud = "Неудалось до вас дозвониться.";
+        if(d2 > 21 || d2 < 3) {
+			neud = "";
+		}
+		if (document.getElementById('language').innerHTML == 'Русский') {
+			copyToRedactor("Здравствуйте!\n\nМеня зовут " + localStorage.getItem('name1') + ", я сотрудник техподдержки школы Skyeng. Мы получили информацию о трудностях, которые возникли во время урока. " + neud + "\nПожалуйста, напишите в ответном письме <strong>несколько временных промежутков</strong>, в которые вам будет удобно провести проверку связи, начиная с " + dstr + ". Мы работаем с 8:00 до 23:00 по Московскому времени.\nЖду вашего ответа.");
 		} else {
             copyToRedactor("﻿Hello!\nWe were informed that there were communication problems during the lesson.\n\nPlease tell us when you can be contacted to check and fix this problem (working hours from 8-00 to 23-00 MSK) starting from " + dstr + ".\nSpecify <strong>several time intervals</strong>, in case you are at a convenient time for you, all specialists will be busy.\nWe will wait for your reply.");
         }
