@@ -150,7 +150,7 @@ function move_again() {
         window.myY2 = a.layerY; 
         document.addEventListener('mousemove', listener2);
     }
-    wint2.onmouseup = function () {document.removeEventListener('mousemove', listener);}
+    wint2.onmouseup = function () {document.removeEventListener('mousemove', listener2);}
 	
     
     
