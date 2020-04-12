@@ -578,13 +578,13 @@ function tckts_cmd() {
 		} else {
             copyToRedactor("﻿Hello!\nWe were informed that there were communication problems during the lesson.\n\nPlease tell us when you can be contacted to check and fix this problem (working hours from 8-00 to 23-00 MSK) starting from " + dstr + ".\nSpecify <strong>several time intervals</strong>, in case you are at a convenient time for you, all specialists will be busy.\nWe will wait for your reply.");
         }
+		if(document.getElementById('nedozvon_who').innerHTML == "У"){
+			alert('Если У CRM2 - не забудь залогировать');
+		}
     }; 
 	
 		document.getElementById('srv_save').onclick = function () {
 			localStorage.setItem('addSrv', document.getElementById('srv_add').value);
-		}
-		if(document.getElementById('nedozvon_who').innerHTML == "У"){
-			alert('Если У CRM2 - не забудь залогировать');
 		}
 }
 tckts_cmd()
