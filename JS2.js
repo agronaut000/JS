@@ -529,7 +529,10 @@ function tckts_cmd() {
 			}
 		} else {
             copyToRedactor("﻿Hello!\nI was unable to get through to the student to check the connection.\nI will continue to try to contact.\nI also write a letter to the student.");
-        }
+		}
+		if(document.getElementById('nedozvon_who').innerHTML == "У"){
+			alert('Если У CRM2 - не забудь залогировать');
+		}
     }; 
     document.getElementById('nedozvon2').onclick = function () {
 		if(localStorage.getItem('name1') == null ||	localStorage.getItem('name1') == "") {
@@ -573,9 +576,12 @@ function tckts_cmd() {
         }
     }; 
 	
-    document.getElementById('srv_save').onclick = function () {
-		localStorage.setItem('addSrv', document.getElementById('srv_add').value);
-	}
+		document.getElementById('srv_save').onclick = function () {
+			localStorage.setItem('addSrv', document.getElementById('srv_add').value);
+		}
+		if(document.getElementById('nedozvon_who').innerHTML == "У"){
+			alert('Если У CRM2 - не забудь залогировать');
+		}
 }
 tckts_cmd()
 let audio = new Audio("https://ustyugov.net/tmp/msg.mp3");
