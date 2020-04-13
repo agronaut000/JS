@@ -480,9 +480,9 @@ function move_again() {
 			})
 			
             // document.getElementsByClassName("req-status-waiting")[0].click();
-            // document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl active-item";
-            // document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl";
-            // document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl active-item";
+            document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl";
+            document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl active-item";
+            document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl";
 			
 		}
         newbuttons.insertBefore(inBox, newbuttons.children[0]);
@@ -535,11 +535,6 @@ function tckts_cmd() {
 		}
     }; 
     document.getElementById('nedozvon2').onclick = function () {
-		if(localStorage.getItem('name1') == null ||	localStorage.getItem('name1') == "") {
-            document.getElementById('set').style.display = "block";
-			document.getElementById('name_error').style.display = "block";
-			return;
-		}
 		let d = new Date();
 		let d1 = d.getDate();
 		let d2 = d.getMonth();
@@ -574,7 +569,7 @@ function tckts_cmd() {
 			neud = "";
 		}
 		if (document.getElementById('language').innerHTML == 'Русский') {
-			copyToRedactor("Здравствуйте!\n\nМеня зовут " + localStorage.getItem('name1') + ", я сотрудник техподдержки школы Skyeng. Мы получили информацию о трудностях, которые возникли во время урока. " + neud + "\nПожалуйста, напишите в ответном письме <strong>несколько временных промежутков</strong>, в которые вам будет удобно провести проверку связи, начиная с " + dstr + ". Мы работаем с 8:00 до 23:00 по Московскому времени.\nЖду вашего ответа.");
+			copyToRedactor("Здравствуйте!\n\nМы получили информацию о трудностях, которые возникли во время урока. " + neud + "\nПожалуйста, напишите в ответном письме <strong>несколько временных промежутков</strong>, в которые вам будет удобно провести проверку связи, начиная с " + dstr + ". Мы работаем с 8:00 до 23:00 по Московскому времени.\nЖду вашего ответа.");
 		} else {
             copyToRedactor("﻿Hello!\nWe were informed that there were communication problems during the lesson.\n\nPlease tell us when you can be contacted to check and fix this problem (working hours from 8-00 to 23-00 MSK) starting from " + dstr + ".\nSpecify <strong>several time intervals</strong>, in case you are at a convenient time for you, all specialists will be busy.\nWe will wait for your reply.");
         }
