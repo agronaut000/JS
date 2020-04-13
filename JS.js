@@ -227,7 +227,7 @@ function move_again() {
     }; 
     document.getElementById('tag_duty').onclick = function () {
         let d = document.getElementById('duty_why').innerHTML;
-        copyToClipboard("@2duty \n" + window.location.href + "\n" + d);
+        copyToClipboard1("@2duty \n" + window.location.href + "\n" + d);
         copyToComment("Зову коллег");
 		document.body.removeChild(d);
     };
@@ -427,7 +427,7 @@ localStorage.getItem(['chat_high'], function(result) {
     }
 });
 
-const copyToClipboard = str => {
+const copyToClipboard1 = str => {
     const el = document.createElement('textarea');
     el.value = str;
     document.body.appendChild(el);
