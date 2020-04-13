@@ -276,7 +276,7 @@ function move_again() {
     }; 
     document.getElementById('tag_duty').onclick = function () {
         let d = document.getElementById('duty_why').innerHTML;
-        copyToClipboard("@2duty \n" + window.location.href + "\n" + d);
+        copyToClipboard1("@2duty \n" + window.location.href + "\n" + d);
         copyToComment("Зову коллег");
 		document.body.removeChild(d);
     };
@@ -546,7 +546,7 @@ function tckts_cmd() {
 		let d3 = (d.getUTCHours() + 3) % 24;
 		let d4 = d.getFullYear();
 		let daysInCurMnth = 32 - new Date(d4, d2, 32).getDate();
-		if(d3 < 3) {
+		if(d3 < 4) {
 			d1 = d1 + 1;
 		} else {
 			d1 = (d1 + 2) % daysInCurMnth;
@@ -570,7 +570,7 @@ function tckts_cmd() {
 		dstr = "<strong>" + dstr + String(d2 + 1) + "</strong>" + '.' + d4;
 			
 		let neud = "Не удалось до вас дозвониться.";
-        if(d3 > 21 || d3 < 3) {
+        if(d3 > 21 || d3 < 4) {
 			neud = "";
 		}
 		if (document.getElementById('language').innerHTML == 'Русский') {
@@ -638,7 +638,7 @@ localStorage.getItem(['chat_high'], function(result) {
     }
 });
 
-const copyToClipboard = str => {
+const copyToClipboard1 = str => {
     const el = document.createElement('textarea');
     el.value = str;
     document.body.appendChild(el);
