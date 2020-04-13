@@ -479,11 +479,12 @@ function move_again() {
 				if (a.text == text) {AddLabels(a.id.slice(2))}
 			})
 			
+			setTimeout(() => {
             // document.getElementsByClassName("req-status-waiting")[0].click();
-            document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl";
-            document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl active-item";
-            document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl";
-			
+				document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl";
+				document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl active-item";
+				document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl";
+			}, 500);
 		}
         newbuttons.insertBefore(inBox, newbuttons.children[0]);
         newbuttons.insertBefore(secLine, newbuttons.children[0]);
