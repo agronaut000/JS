@@ -566,7 +566,7 @@ function tckts_cmd() {
 		dstr = "<strong>" + dstr + String(d2 + 1) + "</strong>" + '.' + d4;
 			
 		let neud = "Не удалось до вас дозвониться.";
-        if(d3 > 21 || d3 < 4) {
+        if(d3 > 20 || d3 < 4) {
 			neud = "";
 		}
 		if (document.getElementById('language').innerHTML == 'Русский') {
