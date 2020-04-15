@@ -417,7 +417,7 @@ function move_again() {
 			    document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl";
 			    document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl";
 			    document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl active-item";
-			}, 500);
+			}, 250);
 		}
 		
 		
