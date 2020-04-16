@@ -532,7 +532,7 @@ function tckts_cmd() {
 				copyToRedactor("﻿Здравствуйте!\nНе удалось дозвониться до преподавателя.\nБуду продолжать попытки связаться.\nТакже пишу преподавателю письмо на почту.");
 			}
 		} else {
-            copyToRedactor("﻿Hello!\nI was unable to get through to the student to check the connection.\nI will continue to try to contact.\nI also write a letter to the student.");
+            copyToRedactor("﻿Hello!\nI was unable to get through to the student.\nI will continue to try to contact.\nI also write a letter to the student.");
 		}
 		if(document.getElementById('nedozvon_who').innerHTML == "У"){
 			alert('Если У CRM2 - не забудь залогировать');
