@@ -527,12 +527,12 @@ function tckts_cmd() {
     document.getElementById('nedozvon').onclick = function () {
         if (document.getElementById('language').innerHTML == 'Русский') {
 			if(document.getElementById('nedozvon_who').innerHTML == "У"){
-				copyToRedactor("﻿Здравствуйте!\nНе удалось дозвониться до ученика.\nБуду продолжать попытки связаться.\nТакже пишу ученику письмо на почту.");
+				copyToRedactor("Не удалось дозвониться до ученика.\nБуду продолжать попытки связаться.\nТакже пишу ученику письмо на почту.");
 			} else {	
-				copyToRedactor("﻿Здравствуйте!\nНе удалось дозвониться до преподавателя.\nБуду продолжать попытки связаться.\nТакже пишу преподавателю письмо на почту.");
+				copyToRedactor("Не удалось дозвониться до преподавателя.\nБуду продолжать попытки связаться.\nТакже пишу преподавателю письмо на почту.");
 			}
 		} else {
-            copyToRedactor("﻿Hello!\nI was unable to get through to the student.\nI will continue to try to contact.\nI also write a letter to the student.");
+            copyToRedactor("I was unable to get through to the student.\nI will continue to try to contact.\nI also write a letter to the student.");
 		}
 		if(document.getElementById('nedozvon_who').innerHTML == "У"){
 			alert('Если У CRM2 - не забудь залогировать');
@@ -569,13 +569,13 @@ function tckts_cmd() {
 		dstr = "<strong>" + dstr + String(d2 + 1) + "</strong>" + '.' + d4;
 			
 		let neud = "Не удалось до вас дозвониться.";
-        if(d3 > 20 || d3 < 4) {
+        	if(d3 > 20 || d3 < 4) {
 			neud = "";
 		}
 		if (document.getElementById('language').innerHTML == 'Русский') {
 			copyToRedactor("Здравствуйте!\n\nМы получили информацию о трудностях, которые возникли во время урока. " + neud + "\nПожалуйста, напишите в ответном письме <strong>несколько временных промежутков</strong>, в которые вам будет удобно провести проверку связи, начиная с " + dstr + ". Мы работаем с 8:00 до 23:00 по Московскому времени.\nЖду вашего ответа.");
 		} else {
-            copyToRedactor("﻿Hello!\nWe were informed that there were communication problems during the lesson.\n\nPlease tell us when you can be contacted to check and fix this problem (working hours from 8-00 to 23-00 MSK) starting from " + dstr + ".\nSpecify <strong>several time intervals</strong>, in case you are at a convenient time for you, all specialists will be busy.\nWe will wait for your reply.");
+            copyToRedactor("Hello!\nWe were informed that there were communication problems during the lesson.\n\nPlease tell us when you can be contacted to check and fix this problem (working hours from 8-00 to 23-00 MSK) starting from " + dstr + ".\nSpecify <strong>several time intervals</strong>, in case you are at a convenient time for you, all specialists will be busy.\nWe will wait for your reply.");
         }
 		if(document.getElementById('nedozvon_who').innerHTML == "У"){
 			alert('Если У CRM2 - не забудь залогировать');
