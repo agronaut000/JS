@@ -393,26 +393,12 @@ function move_again() {
         let tck_dbl = document.createElement('span');
         tck_dbl.innerHTML = "Дубль";
         tck_dbl.classList.add('inl');
-        tck_dbl.style.marginRight = "15px";
-        tck_dbl.onclick = function() {
-			let text = "Дубль";
-			localStorage.setItem('label', text);
-			all_labels_list.forEach( function (a) {
-				if (a.text == text) {AddLabels(a.id.slice(2))}
-			})
-			document.getElementsByClassName('case_update_button')[0].removeAttribute('disabled');
-			
-			if(update_form.field_2483.parentNode.className == "icheckbox_square-blue checked")
-				return;
-			else 
-				update_form.field_2483.parentNode.click();
-		
-			setTimeout(() => {
-			    document.getElementsByClassName("req-status-waiting")[0].className = "tab-title req-status-waiting inl";
-			    document.getElementsByClassName("req-status-opened")[0].className = "tab-title req-status-opened inl";
-			    document.getElementsByClassName("req-status-closed")[0].className = "tab-title req-status-closed inl active-item";
-			}, 250);
-		}
+        tck_dbl.style.marginRight = "15px";        
+		tck_dbl.onclick = function() {
+			if(document.getElementById('extra-templates260').childNodes[23].childNodes[1].innerHTML == "Дубль") {
+				document.getElementById('extra-templates260').childNodes[23].click();
+			}
+        }
 		
 		
         let secLine = document.createElement('span');
