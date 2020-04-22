@@ -346,12 +346,6 @@ function move_again() {
 				add_Srv = '\n' + add_Srv;
 			}
 			copyToComment('Сейчас наблюдаются массовые неполадки.\nНаши разработчики уже знают об этом и устраняют их.' + add_Srv);
-
-			let text = "Серверные проблемы";
-			localStorage.setItem('label', text);
-			all_labels_list.forEach( function (a) {
-				if (a.text == text) {AddLabels(a.id.slice(2))}
-			})
 			
 		}
         var newbuttons = document.getElementsByClassName('chat_close_and_archive')[0];
@@ -462,7 +456,9 @@ function move_again() {
         serv.style.marginRight = "15px";
         serv.onclick = function() {
 			document.getElementsByClassName('set_staff')[0].click();			
-			document.getElementById('priority-select').value = 4; 
+			if(document.getElementById('priority-select').value != 2) {		
+				document.getElementById('priority-select').value = 4; 
+			}
 			//document.getElementsByClassName('case-priority-colorful')[0].setAttribute('data-current-priority', '4');			
 			//document.getElementById('priority_select_chosen').childNodes[0].childNodes[0].innerHTML = "Крит"; 
 			
@@ -475,12 +471,6 @@ function move_again() {
 				add_Srv = '\n' + add_Srv;
 			}
 			copyToRedactor('Здравствуйте!\nИзвините, пожалуйста, за технические неисправности.\nНаши разработчики уже знают об этом и решают вопрос.\nКак только все будет работать как нужно, мы напишем письмо.\nЕсли остались вопросы, пожалуйста, напишите.' + add_Srv);
-
-			let text = "Серверные проблемы";
-			localStorage.setItem('label', text);
-			all_labels_list.forEach( function (a) {
-				if (a.text == text) {AddLabels(a.id.slice(2))}
-			})
 			
 			setTimeout(() => {
             // document.getElementsByClassName("req-status-waiting")[0].click();
@@ -491,7 +481,7 @@ function move_again() {
 		}
         newbuttons.insertBefore(inBox, newbuttons.children[0]);
         newbuttons.insertBefore(secLine, newbuttons.children[0]);
-        newbuttons.insertBefore(tck_dbl, newbuttons.children[0]);
+        //newbuttons.insertBefore(tck_dbl, newbuttons.children[0]);
 		
         if(window.location.href.indexOf('parent') === -1) {
 			newbuttons.insertBefore(serv, newbuttons.children[0]);
