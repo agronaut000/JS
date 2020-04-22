@@ -467,7 +467,7 @@ function move_again() {
 		}
         newbuttons.insertBefore(inBox, newbuttons.children[0]);
         newbuttons.insertBefore(secLine, newbuttons.children[0]);
-        //newbuttons.insertBefore(tck_dbl, newbuttons.children[0]);
+        newbuttons.insertBefore(tck_dbl, newbuttons.children[0]);
 		
         if(window.location.href.indexOf('parent') === -1) {
 			newbuttons.insertBefore(serv, newbuttons.children[0]);
