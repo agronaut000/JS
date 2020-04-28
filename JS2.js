@@ -524,10 +524,11 @@ function tckts_cmd() {
 		if(d3 < 4) {
 			d1 = d1 + 1;
 		} else {
-			d1 = (d1 + 2) % daysInCurMnth;
+			d1 = d1 + 2;
 		}
 		if (d1 > daysInCurMnth) {
 			d1 = d1 % daysInCurMnth;
+			d2 = d2 + 1
 		}
 		if(d2 > 11) {
 			d4 = d4 + 1;
