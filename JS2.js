@@ -520,7 +520,7 @@ function tckts_cmd() {
 		let d2 = d.getMonth();
 		let d3 = (d.getUTCHours() + 3) % 24;
 		let d4 = d.getFullYear();
-		let daysInCurMnth = 32 - new Date(d4, d2, 32).getDate() + 1;
+		let daysInCurMnth = 32 - new Date(d4, d2, 32).getDate();
 		if(d3 < 4) {
 			d1 = d1 + 1;
 		} else {
