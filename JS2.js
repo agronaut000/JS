@@ -816,24 +816,25 @@ setTimeout(() => {
 		if(document.getElementById('msg1').innerHTML == "Доработать")
 			document.getElementById('inp').value = tmpText
 		else 
-			fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
-				  "headers": {
-					"accept": "*/*",
-					"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-					"cache-control": "max-age=0",
-					"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryZ3ivsA3aU80QEBST",
-					"sec-fetch-dest": "empty",
-					"sec-fetch-mode": "cors",
-					"sec-fetch-site": "same-origin"
-				  },
-				  "referrer": adr,
-				  "referrerPolicy": "no-referrer-when-downgrade",
-				  "body": "------WebKitFormBoundaryZ3ivsA3aU80QEBST\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + tmpText + "\",\"ext\":null,\"files\":[],\"suggestedAnswerDocId\":" + documentId + ",\"autoFaqServiceId\":" + serviceId + ",\"autoFaqSessionId\":\"" + sessionId + "\",\"autoFaqQueryId\":\"" + queryId + "\",\"autoFaqTitle\":\"" + title + "\",\"autoFaqQuery\":\"" + word + "\",\"autoFaqAccuracy\":" + accuracy + "}\r\n------WebKitFormBoundaryZ3ivsA3aU80QEBST--\r\n",
-				  "method": "POST",
-				  "mode": "cors",
-				  "credentials": "include"
-				});
-		}, 250);
+			if(values[3])
+				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+					  "headers": {
+						"accept": "*/*",
+						"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+						"cache-control": "max-age=0",
+						"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryZ3ivsA3aU80QEBST",
+						"sec-fetch-dest": "empty",
+						"sec-fetch-mode": "cors",
+						"sec-fetch-site": "same-origin"
+					  },
+					  "referrer": adr,
+					  "referrerPolicy": "no-referrer-when-downgrade",
+					  "body": "------WebKitFormBoundaryZ3ivsA3aU80QEBST\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + tmpText + "\",\"ext\":null,\"files\":[],\"suggestedAnswerDocId\":" + documentId + ",\"autoFaqServiceId\":" + serviceId + ",\"autoFaqSessionId\":\"" + sessionId + "\",\"autoFaqQueryId\":\"" + queryId + "\",\"autoFaqTitle\":\"" + title + "\",\"autoFaqQuery\":\"" + word + "\",\"autoFaqAccuracy\":" + accuracy + "}\r\n------WebKitFormBoundaryZ3ivsA3aU80QEBST--\r\n",
+					  "method": "POST",
+					  "mode": "cors",
+					  "credentials": "include"
+					});
+			}, 250);
 }
 function sendAnswer(txt, flag = 1) {
 		var values = getInfo()
@@ -845,33 +846,35 @@ function sendAnswer(txt, flag = 1) {
 		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
 			document.getElementById('inp').value = txt
 		else 
-			fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
-				  "headers": {
-					"accept": "*/*",
-					"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-					"cache-control": "max-age=0",
-					"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryFeIiMdHaxAteNUHd",
-					"sec-fetch-dest": "empty",
-					"sec-fetch-mode": "cors",
-					"sec-fetch-site": "same-origin"
-				  },
-				  "referrer": "https://skyeng.autofaq.ai/tickets/assigned/336479fa-d024-4c99-9092-ddd843c9f6bd",
-				  "referrerPolicy": "no-referrer-when-downgrade",
-				  "body": "------WebKitFormBoundaryFeIiMdHaxAteNUHd\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt3 + "\"}\r\n------WebKitFormBoundaryFeIiMdHaxAteNUHd--\r\n",
-				  "method": "POST",
-				  "mode": "cors",
-				  "credentials": "include"
-			});
+			if(values[3])
+				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+					  "headers": {
+						"accept": "*/*",
+						"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+						"cache-control": "max-age=0",
+						"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryFeIiMdHaxAteNUHd",
+						"sec-fetch-dest": "empty",
+						"sec-fetch-mode": "cors",
+						"sec-fetch-site": "same-origin"
+					  },
+					  "referrer": "https://skyeng.autofaq.ai/tickets/assigned/336479fa-d024-4c99-9092-ddd843c9f6bd",
+					  "referrerPolicy": "no-referrer-when-downgrade",
+					  "body": "------WebKitFormBoundaryFeIiMdHaxAteNUHd\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt3 + "\"}\r\n------WebKitFormBoundaryFeIiMdHaxAteNUHd--\r\n",
+					  "method": "POST",
+					  "mode": "cors",
+					  "credentials": "include"
+				});
 }
 function getInfo() {
 		adr = document.location.href
 		adr1 = document.location.pathname
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
+		flag = true
 	
 		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[0].innerHTML)
 			uid = document.getElementsByClassName('expert-user_details-list')[1].childNodes[1].innerHTML + ",-11"
 		else 
-			uid = ""
-		return [adr, adr1, uid]
+			flag = false
+		return [adr, adr1, uid, flag]
 }
