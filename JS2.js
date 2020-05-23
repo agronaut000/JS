@@ -871,8 +871,8 @@ function getInfo() {
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
 		flag = true
-	
-		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[0].innerHTML)
+		id = document.getElementsByClassName('expert-user_details-list')[1]
+		if(id !== undefined && id.childNodes[0].innerHTML == 'id')
 			uid = document.getElementsByClassName('expert-user_details-list')[1].childNodes[1].innerHTML + ",-11"
 		else 
 			flag = false
