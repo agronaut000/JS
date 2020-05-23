@@ -698,7 +698,7 @@ function move_again_AF() {
 		document.getElementById('AF_helper').style.display = 'none';
 	}
     if(window.location.href.indexOf('help.skyeng.ru') === -1) {
-		document.getElementById('my_timer').style.display = 'none';
+		document.getElementById('timer').style.display = 'none';
 	}
     var listener2 = function(e , a) {
         wintAF.style.left = Number(e.clientX - myX2) + "px";
