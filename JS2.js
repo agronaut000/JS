@@ -757,23 +757,27 @@ function move_again_AF() {
 		var values = getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		
-		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
-			  "headers": {
-				"accept": "*/*",
-				"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-				"cache-control": "max-age=0",
-				"content-type": "multipart/form-data; boundary=----WebKitFormBoundarymasjvc4O46a190zh",
-				"sec-fetch-dest": "empty",
-				"sec-fetch-mode": "cors",
-				"sec-fetch-site": "same-origin"
-			  },
-			  "referrer": adr,
-			  "referrerPolicy": "no-referrer-when-downgrade",
-			  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"Здравствуйте!\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
-			  "method": "POST",
-			  "mode": "cors",
-			  "credentials": "include"
-		});
+		if(document.getElementById('msg1').innerHTML == "Доработать")
+			document.getElementById('inp').value = "Здравствуйте!"
+		else 
+			if(values[3])
+				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+					  "headers": {
+						"accept": "*/*",
+						"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+						"cache-control": "max-age=0",
+						"content-type": "multipart/form-data; boundary=----WebKitFormBoundarymasjvc4O46a190zh",
+						"sec-fetch-dest": "empty",
+						"sec-fetch-mode": "cors",
+						"sec-fetch-site": "same-origin"
+					  },
+					  "referrer": adr,
+					  "referrerPolicy": "no-referrer-when-downgrade",
+					  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"Здравствуйте!\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
+					  "method": "POST",
+					  "mode": "cors",
+					  "credentials": "include"
+				});
 	}
     document.getElementById('utoch').onclick = function () {
 		sendAnswerTemplate("Уточнение дополнительных вопросов (шаблон)", "уточнение")
