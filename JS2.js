@@ -896,9 +896,20 @@ function getInfo() {
 		flag = true
 		uid = ""
 		id = document.getElementsByClassName('expert-user_details-list')[1]
-		if(id !== undefined && id.childNodes[0].innerHTML == 'id')
-			uid = document.getElementsByClassName('expert-user_details-list')[1].childNodes[1].innerHTML + ",-11"
-		else 
+		i = 0
+		if(id !== undefined)
+			while(true) {
+				if(id.childNodes[i].innerHTML == 'id') {
+					console.log('here')
+					uid = id.childNodes[i + 1].innerHTML + ",-11"
+					break
+				}
+				i = i + 2
+				console.log(i)
+				if(id.childNodes[i] === undefined)
+					break
+			}
+		if(uid == "") 
 			flag = false
 		return [adr, adr1, uid, flag]
 }
