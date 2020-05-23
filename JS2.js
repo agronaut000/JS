@@ -566,6 +566,9 @@ function tckts_cmd() {
 tckts_cmd()
 let audio = new Audio("https://ustyugov.net/tmp/msg.mp3");
   function startTimer() {
+    if(window.location.href.indexOf('help.skyeng.ru') === -1) {
+		return;
+	}
     var time = localStorage.getItem('time');
     var cT = new Date();
     var curTime1 = Number(time);
@@ -648,3 +651,224 @@ const copyToRedactor = str => {
 	}
 	document.getElementById('redactor-uuid-0').innerHTML = str3;
 };
+
+//////////////////////////////////////////////////////
+//////// AF Section ////////
+var win_AFhelper =  
+    `<div style="display: flex; width: 301px;">
+        <span style="width: 301px">
+			<span style="cursor: -webkit-grab;">
+				<div style="margin: 5px;margin-top: 15px">
+					<button id="hello">Приветствие</button>
+					<button id="min">Минуту</button>
+				</div>
+				<div style="margin: 5px;">
+					<button id="utoch">Доп впр</button>
+					<button id="bag">Подождите</button>
+				</div>
+				<div style="margin: 5px;">
+					<button id="longans">Нет ответа</button>
+					<button id="NS">урок NS</button>
+				</div>
+			</span>
+			<div style="margin: 5px;">
+				<textarea style="width: 291px; height: 125px; resize: none" id="inp"></textarea>
+				<button id="msg1" style="width:100px;">Отправить</button>
+				<button id="snd" style="width:50px; margin-left:16px">send</button>
+				<button id="msg" style="width:100px; margin-left:16px">Чат</button>
+			</div>
+		</span>
+    </div>`;
+	
+if (localStorage.getItem('winTopAF') == null) {
+    localStorage.setItem('winTopAF', '120');
+    localStorage.setItem('winLeftAF', '295');
+}
+
+
+let wintAF = document.createElement('div');
+document.body.append(wintAF);
+wintAF.style = 'min-height: 25px; min-width: 65px; background: wheat; top: ' + localStorage.getItem('winTopAF') + 'px; left: ' + localStorage.getItem('winLeftAF') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black;';
+wintAF.setAttribute('id' ,'AF_test');
+wintAF.innerHTML = win_AFhelper; 
+
+	
+function move_again_AF() {
+    if(window.location.href.indexOf('autofaq') === -1) {
+		return;
+	}
+    var listener2 = function(e , a) {
+        wintAF.style.left = Number(e.clientX - myX2) + "px";
+        wintAF.style.top = Number(e.clientY - myY2) + "px";
+        localStorage.setItem('winTopAF', String(Number(e.clientY - myY2)));
+        localStorage.setItem('winLeftAF', String(Number(e.clientX - myX2)));
+    };
+    wintAF.firstElementChild.firstElementChild.firstElementChild.onmousedown = function (a) {
+        window.myX2 = a.layerX; 
+        window.myY2 = a.layerY; 
+        document.addEventListener('mousemove', listener2);
+    }
+    wintAF.onmouseup = function () {document.removeEventListener('mousemove', listener2);}
+	
+	
+    document.getElementById('msg').onclick = function () {
+        if(this.innerHTML == "Чат") {
+            this.innerHTML = "Заметки";
+        } else {
+            this.innerHTML = "Чат";
+        }
+	}
+    document.getElementById('msg1').onclick = function () {
+        if(this.innerHTML == "Отправить") {
+            this.innerHTML = "Доработать";
+        } else {
+            this.innerHTML = "Отправить";
+        }
+	}
+    document.getElementById('snd').onclick = function () {
+		if(document.getElementById('msg').innerHTML == "Чат")
+			sendAnswer(document.getElementById('inp').value, 0)
+	}
+	
+	
+    document.getElementById('hello').onclick = function () {
+		var values = getInfo()
+		adr = values[0]; adr1 = values[1]; uid = values[2]
+		
+		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+			  "headers": {
+				"accept": "*/*",
+				"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+				"cache-control": "max-age=0",
+				"content-type": "multipart/form-data; boundary=----WebKitFormBoundarymasjvc4O46a190zh",
+				"sec-fetch-dest": "empty",
+				"sec-fetch-mode": "cors",
+				"sec-fetch-site": "same-origin"
+			  },
+			  "referrer": adr,
+			  "referrerPolicy": "no-referrer-when-downgrade",
+			  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"Здравствуйте!\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
+			  "method": "POST",
+			  "mode": "cors",
+			  "credentials": "include"
+		});
+	}
+    document.getElementById('utoch').onclick = function () {
+		sendAnswerTemplate("Уточнение дополнительных вопросов (шаблон)", "уточнение")
+	}
+    document.getElementById('bag').onclick = function () {
+		sendAnswerTemplate("Подождите пожалуйста (шаблон ТП)", "баг")
+	}
+    document.getElementById('min').onclick = function () {
+		sendAnswer("Одну минуту")
+	}
+    document.getElementById('NS').onclick = function () {
+		txt = "Пожалуйста, воспользуйтесь инструкцией, а затем напишите, удалось ли вам наладить связь\n\
+1. Завершаете урок через Finish\n\
+2. Создаете урок через New Student - http://joxi.ru/v298jgeTzKyKYm \n\
+3. Копируете ссылку и отправляете в чат ученику, заранее предупредив его об этом, так как кнопка войти в класс уже не будет функционировать."
+		sendAnswer(txt)
+	}
+    document.getElementById('longans').onclick = function () {
+		sendAnswer("Нет долго от У ответа (шаблон)", "долго ответ")
+	}
+	
+}
+move_again_AF();
+
+
+async function sendAnswerTemplate(template, word) {
+	flag = 0
+	var values = getInfo()
+	adr = values[0]; adr1 = values[1]; uid = values[2]
+	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "max-age=0",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://skyeng.autofaq.ai/tickets/assigned/6067d8ca-8fa0-47ea-9e3d-c449b3783465",
+  "referrerPolicy": "no-referrer-when-downgrade",
+  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119636,119638,119646,119649,118980,119841,119843,119844,120181,120969,121286,121299,121300,121305]}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
+b = a.json()
+b.then(b => {b.forEach(b => {if (b.title == template) {documentId = b.documentId
+serviceId = b.serviceId
+queryId = b.queryId
+sessionId = b.sessionId
+tmpText = b.text
+title = b.title
+accuracy = b.accuracy
+flag = 1}});})
+
+setTimeout(() => {
+	if(flag == 1)
+		if(document.getElementById('msg1').innerHTML == "Доработать")
+			document.getElementById('inp').value = tmpText
+		else 
+			fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+				  "headers": {
+					"accept": "*/*",
+					"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+					"cache-control": "max-age=0",
+					"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryZ3ivsA3aU80QEBST",
+					"sec-fetch-dest": "empty",
+					"sec-fetch-mode": "cors",
+					"sec-fetch-site": "same-origin"
+				  },
+				  "referrer": adr,
+				  "referrerPolicy": "no-referrer-when-downgrade",
+				  "body": "------WebKitFormBoundaryZ3ivsA3aU80QEBST\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + tmpText + "\",\"ext\":null,\"files\":[],\"suggestedAnswerDocId\":" + documentId + ",\"autoFaqServiceId\":" + serviceId + ",\"autoFaqSessionId\":\"" + sessionId + "\",\"autoFaqQueryId\":\"" + queryId + "\",\"autoFaqTitle\":\"" + title + "\",\"autoFaqQuery\":\"" + word + "\",\"autoFaqAccuracy\":" + accuracy + "}\r\n------WebKitFormBoundaryZ3ivsA3aU80QEBST--\r\n",
+				  "method": "POST",
+				  "mode": "cors",
+				  "credentials": "include"
+				});
+		}, 250);
+}
+function sendAnswer(txt, flag = 1) {
+		var values = getInfo()
+		adr = values[0]; adr1 = values[1]; uid = values[2]
+		txt2 = txt.split('\n')
+		txt3 = ""
+		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
+		
+		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
+			document.getElementById('inp').value = txt
+		else 
+			fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+				  "headers": {
+					"accept": "*/*",
+					"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+					"cache-control": "max-age=0",
+					"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryFeIiMdHaxAteNUHd",
+					"sec-fetch-dest": "empty",
+					"sec-fetch-mode": "cors",
+					"sec-fetch-site": "same-origin"
+				  },
+				  "referrer": "https://skyeng.autofaq.ai/tickets/assigned/336479fa-d024-4c99-9092-ddd843c9f6bd",
+				  "referrerPolicy": "no-referrer-when-downgrade",
+				  "body": "------WebKitFormBoundaryFeIiMdHaxAteNUHd\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt3 + "\"}\r\n------WebKitFormBoundaryFeIiMdHaxAteNUHd--\r\n",
+				  "method": "POST",
+				  "mode": "cors",
+				  "credentials": "include"
+			});
+}
+function getInfo() {
+		adr = document.location.href
+		adr1 = document.location.pathname
+		adr1 = adr1.split('/')
+		adr1 = adr1[3]
+	
+		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[0].innerHTML)
+			uid = document.getElementsByClassName('expert-user_details-list')[1].childNodes[1].innerHTML + ",-11"
+		else 
+			uid = ""
+		return [adr, adr1, uid]
+}
