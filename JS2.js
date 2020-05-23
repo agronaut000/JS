@@ -658,7 +658,7 @@ var win_AFhelper =
     `<div style="display: flex; width: 301px;">
         <span style="width: 301px">
 			<span style="cursor: -webkit-grab;">
-				<div style="margin: 5px;margin-top: 15px">
+				<div style="margin: 5px;">
 					<button id="hello">Приветствие</button>
 					<button id="min">Минуту</button>
 				</div>
@@ -696,6 +696,21 @@ wintAF.innerHTML = win_AFhelper;
 function move_again_AF() {
     if(window.location.href.indexOf('autofaq') === -1) {
 		document.getElementById('AF_helper').style.display = 'none';
+	} else {
+		window.onkeydown = function(e) {
+			var bool = 0;
+			if(e.key == 'Control') {
+					bool = 1;
+			}
+			if(e.key == 'Enter' && bool == 1 && buttons[0].classList.contains('active')) {
+				document.getElementById('snd').click();
+			}
+		}
+		window.onkeyup = function(e) {
+			if(e.key == 'Control') {
+				bool = 0;
+			}
+		}
 	}
     if(window.location.href.indexOf('help.skyeng.ru') === -1) {
 		document.getElementById('main_timer').style.display = 'none';
