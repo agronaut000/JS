@@ -689,13 +689,16 @@ if (localStorage.getItem('winTopAF') == null) {
 let wintAF = document.createElement('div');
 document.body.append(wintAF);
 wintAF.style = 'min-height: 25px; min-width: 65px; background: wheat; top: ' + localStorage.getItem('winTopAF') + 'px; left: ' + localStorage.getItem('winLeftAF') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black;';
-wintAF.setAttribute('id' ,'AF_test');
+wintAF.setAttribute('id' ,'AF_helper');
 wintAF.innerHTML = win_AFhelper; 
 
 	
 function move_again_AF() {
     if(window.location.href.indexOf('autofaq') === -1) {
-		return;
+		document.getElementById('AF_helper').style.display = 'none';
+	}
+    if(window.location.href.indexOf('help.skyeng.ru') === -1) {
+		document.getElementById('my_timer').style.display = 'none';
 	}
     var listener2 = function(e , a) {
         wintAF.style.left = Number(e.clientX - myX2) + "px";
