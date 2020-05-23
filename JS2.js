@@ -698,7 +698,7 @@ function move_again_AF() {
 		document.getElementById('AF_helper').style.display = 'none';
 	}
     if(window.location.href.indexOf('help.skyeng.ru') === -1) {
-		document.getElementById('timer').style.display = 'none';
+		document.getElementById('main_timer').style.display = 'none';
 	}
     var listener2 = function(e , a) {
         wintAF.style.left = Number(e.clientX - myX2) + "px";
@@ -871,6 +871,7 @@ function getInfo() {
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
 		flag = true
+		uid = ""
 		id = document.getElementsByClassName('expert-user_details-list')[1]
 		if(id !== undefined && id.childNodes[0].innerHTML == 'id')
 			uid = document.getElementsByClassName('expert-user_details-list')[1].childNodes[1].innerHTML + ",-11"
