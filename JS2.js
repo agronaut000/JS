@@ -796,7 +796,7 @@ function move_again_AF() {
 		sendAnswer(txt)
 	}
     document.getElementById('longans').onclick = function () {
-		sendAnswerAnswer("Нет долго от У ответа (шаблон)", "долго ответ")
+		sendAnswerTemplate("Нет долго от У ответа (шаблон)", "долго ответ")
 	}
 	
 }
