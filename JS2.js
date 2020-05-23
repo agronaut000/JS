@@ -696,10 +696,29 @@ wintAF.innerHTML = win_AFhelper;
 function move_again_AF() {
     if(window.location.href.indexOf('autofaq') === -1) {
 		document.getElementById('AF_helper').style.display = 'none';
+	} else {
+		window.onkeydown = function(e) {
+			var bool = 0;
+			if(e.key == 'Control') {
+					bool = 1;
+			}
+			if(e.key == 'Enter' && bool == 1 && buttons[0].classList.contains('active')) {
+				document.getElementById('snd').click();
+			}
+		}
+		window.onkeyup = function(e) {
+			if(e.key == 'Control') {
+				bool = 0;
+			}
+		}
 	}
     if(window.location.href.indexOf('help.skyeng.ru') === -1) {
 		document.getElementById('main_timer').style.display = 'none';
 	}
+	
+	
+		
+		
     var listener2 = function(e , a) {
         wintAF.style.left = Number(e.clientX - myX2) + "px";
         wintAF.style.top = Number(e.clientY - myY2) + "px";
