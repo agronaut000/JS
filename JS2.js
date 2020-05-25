@@ -898,7 +898,7 @@ function move_again_AF() {
 			sendAnswerTemplate("Нет долго от У ответа (шаблон)", "долго ответ")
 		else 
 			sendAnswer("We did not received a response from you. Chat will be closed.\n\
-If you need help, please write and we will help you."
+If you need help, please write and we will help you.")
 	}
 	
 }
