@@ -659,23 +659,39 @@ var win_AFhelper =
         <span style="width: 301px">
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;">
+					<button id="languageAF">Приветствие</button>
+				</div>
+				<div style="margin: 5px;">
 					<button id="hello">Приветствие</button>
 					<button id="min">Минуту</button>
+					<button id="internet">Интернет</button>
+					<button id="TW">TW</button>
+					<button id="secLine">2Л</button>
 				</div>
 				<div style="margin: 5px;">
 					<button id="utoch">Доп впр</button>
 					<button id="bag">Подождите</button>
+					<button id="idU">ID У</button>
+					<button id="screen">скрин</button>
+					<button id="bag1">баг</button>
 				</div>
 				<div style="margin: 5px;">
 					<button id="longans">Нет ответа</button>
 					<button id="NS">урок NS</button>
+					<button id="mobApp">Переуст прил</button>
+					<button id="tc_sc">tc+sc</button>
+				</div>
+				<div style="margin: 5px;">
+					<button id="engConv">общ на англ</button>
+					<button id="browser">ус+брауз</button>
+					<button id="calltest">vcall-test</button>
 				</div>
 			</span>
 			<div style="margin: 5px;">
 				<textarea style="width: 291px; height: 125px; resize: none" id="inp"></textarea>
 				<button id="msg1" style="width:100px;">Отправить</button>
 				<button id="snd" style="width:50px; margin-left:16px">send</button>
-				<button id="msg" style="width:100px; margin-left:16px">Чат</button>
+				<button id="msg" style="width:100px; margin-left:16px">Заметки</button>
 			</div>
 		</span>
     </div>`;
@@ -696,21 +712,6 @@ wintAF.innerHTML = win_AFhelper;
 function move_again_AF() {
     if(window.location.href.indexOf('autofaq') === -1) {
 		document.getElementById('AF_helper').style.display = 'none';
-	} else {
-		window.onkeydown = function(e) {
-			var bool = 0;
-			if(e.key == 'Control') {
-					bool = 1;
-			}
-			if(e.key == 'Enter' && bool == 1 && buttons[0].classList.contains('active')) {
-				document.getElementById('snd').click();
-			}
-		}
-		window.onkeyup = function(e) {
-			if(e.key == 'Control') {
-				bool = 0;
-			}
-		}
 	}
     if(window.location.href.indexOf('help.skyeng.ru') === -1) {
 		document.getElementById('main_timer').style.display = 'none';
@@ -740,6 +741,25 @@ function move_again_AF() {
             this.innerHTML = "Чат";
         }
 	}
+    document.getElementById('languageAF').onclick = function () {
+        if(this.innerHTML == "Русский") {
+            this.innerHTML = "Английский";
+			document.getElementById('calltest').style.display = 'none'
+			document.getElementById('tc_sc').style.display = 'none'
+			document.getElementById('TW').style.display = 'none'
+			document.getElementById('internet').style.display = 'none'
+			document.getElementById('engConv').style.display = 'none'
+			document.getElementById('mobApp').style.display = 'none'
+        } else {
+            this.innerHTML = "Русский";
+			document.getElementById('calltest').style.display = ''
+			document.getElementById('tc_sc').style.display = ''
+			document.getElementById('TW').style.display = ''
+			document.getElementById('internet').style.display = ''
+			document.getElementById('engConv').style.display = ''
+			document.getElementById('mobApp').style.display = ''
+        }
+	}
     document.getElementById('msg1').onclick = function () {
         if(this.innerHTML == "Отправить") {
             this.innerHTML = "Доработать";
@@ -750,6 +770,9 @@ function move_again_AF() {
     document.getElementById('snd').onclick = function () {
 		if(document.getElementById('msg').innerHTML == "Чат")
 			sendAnswer(document.getElementById('inp').value, 0)
+		else 
+			sendComment(document.getElementById('inp').value)
+		document.getElementById('inp').value = ""
 	}
 	
 	
@@ -758,9 +781,10 @@ function move_again_AF() {
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		
 		if(document.getElementById('msg1').innerHTML == "Доработать")
-			document.getElementById('inp').value = "Здравствуйте!"
+			document.getElementById('inp').value = txt
 		else 
 			if(values[3])
+		if(document.getElementById('languageAF').innerHTML == "Русский")
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -778,25 +802,103 @@ function move_again_AF() {
 					  "mode": "cors",
 					  "credentials": "include"
 				});
+		else 
+			sendAnswer('Hello!')
 	}
     document.getElementById('utoch').onclick = function () {
-		sendAnswerTemplate("Уточнение дополнительных вопросов (шаблон)", "уточнение")
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswerTemplate("Уточнение дополнительных вопросов (шаблон)", "уточнение")
+		else
+			sendAnswer("Do you have any additional questions?")
+	}
+    document.getElementById('calltest').onclick = function () {
+		sendAnswerTemplate("Тест видеосвязи (ТП)", "видеосвязи")
+	}
+    document.getElementById('browser').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswer("Уточните, пожалуйста, какое устройство и какой браузер используете")
+		else 
+			sendAnswer("Please specify which device and browser you are using.")
+	}
+    document.getElementById('tc_sc').onclick = function () {
+		sendAnswerTemplate("Перевод чата от П на @studentscare и чат \"Teachers Care\" (шаблон)", "tecahers")
 	}
     document.getElementById('bag').onclick = function () {
-		sendAnswerTemplate("Подождите пожалуйста (шаблон ТП)", "баг")
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswerTemplate("Подождите пожалуйста (шаблон ТП)", "баг")
+		else 
+			sendAnswer("Wait please. Now I will check and answer you.")
+	}
+    document.getElementById('bag1').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswerTemplate("ТП уже в разработке (есть тикет jira) (шаблон ТП)", "jira")
+		else 
+			sendAnswer("Sorry for the issue, our developers are already solving it. As soon as they find a way to fix this defect, they will do everything as quickly as possible.")
+	}
+    document.getElementById('secLine').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswerTemplate("Перевод на ТП 2Л. (шаблон ТП)", "2Л")
+		else 
+			sendAnswer("Please wait, a senior employee will contact you for a more detailed troubleshooting.")
+	}
+    document.getElementById('idU').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswerTemplate("Уточнение ID ученика (шаблон ТП)", "id")
+		else 
+			sendAnswer("Please specify student ID")
+	}
+    document.getElementById('TW').onclick = function () {
+		sendAnswerTemplate("Программа TeamViewer (шаблон ТП)", "jira")
+	}
+    document.getElementById('internet').onclick = function () {
+		sendAnswerTemplate("Проблема с Интернетом (ТП)", "интернет")
+	}
+    document.getElementById('engConv').onclick = function () {
+		sendAnswerTemplate("Общение на англ (шаблон)", "общение на англ")
 	}
     document.getElementById('min').onclick = function () {
-		sendAnswer("Одну минуту")
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswer("Одну минуту")
+		else 
+			sendAnswer("Wait a minute please")
+	}
+	
+    document.getElementById('screen').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswerTemplate("Скрин проблемы (шаблон)", "скрин")
+		else 
+			sendAnswer("Please send a link to a screenshot of your problem and we will help you. To quickly create a screenshot, you can use this service: https://prnt.sc/")
+		
+	}
+	
+    document.getElementById('mobApp').onclick = function () {
+		sendAnswer("Чтобы исправить неполадку, пожалуйста, воспользуйтесь следующей инструкцией:\n\
+1.Закрыть все приложения на устройстве.\n\
+2.Удалить приложение Skyeng.\n\
+3.Установить приложение Skyeng.\n\
+4.Не открывать приложение.\n\
+5.Перезапустить устройство(выключение/включение).\n\
+После этого, пожалуйста, проверьте приложение ещё раз")
 	}
     document.getElementById('NS').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский")
 		txt = "Пожалуйста, воспользуйтесь инструкцией, а затем напишите, удалось ли вам наладить связь\n\
 1. Завершаете урок через Finish\n\
 2. Создаете урок через New Student - http://joxi.ru/v298jgeTzKyKYm \n\
 3. Копируете ссылку и отправляете в чат ученику, заранее предупредив его об этом, так как кнопка войти в класс уже не будет функционировать."
+		else 
+			txt = "Use this instruction, and then write if you managed to establish a connection \n\
+ 1. End the lesson by clicking Finish \n\
+ 2. Create a lesson through New Student - http://joxi.ru/v298jgeTzKyKYm \n\
+ 3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
 		sendAnswer(txt)
 	}
     document.getElementById('longans').onclick = function () {
-		sendAnswerTemplate("Нет долго от У ответа (шаблон)", "долго ответ")
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswerTemplate("Нет долго от У ответа (шаблон)", "долго ответ")
+		else 
+			sendAnswer("We did not received a response from you. Chat will be closed.\n\
+If you need help, please write and we will help you."
 	}
 	
 }
@@ -804,7 +906,6 @@ move_again_AF();
 
 
 async function sendAnswerTemplate(template, word) {
-	flag = 0
 	var values = getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
@@ -825,6 +926,7 @@ async function sendAnswerTemplate(template, word) {
   "credentials": "include"
 });
 b = a.json()
+serviceId = queryId = sessionId = tmpText = title = accuracy = ""
 b.then(b => {b.forEach(b => {if (b.title == template) {documentId = b.documentId
 serviceId = b.serviceId
 queryId = b.queryId
@@ -832,14 +934,15 @@ sessionId = b.sessionId
 tmpText = b.text
 title = b.title
 accuracy = b.accuracy
-flag = 1}});})
-
-setTimeout(() => {
-	if(flag == 1)
+}});}).then(k => {
 		if(document.getElementById('msg1').innerHTML == "Доработать")
 			document.getElementById('inp').value = tmpText
 		else 
-			if(values[3])
+			if(!value[3])
+				console.log('Не знаю id У')
+			else if(tmpText == "")
+				console.log('Шаблон не найден')
+			else 
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -857,7 +960,7 @@ setTimeout(() => {
 					  "mode": "cors",
 					  "credentials": "include"
 					});
-			}, 250);
+			});
 }
 function sendAnswer(txt, flag = 1) {
 		var values = getInfo()
@@ -869,7 +972,9 @@ function sendAnswer(txt, flag = 1) {
 		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
 			document.getElementById('inp').value = txt
 		else 
-			if(values[3])
+			if(!value[3])
+				console.log('Не знаю id У')
+			else 
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -900,7 +1005,6 @@ function getInfo() {
 		if(id !== undefined)
 			while(true) {
 				if(id.childNodes[i].innerHTML == 'id') {
-					console.log('here')
 					uid = id.childNodes[i + 1].innerHTML + ",-11"
 					break
 				}
@@ -912,4 +1016,28 @@ function getInfo() {
 		if(uid == "") 
 			flag = false
 		return [adr, adr1, uid, flag]
+}
+
+function sendComment(txt){ 
+		var values = getInfo()
+		adr = values[0]; adr1 = values[1]; uid = values[2]
+		txt2 = txt.split('\n').join('\\n')
+		
+	fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+	  "headers": {
+		"accept": "*/*",
+		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+		"cache-control": "max-age=0",
+		"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryH2CK1t5M3Dc3ziNW",
+		"sec-fetch-dest": "empty",
+		"sec-fetch-mode": "cors",
+		"sec-fetch-site": "same-origin"
+	  },
+	  "referrer": adr,
+	  "referrerPolicy": "no-referrer-when-downgrade",
+	  "body": "------WebKitFormBoundaryH2CK1t5M3Dc3ziNW\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt2 + "\",\"isComment\":true}\r\n------WebKitFormBoundaryH2CK1t5M3Dc3ziNW--\r\n",
+	  "method": "POST",
+	  "mode": "cors",
+	  "credentials": "include"
+	});
 }
