@@ -1,4 +1,4 @@
-cvar win_html = `<div style="display: flex;">
+var win_html = `<div style="display: flex;">
     <span style="cursor: -webkit-grab;">
             <div style="margin: 5px;">
                 <button id="language" style="width:100px">Русский</button>
