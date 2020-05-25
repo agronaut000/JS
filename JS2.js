@@ -1,4 +1,4 @@
-var win_html = `<div style="display: flex;">
+cvar win_html = `<div style="display: flex;">
     <span style="cursor: -webkit-grab;">
             <div style="margin: 5px;">
                 <button id="language" style="width:100px">Русский</button>
@@ -821,7 +821,7 @@ function move_again_AF() {
 			sendAnswer("Please specify which device and browser you are using.")
 	}
     document.getElementById('tc_sc').onclick = function () {
-		sendAnswerTemplate("Перевод чата от П на @studentscare и чат \"Teachers Care\" (шаблон)", "tecahers")
+		sendAnswerTemplate("Перевод чата от П на @studentscare и чат \"Teachers Care\" (шаблон)", "teachers")
 	}
     document.getElementById('bag').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
