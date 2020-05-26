@@ -659,7 +659,7 @@ var win_AFhelper =
         <span style="width: 301px">
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;">
-					<button id="languageAF">Приветствие</button>
+					<button id="languageAF">Русский</button>
 				</div>
 				<div style="margin: 5px;">
 					<button id="helloAF">Приветствие</button>
