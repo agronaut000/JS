@@ -709,7 +709,7 @@ wintAF.setAttribute('id' ,'AF_helper');
 wintAF.innerHTML = win_AFhelper; 
 
 	
-async function move_again_AF() {
+function move_again_AF() {
     if(window.location.href.indexOf('autofaq') === -1) {
 		document.getElementById('AF_helper').style.display = 'none';
 	}
@@ -773,7 +773,7 @@ async function move_again_AF() {
 	}
 	
 	
-    document.getElementById('helloAF').onclick = function () {
+    document.getElementById('helloAF').onclick = async function () {
 		var values = await getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		if(document.getElementById('languageAF').innerHTML == "Русский")
