@@ -777,7 +777,7 @@ function move_again_AF() {
 	
 	
     document.getElementById('helloAF').onclick = function () {
-		var values = await getInfo()
+		var values = getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			txt = "Здравствуйте!"
@@ -968,7 +968,7 @@ accuracy = b.accuracy
 			});
 }
 function sendAnswer(txt, flag = 1) {
-		var values = await getInfo()
+		var values = getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n')
 		txt3 = ""
@@ -1026,7 +1026,7 @@ async function getInfo() {
 }
 
 function sendComment(txt){ 
-		var values = await getInfo()
+		var values = getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n').join('\\n')
 		
