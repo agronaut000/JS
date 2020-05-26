@@ -825,7 +825,7 @@ function move_again_AF() {
 			sendAnswer("Please specify which device and browser you are using.")
 	}
     document.getElementById('tc_sc').onclick = function () {
-		sendAnswerTemplate("Перевод чата от П на @studentscare и чат \"Teachers Care\" (шаблон)", "tecahers")
+		sendAnswerTemplate("Перевод чата от П на @studentscare и чат \"Teachers Care\" (шаблон)", "teachers")
 	}
     document.getElementById('bag').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
