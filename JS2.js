@@ -20,7 +20,7 @@ var win_html = `<div style="display: flex;">
             <div style="margin: 5px;">
                 <button id="tc">tc + РГ</button>
                 <button style="margin: 0 0 0 5px;"id="ph">Телефония</button>
-            </div>
+            </div> 
             <div style="margin: 5px;">
                 <button id="duty_why" style="width:100px; text-align:center;">Телефония</button>
                 <button id="tag_duty">зовём 2Л</button>
