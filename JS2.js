@@ -806,10 +806,10 @@ function move_again_AF() {
 Как только все будет работать как нужно, мы напишем письмо.\
 Если остались вопросы, пожалуйста, напишите.")
 	}
-    document.getElementById(macBag).onclick = function () {
+    document.getElementById('macBag').onclick = function () {
 		sendAnswerTemplate("Макобаг (ТП)", "макобаг")
 	}
-    document.getElementById(revision).onclick = function () {
+    document.getElementById('revision').onclick = function () {
 		sendAnswerTemplate("Старая ревизия (шаблон ТП)", "ревизия")
 	}
 	
