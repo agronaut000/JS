@@ -934,7 +934,7 @@ serviceId = queryId = sessionId = tmpText = title = accuracy = ""
 b.then(b => {b.forEach(b => {if (b.title == template) {documentId = b.documentId
 serviceId = b.serviceId
 queryId = b.queryId
-sessionId = b.sessionId
+AFsessionId = b.sessionId
 tmpText = b.text
 tmpText = tmpText.split("\"").join("\\\\\\\"")
 title = b.title
@@ -960,7 +960,7 @@ accuracy = b.accuracy
 					  },
 					  "referrer": adr,
 					  "referrerPolicy": "no-referrer-when-downgrade",
-					  "body": "------WebKitFormBoundaryZ3ivsA3aU80QEBST\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + tmpText + "\",\"ext\":null,\"files\":[],\"suggestedAnswerDocId\":" + documentId + ",\"autoFaqServiceId\":" + serviceId + ",\"autoFaqSessionId\":\"" + sessionId + "\",\"autoFaqQueryId\":\"" + queryId + "\",\"autoFaqTitle\":\"" + title + "\",\"autoFaqQuery\":\"" + word + "\",\"autoFaqAccuracy\":" + accuracy + "}\r\n------WebKitFormBoundaryZ3ivsA3aU80QEBST--\r\n",
+					  "body": "------WebKitFormBoundaryZ3ivsA3aU80QEBST\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + tmpText + "\",\"ext\":null,\"files\":[],\"suggestedAnswerDocId\":" + documentId + ",\"autoFaqServiceId\":" + serviceId + ",\"autoFaqSessionId\":\"" + AFsessionId + "\",\"autoFaqQueryId\":\"" + queryId + "\",\"autoFaqTitle\":\"" + title + "\",\"autoFaqQuery\":\"" + word + "\",\"autoFaqAccuracy\":" + accuracy + "}\r\n------WebKitFormBoundaryZ3ivsA3aU80QEBST--\r\n",
 					  "method": "POST",
 					  "mode": "cors",
 					  "credentials": "include"
@@ -1003,24 +1003,28 @@ function getInfo() {
 		adr1 = document.location.pathname
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
+		sessionId = ""
 		flag = true
-		uid = ""
-		id = document.getElementsByClassName('expert-user_details-list')[1]
-		i = 0
-		if(id !== undefined)
-			while(true) {
-				if(id.childNodes[i].innerHTML == 'id') {
-					uid = id.childNodes[i + 1].innerHTML + ",-11"
-					break
-				}
-				i = i + 2
-				console.log(i)
-				if(id.childNodes[i] === undefined)
-					break
-			}
-		if(uid == "") 
-			flag = false
-		return [adr, adr1, uid, flag]
+		a = await fetch("https://skyeng.autofaq.ai/api/reason8/reports/conversations/"+adr1, {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://skyeng.autofaq.ai/tickets/archive",
+  "referrerPolicy": "no-referrer-when-downgrade",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+});
+	b = a.json()
+	b.then(b => sessionId = b.sessionId).then(b => {if(sessionId == "")
+	flag = false});
+		return [adr, adr1, sessionId, flag]
 }
 
 function sendComment(txt){ 
