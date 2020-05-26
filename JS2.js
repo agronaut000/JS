@@ -742,7 +742,6 @@ function move_again_AF() {
         if(this.innerHTML == "Русский") {
             this.innerHTML = "Английский";
 			document.getElementById('calltest').style.display = 'none'
-			document.getElementById('tc_sc').style.display = 'none'
 			document.getElementById('TW').style.display = 'none'
 			document.getElementById('internet').style.display = 'none'
 			document.getElementById('engConv').style.display = 'none'
@@ -750,7 +749,6 @@ function move_again_AF() {
         } else {
             this.innerHTML = "Русский";
 			document.getElementById('calltest').style.display = ''
-			document.getElementById('tc_sc').style.display = ''
 			document.getElementById('TW').style.display = ''
 			document.getElementById('internet').style.display = ''
 			document.getElementById('engConv').style.display = ''
@@ -822,7 +820,10 @@ function move_again_AF() {
 			sendAnswer("Please specify which device and browser you are using.")
 	}
     document.getElementById('tc_sc').onclick = function () {
-		sendAnswerTemplate("Перевод чата от П на @studentscare и чат \"Teachers Care\" (шаблон)", "teachers")
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswerTemplate("Перевод чата от П на @studentscare и чат \"Teachers Care\" (шаблон)", "teachers")
+		else 
+			sendAnswerTemplate("Перевод чата от П на @studentscare и чат \"Teachers Care\" (шаблон ТП ENG)", "teachers")
 	}
     document.getElementById('bag').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
