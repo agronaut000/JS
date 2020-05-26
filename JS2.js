@@ -935,6 +935,7 @@ queryId = b.queryId
 AFsessionId = b.sessionId
 tmpText = b.text
 tmpText = tmpText.split("\"").join("\\\"")
+tmpText = tmpText.split("\n").join("\\n")
 title = b.title
 title = title.split("\"").join("\\\"")
 accuracy = b.accuracy
