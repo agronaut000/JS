@@ -20,7 +20,7 @@ var win_html = `<div style="display: flex;">
             <div style="margin: 5px;">
                 <button id="tc">tc + РГ</button>
                 <button style="margin: 0 0 0 5px;"id="ph">Телефония</button>
-            </div> 
+            </div>
             <div style="margin: 5px;">
                 <button id="duty_why" style="width:100px; text-align:center;">Телефония</button>
                 <button id="tag_duty">зовём 2Л</button>
@@ -909,7 +909,6 @@ move_again_AF();
 async function sendAnswerTemplate(template, word) {
 	var values = await getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
-	template = template.split("\"").join("\\\"")
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
   "headers": {
     "accept": "*/*",
@@ -936,6 +935,7 @@ AFsessionId = b.sessionId
 tmpText = b.text
 tmpText = tmpText.split("\"").join("\\\"")
 title = b.title
+title = title.split("\"").join("\\\"")
 accuracy = b.accuracy
 }});}).then(k => {
 		if(document.getElementById('msg1').innerHTML == "Доработать")
