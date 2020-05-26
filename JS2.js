@@ -695,6 +695,18 @@ var win_AFhelper =
 				<button id="msg" style="width:100px; margin-left:16px">Заметки</button>
 			</div>
 		</span>
+	<span style="border: 2px double black; display: none; background-color: #CCCCFF" id="addTmp">
+        <div style="margin: 5px; width: 300px">
+				<button id="cacheSafari" style="margin: 2px">Кэш Сафари</button>
+				<button id="UnapisalSam" style="margin: 2px">П -> У написал сам</button>
+				<button id="macBag" style="margin: 2px">Макобаг</button>
+				<button id="grammar" style="margin: 2px">Грамматика</button>
+				<button id="hiddenHW" style="margin: 2px">Скрытое ДЗ</button>
+				<button id="revision" style="margin: 2px">Ревизия</button>
+				<button id="mat" style="margin: 2px">Материалы приложение</button>
+				<button id="serverAF" style="margin: 2px">Серверные</button>
+		</div>
+	</span>
     </div>`;
 	
 if (localStorage.getItem('winTopAF') == null) {
@@ -724,6 +736,12 @@ function move_again_AF() {
         localStorage.setItem('winTopAF', String(Number(e.clientY - myY2)));
         localStorage.setItem('winLeftAF', String(Number(e.clientX - myX2)));
     };
+    wintAF.firstElementChild.firstElementChild.firstElementChild.ondblclick = function () {
+		if(document.getElementById('addTmp').style.display == 'none')
+			document.getElementById('addTmp').style.display = '';
+		else
+			document.getElementById('addTmp').style.display = 'none';
+	}
     wintAF.firstElementChild.firstElementChild.firstElementChild.onmousedown = function (a) {
         window.myX2 = a.layerX; 
         window.myY2 = a.layerY; 
@@ -756,6 +774,46 @@ function move_again_AF() {
 			document.getElementById('mobApp').style.display = ''
         }
 	}
+	
+    document.getElementById('cacheSafari').onclick = function () {
+		sendAnswer("Давайте попробуем очистить кэш Safari:\
+1. Зайдите в Настройки->Safari.\
+2. Найдите пункт \"Очистить историю и данные сайтов\". Жмите по этой кнопке.\
+3. В новом окне прочитайте сообщение и нажмите \"Очистить\"")
+	}
+	
+    document.getElementById('UnapisalSam').onclick = function () {
+		sendAnswer("Попросите ученика самостоятельно написать нам в чат, чтобы мы получили информацию о нем и его системе. Это поможет нам оперативно связаться с учеником и настроить его устройство. Спасибо за понимание!")
+	}
+	
+    document.getElementById('grammar').onclick = function () {
+		sendAnswer("Раздел \"Грамматика\" находится в разработке. Иногда он появляется в личных кабинетах учеников, так как разработчики тестируют его. Перейти в раздел грамматики вы можете по ссылке: https://vimbox.skyeng.ru/grammar-trainer")
+	}
+	
+    document.getElementById('hiddenHW').onclick = function () {
+		sendAnswer("Ваш преподаватель забыл открыть для вас скрытый раздел, выполнение которого влияет на подсчет балла и завершение домашнего задания.\
+Мы открыли его для вас, теперь после выполнения вы сможете завершить это домашнее задание.")
+	}
+    document.getElementById('mat').onclick = function () {
+		sendAnswer("Приложение сейчас в режиме доработки и исправления контента.\
+По этому из него временно убраны видео и статьи в ежедневных заданиях.")
+	}
+	
+	
+    document.getElementById('serverAF').onclick = function () {
+		sendAnswer("Извините, пожалуйста, за технические неисправности.\
+Наши разработчики уже знают об этом и решают вопрос. \
+Как только все будет работать как нужно, мы напишем письмо.\
+Если остались вопросы, пожалуйста, напишите.")
+	}
+    document.getElementById(macBag).onclick = function () {
+		sendAnswerTemplate("Макобаг (ТП)", "макобаг")
+	}
+    document.getElementById(revision).onclick = function () {
+		sendAnswerTemplate("Старая ревизия (шаблон ТП)", "ревизия")
+	}
+	
+	
     document.getElementById('msg1').onclick = function () {
         if(this.innerHTML == "Отправить") {
             this.innerHTML = "Доработать";
