@@ -685,6 +685,7 @@ var win_AFhelper =
 					<button id="engConv">общ на англ</button>
 					<button id="browser">ус+брауз</button>
 					<button id="calltest">vcall-test</button>
+					<button id="perevod">Др отд</button>
 				</div>
 			</span>
 			<div style="margin: 5px;">
@@ -812,6 +813,9 @@ function move_again_AF() {
 	}
     document.getElementById('calltest').onclick = function () {
 		sendAnswerTemplate("Тест видеосвязи (ТП)", "видеосвязи")
+	}
+    document.getElementById('perevod').onclick = function () {
+		sendAnswerTemplate("Перевод на другой отдел (шаблон)", "перевод на другой отдел")
 	}
     document.getElementById('browser').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
