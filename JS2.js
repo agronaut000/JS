@@ -936,8 +936,7 @@ b.then(b => {b.forEach(b => {if (b.title == template) {documentId = b.documentId
 serviceId = b.serviceId
 queryId = b.queryId
 sessionId = b.sessionId
-tmp1 = b.text.split('<a href')
-tmp2 = tmp1[1].split('\\').join('\\\\\\')
+tmpText = b.text.split("\"").join("\\\\\\\"")
 title = b.title
 accuracy = b.accuracy
 }});}).then(k => {
