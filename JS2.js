@@ -912,7 +912,6 @@ move_again_AF();
 async function sendAnswerTemplate(template, word) {
 	var values = getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
-	tmp.split("\"").join("\\\\\\\"")
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
   "headers": {
     "accept": "*/*",
@@ -944,7 +943,7 @@ accuracy = b.accuracy
 		if(document.getElementById('msg1').innerHTML == "Доработать")
 			document.getElementById('inp').value = tmpText
 		else 
-			if(!value[3])
+			if(!values[3])
 				console.log('Не знаю id У')
 			else if(tmpText == "")
 				console.log('Шаблон не найден')
@@ -978,7 +977,7 @@ function sendAnswer(txt, flag = 1) {
 		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
 			document.getElementById('inp').value = txt
 		else 
-			if(!value[3])
+			if(!values[3])
 				console.log('Не знаю id У')
 			else 
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
