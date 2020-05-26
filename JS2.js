@@ -709,7 +709,7 @@ wintAF.setAttribute('id' ,'AF_helper');
 wintAF.innerHTML = win_AFhelper; 
 
 	
-function move_again_AF() {
+async function move_again_AF() {
     if(window.location.href.indexOf('autofaq') === -1) {
 		document.getElementById('AF_helper').style.display = 'none';
 	}
@@ -777,7 +777,7 @@ function move_again_AF() {
 	
 	
     document.getElementById('helloAF').onclick = function () {
-		var values = getInfo()
+		var values = await getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			txt = "Здравствуйте!"
@@ -967,8 +967,8 @@ accuracy = b.accuracy
 					});
 			});
 }
-function sendAnswer(txt, flag = 1) {
-		var values = getInfo()
+async function sendAnswer(txt, flag = 1) {
+		var values = await getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n')
 		txt3 = ""
@@ -1025,8 +1025,8 @@ async function getInfo() {
 		return [adr, adr1, sessionId, flag]
 }
 
-function sendComment(txt){ 
-		var values = getInfo()
+async function sendComment(txt){ 
+		var values = await getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n').join('\\n')
 		
