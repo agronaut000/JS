@@ -1020,9 +1020,7 @@ async function getInfo() {
   "method": "GET",
   "mode": "cors",
   "credentials": "include"
-});
-	b = a.json()
-	b.then(b => sessionId = b.sessionId).then(b => {if(sessionId == "")
+}).then(a => b = a.json()).then(b => sessionId = b.sessionId).then(b => {if(sessionId == "")
 	flag = false});
 		return [adr, adr1, sessionId, flag]
 }
