@@ -998,7 +998,7 @@ function sendAnswer(txt, flag = 1) {
 					  "credentials": "include"
 				});
 }
-function getInfo() {
+async function getInfo() {
 		adr = document.location.href
 		adr1 = document.location.pathname
 		adr1 = adr1.split('/')
