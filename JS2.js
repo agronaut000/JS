@@ -659,10 +659,10 @@ var win_AFhelper =
         <span style="width: 301px">
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;">
-					<button id="languageAF">Русский</button>
+					<button id="languageAF">Приветствие</button>
 				</div>
 				<div style="margin: 5px;">
-					<button id="hello">Приветствие</button>
+					<button id="helloAF">Приветствие</button>
 					<button id="min">Минуту</button>
 					<button id="internet">Интернет</button>
 					<button id="TW">TW</button>
@@ -776,9 +776,13 @@ function move_again_AF() {
 	}
 	
 	
-    document.getElementById('hello').onclick = function () {
+    document.getElementById('helloAF').onclick = function () {
 		var values = getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			txt = "Здравствуйте!"
+		else
+			txt = "Hello!"
 		
 		if(document.getElementById('msg1').innerHTML == "Доработать")
 			document.getElementById('inp').value = txt
@@ -821,7 +825,7 @@ function move_again_AF() {
 			sendAnswer("Please specify which device and browser you are using.")
 	}
     document.getElementById('tc_sc').onclick = function () {
-		sendAnswerTemplate("Перевод чата от П на @studentscare и чат \"Teachers Care\" (шаблон)", "teachers")
+		sendAnswerTemplate("Перевод чата от П на @studentscare и чат \"Teachers Care\" (шаблон)", "tecahers")
 	}
     document.getElementById('bag').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -898,7 +902,7 @@ function move_again_AF() {
 			sendAnswerTemplate("Нет долго от У ответа (шаблон)", "долго ответ")
 		else 
 			sendAnswer("We did not received a response from you. Chat will be closed.\n\
-If you need help, please write and we will help you.")
+If you need help, please write and we will help you."
 	}
 	
 }
@@ -908,6 +912,7 @@ move_again_AF();
 async function sendAnswerTemplate(template, word) {
 	var values = getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
+	tmp.split("\"").join("\\\\\\\"")
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
   "headers": {
     "accept": "*/*",
@@ -931,14 +936,15 @@ b.then(b => {b.forEach(b => {if (b.title == template) {documentId = b.documentId
 serviceId = b.serviceId
 queryId = b.queryId
 sessionId = b.sessionId
-tmpText = b.text
+tmp1 = b.text.split('<a href')
+tmp2 = tmp1[1].split('\\').join('\\\\\\')
 title = b.title
 accuracy = b.accuracy
 }});}).then(k => {
 		if(document.getElementById('msg1').innerHTML == "Доработать")
 			document.getElementById('inp').value = tmpText
 		else 
-			if(!values[3])
+			if(!value[3])
 				console.log('Не знаю id У')
 			else if(tmpText == "")
 				console.log('Шаблон не найден')
@@ -972,7 +978,7 @@ function sendAnswer(txt, flag = 1) {
 		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
 			document.getElementById('inp').value = txt
 		else 
-			if(!values[3])
+			if(!value[3])
 				console.log('Не знаю id У')
 			else 
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
