@@ -709,16 +709,13 @@ wintAF.setAttribute('id' ,'AF_helper');
 wintAF.innerHTML = win_AFhelper; 
 
 	
-function move_again_AF() {
+async function move_again_AF() {
     if(window.location.href.indexOf('autofaq') === -1) {
 		document.getElementById('AF_helper').style.display = 'none';
 	}
     if(window.location.href.indexOf('help.skyeng.ru') === -1) {
 		document.getElementById('main_timer').style.display = 'none';
 	}
-	
-	
-		
 		
     var listener2 = function(e , a) {
         wintAF.style.left = Number(e.clientX - myX2) + "px";
@@ -776,7 +773,7 @@ function move_again_AF() {
 	}
 	
 	
-    document.getElementById('helloAF').onclick = async function () {
+    document.getElementById('helloAF').onclick = function () {
 		var values = await getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -912,6 +909,7 @@ move_again_AF();
 async function sendAnswerTemplate(template, word) {
 	var values = await getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
+	template = template.split("\"").join("\\\"")
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
   "headers": {
     "accept": "*/*",
