@@ -970,8 +970,6 @@ move_again_AF();
 
 
 async function sendAnswerTemplate(template, word) {
-	var values = await getInfo()
-	adr = values[0]; adr1 = values[1]; uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
   "headers": {
     "accept": "*/*",
@@ -1009,7 +1007,9 @@ accuracy = b.accuracy
 				console.log('Не знаю id У')
 			else if(tmpText == "")
 				console.log('Шаблон не найден')
-			else 
+			else {
+				var values = await getInfo()
+				adr = values[0]; adr1 = values[1]; uid = values[2]
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -1027,11 +1027,10 @@ accuracy = b.accuracy
 					  "mode": "cors",
 					  "credentials": "include"
 					});
+				}
 			});
 }
 async function sendAnswer(txt, flag = 1) {
-		var values = await getInfo()
-		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n')
 		txt3 = ""
 		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
@@ -1041,7 +1040,10 @@ async function sendAnswer(txt, flag = 1) {
 		else 
 			if(!values[3])
 				console.log('Не знаю id У')
-			else 
+			else {
+				var values = await getInfo()
+				adr = values[0]; adr1 = values[1]; uid = values[2]
+
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -1059,6 +1061,7 @@ async function sendAnswer(txt, flag = 1) {
 					  "mode": "cors",
 					  "credentials": "include"
 				});
+			}
 }
 async function getInfo() {
 		adr = document.location.href
