@@ -789,7 +789,7 @@ function move_again_AF() {
 		sendComment("https://skyeng.slack.com/archives/CJQRWT346/p1590040959451600?thread_ts=1590007548.447300&cid=CJQRWT346")
 	}
 	
-    document.getElementById('lonaAnsOld').onclick = function () {
+    document.getElementById('longAnsOld').onclick = function () {
 		sendAnswer("Мы не получили от вас ответа, чат будет закрыт.\
 Если у вас будут вопросы, пожалуйста, задавайте и мы вам поможем.")
 	}
