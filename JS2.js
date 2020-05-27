@@ -786,7 +786,7 @@ function move_again_AF() {
     document.getElementById('bil_qa').onclick = function () {
 		sendAnswer("Сейчас наблюдаются неполадки с некорректным списанием уроков с баланса. Передал в ответственный отдел, чтобы баланс исправили.\
 Есть возможность это исправить сразу, чтобы в дальнейшем баланс списывался корректно, но это приведёт к потере прогресса в личном кабинете. Сейчас разработчики занимаются устранением этой неполадки и рекомендуют пока ничего не исправлять.")
-		sendComment("https://skyeng.slack.com/archives/CJQRWT346/p1590040959451600?thread_ts=1590007548.447300&cid=CJQRWT346"
+		sendComment("https://skyeng.slack.com/archives/CJQRWT346/p1590040959451600?thread_ts=1590007548.447300&cid=CJQRWT346")
 	}
 	
     document.getElementById('lonaAnsOld').onclick = function () {
