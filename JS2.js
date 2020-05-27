@@ -705,6 +705,8 @@ var win_AFhelper =
 				<button id="revision" style="margin: 2px">Ревизия</button>
 				<button id="mat" style="margin: 2px">Материалы приложение</button>
 				<button id="serverAF" style="margin: 2px">Серверные</button>
+				<button id="bil_qa" style="margin: 2px">Баланс (таска)</button>
+				<button id="longAnsOld" style="margin: 2px">Нет ответа(old)</button>
 		</div>
 	</span>
     </div>`;
@@ -781,6 +783,17 @@ function move_again_AF() {
 2. Найдите пункт \"Очистить историю и данные сайтов\". Жмите по этой кнопке.\
 3. В новом окне прочитайте сообщение и нажмите \"Очистить\"")
 	}
+    document.getElementById('bil_qa').onclick = function () {
+		sendAnswer("Сейчас наблюдаются неполадки с некорректным списанием уроков с баланса. Передал в ответственный отдел, чтобы баланс исправили.\
+Есть возможность это исправить сразу, чтобы в дальнейшем баланс списывался корректно, но это приведёт к потере прогресса в личном кабинете. Сейчас разработчики занимаются устранением этой неполадки и рекомендуют пока ничего не исправлять.")
+		sendComment("https://skyeng.slack.com/archives/CJQRWT346/p1590040959451600?thread_ts=1590007548.447300&cid=CJQRWT346"
+	}
+	
+    document.getElementById('lonaAnsOld').onclick = function () {
+		sendAnswer("Мы не получили от вас ответа, чат будет закрыт.\
+Если у вас будут вопросы, пожалуйста, задавайте и мы вам поможем.")
+	}
+	
 	
     document.getElementById('UnapisalSam').onclick = function () {
 		sendAnswer("Попросите ученика самостоятельно написать нам в чат, чтобы мы получили информацию о нем и его системе. Это поможет нам оперативно связаться с учеником и настроить его устройство. Спасибо за понимание!")
