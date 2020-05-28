@@ -339,6 +339,7 @@ If you need help, please write and we will help you.")
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswerTemplate("Нет долго от У ответа (шаблон)", "долго ответ")
 		else 
+			sendAnswer("I am closing this chat. If you have questions, please write.")
 	}
 	
 }
