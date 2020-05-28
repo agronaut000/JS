@@ -42,14 +42,14 @@ var win_AFhelper =
 				<div style="margin: 5px;">
 					<button id="longans">Нет ответа</button>
 					<button id="NS">урок NS</button>
-					<button id="mobApp">Переуст прил</button>
+					<button id="perevod">Др отд</button>
 					<button id="tc_sc">tc+sc</button>
 				</div>
 				<div style="margin: 5px;">
 					<button id="engConv">общ на англ</button>
 					<button id="browser">ус+брауз</button>
 					<button id="calltest">vcall-test</button>
-					<button id="perevod">Др отд</button>
+					<button id="vcall_2" style="margin: 2px">vcall-2</button>
 				</div>
 			</span>
 			<div style="margin: 5px;">
@@ -71,10 +71,9 @@ var win_AFhelper =
 				<button id="serverAF" style="margin: 2px">Серверные</button>
 				<button id="bil_qa" style="margin: 2px">Баланс (таска)</button>
 				<button id="longAnsOld" style="margin: 2px">Нет ответа(old)</button>
-				
+				<button id="mobApp">Переуст прил</button>
 				<button id="RK1" style="margin: 2px">Общ инф РК</button>
 				<button id="RK2" style="margin: 2px">Вход РК</button>
-				<button id="vcall_2" style="margin: 2px">vcall-2</button>
 				<button id="privateMode" style="margin: 2px">Инкогнито</button>
 				<button id="browser_clear" style="margin: 2px">Проверка браузера</button>
 				<button id="predlozh" style="margin: 2px">Предложение</button>
