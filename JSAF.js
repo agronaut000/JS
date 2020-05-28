@@ -412,7 +412,7 @@ async function sendAnswer(txt, flag = 1) {
 		txt2 = txt.split('\n')
 		txt3 = ""
 		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
-		txt2 = txt2.split("\"").join("\\\"")
+		txt3 = txt3.split("\"").join("\\\"")
 		
 		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
 			document.getElementById('inp').value = txt
