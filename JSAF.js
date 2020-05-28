@@ -133,14 +133,14 @@ function move_again_AF() {
 			document.getElementById('TW').style.display = 'none'
 			document.getElementById('internet').style.display = 'none'
 			document.getElementById('engConv').style.display = 'none'
-			document.getElementById('mobApp').style.display = 'none'
+			document.getElementById('vcall_2').style.display = 'none'
         } else {
             this.innerHTML = "Русский";
 			document.getElementById('calltest').style.display = ''
 			document.getElementById('TW').style.display = ''
 			document.getElementById('internet').style.display = ''
 			document.getElementById('engConv').style.display = ''
-			document.getElementById('mobApp').style.display = ''
+			document.getElementById('vcall_2').style.display = ''
         }
 	}
 	
@@ -198,7 +198,8 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 	}
 	
     document.getElementById('grammar').onclick = function () {
-		sendAnswer("Раздел \"Грамматика\" находится в разработке. Иногда он появляется в личных кабинетах учеников, так как разработчики тестируют его. Перейти в раздел грамматики вы можете по ссылке: https://vimbox.skyeng.ru/grammar-trainer")
+		sendAnswer("Раздел \"Грамматика\" находится в разработке, поэтому кнопка перехода в раздел грамматики отображается не всегда. \n\
+Перейти в раздел грамматики вы можете по ссылке: https://vimbox.skyeng.ru/grammar-trainer")
 	}
 	
     document.getElementById('hiddenHW').onclick = function () {
@@ -275,7 +276,7 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 	}
     document.getElementById('utoch').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Уточнение дополнительных вопросов (шаблон)", "уточнение")
+			sendAnswer("Уточните, пожалуйста, у вас остались дополнительные вопросы?")
 		else
 			sendAnswer("Do you have any additional questions?")
 	}
@@ -379,6 +380,7 @@ move_again_AF();
 
 
 async function sendAnswerTemplate(template, word) {
+	addTimer()
 	var values = await getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
@@ -439,6 +441,7 @@ accuracy = b.accuracy
 			});
 }
 async function sendAnswer(txt, flag = 1) {
+		addTimer()
 		var values = await getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n')
@@ -462,7 +465,7 @@ async function sendAnswer(txt, flag = 1) {
 						"sec-fetch-mode": "cors",
 						"sec-fetch-site": "same-origin"
 					  },
-					  "referrer": "https://skyeng.autofaq.ai/tickets/assigned/336479fa-d024-4c99-9092-ddd843c9f6bd",
+					  "referrer": adr,
 					  "referrerPolicy": "no-referrer-when-downgrade",
 					  "body": "------WebKitFormBoundaryFeIiMdHaxAteNUHd\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt3 + "\"}\r\n------WebKitFormBoundaryFeIiMdHaxAteNUHd--\r\n",
 					  "method": "POST",
@@ -520,3 +523,70 @@ async function sendComment(txt){
 	  "credentials": "include"
 	});
 }
+
+idk = 0
+var tmrs = []
+function addTimer() {
+	tm = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0].childNodes[0].childNodes[0]
+	if(tm.childNodes[0].childNodes[2] === undefined) {
+		let serv = document.createElement('div')
+		tm.childNodes[0].appendChild(serv)
+		tm.childNodes[0].childNodes[2].innerHTML = "10:00"
+		tmrs[idk] = ["10:00", tm.childNodes[1].childNodes[0].innerText]
+		idk++
+	}
+}
+function refreshTimer() {
+	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0].childNodes[0].childNodes[0].childNodes[0]
+	j = 0
+	while(true) {
+		if(btns.childNodes[j] === undefined)
+			break
+		name = btns.childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerText
+		for (i = 0; i < idk; i++) {
+			if(tmrs[i][1] == name) {
+				btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[2].innerHTML = tmrs[i][0]
+				break
+			}
+		}
+		j++
+	}
+}
+
+/*
+document.getElementsByClassName('ant-btn ant-btn-primary')[0].onclick = function () {
+	addTimer()
+	name = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
+	for (i = 0; i < idk; i++) {
+		if(tmrs[i][1] == name) {
+			tmrs[i][0] = "10:00"
+		}
+	}
+}*/
+					
+function startTimer() {
+	for(i = 0; i < idk; i++) {
+		a = tmrs[i][0].split(':')
+		if(a[0] == 0 && a[1] == 0) {
+			continue
+		}
+		
+		a[1] = a[1] - 1;
+		if (a[1] < 0 && a[0] > 0) {
+			a[0] = a[0] - 1;
+			a[1] = 59;
+		}
+		var tim = ''
+		if(Number(a[0]) < 10)
+			tim = '0'
+		tim = tim + Number(a[0]) + ':'
+		if(a[1] < 10)
+			tim = tim + '0'
+		tim = tim + Number(a[1])
+		
+		tmrs[i][0] = tim
+	}
+	setTimeout(startTimer, 1000);
+	refreshTimer()
+}
+startTimer();
