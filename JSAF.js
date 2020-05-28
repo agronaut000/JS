@@ -71,6 +71,13 @@ var win_AFhelper =
 				<button id="serverAF" style="margin: 2px">Серверные</button>
 				<button id="bil_qa" style="margin: 2px">Баланс (таска)</button>
 				<button id="longAnsOld" style="margin: 2px">Нет ответа(old)</button>
+				
+				<button id="RK1" style="margin: 2px">Общ инф РК</button>
+				<button id="RK2" style="margin: 2px">Вход РК</button>
+				<button id="vcall_2" style="margin: 2px">vcall-2</button>
+				<button id="privateMode" style="margin: 2px">Инкогнито</button>
+				<button id="browser_clear" style="margin: 2px">Проверка браузера</button>
+				<button id="predlozh" style="margin: 2px">Предложение</button>
 		</div>
 	</span>
     </div>`;
@@ -160,6 +167,33 @@ If you need help, please write and we will help you.")
 	}
 	
 	
+    document.getElementById('RK1').onclick = function () {
+		sendAnswerTemplate("Информация о разговорных клубов", "РК")
+	}
+    document.getElementById('RK2').onclick = function () {
+		sendAnswerTemplate("Как войти в РК (шаблон)", "РК")
+	}
+	
+    document.getElementById('vcall_2').onclick = function () {
+		sendAnswer("Также на этой странице есть кнопка \"Проверить динамики\", нажав на которую вы должны услышать звук")
+	}
+    document.getElementById('browser_clear').onclick = function () {
+		sendAnswer("Попробуйте, пожалуйста, воспользоваться следующими инструкциями, а затем проверить ещё раз\n\
+http://faq.usedocs.com/article/7652 - проверить обновление браузера\n\
+http://faq.usedocs.com/article/7656 - удалить Cookies сайта Skyeng\n\
+http://faq.usedocs.com/article/7654 - очистка кэша\n\
+http://faq.usedocs.com/article/7655 - очистить браузер от расширений")
+	}
+    document.getElementById('privateMode').onclick = function () {
+		sendAnswerTemplate("Инкогнито/приватное окно (шаблон ТП)", "инкогнито")
+	}
+    document.getElementById('predlozh').onclick = function () {
+		sendAnswerTemplate("Платформа: Пожелания/Отзыв по платформе и личному кабинету", "предложение")
+	}
+
+
+	
+	
     document.getElementById('UnapisalSam').onclick = function () {
 		sendAnswer("Попросите ученика самостоятельно написать нам в чат, чтобы мы получили информацию о нем и его системе. Это поможет нам оперативно связаться с учеником и настроить его устройство. Спасибо за понимание!")
 	}
@@ -179,9 +213,8 @@ If you need help, please write and we will help you.")
 	
 	
     document.getElementById('serverAF').onclick = function () {
-		sendAnswer("Извините, пожалуйста, за технические неисправности.\
-Наши разработчики уже знают об этом и решают вопрос. \
-Как только все будет работать как нужно, мы напишем письмо.\
+		sendAnswer("Извините, пожалуйста, за технические неисправности.\n\
+Наши разработчики уже знают об этом и решают вопрос. \n\
 Если остались вопросы, пожалуйста, напишите.")
 	}
     document.getElementById('macBag').onclick = function () {
@@ -374,7 +407,7 @@ queryId = b.queryId
 AFsessionId = b.sessionId
 tmpText = b.text
 tmpText = tmpText.split("\"").join("\\\"")
-tmpText = tmpText.split("\n").join("\\n")
+tmpText = tmpText.split("\n").join("\\\n")
 title = b.title
 title = title.split("\"").join("\\\"")
 accuracy = b.accuracy
