@@ -24,6 +24,8 @@ var win_AFhelper =
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;">
 					<button id="languageAF">Русский</button>
+					<button id="rfrTmr" style="marginLeft: 150px">T10</button>
+					<button id="rfrTmr1" style="marginLeft: 5px">T1</button>
 				</div>
 				<div style="margin: 5px;">
 					<button id="helloAF">Приветствие</button>
@@ -144,6 +146,12 @@ function move_again_AF() {
         }
 	}
 	
+    document.getElementById('rfrTmr').onclick = function () {
+		refCurTimer("10:00")
+	}
+    document.getElementById('rfrTmr').onclick = function () {
+		refCurTimer("1:00")
+	}
     document.getElementById('cacheSafari').onclick = function () {
 		sendAnswer("Давайте попробуем очистить кэш Safari:\n\
 1. Зайдите в Настройки->Safari.\n\
@@ -159,10 +167,10 @@ function move_again_AF() {
     document.getElementById('longAnsOld').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswer("Мы не получили от вас ответа, чат будет закрыт.\n\
-Если у вас будут вопросы, пожалуйста, задавайте и мы вам поможем.")
+Если у вас будут вопросы, пожалуйста, задавайте и мы вам поможем.", 1, "1:00")
 		else 
 			sendAnswer("We did not received a response from you. Chat will be closed.\n\
-If you need help, please write and we will help you.")
+If you need help, please write and we will help you.", 1, "1:00")
 	}
 	
 	
@@ -371,17 +379,18 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 	}
     document.getElementById('longans').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Нет долго от У ответа (шаблон)", "долго ответ")
+			sendAnswerTemplate("Нет долго от У ответа (шаблон)", "долго ответ", "1:00")
 		else 
-			sendAnswer("I am closing this chat. If you have questions, please write.")
+			sendAnswer("I am closing this chat. If you have questions, please write.", 1, "1:00")
 	}
 	
 }
 move_again_AF();
 
 
-async function sendAnswerTemplate(template, word) {
+async function sendAnswerTemplate(template, word, time = "10:00") {
 	addTimer()
+	refCurTimer(time)
 	var values = await getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
@@ -441,8 +450,9 @@ accuracy = b.accuracy
 					});
 			});
 }
-async function sendAnswer(txt, flag = 1) {
+async function sendAnswer(txt, flag = 1, time = "10:00") {
 		addTimer()
+		refCurTimer(time)
 		var values = await getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n')
@@ -534,7 +544,7 @@ function addTimer() {
 		serv.style.backgroundColor = ""
 		tm.childNodes[0].appendChild(serv)
 		tm.childNodes[0].childNodes[2].innerHTML = "10:00"
-		tmrs[idk] = ["10:00", tm.childNodes[1].childNodes[0].innerText]
+		tmrs[idk] = ["10:00", tm.childNodes[1].childNodes[0].innerText, 1]
 		idk++
 	}
 }
@@ -550,13 +560,38 @@ function refreshTimer() {
 		for (i = 0; i < idk; i++) {
 			if(tmrs[i][1] == name) {
 				btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[2].innerHTML = tmrs[i][0]
-				break
+				if(tmrs[i][0] == "00:00")
+					if(tmrs[i][2] == 1)
+						btns.childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#ECEBBD"
+					else
+						btns.childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#FBCEB1"
 			}
 		}
 		j++
 	}
 }
 
+function refCurTimer(time) {
+	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0].childNodes[0].childNodes[0].childNodes[0]
+	j = 0
+	while(true) {
+		if(btns.childNodes[j] === undefined)
+			break
+		if(btns.childNodes[j].className === "ant-empty ant-empty-normal")
+			break;
+		name = btns.childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerText
+		for (i = 0; i < idk; i++) {
+			if(tmrs[i][1] == name) {
+				tmrs[i][0] = time
+				if(time == "1:00")
+					tmrs[i][2] = 0
+				else
+					tmrs[i][2] = 1
+			}
+		}
+		j++
+	}
+}
 /*
 document.getElementsByClassName('ant-btn ant-btn-primary')[0].onclick = function () {
 	addTimer()
