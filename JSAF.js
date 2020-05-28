@@ -147,9 +147,11 @@ function move_again_AF() {
 	}
 	
     document.getElementById('rfrTmr').onclick = function () {
+		addTimer()
 		refCurTimer("10:00")
 	}
-    document.getElementById('rfrTmr').onclick = function () {
+    document.getElementById('rfrTmr1').onclick = function () {
+		addTimer()
 		refCurTimer("1:00")
 	}
     document.getElementById('cacheSafari').onclick = function () {
@@ -572,24 +574,17 @@ function refreshTimer() {
 }
 
 function refCurTimer(time) {
-	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0].childNodes[0].childNodes[0].childNodes[0]
-	j = 0
-	while(true) {
-		if(btns.childNodes[j] === undefined)
-			break
-		if(btns.childNodes[j].className === "ant-empty ant-empty-normal")
-			break;
-		name = btns.childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerText
-		for (i = 0; i < idk; i++) {
-			if(tmrs[i][1] == name) {
-				tmrs[i][0] = time
-				if(time == "1:00")
-					tmrs[i][2] = 0
-				else
-					tmrs[i][2] = 1
-			}
+	btns = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0]
+
+	name = btns.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
+	for (i = 0; i < idk; i++) {
+		if(tmrs[i][1] == name) {
+			tmrs[i][0] = time
+			if(time == "1:00")
+				tmrs[i][2] = 0
+			else
+				tmrs[i][2] = 1
 		}
-		j++
 	}
 }
 /*
