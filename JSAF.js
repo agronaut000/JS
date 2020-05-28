@@ -24,8 +24,8 @@ var win_AFhelper =
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;">
 					<button id="languageAF">Русский</button>
-					<button id="rfrTmr" style="marginLeft: 150px">T10</button>
-					<button id="rfrTmr1" style="marginLeft: 5px">T1</button>
+					<button id="rfrTmr" style="margin-left: 172px">T10</button>
+					<button id="rfrTmr1" style="margin-left: 5px">T1</button>
 				</div>
 				<div style="margin: 5px;">
 					<button id="helloAF">Приветствие</button>
