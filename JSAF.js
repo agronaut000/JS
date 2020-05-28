@@ -253,7 +253,8 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 			document.getElementById('inp').value = txt
 		else 
 			if(values[3])
-		if(document.getElementById('languageAF').innerHTML == "Русский")
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+				addTimer()
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -271,7 +272,7 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 					  "mode": "cors",
 					  "credentials": "include"
 				});
-		else 
+		} else 
 			sendAnswer('Hello!')
 	}
     document.getElementById('utoch').onclick = function () {
@@ -530,6 +531,7 @@ function addTimer() {
 	tm = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0].childNodes[0].childNodes[0]
 	if(tm.childNodes[0].childNodes[2] === undefined) {
 		let serv = document.createElement('div')
+		serv.style.backgroundColor = ""
 		tm.childNodes[0].appendChild(serv)
 		tm.childNodes[0].childNodes[2].innerHTML = "10:00"
 		tmrs[idk] = ["10:00", tm.childNodes[1].childNodes[0].innerText]
@@ -542,6 +544,8 @@ function refreshTimer() {
 	while(true) {
 		if(btns.childNodes[j] === undefined)
 			break
+		if(btns.childNodes[j].className === "ant-empty ant-empty-normal")
+			break;
 		name = btns.childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerText
 		for (i = 0; i < idk; i++) {
 			if(tmrs[i][1] == name) {
