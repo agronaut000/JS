@@ -541,7 +541,7 @@ idk = 0
 var tmrs = []
 function addTimer() {
 	tm = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0].childNodes[0].childNodes[0]
-	if(tm.childNodes[0].childNodes[2] === undefined && flag == 1) {
+	if(tm.childNodes[0].childNodes[2] === undefined) {
 		let serv = document.createElement('div')
 		tm.childNodes[0].appendChild(serv)
 		tm.childNodes[0].childNodes[2].innerHTML = "10:00"
