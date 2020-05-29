@@ -550,14 +550,15 @@ function addTimer() {
 	}
 }
 
+
 function addTimers() {
 	j = 0
 	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0]
 	while (true) {
-		if(btns.childNodes[j] == undefined)
+		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j] == undefined)
 			break;
 		btns.childNodes[j]
-		nm = btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
+		nm = btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
 		flag = 0
 		for(i = 0; i < idk; i++) {
 			name = tmrs[i][1]
@@ -575,10 +576,10 @@ function addTimers() {
 	j = 0
 	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0]
 	while (true) {
-		if(btns.childNodes[j] == undefined)
+		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j] == undefined)
 			break;
-		if(btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
-			btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].appendChild(document.createElement('div'))
+		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
+			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[0].appendChild(document.createElement('div'))
 		j++
 	}
 }
