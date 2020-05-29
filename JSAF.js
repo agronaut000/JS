@@ -585,9 +585,9 @@ function addTimers() {
 }
 
 function refreshTimer() {
-	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0]
 	j = 0
 	while(true) {
+		btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0]
 		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j] === undefined)
 			break
 		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].className === "ant-empty ant-empty-normal")
