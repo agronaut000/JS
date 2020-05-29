@@ -566,7 +566,7 @@ function addTimers() {
 				break
 			}
 		}
-		if(flag == 1)
+		if(flag == 0)
 			tmrs[idk++] = ["10:00", nm, 1]
 
 		if(btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
