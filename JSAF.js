@@ -539,16 +539,38 @@ async function sendComment(txt){
 
 idk = 0
 var tmrs = []
-function addTimer(tm = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0].childNodes[0].childNodes[0], flag = 1) {
+function addTimer() {
+	tm = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0].childNodes[0].childNodes[0]
 	if(tm.childNodes[0].childNodes[2] === undefined && flag == 1) {
 		let serv = document.createElement('div')
-		serv.style.backgroundColor = ""
 		tm.childNodes[0].appendChild(serv)
 		tm.childNodes[0].childNodes[2].innerHTML = "10:00"
 		tmrs[idk] = ["10:00", tm.childNodes[1].childNodes[0].innerText, 1]
 		idk++
 	}
 }
+
+function addTimers() {
+	j = 0
+	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0]
+	while (true) {
+		if(btns.childNodes[j] == undefined)
+			break;
+		btns.childNodes[j]
+		nm = btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
+		for(i = 0; i < idk; i++) {
+			name = tmrs[i][1]
+			if(nm == name)
+				break
+			if((i + 1) == idk)
+				tmrs[i + 1] = ["10:00", nm, 1]
+		}
+		if(btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
+			btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].appendChild(document.createElement('div'))
+		j++
+	}	
+}
+
 function refreshTimer() {
 	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0].childNodes[0].childNodes[0].childNodes[0]
 	j = 0
@@ -558,7 +580,7 @@ function refreshTimer() {
 		if(btns.childNodes[j].className === "ant-empty ant-empty-normal")
 			break;
 		if(btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
-		    addTimer(btns.childNodes[0].childNodes[0].childNodes[0], 0)
+			addTimers()
 		name = btns.childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerText
 		for (i = 0; i < idk; i++) {
 			if(tmrs[i][1] == name) {
