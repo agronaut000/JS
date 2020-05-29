@@ -24,7 +24,7 @@ var win_AFhelper =
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;">
 					<button id="languageAF">Русский</button>
-					<button id="rfrTmr" style="margin-left: 172px">T10</button>
+					<button id="rfrTmr" style="margin-left: 170px">T10</button>
 					<button id="rfrTmr1" style="margin-left: 5px">T1</button>
 				</div>
 				<div style="margin: 5px;">
@@ -539,9 +539,8 @@ async function sendComment(txt){
 
 idk = 0
 var tmrs = []
-function addTimer() {
-	tm = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0].childNodes[0].childNodes[0]
-	if(tm.childNodes[0].childNodes[2] === undefined) {
+function addTimer(tm = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0].childNodes[0].childNodes[0], flag = 1) {
+	if(tm.childNodes[0].childNodes[2] === undefined && flag == 1) {
 		let serv = document.createElement('div')
 		serv.style.backgroundColor = ""
 		tm.childNodes[0].appendChild(serv)
@@ -558,6 +557,8 @@ function refreshTimer() {
 			break
 		if(btns.childNodes[j].className === "ant-empty ant-empty-normal")
 			break;
+		if(btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
+		    addTimer(btns.childNodes[0].childNodes[0].childNodes[0], 0)
 		name = btns.childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerText
 		for (i = 0; i < idk; i++) {
 			if(tmrs[i][1] == name) {
