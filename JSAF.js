@@ -18,7 +18,7 @@ button {
 }`
 mstl.innerHTML = style;
 
-var win_AFhelper =
+var win_AFhelper =  
     `<div style="display: flex; width: 301px;">
         <span style="width: 301px">
 			<span style="cursor: -webkit-grab;">
@@ -163,7 +163,6 @@ function move_again_AF() {
     document.getElementById('bil_qa').onclick = function () {
 		sendAnswer("Сейчас наблюдаются неполадки с некорректным списанием уроков с баланса. Передал в ответственный отдел, чтобы баланс исправили.\n\
 Есть возможность это исправить сразу, чтобы в дальнейшем баланс списывался корректно, но это приведёт к потере прогресса в личном кабинете. Сейчас разработчики занимаются устранением этой неполадки и рекомендуют пока ничего не исправлять.")
-		sendComment("https://skyeng.slack.com/archives/CJQRWT346/p1590040959451600?thread_ts=1590007548.447300&cid=CJQRWT346")
 	}
 	
     document.getElementById('longAnsOld').onclick = function () {
@@ -585,9 +584,9 @@ function addTimers() {
 }
 
 function refreshTimer() {
+	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0]
 	j = 0
 	while(true) {
-		btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0]
 		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j] === undefined)
 			break
 		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].className === "ant-empty ant-empty-normal")
@@ -605,6 +604,7 @@ function refreshTimer() {
 						btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#FBCEB1"
 				else
 					btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "white"
+					
 			}
 		}
 		j++
@@ -660,6 +660,14 @@ function startTimer() {
 	}
 	setTimeout(startTimer, 1000);
 	refreshTimer()
+	flag = 0
+	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned' !== -1 && flag == 0) {
+		questsRed()
+		flag = 1
+		continue
+	} 
+	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned' === -1 && flag == 1)
+		flag = 0
 }
 startTimer();
 
@@ -672,5 +680,4 @@ function questsRed () {
 				document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].style.backgroundColor = "white"
 	});
 }
-
 setTimeout(questsRed, 10000);
