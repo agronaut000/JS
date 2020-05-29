@@ -24,7 +24,7 @@ var win_AFhelper =
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;">
 					<button id="languageAF">Русский</button>
-					<button id="rfrTmr" style="margin-left: 170px">T10</button>
+					<button id="rfrTmr" style="margin-left: 167px">T10</button>
 					<button id="rfrTmr1" style="margin-left: 5px">T1</button>
 				</div>
 				<div style="margin: 5px;">
@@ -558,13 +558,16 @@ function addTimers() {
 			break;
 		btns.childNodes[j]
 		nm = btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
+		flag = 0
 		for(i = 0; i < idk; i++) {
 			name = tmrs[i][1]
-			if(nm == name)
+			if(nm == name) {
+				flag = 1
 				break
-			if((i + 1) == idk)
-				tmrs[i + 1] = ["10:00", nm, 1]
+			}
 		}
+		if((flag == 1)
+			tmrs[idk++] = ["10:00", nm, 1]
 		if(btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
 			btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].appendChild(document.createElement('div'))
 		j++
