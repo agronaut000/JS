@@ -569,31 +569,39 @@ function addTimers() {
 		if(flag == 0)
 			tmrs[idk++] = ["10:00", nm, 1]
 
+		j++
+	}	
+	
+	j = 0
+	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0]
+	while (true) {
+		if(btns.childNodes[j] == undefined)
+			break;
 		if(btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
 			btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[0].appendChild(document.createElement('div'))
 		j++
-	}	
+	}
 }
 
 function refreshTimer() {
-	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0].childNodes[0].childNodes[0].childNodes[0]
+	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0]
 	j = 0
 	while(true) {
-		if(btns.childNodes[j] === undefined)
+		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j] === undefined)
 			break
-		if(btns.childNodes[j].className === "ant-empty ant-empty-normal")
+		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].className === "ant-empty ant-empty-normal")
 			break;
-		if(btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
+		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
 			addTimers()
-		name = btns.childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerText
+		name = btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerText
 		for (i = 0; i < idk; i++) {
 			if(tmrs[i][1] == name) {
-				btns.childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[2].innerHTML = tmrs[i][0]
+				btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[2].innerHTML = tmrs[i][0]
 				if(tmrs[i][0] == "00:00")
 					if(tmrs[i][2] == 1)
-						btns.childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#ECEBBD"
+						btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#ECEBBD"
 					else
-						btns.childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#FBCEB1"
+						btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#FBCEB1"
 			}
 		}
 		j++
