@@ -668,3 +668,5 @@ document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childN
 		else
 			document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].style.backgroundColor = "white"
 });
+
+setTimeout(questsRed, 5000);
