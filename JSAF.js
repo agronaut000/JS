@@ -147,11 +147,11 @@ function move_again_AF() {
 	}
 	
     document.getElementById('rfrTmr').onclick = function () {
-		addTimer()
+		//addTimer()
 		refCurTimer("10:00")
 	}
     document.getElementById('rfrTmr1').onclick = function () {
-		addTimer()
+		//addTimer()
 		refCurTimer("1:00")
 	}
     document.getElementById('cacheSafari').onclick = function () {
@@ -264,7 +264,7 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 		else 
 			if(values[3])
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-				addTimer()
+				//addTimer()
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -391,7 +391,7 @@ move_again_AF();
 
 
 async function sendAnswerTemplate(template, word, time = "10:00") {
-	addTimer()
+	//addTimer()
 	refCurTimer(time)
 	var values = await getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
@@ -453,7 +453,7 @@ accuracy = b.accuracy
 			});
 }
 async function sendAnswer(txt, flag = 1, time = "10:00") {
-		addTimer()
+		//addTimer()
 		refCurTimer(time)
 		var values = await getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
