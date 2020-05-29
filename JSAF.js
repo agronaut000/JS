@@ -673,4 +673,4 @@ function questsRed () {
 	});
 }
 
-setTimeout(questsRed, 5000);
+setTimeout(questsRed, 10000);
