@@ -660,3 +660,11 @@ function startTimer() {
 	refreshTimer()
 }
 startTimer();
+
+document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].addEventListener("DOMSubtreeModified", function() {
+		txt = document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].innerHTML
+		if(txt == "Взять запрос (0)")
+			document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].style.backgroundColor = "#F34723"
+		else
+			document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].style.backgroundColor = "white"
+});
