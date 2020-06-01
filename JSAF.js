@@ -684,7 +684,7 @@ function startTimer() {
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') === -1 && flag == 1)
 		flag = 0
 	
-	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1 && flag == 0) {
+	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1) {
 		document.getElementsByClassName('ant-btn ant-btn-primary')[0].onclick = function () {
 			refCurTimer('10:00')
 		}
