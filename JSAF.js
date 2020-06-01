@@ -385,9 +385,26 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 			sendAnswer("I am closing this chat. If you have questions, please write.", 1, "1:00")
 	}
 	
+	
+	
+
+	window.onkeydown = function(e) {
+			if(e.key == 'Control') {
+					bool = 1;
+			}
+			console.log(bool, e.key)
+			if(e.key == 'Enter' && bool == 1) {
+				refCurTimer('10:00')
+			}
+		}
+	window.onkeyup = function(e) {
+		if(e.key == 'Control') {
+			bool = 0;
+		}
+	}
 }
 move_again_AF();
-
+var bool = 0;	
 
 async function sendAnswerTemplate(template, word, time = "10:00") {
 	//addTimer()
@@ -635,7 +652,7 @@ document.getElementsByClassName('ant-btn ant-btn-primary')[0].onclick = function
 		}
 	}
 }*/
-					
+				
 function startTimer() {
 	for(i = 0; i < idk; i++) {
 		a = tmrs[i][0].split(':')
@@ -664,9 +681,17 @@ function startTimer() {
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1 && flag == 0) {
 		questsRed()
 		flag = 1
+		continue
 	} 
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') === -1 && flag == 1)
 		flag = 0
+	
+	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1 && flag == 0) {
+		document.getElementsByClassName('ant-btn ant-btn-primary')[0].onclick = function () {
+			refCurTimer('10:00')
+		}
+	}
+	
 }
 startTimer();
 
