@@ -23,12 +23,12 @@ var win_AFhelper =
         <span style="width: 301px">
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;">
-					<button id="languageAF">Русский</button>
-					<button id="rfrTmr" style="margin-left: 167px">T10</button>
+					<button id="languageAF" style="width:100px">Русский</button>
+					<button id="rfrTmr" style="margin-left: 125px">T10</button>
 					<button id="rfrTmr1" style="margin-left: 5px">T1</button>
 				</div>
 				<div style="margin: 5px;">
-					<button id="helloAF">Приветствие</button>
+					<button id="helloAF">Hello</button>
 					<button id="min">Минуту</button>
 					<button id="internet">Интернет</button>
 					<button id="TW">TW</button>
@@ -55,30 +55,40 @@ var win_AFhelper =
 				</div>
 			</span>
 			<div style="margin: 5px;">
+				<button id="tmplt1_save">save</button>
+				<button id="tmplt1_snd">send</button>
+				
+				<button id="tmplt2_save" style="margin-left: 25px">save</button>
+				<button id="tmplt2_snd">send</button>
+				
+				<button id="tmplt3_save" style="margin-left: 25px">save</button>
+				<button id="tmplt3_snd">send</button>
+			</div>
+			<div style="margin: 5px;">
 				<textarea style="width: 291px; height: 125px; resize: none" id="inp"></textarea>
 				<button id="msg1" style="width:100px;">Отправить</button>
 				<button id="snd" style="width:50px; margin-left:16px">send</button>
 				<button id="msg" style="width:100px; margin-left:16px">Заметки</button>
 			</div>
-		</span>
-	<span style="border: 2px double black; display: none; background-color: #CCCCFF" id="addTmp">
-        <div style="margin: 5px; width: 300px">
-				<button id="cacheSafari" style="margin: 2px">Кэш Сафари</button>
-				<button id="UnapisalSam" style="margin: 2px">П -> У написал сам</button>
-				<button id="macBag" style="margin: 2px">Макобаг</button>
-				<button id="grammar" style="margin: 2px">Грамматика</button>
-				<button id="hiddenHW" style="margin: 2px">Скрытое ДЗ</button>
-				<button id="revision" style="margin: 2px">Ревизия</button>
-				<button id="mat" style="margin: 2px">Материалы приложение</button>
-				<button id="serverAF" style="margin: 2px">Серверные</button>
-				<button id="bil_qa" style="margin: 2px">Баланс (таска)</button>
-				<button id="longAnsOld" style="margin: 2px">Нет ответа(old)</button>
-				<button id="mobApp">Переуст прил</button>
-				<button id="RK1" style="margin: 2px">Общ инф РК</button>
-				<button id="RK2" style="margin: 2px">Вход РК</button>
-				<button id="privateMode" style="margin: 2px">Инкогнито</button>
-				<button id="browser_clear" style="margin: 2px">Проверка браузера</button>
-				<button id="predlozh" style="margin: 2px">Предложение</button>
+		<div style="border: 2px double black; display: none; background-color: #CCCCFF" id="addTmp">
+			<div style="margin: 5px; width: 300px">
+					<button id="cacheSafari" style="margin: 2px">Кэш Сафари</button>
+					<button id="UnapisalSam" style="margin: 2px">П -> У написал сам</button>
+					<button id="macBag" style="margin: 2px">Макобаг</button>
+					<button id="grammar" style="margin: 2px">Грамматика</button>
+					<button id="hiddenHW" style="margin: 2px">Скрытое ДЗ</button>
+					<button id="revision" style="margin: 2px">Ревизия</button>
+					<button id="mat" style="margin: 2px">Материалы приложение</button>
+					<button id="serverAF" style="margin: 2px">Серверные</button>
+					<button id="bil_qa" style="margin: 2px">Баланс (таска)</button>
+					<button id="longAnsOld" style="margin: 2px">Нет ответа(old)</button>
+					<button id="mobApp">Переуст прил</button>
+					<button id="RK1" style="margin: 2px">Общ инф РК</button>
+					<button id="RK2" style="margin: 2px">Вход РК</button>
+					<button id="privateMode" style="margin: 2px">Инкогнито</button>
+					<button id="browser_clear" style="margin: 2px">Проверка браузера</button>
+					<button id="predlozh" style="margin: 2px">Предложение</button>
+			</div>
 		</div>
 	</span>
     </div>`;
@@ -134,14 +144,12 @@ function move_again_AF() {
 			document.getElementById('calltest').style.display = 'none'
 			document.getElementById('TW').style.display = 'none'
 			document.getElementById('internet').style.display = 'none'
-			document.getElementById('engConv').style.display = 'none'
 			document.getElementById('vcall_2').style.display = 'none'
         } else {
             this.innerHTML = "Русский";
 			document.getElementById('calltest').style.display = ''
 			document.getElementById('TW').style.display = ''
 			document.getElementById('internet').style.display = ''
-			document.getElementById('engConv').style.display = ''
 			document.getElementById('vcall_2').style.display = ''
         }
 	}
@@ -163,6 +171,7 @@ function move_again_AF() {
     document.getElementById('bil_qa').onclick = function () {
 		sendAnswer("Сейчас наблюдаются неполадки с некорректным списанием уроков с баланса. Передал в ответственный отдел, чтобы баланс исправили.\n\
 Есть возможность это исправить сразу, чтобы в дальнейшем баланс списывался корректно, но это приведёт к потере прогресса в личном кабинете. Сейчас разработчики занимаются устранением этой неполадки и рекомендуют пока ничего не исправлять.")
+		sendComment('https://skyeng.slack.com/archives/CJQRWT346/p1590040959451600?thread_ts=1590007548.447300&cid=CJQRWT346')
 	}
 	
     document.getElementById('longAnsOld').onclick = function () {
@@ -174,6 +183,67 @@ function move_again_AF() {
 If you need help, please write and we will help you.", 1, "1:00")
 	}
 	
+    document.getElementById('tmplt1_save').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			txt = document.getElementById('inp').value
+			localStorage.setItem('tmplt1_ru', txt)
+		} else {
+			txt = document.getElementById('inp').value
+			localStorage.setItem('tmplt1_en', txt)
+		}
+	}
+    document.getElementById('tmplt2_save').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			txt = document.getElementById('inp').value
+			localStorage.setItem('tmplt2_ru', txt)
+		} else {
+			txt = document.getElementById('inp').value
+			localStorage.setItem('tmplt2_en', txt)
+		}
+	}
+    document.getElementById('tmplt3_save').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			txt = document.getElementById('inp').value
+			localStorage.setItem('tmplt3_ru', txt)
+		} else {
+			txt = document.getElementById('inp').value
+			localStorage.setItem('tmplt3_en', txt)
+		}
+	}
+	
+    document.getElementById('tmplt1_snd').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			txt = localStorage.getItem('tmplt1_ru')
+		} else {
+			txt = localStorage.getItem('tmplt1_en')
+		}
+		if(txt == null || txt == "")
+			document.getElementById('inp').value = "Не введен текст 1 шаблона"
+		else 
+			sendAnswer(txt)
+	}
+    document.getElementById('tmplt2_snd').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			txt = localStorage.getItem('tmplt2_ru')
+		} else {
+			txt = localStorage.getItem('tmplt2_en')
+		}
+		if(txt == null || txt == "")
+			document.getElementById('inp').value = "Не введен текст 2 шаблона"
+		else 
+			sendAnswer(txt)
+	}
+    document.getElementById('tmplt3_snd').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			txt = localStorage.getItem('tmplt3_ru')
+		} else {
+			txt = localStorage.getItem('tmplt3_en')
+		}
+		if(txt == null || txt == "")
+			document.getElementById('inp').value = "Не введен текст 3 шаблона"
+		else 
+			sendAnswer(txt)
+	}
 	
     document.getElementById('RK1').onclick = function () {
 		sendAnswerTemplate("Информация о разговорных клубов", "РК")
@@ -263,7 +333,6 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 		else 
 			if(values[3])
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-				//addTimer()
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -420,7 +489,7 @@ async function sendAnswerTemplate(template, word, time = "10:00") {
     "sec-fetch-mode": "cors",
     "sec-fetch-site": "same-origin"
   },
-  "referrer": "https://skyeng.autofaq.ai/tickets/assigned/6067d8ca-8fa0-47ea-9e3d-c449b3783465",
+  "referrer": adr,
   "referrerPolicy": "no-referrer-when-downgrade",
   "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119636,119638,119646,119649,118980,119841,119843,119844,120181,120969,121286,121299,121300,121305]}",
   "method": "POST",
@@ -532,6 +601,7 @@ async function sendComment(txt){
 		var values = await getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n').join('\\n')
+		txt2 = txt2.split("\"").join("\\\"")
 		
 	fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 	  "headers": {
@@ -641,17 +711,8 @@ function refCurTimer(time) {
 		}
 	}
 }
-/*
-document.getElementsByClassName('ant-btn ant-btn-primary')[0].onclick = function () {
-	addTimer()
-	name = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
-	for (i = 0; i < idk; i++) {
-		if(tmrs[i][1] == name) {
-			tmrs[i][0] = "10:00"
-		}
-	}
-}*/
-				
+		
+flag = 0		
 function startTimer() {
 	for(i = 0; i < idk; i++) {
 		a = tmrs[i][0].split(':')
@@ -675,8 +736,6 @@ function startTimer() {
 		tmrs[i][0] = tim
 	}
 	setTimeout(startTimer, 1000);
-	refreshTimer()
-	flag = 0
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1 && flag == 0) {
 		questsRed()
 		flag = 1
@@ -685,9 +744,11 @@ function startTimer() {
 		flag = 0
 	
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1) {
-		document.getElementsByClassName('ant-btn ant-btn-primary')[0].onclick = function () {
-			refCurTimer('10:00')
-		}
+		if(document.getElementsByClassName('ant-btn ant-btn-primary')[0] !== undefined)
+			document.getElementsByClassName('ant-btn ant-btn-primary')[0].onclick = function () {
+				refCurTimer('10:00')
+			}
+		refreshTimer()
 	}
 	
 }
