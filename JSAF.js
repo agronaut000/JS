@@ -392,7 +392,6 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 			if(e.key == 'Control') {
 					bool = 1;
 			}
-			console.log(bool, e.key)
 			if(e.key == 'Enter' && bool == 1) {
 				refCurTimer('10:00')
 			}
