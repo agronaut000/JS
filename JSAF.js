@@ -681,7 +681,6 @@ function startTimer() {
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1 && flag == 0) {
 		questsRed()
 		flag = 1
-		continue
 	} 
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') === -1 && flag == 1)
 		flag = 0
