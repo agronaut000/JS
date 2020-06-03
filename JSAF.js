@@ -47,9 +47,10 @@ var win_AFhelper =
 					<button id="NS">урок NS</button>
 					<button id="perevod">Др отд</button>
 					<button id="tc_sc">tc+sc</button>
+					<button id="VPN">VPN</button>
 				</div>
 				<div style="margin: 5px;">
-					<button id="engConv">общ на англ</button>
+					<button id="micro">микро</button>
 					<button id="browser">ус+брауз</button>
 					<button id="calltest">vcall-test</button>
 					<button id="vcall_2" style="margin: 2px">vcall-2</button>
@@ -73,6 +74,7 @@ var win_AFhelper =
 			</div>
 		<div style="border: 2px double black; display: none; background-color: #CCCCFF" id="addTmp">
 			<div style="margin: 5px; width: 300px">
+					<button id="engConv">общ на англ</button>
 					<button id="cacheSafari" style="margin: 2px">Кэш Сафари</button>
 					<button id="UnapisalSam" style="margin: 2px">П -> У написал сам</button>
 					<button id="macBag" style="margin: 2px">Макобаг</button>
@@ -252,6 +254,12 @@ If you need help, please write and we will help you.", 1, "1:00")
 			sendAnswer(txt)
 	}
 	
+    document.getElementById('VPN').onclick = function () {
+		sendAnswerTemplate("Установка VPN (шаблон ТП)", "VPN")
+	}
+    document.getElementById('micro').onclick = function () {
+		sendAnswerTemplate("Настройка микрофона (шаблон ТП)", "микрофон")
+	}
     document.getElementById('RK1').onclick = function () {
 		sendAnswerTemplate("Информация о разговорных клубов", "РК")
 	}
