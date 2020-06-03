@@ -394,7 +394,7 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 	}
     document.getElementById('bag').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Подождите пожалуйста (шаблон ТП)", "баг")
+			sendAnswer("Подождите, пожалуйста, сейчас я проверю и отвечу вам")
 		else 
 			sendAnswer("Wait please. Now I will check and answer you.")
 	}
