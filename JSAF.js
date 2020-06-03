@@ -28,11 +28,12 @@ var win_AFhelper =
 					<button id="rfrTmr1" style="margin-left: 5px">T1</button>
 				</div>
 				<div style="margin: 5px;">
-					<button id="helloAF">Hello</button>
+					<button id="helloAF">Привет</button>
 					<button id="min">Минуту</button>
 					<button id="internet">Интернет</button>
 					<button id="TW">TW</button>
 					<button id="secLine">2Л</button>
+					<button id="twoMin">Пару мин</button>
 				</div>
 				<div style="margin: 5px;">
 					<button id="utoch">Доп впр</button>
@@ -152,6 +153,13 @@ function move_again_AF() {
 			document.getElementById('internet').style.display = ''
 			document.getElementById('vcall_2').style.display = ''
         }
+	}
+    document.getElementById('twoMin').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswerTemplate("Сейчас я вам помогу (шаблон)", "Сейчас я вам помогу")
+        } else {
+			sendAnswer("I will help you now. Please wait a couple of minutes.")
+		}
 	}
 	
     document.getElementById('rfrTmr').onclick = function () {
@@ -481,7 +489,7 @@ async function sendAnswerTemplate(template, word, time = "10:00") {
 	adr = values[0]; adr1 = values[1]; uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
   "headers": {
-    "accept": "*/*",
+    "accept": "*/*", 
     "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
     "cache-control": "max-age=0",
     "content-type": "application/json",
@@ -577,16 +585,16 @@ async function getInfo() {
 		adr1 = adr1[3]
 		sessionId = ""
 		flag = true
-		a = await fetch("https://skyeng.autofaq.ai/api/reason8/reports/conversations/"+adr1, {
+		a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
   "headers": {
     "accept": "*/*",
     "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-    "content-type": "application/json",
+    "cache-control": "max-age=0",
     "sec-fetch-dest": "empty",
     "sec-fetch-mode": "cors",
     "sec-fetch-site": "same-origin"
   },
-  "referrer": "https://skyeng.autofaq.ai/tickets/archive",
+  "referrer": adr,
   "referrerPolicy": "no-referrer-when-downgrade",
   "body": null,
   "method": "GET",
