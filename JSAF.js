@@ -157,9 +157,8 @@ function move_again_AF() {
     document.getElementById('twoMin').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswerTemplate("Сейчас я вам помогу (шаблон)", "Сейчас я вам помогу")
-        } else {
+        else
 			sendAnswer("I will help you now. Please wait a couple of minutes.")
-		}
 	}
 	
     document.getElementById('rfrTmr').onclick = function () {
