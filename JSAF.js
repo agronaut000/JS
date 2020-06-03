@@ -30,10 +30,10 @@ var win_AFhelper =
 				<div style="margin: 5px;">
 					<button id="helloAF">Привет</button>
 					<button id="min">Минуту</button>
-					<button id="internet">Интернет</button>
+					<button id="internet">Инет</button>
 					<button id="TW">TW</button>
 					<button id="secLine">2Л</button>
-					<button id="twoMin">Пару мин</button>
+					<button id="twoMin">Помогу</button>
 				</div>
 				<div style="margin: 5px;">
 					<button id="utoch">Доп впр</button>
