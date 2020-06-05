@@ -52,7 +52,7 @@ var win_AFhelper =
 				<div style="margin: 5px;">
 					<button id="micro">микро</button>
 					<button id="browser">ус+брауз</button>
-					<button id="ty">Спс</button>
+					<button id="thanks">Спс</button>
 				</div>
 			</span>
 			<div style="margin: 5px;">
@@ -142,7 +142,7 @@ function move_again_AF() {
             this.innerHTML = "Чат";
         }
 	}
-    document.getElementById('languageAF').onclick = function () {
+    document.getElementById('thanks').onclick = function () {
         if(this.innerHTML == "Русский") {
 			sendAnswer("Спасибо за ожидание")
         } else {
@@ -789,4 +789,8 @@ function questsRed () {
 			else
 				document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].style.backgroundColor = "white"
 	});
+}
+
+window.onload() = function() {
+			document.getElementById('testUsers').style.backgroundColor = "#464451"
 }
