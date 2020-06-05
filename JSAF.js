@@ -143,7 +143,7 @@ function move_again_AF() {
         }
 	}
     document.getElementById('thanks').onclick = function () {
-        if(this.innerHTML == "Русский") {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswer("Спасибо за ожидание")
         } else {
 			sendAnswer("Thanks for waiting")
