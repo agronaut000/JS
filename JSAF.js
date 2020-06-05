@@ -19,7 +19,7 @@ button {
 mstl.innerHTML = style;
 
 var win_AFhelper =  
-    `<div style="display: flex; width: 301px; #464451">
+    `<div style="width: 301px; background-color: #464451">
         <span style="width: 301px">
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;">
