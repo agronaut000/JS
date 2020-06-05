@@ -52,8 +52,7 @@ var win_AFhelper =
 				<div style="margin: 5px;">
 					<button id="micro">микро</button>
 					<button id="browser">ус+брауз</button>
-					<button id="calltest">vcall-test</button>
-					<button id="vcall_2" style="margin: 2px">vcall-2</button>
+					<button id="ty">Спс</button>
 				</div>
 			</span>
 			<div style="margin: 5px;">
@@ -72,15 +71,15 @@ var win_AFhelper =
 				<button id="snd" style="width:50px; margin-left:16px">send</button>
 				<button id="msg" style="width:100px; margin-left:16px">Заметки</button>
 			</div>
-		<div style="border: 2px double black; display: none; background-color: #CCCCFF" id="addTmp">
+		<div style="border: 2px double black; display: none; background-color: #464451" id="addTmp">
 			<div style="margin: 5px; width: 300px">
 					<button id="engConv">общ на англ</button>
 					<button id="cacheSafari" style="margin: 2px">Кэш Сафари</button>
 					<button id="UnapisalSam" style="margin: 2px">П -> У написал сам</button>
 					<button id="macBag" style="margin: 2px">Макобаг</button>
-					<button id="grammar" style="margin: 2px">Грамматика</button>
 					<button id="hiddenHW" style="margin: 2px">Скрытое ДЗ</button>
 					<button id="revision" style="margin: 2px">Ревизия</button>
+					<button id="grammar" style="margin: 2px">Грамматика</button>
 					<button id="mat" style="margin: 2px">Материалы приложение</button>
 					<button id="serverAF" style="margin: 2px">Серверные</button>
 					<button id="bil_qa" style="margin: 2px">Баланс (таска)</button>
@@ -91,6 +90,8 @@ var win_AFhelper =
 					<button id="privateMode" style="margin: 2px">Инкогнито</button>
 					<button id="browser_clear" style="margin: 2px">Проверка браузера</button>
 					<button id="predlozh" style="margin: 2px">Предложение</button>
+					<button id="calltest">vcall-test</button>
+					<button id="vcall_2" style="margin: 2px">vcall-2</button>
 			</div>
 		</div>
 	</span>
@@ -143,17 +144,23 @@ function move_again_AF() {
 	}
     document.getElementById('languageAF').onclick = function () {
         if(this.innerHTML == "Русский") {
+			sendAnswer("Спасибо за ожидание")
+        } else {
+			sendAnswer("Thanks for waiting")
+        }
+	}
+			
+    document.getElementById('languageAF').onclick = function () {
+        if(this.innerHTML == "Русский") {
             this.innerHTML = "Английский";
-			document.getElementById('calltest').style.display = 'none'
 			document.getElementById('TW').style.display = 'none'
 			document.getElementById('internet').style.display = 'none'
-			document.getElementById('vcall_2').style.display = 'none'
+			document.getElementById('AF_helper').style.background-color = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
-			document.getElementById('calltest').style.display = ''
 			document.getElementById('TW').style.display = ''
 			document.getElementById('internet').style.display = ''
-			document.getElementById('vcall_2').style.display = ''
+			document.getElementById('AF_helper').style.background-color = "#464451"
         }
 	}
     document.getElementById('twoMin').onclick = function () {
@@ -294,6 +301,8 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
     document.getElementById('grammar').onclick = function () {
 		sendAnswer("Раздел \"Грамматика\" находится в разработке, поэтому кнопка перехода в раздел грамматики отображается не всегда. \n\
 Перейти в раздел грамматики вы можете по ссылке: https://vimbox.skyeng.ru/grammar-trainer")
+		sendComment('https://skyeng.slack.com/archives/CD2P42ES0/p1591254192411400 \n\
+		https://devjira.skyeng.ru/browse/ST-1539')
 	}
 	
     document.getElementById('hiddenHW').onclick = function () {
@@ -375,7 +384,7 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 			sendAnswer("Do you have any additional questions?")
 	}
     document.getElementById('calltest').onclick = function () {
-		sendAnswerTemplate("Тест видеосвязи (ТП)", "видеосвязи")
+		sendAnswerTemplate("Тест видеосвязи (ТП)", "тест видеосвязи")
 	}
     document.getElementById('perevod').onclick = function () {
 		sendAnswerTemplate("Перевод на другой отдел (шаблон)", "перевод на другой отдел")
@@ -519,7 +528,7 @@ queryId = b.queryId
 AFsessionId = b.sessionId
 tmpText = b.text
 tmpText = tmpText.split("\"").join("\\\"")
-tmpText = tmpText.split("\n").join("\\\n")
+tmpText = tmpText.split("\n").join("\\n")
 title = b.title
 title = title.split("\"").join("\\\"")
 accuracy = b.accuracy
