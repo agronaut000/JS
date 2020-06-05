@@ -155,12 +155,12 @@ function move_again_AF() {
             this.innerHTML = "Английский";
 			document.getElementById('TW').style.display = 'none'
 			document.getElementById('internet').style.display = 'none'
-			document.getElementById('AF_helper').style.background-color = "#EBC7DF"
+			document.getElementById('AF_helper').style.backgroundColor = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
 			document.getElementById('TW').style.display = ''
 			document.getElementById('internet').style.display = ''
-			document.getElementById('AF_helper').style.background-color = "#464451"
+			document.getElementById('AF_helper').style.backgroundColor = "#464451"
         }
 	}
     document.getElementById('twoMin').onclick = function () {
