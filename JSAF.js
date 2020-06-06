@@ -19,7 +19,7 @@ button {
 mstl.innerHTML = style;
 
 var win_AFhelper =  
-    `<div style="width: 301px; background-color: #464451">
+    `<div style="display: flex; width: 301px;">
         <span style="width: 301px">
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;">
@@ -105,7 +105,7 @@ if (localStorage.getItem('winTopAF') == null) {
 
 let wintAF = document.createElement('div');
 document.body.append(wintAF);
-wintAF.style = 'min-height: 25px; min-width: 65px; background: wheat; top: ' + localStorage.getItem('winTopAF') + 'px; left: ' + localStorage.getItem('winLeftAF') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black;';
+wintAF.style = 'min-height: 25px; min-width: 65px; background: #464451; top: ' + localStorage.getItem('winTopAF') + 'px; left: ' + localStorage.getItem('winLeftAF') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black;';
 wintAF.setAttribute('id' ,'AF_helper');
 wintAF.innerHTML = win_AFhelper; 
 
