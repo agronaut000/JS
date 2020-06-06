@@ -791,4 +791,4 @@ function questsRed () {
 	});
 }
 
-setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 1000)
+setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 200)
