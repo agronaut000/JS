@@ -53,6 +53,7 @@ var win_AFhelper =
 					<button id="micro">микро</button>
 					<button id="browser">ус+брауз</button>
 					<button id="thanks">Спс</button>
+					<button id="mobile">в моб</button>
 				</div>
 			</span>
 			<div style="margin: 5px;">
@@ -149,6 +150,14 @@ function move_again_AF() {
 			sendAnswer("Thanks for waiting")
         }
 	}
+    document.getElementById('mobile').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswer("Спасибо за ожидание. Я всё проверил и передал обращение в ответственный отдел. С вами свяжется наш специалист по почте и поможет с решением этого вопроса. Пожалуйста, ожидайте")
+        } else {
+			sendAnswer("Thanks for waiting. I checked everything and transferred all information to the mobile department. Our specialist will contact you by email and will help with the solution. Please wait for an email")
+        }
+	}
+	
 			
     document.getElementById('languageAF').onclick = function () {
         if(this.innerHTML == "Русский") {
@@ -397,9 +406,9 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 	}
     document.getElementById('tc_sc').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Перевод чата от П на @studentscare и чат \"Teachers Care\" (шаблон)", "teachers")
+			sendAnswer("Обратитесь, пожалуйста, с этим вопросом в \"Teachers Care\" или \"Student care\"")
 		else 
-			sendAnswerTemplate("Перевод чата от П на @studentscare и чат \"Teachers Care\" (шаблон ТП ENG)", "teachers")
+			sendAnswer("Please contact \"Teachers care\" or \"Student care\" with this question.")
 	}
     document.getElementById('bag').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -415,9 +424,9 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 	}
     document.getElementById('secLine').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Перевод на ТП 2Л. (шаблон ТП)", "2Л")
+			sendAnswer("Оперативно устранить неполадку не получается. Вам будет удобно сейчас провести более детальную проверку со старшим специалистом?")
 		else 
-			sendAnswer("Please wait, a senior employee will contact you for a more detailed troubleshooting.")
+			sendAnswer("I can't fix this issue quickly. It will be convenient for you to conduct a more detailed check with a senior specialist now?")
 	}
     document.getElementById('idU').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
