@@ -155,12 +155,12 @@ function move_again_AF() {
             this.innerHTML = "Английский";
 			document.getElementById('TW').style.display = 'none'
 			document.getElementById('internet').style.display = 'none'
-			document.getElementById('AF_helper').style.backgroundColor = "#EBC7DF"
+			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
 			document.getElementById('TW').style.display = ''
 			document.getElementById('internet').style.display = ''
-			document.getElementById('AF_helper').style.backgroundColor = "#464451"
+			document.getElementById('AF_helper').style.background = "#464451"
         }
 	}
     document.getElementById('twoMin').onclick = function () {
@@ -791,6 +791,4 @@ function questsRed () {
 	});
 }
 
-window.onload() = function() {
-			document.getElementById('testUsers').style.backgroundColor = "#464451"
-}
+setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 5000)
