@@ -40,7 +40,7 @@ var win_AFhelper =
 					<button id="bag">Подождите</button>
 					<button id="idU">ID У</button>
 					<button id="screen">скрин</button>
-					<button id="bag1">баг</button>
+					<button id="cacheTmp">кэш</button>
 				</div>
 				<div style="margin: 5px;">
 					<button id="longans">Нет ответа</button>
@@ -93,6 +93,7 @@ var win_AFhelper =
 					<button id="predlozh" style="margin: 2px">Предложение</button>
 					<button id="calltest">vcall-test</button>
 					<button id="vcall_2" style="margin: 2px">vcall-2</button>
+					<button id="bag1">баг</button>
 			</div>
 		</div>
 	</span>
@@ -148,6 +149,14 @@ function move_again_AF() {
 			sendAnswer("Спасибо за ожидание")
         } else {
 			sendAnswer("Thanks for waiting")
+        }
+	}
+    document.getElementById('cacheTmp').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswerTemplate("Очистка кэша общая (шаблон ТП)", "кэш")
+        } else {
+			sendAnswer("Please clear your browser cache using instructions: http://faq.usedocs.com/article/7654 \n\
+And then reboot the device and check again, if nothing changes, please write to us.")
         }
 	}
     document.getElementById('mobile').onclick = function () {
