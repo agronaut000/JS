@@ -155,7 +155,7 @@ function move_again_AF() {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswerTemplate("Очистка кэша общая (шаблон ТП)", "кэш")
         } else {
-			sendAnswer("Please clear your browser cache using instructions: http://faq.usedocs.com/article/7654 \n\
+			sendAnswer("Please clear your browser cache using instructions: http://en_faq.usedocs.com/article/14753 \n\
 And then reboot the device and check again, if nothing changes, please write to us.")
         }
 	}
