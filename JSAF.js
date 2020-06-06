@@ -424,9 +424,9 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 	}
     document.getElementById('secLine').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Оперативно устранить неполадку не получается. Вам будет удобно сейчас провести более детальную проверку со старшим специалистом?")
+			sendAnswer("Передал обращение старшему специалисту, пожалуйста, ожидайте")
 		else 
-			sendAnswer("I can't fix this issue quickly. It will be convenient for you to conduct a more detailed check with a senior specialist now?")
+			sendAnswer("Reffered the appeal to a senior specialist, please wait")
 	}
     document.getElementById('idU').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -800,4 +800,4 @@ function questsRed () {
 	});
 }
 
-setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 500)
+setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 200)
