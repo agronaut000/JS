@@ -375,6 +375,7 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 		else 
 			if(values[3])
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
+				refCurTimer('10:00')
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -518,7 +519,6 @@ var bool = 0;
 
 async function sendAnswerTemplate(template, word, time = "10:00") {
 	//addTimer()
-	refCurTimer(time)
 	var values = await getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
@@ -558,7 +558,8 @@ accuracy = b.accuracy
 				console.log('Не знаю id У')
 			else if(tmpText == "")
 				console.log('Шаблон не найден')
-			else 
+			else {
+				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -576,11 +577,11 @@ accuracy = b.accuracy
 					  "mode": "cors",
 					  "credentials": "include"
 					});
+				}
 			});
 }
 async function sendAnswer(txt, flag = 1, time = "10:00") {
 		//addTimer()
-		refCurTimer(time)
 		var values = await getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n')
@@ -593,7 +594,8 @@ async function sendAnswer(txt, flag = 1, time = "10:00") {
 		else 
 			if(!values[3])
 				console.log('Не знаю id У')
-			else 
+			else {
+				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -611,31 +613,36 @@ async function sendAnswer(txt, flag = 1, time = "10:00") {
 					  "mode": "cors",
 					  "credentials": "include"
 				});
+			}
 }
 async function getInfo() {
+		if(document.getElementById('msg1').innerHTML == "Доработать")
 		adr = document.location.href
 		adr1 = document.location.pathname
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
 		sessionId = ""
-		flag = true
-		a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
-  "headers": {
-    "accept": "*/*",
-    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "max-age=0",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-origin"
-  },
-  "referrer": adr,
-  "referrerPolicy": "no-referrer-when-downgrade",
-  "body": null,
-  "method": "GET",
-  "mode": "cors",
-  "credentials": "include"
-}).then(a => b = a.json()).then(b => sessionId = b.sessionId).then(b => {if(sessionId == "")
-	flag = false});
+		flag = false
+		if(document.getElementById('msg1').innerHTML != "Доработать") {
+			flag = true
+			a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
+	  "headers": {
+		"accept": "*/*",
+		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+		"cache-control": "max-age=0",
+		"sec-fetch-dest": "empty",
+		"sec-fetch-mode": "cors",
+		"sec-fetch-site": "same-origin"
+	  },
+	  "referrer": adr,
+	  "referrerPolicy": "no-referrer-when-downgrade",
+	  "body": null,
+	  "method": "GET",
+	  "mode": "cors",
+	  "credentials": "include"
+	}).then(a => b = a.json()).then(b => sessionId = b.sessionId).then(b => {if(sessionId == "")
+		flag = false});
+		}
 		return [adr, adr1, sessionId, flag]
 }
 
@@ -672,20 +679,22 @@ function addTimer() {
 		let serv = document.createElement('div')
 		tm.childNodes[0].appendChild(serv)
 		tm.childNodes[0].childNodes[2].innerHTML = "10:00"
-		tmrs[idk] = ["10:00", tm.childNodes[1].childNodes[0].innerText, 1]
+		let d = new Date()
+		tmrs[idk] = ["10:00", tm.childNodes[1].childNodes[0].innerText, 1, number(d)]
 		idk++
 	}
 }
 
 
 function addTimers() {
-	j = 0
+	k = 0
 	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0]
+	let d = new Date()
 	while (true) {
-		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j] == undefined)
+		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k] == undefined)
 			break;
-		btns.childNodes[j]
-		nm = btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
+		btns.childNodes[k]
+		nm = btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
 		flag = 0
 		for(i = 0; i < idk; i++) {
 			name = tmrs[i][1]
@@ -695,19 +704,19 @@ function addTimers() {
 			}
 		}
 		if(flag == 0)
-			tmrs[idk++] = ["10:00", nm, 1]
+			tmrs[idk++] = ["10:00", nm, 1, Number(d)]
 
-		j++
+		k++
 	}	
 	
-	j = 0
+	k = 0
 	btns = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0]
 	while (true) {
-		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j] == undefined)
+		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k] == undefined)
 			break;
-		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
-			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[0].appendChild(document.createElement('div'))
-		j++
+		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
+			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[0].appendChild(document.createElement('div'))
+		k++
 	}
 }
 
@@ -748,8 +757,9 @@ function refCurTimer(time) {
 			tmrs[i][0] = time
 			if(time == "1:00")
 				tmrs[i][2] = 0
-			else
+			else 
 				tmrs[i][2] = 1
+			tmrs[i][3] = Number(new Date())
 		}
 	}
 }
@@ -757,27 +767,34 @@ function refCurTimer(time) {
 flag = 0		
 function startTimer() {
 	for(i = 0; i < idk; i++) {
+		var cT = new Date();
+		var curTime1 = tmrs[i][3]
+		var curTime2 = Number(cT);
+		t = 0
+		if(tmrs[i][2] == 0)
+			t = 1
+		else 
+			t = 10
+		var curTime3 = (t * 60) - Math.floor((curTime2 - curTime1) / 1000);
+		
+		var m = Math.floor(curTime3 / 60);
+		var s = Math.floor(curTime3 % 60);
+		if(Number(m) < 10) {
+			curTime4 = "0";
+		}
+		var curTime4 = "";    
+		
 		a = tmrs[i][0].split(':')
 		if(a[0] == 0 && a[1] == 0) {
 			continue
 		}
-		
-		a[1] = a[1] - 1;
-		if (a[1] < 0 && a[0] > 0) {
-			a[0] = a[0] - 1;
-			a[1] = 59;
+		curTime4 = curTime4 + String(m) + ":";
+		if(Number(s) < 10) {
+			curTime4 = curTime4 + "0";
 		}
-		var tim = ''
-		if(Number(a[0]) < 10)
-			tim = '0'
-		tim = tim + Number(a[0]) + ':'
-		if(a[1] < 10)
-			tim = tim + '0'
-		tim = tim + Number(a[1])
-		
-		tmrs[i][0] = tim
+		curTime4 = curTime4 + String(s);
+		tmrs[i][0] = curTime4
 	}
-	setTimeout(startTimer, 1000);
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1 && flag == 0) {
 		questsRed()
 		flag = 1
@@ -795,7 +812,7 @@ function startTimer() {
 		document.getElementsByClassName('ant-btn ant-btn-icon-only')[3].style.display = 'none'
 
 	}
-	
+	setTimeout(startTimer, 1000);
 }
 startTimer();
 
