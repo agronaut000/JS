@@ -172,11 +172,37 @@ And then reboot the device and check again, if nothing changes, please write to 
         if(this.innerHTML == "Русский") {
             this.innerHTML = "Английский";
 			document.getElementById('TW').style.display = 'none'
+			document.getElementById('cacheSafari').style.display = 'none'
+			document.getElementById('macBag').style.display = 'none'
+			document.getElementById('hiddenHW').style.display = 'none'
+			document.getElementById('revision').style.display = 'none'
+			document.getElementById('grammar').style.display = 'none'
+			document.getElementById('mat').style.display = 'none'
+			document.getElementById('bil_qa').style.display = 'none'
+			document.getElementById('mobApp').style.display = 'none'
+			document.getElementById('RK1').style.display = 'none'
+			document.getElementById('RK2').style.display = 'none'
+			document.getElementById('predlozh').style.display = 'none'
+			document.getElementById('vcall_2').style.display = 'none'
+			document.getElementById('calltest').style.display = 'none'
 			document.getElementById('internet').style.display = 'none'
 			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
 			document.getElementById('TW').style.display = ''
+			document.getElementById('cacheSafari').style.display = ''
+			document.getElementById('macBag').style.display = ''
+			document.getElementById('hiddenHW').style.display = ''
+			document.getElementById('revision').style.display = ''
+			document.getElementById('grammar').style.display = ''
+			document.getElementById('mat').style.display = ''
+			document.getElementById('bil_qa').style.display = ''
+			document.getElementById('mobApp').style.display = ''
+			document.getElementById('RK1').style.display = ''
+			document.getElementById('RK2').style.display = ''
+			document.getElementById('predlozh').style.display = ''
+			document.getElementById('vcall_2').style.display = ''
+			document.getElementById('calltest').style.display = ''
 			document.getElementById('internet').style.display = ''
 			document.getElementById('AF_helper').style.background = "#464451"
         }
@@ -280,10 +306,22 @@ If you need help, please write and we will help you.", 1, "1:00")
 	}
 	
     document.getElementById('VPN').onclick = function () {
-		sendAnswerTemplate("Установка VPN (шаблон ТП)", "VPN")
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswer("Пожалуйста, установите VPN-расширение для браузера <a href=\"https://skyeng.ru/go/brvpn\" target=\"_blank\" rel=\"noopener\">по инструкции</a>\n\
+Затем запустите его и обновите страницу.")
+		} else {
+			sendAnswer("Please install browser VPN extension using <a href=\"http://en_faq.usedocs.com/article/14752\" target=\"_blank\" rel=\"noopener\">this instruction</a>\n\
+Then run it and refresh the page.")
+		}
 	}
     document.getElementById('micro').onclick = function () {
-		sendAnswerTemplate("Настройка микрофона (шаблон ТП)", "микрофон")
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswer("Проверьте, пожалуйста, настройки микрофона следуя <a href=\"http://faq.usedocs.com/article/7648\" target=\"_blank\" rel=\"noopener\">этой инструкции</a> \n\
+Затем, пожалуйста, напишите нам о результате")
+		} else {
+			sendAnswer("Please check your microphone settings using <a href=\"http://en_faq.usedocs.com/article/14747\" target=\"_blank\" rel=\"noopener\">this instruction</a> \n\
+Then please write to us about the result.")
+		}
 	}
     document.getElementById('RK1').onclick = function () {
 		sendAnswerTemplate("Информация о разговорных клубов", "РК")
@@ -296,14 +334,31 @@ If you need help, please write and we will help you.", 1, "1:00")
 		sendAnswer("Также на этой странице есть кнопка \"Проверить динамики\", нажав на которую вы должны услышать звук")
 	}
     document.getElementById('browser_clear').onclick = function () {
-		sendAnswer("Попробуйте, пожалуйста, воспользоваться следующими инструкциями, а затем проверить ещё раз\n\
-http://faq.usedocs.com/article/7652 - проверить обновление браузера\n\
-http://faq.usedocs.com/article/7656 - удалить Cookies сайта Skyeng\n\
-http://faq.usedocs.com/article/7654 - очистка кэша\n\
-http://faq.usedocs.com/article/7655 - очистить браузер от расширений")
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswer("Попробуйте, пожалуйста, воспользоваться следующими инструкциями, а затем проверить ещё раз\n\
+1. <a href=\"http://faq.usedocs.com/article/7652\" target=\"_blank\" rel=\"noopener\">проверить обновления браузера&nbsp;</a> \n\
+2. <a href=\"http://faq.usedocs.com/article/7656\" target=\"_blank\" rel=\"noopener\">удалить Cookies сайта Skyeng&nbsp;</a> \n\
+3. <a href=\"http://faq.usedocs.com/article/7654\" target=\"_blank\" rel=\"noopener\">очистить кэш&nbsp;</a> \n\
+4. <a href=\"http://faq.usedocs.com/article/7655\" target=\"_blank\" rel=\"noopener\">очистить браузер от лишних расширений&nbsp;</a>")
+		else 
+			sendAnswer("Please use instructions and then check again \n\
+1. <a href=\"http://en_faq.usedocs.com/article/14744\" target=\"_blank\" rel=\"noopener\">check browser for updates&nbsp;</a> \n\
+2. <a href=\"http://en_faq.usedocs.com/article/14751\" target=\"_blank\" rel=\"noopener\">delete Skyeng cookies&nbsp;</a> \n\
+3. <a href=\"http://en_faq.usedocs.com/article/14753\" target=\"_blank\" rel=\"noopener\">clean browser's cache&nbsp;</a> \n\
+4. <a href=\"http://en_faq.usedocs.com/article/14749\" target=\"_blank\" rel=\"noopener\">clean browser from addons&nbsp;</a>")
+	
 	}
     document.getElementById('privateMode').onclick = function () {
-		sendAnswerTemplate("Инкогнито/приватное окно (шаблон ТП)", "инкогнито")
+		if(document.getElementById('languageAF').innerHTML == "Русский") 
+			sendAnswer("Пожалуйста, откройте новую вкладку в режиме инкогнито сочетанием клавиш Ctrl + Shift + N. Либо через специальное меню как <a href=\"https://skyeng.ru/go/screen6\" target=\"_blank\" rel=\"noopener\">на скриншоте&nbsp;</a> \n\
+Для Макбука: Нажмите ⌘ + Shift + N. \n\
+И проверьте как работает платформа в нем.\n\
+Затем, пожалуйста, напишите нам о результате")
+		else 
+			sendAnswer('Please open a new tab in incognito mode by pressing Ctrl + Shift + N. \n\
+For MacBook: Press ⌘ + Shift + N. \n\
+And check how the platform works in it. \n\
+Then please write to us about the result.')
 	}
     document.getElementById('predlozh').onclick = function () {
 		sendAnswerTemplate("Платформа: Пожелания/Отзыв по платформе и личному кабинету", "предложение")
@@ -313,14 +368,18 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 	
 	
     document.getElementById('UnapisalSam').onclick = function () {
-		sendAnswer("Попросите ученика самостоятельно написать нам в чат, чтобы мы получили информацию о нем и его системе. Это поможет нам оперативно связаться с учеником и настроить его устройство. Спасибо за понимание!")
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswer("Напишите, пожалуйста, повторно в этот чат позже или попросите ученика написать в чат Support самостоятельно в удобное для него время и мы свяжемся с ним")
+		} else {
+			sendAnswer("Please write again to this chat later or ask a student to write Support chat on their own at a convenient time for him and we will contact him")
+		}
 	}
 	
     document.getElementById('grammar').onclick = function () {
 		sendAnswer("Раздел \"Грамматика\" находится в разработке, поэтому кнопка перехода в раздел грамматики отображается не всегда. \n\
 Перейти в раздел грамматики вы можете по ссылке: https://vimbox.skyeng.ru/grammar-trainer")
 		sendComment('https://skyeng.slack.com/archives/CD2P42ES0/p1591254192411400 \n\
-		https://devjira.skyeng.ru/browse/ST-1539')
+https://devjira.skyeng.ru/browse/ST-1539')
 	}
 	
     document.getElementById('hiddenHW').onclick = function () {
@@ -334,9 +393,14 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 	
 	
     document.getElementById('serverAF').onclick = function () {
-		sendAnswer("Извините, пожалуйста, за технические неисправности.\n\
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswer("Извините, пожалуйста, за технические неисправности.\n\
 Наши разработчики уже знают об этом и решают вопрос. \n\
 Если остались вопросы, пожалуйста, напишите.")
+		else
+			sendAnswer("Sorry, please for technical issues.\n\
+Our developers already know about it and solve the issue.\n\
+If you have any questions, please write.")
 	}
     document.getElementById('macBag').onclick = function () {
 		sendAnswerTemplate("Макобаг (ТП)", "мак")
@@ -406,7 +470,10 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 		sendAnswerTemplate("Тест видеосвязи (ТП)", "тест видеосвязи")
 	}
     document.getElementById('perevod').onclick = function () {
-		sendAnswerTemplate("Перевод на другой отдел (шаблон)", "перевод на другой отдел")
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswerTemplate("Перевод на другой отдел (шаблон)", "перевод на другой отдел")
+		else
+			sendAnswer('Please expect me to contact you with a specialist for your question.')
 	}
     document.getElementById('browser').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -462,9 +529,9 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 	
     document.getElementById('screen').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Скрин проблемы (шаблон)", "скрин")
+			sendAnswer("Отправьте, пожалуйста, ссылку на скриншот вашей неполадки и мы поможем вам. Для быстрого создания скриншота вы можете воспользоваться <a href=\"http://skyeng.ru/go/prnt\" target=\"_blank\" rel=\"noopener\">этим сервисом</a>&nbsp;")
 		else 
-			sendAnswer("Please send a link to a screenshot of your problem and we will help you. To quickly create a screenshot, you can use this service: https://prnt.sc/")
+			sendAnswer("Please send a link to a screenshot of your problem and we will help you. To quickly create a screenshot, you can use <a href=\"http://skyeng.ru/go/prnt\" target=\"_blank\" rel=\"noopener\">this service</a>&nbsp")
 		
 	}
 	
@@ -481,13 +548,13 @@ http://faq.usedocs.com/article/7655 - очистить браузер от ра�
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 		txt = "Пожалуйста, воспользуйтесь инструкцией, а затем напишите, удалось ли вам наладить связь\n\
 1. Завершаете урок через Finish\n\
-2. Создаете урок через New Student - http://joxi.ru/v298jgeTzKyKYm \n\
+2. Создаете урок через New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">вот так&nbsp;</a> \n\
 3. Копируете ссылку и отправляете в чат ученику, заранее предупредив его об этом, так как кнопка войти в класс уже не будет функционировать."
 		else 
 			txt = "Use this instruction, and then write if you managed to establish a connection \n\
- 1. End the lesson by clicking Finish \n\
- 2. Create a lesson through New Student - http://joxi.ru/v298jgeTzKyKYm \n\
- 3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
+1. End the lesson by clicking Finish \n\
+2. Create a lesson through New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">like this&nbsp;</a> \n\
+3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
 		sendAnswer(txt)
 	}
     document.getElementById('longans').onclick = function () {
@@ -582,7 +649,7 @@ accuracy = b.accuracy
 }
 async function sendAnswer(txt, flag = 1, time = "10:00") {
 		//addTimer()
-		var values = await getInfo()
+		var values = await getInfo(flag)
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n')
 		txt3 = ""
@@ -615,15 +682,14 @@ async function sendAnswer(txt, flag = 1, time = "10:00") {
 				});
 			}
 }
-async function getInfo() {
-		if(document.getElementById('msg1').innerHTML == "Доработать")
+async function getInfo(flag1 = 1) {
 		adr = document.location.href
 		adr1 = document.location.pathname
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
 		sessionId = ""
 		flag = false
-		if(document.getElementById('msg1').innerHTML != "Доработать") {
+		if(document.getElementById('msg1').innerHTML != "Доработать" || flag1 == 0) {
 			flag = true
 			a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
 	  "headers": {
@@ -647,7 +713,7 @@ async function getInfo() {
 }
 
 async function sendComment(txt){ 
-		var values = await getInfo()
+		var values = await getInfo(0)
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n').join('\\n')
 		txt2 = txt2.split("\"").join("\\\"")
