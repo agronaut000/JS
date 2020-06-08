@@ -77,6 +77,7 @@ var win_AFhelper =
 					<button id="engConv">общ на англ</button>
 					<button id="cacheSafari" style="margin: 2px">Кэш Сафари</button>
 					<button id="UnapisalSam" style="margin: 2px">П -> У написал сам</button>
+					<button id="nedozvonU">недозвон У</button>
 					<button id="macBag" style="margin: 2px">Макобаг</button>
 					<button id="hiddenHW" style="margin: 2px">Скрытое ДЗ</button>
 					<button id="revision" style="margin: 2px">Ревизия</button>
@@ -161,9 +162,9 @@ And then reboot the device and check again, if nothing changes, please write to 
 	}
     document.getElementById('mobile').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Спасибо за ожидание. Я всё проверил и передал обращение в ответственный отдел. С вами свяжется наш специалист по почте и поможет с решением этого вопроса. Пожалуйста, ожидайте")
+			sendAnswer("Я всё проверил и передал обращение в ответственный отдел. С вами свяжется наш специалист по почте и поможет с решением этого вопроса. Пожалуйста, ожидайте")
         } else {
-			sendAnswer("Thanks for waiting. I checked everything and transferred all information to the mobile department. Our specialist will contact you by email and will help with the solution. Please wait for an email")
+			sendAnswer("I checked everything and transferred all information to the mobile department. Our specialist will contact you by email and will help with the solution. Please wait for an email")
         }
 	}
 	
@@ -368,6 +369,13 @@ Then please write to us about the result.')
 	
 	
     document.getElementById('UnapisalSam').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswer("Попросите ученика самостоятельно написать нам в чат, чтобы мы получили информацию о нем и его системе. Это поможет нам оперативно связаться с учеником и получить необходимую информацию. Спасибо за понимание!")
+		} else {
+			sendAnswer("Ask the student to write us a chat on their own so that we receive information about him and his system. This will help us quickly contact the student and get the necessary information. Thank you for understanding!")
+		}
+	}
+    document.getElementById('nedozvonU').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswer("Напишите, пожалуйста, повторно в этот чат позже или попросите ученика написать в чат Support самостоятельно в удобное для него время и мы свяжемся с ним")
 		} else {
