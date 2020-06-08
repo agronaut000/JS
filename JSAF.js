@@ -24,7 +24,8 @@ var win_AFhelper =
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;">
 					<button id="languageAF" style="width:100px">Русский</button>
-					<button id="rfrTmr" style="margin-left: 125px">T10</button>
+					<button id="hideMenu" style="margin-left: 44px">hide</button>
+					<button id="rfrTmr" style="margin-left: 44px">T10</button>
 					<button id="rfrTmr1" style="margin-left: 5px">T1</button>
 				</div>
 				<div style="margin: 5px;">
@@ -50,6 +51,7 @@ var win_AFhelper =
 					<button id="VPN">VPN</button>
 				</div>
 				<div style="margin: 5px;">
+					<button id="engConv">общ на англ</button>
 					<button id="micro">микро</button>
 					<button id="browser">ус+брауз</button>
 					<button id="thanks">Спс</button>
@@ -74,7 +76,6 @@ var win_AFhelper =
 			</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="addTmp">
 			<div style="margin: 5px; width: 300px">
-					<button id="engConv">общ на англ</button>
 					<button id="cacheSafari" style="margin: 2px">Кэш Сафари</button>
 					<button id="UnapisalSam" style="margin: 2px">П -> У написал сам</button>
 					<button id="nedozvonU">недозвон У</button>
@@ -118,6 +119,7 @@ function move_again_AF() {
 		document.getElementById('AF_helper').style.display = 'none';
 	}
 		
+		
     var listener2 = function(e , a) {
         wintAF.style.left = Number(e.clientX - myX2) + "px";
         wintAF.style.top = Number(e.clientY - myY2) + "px";
@@ -145,6 +147,11 @@ function move_again_AF() {
             this.innerHTML = "Чат";
         }
 	}
+    document.getElementById('hideMenu').onclick = function () {
+		document.getElementById('AF_helper').style.display = 'none'
+		document.getElementById('scriptBut').style.display = ''
+	}
+		
     document.getElementById('thanks').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswer("Спасибо за ожидание")
@@ -588,6 +595,18 @@ If you have any questions, please write.")
 			bool = 0;
 		}
 	}
+	
+	let button = document.createElement('div');
+	button.id = 'scriptBut';
+	button.innerHTML = "Скрипт";
+	button.style.marginRight = "15px";
+	button.style.display = 'none'
+	button.onclick = function() {
+		document.getElementById('AF_helper').style.display = 'flex'
+		this.style.display = 'none'
+	}
+	btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+	btnAdd.insertBefore(button, btnAdd.children[0])
 }
 move_again_AF();
 var bool = 0;	
@@ -850,17 +869,13 @@ function startTimer() {
 		else 
 			t = 10
 		var curTime3 = (t * 60) - Math.floor((curTime2 - curTime1) / 1000);
-		
+		if(curTime3 < 0)
+			continue
 		var m = Math.floor(curTime3 / 60);
 		var s = Math.floor(curTime3 % 60);
+		var curTime4 = "";    
 		if(Number(m) < 10) {
 			curTime4 = "0";
-		}
-		var curTime4 = "";    
-		
-		a = tmrs[i][0].split(':')
-		if(a[0] == 0 && a[1] == 0) {
-			continue
 		}
 		curTime4 = curTime4 + String(m) + ":";
 		if(Number(s) < 10) {
@@ -886,9 +901,8 @@ function startTimer() {
 		document.getElementsByClassName('ant-btn ant-btn-icon-only')[3].style.display = 'none'
 
 	}
-	setTimeout(startTimer, 1000);
 }
-startTimer();
+setInterval(startTimer, 1000)
 
 function questsRed () {
 	document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].addEventListener("DOMSubtreeModified", function() {
