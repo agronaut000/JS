@@ -579,8 +579,6 @@ If you have any questions, please write.")
 			sendAnswer("I am closing this chat. If you have questions, please write.", 1, "1:00")
 	}
 	
-	
-	
 
 	window.onkeydown = function(e) {
 			if(e.key == 'Control') {
@@ -596,17 +594,17 @@ If you have any questions, please write.")
 		}
 	}
 	
-	let button = document.createElement('div');
-	button.id = 'scriptBut';
-	button.innerHTML = "Скрипт";
-	button.style.marginRight = "15px";
-	button.style.display = 'none'
-	button.onclick = function() {
+	let button1 = document.createElement('div');
+	button1.id = 'scriptBut';
+	button1.innerHTML = "Скрипт";
+	button1.style.marginRight = "15px";
+	button1.style.display = 'none'
+	button1.onclick = function() {
 		document.getElementById('AF_helper').style.display = 'flex'
 		this.style.display = 'none'
 	}
 	btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
-	btnAdd.insertBefore(button, btnAdd.children[0])
+	btnAdd.insertBefore(button1, btnAdd.children[0])
 }
 move_again_AF();
 var bool = 0;	
@@ -835,6 +833,12 @@ function refreshTimer() {
 				else
 					btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "white"
 					
+				var cT = new Date();
+				var curT1 = tmrs[i][3]
+				var curT2 = Number(cT);
+				var curT3 = (13.5 * 60) - Math.floor((curT2 - curT1) / 1000);
+				if(curT3 < 0)
+					btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#FF47CA"
 			}
 		}
 		j++
@@ -885,7 +889,7 @@ function startTimer() {
 		tmrs[i][0] = curTime4
 	}
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1 && flag == 0) {
-		questsRed()
+		requestsRed()
 		flag = 1
 	} 
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') === -1 && flag == 1)
@@ -904,7 +908,7 @@ function startTimer() {
 }
 setInterval(startTimer, 1000)
 
-function questsRed () {
+function requestsRed () {
 	document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].addEventListener("DOMSubtreeModified", function() {
 			txt = document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].innerHTML
 			if(txt != "Взять запрос (0)")
