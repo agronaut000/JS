@@ -148,7 +148,7 @@ function move_again_AF() {
 	}
 		
     document.getElementById('managers_sc').onclick = function () {
-			sendAnswer("Вы написали в техподдержку школы. Если вопрос связан с учениками, вам в чат личного кабинета "Managers (Student Care)".")
+			sendAnswer("Вы написали в техподдержку школы. Если вопрос связан с учениками, вам в чат личного кабинета \"Managers (Student Care)\".")
 	}
 		
     document.getElementById('thanks').onclick = function () {
