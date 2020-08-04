@@ -44,10 +44,8 @@ var win_AFhelper =
 					<button id="cacheTmp">кэш</button>
 				</div>
 				<div style="margin: 5px;">
-					<button id="longans">Нет ответа</button>
 					<button id="NS">урок NS</button>
 					<button id="perevod">Др отд</button>
-					<button id="tc_sc">tc+sc</button>
 					<button id="VPN">VPN</button>
 				</div>
 				<div style="margin: 5px;">
@@ -82,11 +80,7 @@ var win_AFhelper =
 					<button id="macBag" style="margin: 2px">Макобаг</button>
 					<button id="hiddenHW" style="margin: 2px">Скрытое ДЗ</button>
 					<button id="revision" style="margin: 2px">Ревизия</button>
-					<button id="grammar" style="margin: 2px">Грамматика</button>
-					<button id="mat" style="margin: 2px">Материалы приложение</button>
 					<button id="serverAF" style="margin: 2px">Серверные</button>
-					<button id="bil_qa" style="margin: 2px">Баланс (таска)</button>
-					<button id="longAnsOld" style="margin: 2px">Нет ответа(old)</button>
 					<button id="mobApp">Переуст прил</button>
 					<button id="RK1" style="margin: 2px">Общ инф РК</button>
 					<button id="RK2" style="margin: 2px">Вход РК</button>
@@ -184,9 +178,6 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('macBag').style.display = 'none'
 			document.getElementById('hiddenHW').style.display = 'none'
 			document.getElementById('revision').style.display = 'none'
-			document.getElementById('grammar').style.display = 'none'
-			document.getElementById('mat').style.display = 'none'
-			document.getElementById('bil_qa').style.display = 'none'
 			document.getElementById('mobApp').style.display = 'none'
 			document.getElementById('RK1').style.display = 'none'
 			document.getElementById('RK2').style.display = 'none'
@@ -202,9 +193,6 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('macBag').style.display = ''
 			document.getElementById('hiddenHW').style.display = ''
 			document.getElementById('revision').style.display = ''
-			document.getElementById('grammar').style.display = ''
-			document.getElementById('mat').style.display = ''
-			document.getElementById('bil_qa').style.display = ''
 			document.getElementById('mobApp').style.display = ''
 			document.getElementById('RK1').style.display = ''
 			document.getElementById('RK2').style.display = ''
@@ -236,20 +224,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 2. Найдите пункт \"Очистить историю и данные сайтов\". Жмите по этой кнопке.\n\
 3. В новом окне прочитайте сообщение и нажмите \"Очистить\"")
 	}
-    document.getElementById('bil_qa').onclick = function () {
-		sendAnswer("Сейчас наблюдаются неполадки с некорректным списанием уроков с баланса. Передал в ответственный отдел, чтобы баланс исправили.\n\
-Есть возможность это исправить сразу, чтобы в дальнейшем баланс списывался корректно, но это приведёт к потере прогресса в личном кабинете. Сейчас разработчики занимаются устранением этой неполадки и рекомендуют пока ничего не исправлять.")
-		sendComment('https://skyeng.slack.com/archives/CJQRWT346/p1590040959451600?thread_ts=1590007548.447300&cid=CJQRWT346')
-	}
 	
-    document.getElementById('longAnsOld').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Мы не получили от вас ответа, чат будет закрыт.\n\
-Если у вас будут вопросы, пожалуйста, задавайте и мы вам поможем.", 1, "1:00")
-		else 
-			sendAnswer("We did not received a response from you. Chat will be closed.\n\
-If you need help, please write and we will help you.", 1, "1:00")
-	}
 	
     document.getElementById('tmplt1_save').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
@@ -390,20 +365,10 @@ Then please write to us about the result.')
 		}
 	}
 	
-    document.getElementById('grammar').onclick = function () {
-		sendAnswer("Раздел \"Грамматика\" находится в разработке, поэтому кнопка перехода в раздел грамматики отображается не всегда. \n\
-Перейти в раздел грамматики вы можете по ссылке: https://vimbox.skyeng.ru/grammar-trainer")
-		sendComment('https://skyeng.slack.com/archives/CD2P42ES0/p1591254192411400 \n\
-https://devjira.skyeng.ru/browse/ST-1539')
-	}
 	
     document.getElementById('hiddenHW').onclick = function () {
 		sendAnswer("Ваш преподаватель забыл открыть для вас скрытый раздел, выполнение которого влияет на подсчет балла и завершение домашнего задания.\n\
 Мы открыли его для вас, теперь после выполнения вы сможете завершить это домашнее задание.")
-	}
-    document.getElementById('mat').onclick = function () {
-		sendAnswer("Приложение сейчас в режиме доработки и исправления контента.\
-По этому из него временно убраны видео и статьи в ежедневных заданиях.")
 	}
 	
 	
@@ -469,7 +434,7 @@ If you have any questions, please write.")
 					  },
 					  "referrer": adr,
 					  "referrerPolicy": "no-referrer-when-downgrade",
-					  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt + "\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
+					  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"Здравствуйте!\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
 					  "method": "POST",
 					  "mode": "cors",
 					  "credentials": "include"
@@ -497,12 +462,6 @@ If you have any questions, please write.")
 			sendAnswer("Уточните, пожалуйста, какое устройство и какой браузер используете")
 		else 
 			sendAnswer("Please specify which device and browser you are using.")
-	}
-    document.getElementById('tc_sc').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Обратитесь, пожалуйста, с этим вопросом в \"Teachers Care\" или \"Student care\"")
-		else 
-			sendAnswer("Please contact \"Teachers care\" or \"Student care\" with this question.")
 	}
     document.getElementById('bag').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -574,12 +533,6 @@ If you have any questions, please write.")
 3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
 		sendAnswer(txt)
 	}
-    document.getElementById('longans').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Нет долго от У ответа (шаблон)", "долго ответ", "1:00")
-		else 
-			sendAnswer("I am closing this chat. If you have questions, please write.", 1, "1:00")
-	}
 	
 
 	window.onkeydown = function(e) {
@@ -611,7 +564,7 @@ If you have any questions, please write.")
 move_again_AF();
 var bool = 0;	
 
-async function sendAnswerTemplate(template, word) {
+async function sendAnswerTemplate(template, word, time = "10:00") {
 	//addTimer()
 	var values = await getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
@@ -645,9 +598,15 @@ title = b.title
 title = title.split("\"").join("\\\"")
 accuracy = b.accuracy
 }});}).then(k => {
-			if(tmpText == "")
+		if(document.getElementById('msg1').innerHTML == "Доработать")
+			document.getElementById('inp').value = tmpText
+		else 
+			if(!values[3])
+				console.log('Не знаю id У')
+			else if(tmpText == "")
 				console.log('Шаблон не найден')
 			else {
+				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -668,40 +627,51 @@ accuracy = b.accuracy
 				}
 			});
 }
-async function sendAnswer(txt) {
+async function sendAnswer(txt, flag = 1, time = "10:00") {
 		//addTimer()
-		var values = await getInfo()
+		var values = await getInfo(flag)
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n')
 		txt3 = ""
 		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
 		txt3 = txt3.split("\"").join("\\\"")
 		
-		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
-			  "headers": {
-				"accept": "*/*",
-				"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-				"cache-control": "max-age=0",
-				"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryFeIiMdHaxAteNUHd",
-				"sec-fetch-dest": "empty",
-				"sec-fetch-mode": "cors",
-				"sec-fetch-site": "same-origin"
-			  },
-			  "referrer": adr,
-			  "referrerPolicy": "no-referrer-when-downgrade",
-			  "body": "------WebKitFormBoundaryFeIiMdHaxAteNUHd\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt3 + "\"}\r\n------WebKitFormBoundaryFeIiMdHaxAteNUHd--\r\n",
-			  "method": "POST",
-			  "mode": "cors",
-			  "credentials": "include"
-		});
+		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
+			document.getElementById('inp').value = txt
+		else 
+			if(!values[3])
+				console.log('Не знаю id У')
+			else {
+				refCurTimer(time)
+				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+					  "headers": {
+						"accept": "*/*",
+						"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+						"cache-control": "max-age=0",
+						"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryFeIiMdHaxAteNUHd",
+						"sec-fetch-dest": "empty",
+						"sec-fetch-mode": "cors",
+						"sec-fetch-site": "same-origin"
+					  },
+					  "referrer": adr,
+					  "referrerPolicy": "no-referrer-when-downgrade",
+					  "body": "------WebKitFormBoundaryFeIiMdHaxAteNUHd\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt3 + "\"}\r\n------WebKitFormBoundaryFeIiMdHaxAteNUHd--\r\n",
+					  "method": "POST",
+					  "mode": "cors",
+					  "credentials": "include"
+				});
+			}
 }
-async function getInfo() {
+async function getInfo(flag1 = 1) {
 		adr = document.location.href
 		adr1 = document.location.pathname
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
 		sessionId = ""
-		a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
+		flag = false
+		if(document.getElementById('msg1').innerHTML != "Доработать" || flag1 == 0) {
+			flag = true
+			a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
 	  "headers": {
 		"accept": "*/*",
 		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
@@ -716,8 +686,10 @@ async function getInfo() {
 	  "method": "GET",
 	  "mode": "cors",
 	  "credentials": "include"
-	}).then(a => b = a.json()).then(b => sessionId = b.sessionId);
-		return [adr, adr1, sessionId]
+	}).then(a => b = a.json()).then(b => sessionId = b.sessionId).then(b => {if(sessionId == "")
+		flag = false});
+		}
+		return [adr, adr1, sessionId, flag]
 }
 
 async function sendComment(txt){ 
