@@ -47,6 +47,7 @@ var win_AFhelper =
 					<button id="NS">урок NS</button>
 					<button id="perevod">Др отд</button>
 					<button id="VPN">VPN</button>
+					<button id="managers_sc">SC</button>
 				</div>
 				<div style="margin: 5px;">
 					<button id="engConv">общ на англ</button>
@@ -146,6 +147,10 @@ function move_again_AF() {
 		document.getElementById('scriptBut').style.display = ''
 	}
 		
+    document.getElementById('managers_sc').onclick = function () {
+			sendAnswer("Вы написали в техподдержку школы. Если вопрос связан с учениками, вам в чат личного кабинета "Managers (Student Care)".")
+	}
+		
     document.getElementById('thanks').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswer("Спасибо за ожидание")
@@ -175,6 +180,7 @@ And then reboot the device and check again, if nothing changes, please write to 
             this.innerHTML = "Английский";
 			document.getElementById('TW').style.display = 'none'
 			document.getElementById('cacheSafari').style.display = 'none'
+			document.getElementById('managers_sc').style.display = ''
 			document.getElementById('macBag').style.display = 'none'
 			document.getElementById('hiddenHW').style.display = 'none'
 			document.getElementById('revision').style.display = 'none'
@@ -189,6 +195,7 @@ And then reboot the device and check again, if nothing changes, please write to 
         } else {
             this.innerHTML = "Русский";
 			document.getElementById('TW').style.display = ''
+			document.getElementById('managers_sc').style.display = ''
 			document.getElementById('cacheSafari').style.display = ''
 			document.getElementById('macBag').style.display = ''
 			document.getElementById('hiddenHW').style.display = ''
@@ -434,7 +441,7 @@ If you have any questions, please write.")
 					  },
 					  "referrer": adr,
 					  "referrerPolicy": "no-referrer-when-downgrade",
-					  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt + "\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
+					  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"Здравствуйте!\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
 					  "method": "POST",
 					  "mode": "cors",
 					  "credentials": "include"
