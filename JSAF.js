@@ -444,8 +444,10 @@ If you have any questions, please write.")
     document.getElementById('helloAF').onclick = async function () {
 		var values = await getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
+		a = document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText
+		a = a.split(' ')
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			txt = "Здравствуйте!"
+			txt = "Здравствуйте, " + a[0] + "!"
 		else
 			txt = "Hello!"
 		
@@ -609,7 +611,7 @@ If you have any questions, please write.")
 move_again_AF();
 var bool = 0;	
 
-async function sendAnswerTemplate(template, word, time = "10:00") {
+async function sendAnswerTemplate(template, word) {
 	//addTimer()
 	var values = await getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
@@ -643,15 +645,9 @@ title = b.title
 title = title.split("\"").join("\\\"")
 accuracy = b.accuracy
 }});}).then(k => {
-		if(document.getElementById('msg1').innerHTML == "Доработать")
-			document.getElementById('inp').value = tmpText
-		else 
-			if(!values[3])
-				console.log('Не знаю id У')
-			else if(tmpText == "")
+			if(tmpText == "")
 				console.log('Шаблон не найден')
 			else {
-				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -672,51 +668,40 @@ accuracy = b.accuracy
 				}
 			});
 }
-async function sendAnswer(txt, flag = 1, time = "10:00") {
+async function sendAnswer(txt) {
 		//addTimer()
-		var values = await getInfo(flag)
+		var values = await getInfo()
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n')
 		txt3 = ""
 		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
 		txt3 = txt3.split("\"").join("\\\"")
 		
-		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
-			document.getElementById('inp').value = txt
-		else 
-			if(!values[3])
-				console.log('Не знаю id У')
-			else {
-				refCurTimer(time)
-				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
-					  "headers": {
-						"accept": "*/*",
-						"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-						"cache-control": "max-age=0",
-						"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryFeIiMdHaxAteNUHd",
-						"sec-fetch-dest": "empty",
-						"sec-fetch-mode": "cors",
-						"sec-fetch-site": "same-origin"
-					  },
-					  "referrer": adr,
-					  "referrerPolicy": "no-referrer-when-downgrade",
-					  "body": "------WebKitFormBoundaryFeIiMdHaxAteNUHd\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt3 + "\"}\r\n------WebKitFormBoundaryFeIiMdHaxAteNUHd--\r\n",
-					  "method": "POST",
-					  "mode": "cors",
-					  "credentials": "include"
-				});
-			}
+		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+			  "headers": {
+				"accept": "*/*",
+				"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+				"cache-control": "max-age=0",
+				"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryFeIiMdHaxAteNUHd",
+				"sec-fetch-dest": "empty",
+				"sec-fetch-mode": "cors",
+				"sec-fetch-site": "same-origin"
+			  },
+			  "referrer": adr,
+			  "referrerPolicy": "no-referrer-when-downgrade",
+			  "body": "------WebKitFormBoundaryFeIiMdHaxAteNUHd\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt3 + "\"}\r\n------WebKitFormBoundaryFeIiMdHaxAteNUHd--\r\n",
+			  "method": "POST",
+			  "mode": "cors",
+			  "credentials": "include"
+		});
 }
-async function getInfo(flag1 = 1) {
+async function getInfo() {
 		adr = document.location.href
 		adr1 = document.location.pathname
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
 		sessionId = ""
-		flag = false
-		if(document.getElementById('msg1').innerHTML != "Доработать" || flag1 == 0) {
-			flag = true
-			a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
+		a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
 	  "headers": {
 		"accept": "*/*",
 		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
@@ -731,10 +716,8 @@ async function getInfo(flag1 = 1) {
 	  "method": "GET",
 	  "mode": "cors",
 	  "credentials": "include"
-	}).then(a => b = a.json()).then(b => sessionId = b.sessionId).then(b => {if(sessionId == "")
-		flag = false});
-		}
-		return [adr, adr1, sessionId, flag]
+	}).then(a => b = a.json()).then(b => sessionId = b.sessionId);
+		return [adr, adr1, sessionId]
 }
 
 async function sendComment(txt){ 
