@@ -421,7 +421,7 @@ If you have any questions, please write.")
 		const cyrillicPattern = /^[\u0400-\u04FF]+$/;
 		
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			if(cyrillicPattern.test(a[0])
+			if(cyrillicPattern.test(a[0]))
 				txt = "Здравствуйте, " + a[0] + "!"
 			else
 				txt = "Здравствуйте!"
