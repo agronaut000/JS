@@ -418,8 +418,13 @@ If you have any questions, please write.")
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		a = document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText
 		a = a.split(' ')
+		const cyrillicPattern = /^[\u0400-\u04FF]+$/;
+		
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			txt = "Здравствуйте, " + a[0] + "!"
+			if(cyrillicPattern.test(a[0])
+				txt = "Здравствуйте, " + a[0] + "!"
+			else
+				txt = "Здравствуйте!"
 		else
 			txt = "Hello!"
 		
