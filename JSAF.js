@@ -152,9 +152,16 @@ function move_again_AF() {
 			sendAnswer("Вы написали в техподдержку школы. Если вопрос связан с учениками, вам в чат личного кабинета \"Managers (Student Care)\".")
 	}
     document.getElementById('anydesk').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswer("Пожалуйста, установите и запустите программу \"AnyDesk\" — она поможет мне увидеть ваш экран и быстрее решить вопрос.\n\
-Загрузить её можно по ссылке  https://download.anydesk.com/AnyDesk.exe \n\
-После загрузки запустите её и отправьте мне адрес рабочего места (<a href=\"http://joxi.ru/D2PZ0kvHJqZgYr\" target=\"_blank\" rel=\"noopener\">скрин</a>), который она покажет, обратным сообщением в чат.")
+Загрузить её можно <a href=\"https://download.anydesk.com/AnyDesk.exe\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
+После загрузки запустите её и отправьте мне адрес рабочего места (<a href=\"http://joxi.ru/D2PZ0kvHJqZgYr\" target=\"_blank\" rel=\"noopener\">скрин</a>), который она покажет, обратным сообщением в чат.\n\
+При подключении сотрудника, пожалуйста, нажмите \"Принять\" (<a href=\"http://joxi.ru/bmoMnPzs96X3kA\" target=\"_blank\" rel=\"noopener\">скрин</a>).")
+        } else {
+			sendAnswer("Please use this link to download AnyDesk; this program will allow me to see your screen and fix the issue more efficiently: <a href=\"https://download.anydesk.com/AnyDesk.exe\" target=\"_blank\" rel=\"noopener\">link</a>\n\
+Once it's downloaded, please launch it and send me your desktop number. It will be shown in the top left corner (<a href=\"http://joxi.ru/D2PZ0kvHJqZgYr\" target=\"_blank\" rel=\"noopener\">screenshot</a>)\n\
+When our employee connects, please click \"Accept\" (<a href=\"http://joxi.ru/Q2K8GKYHwzddkA\" target=\"_blank\" rel=\"noopener\">screenshot</a>)")
+		}
 	}
 		
     document.getElementById('thanks').onclick = function () {
@@ -174,9 +181,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 	}
     document.getElementById('mobile').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Я всё проверил и передал обращение в ответственный отдел. С вами свяжется наш специалист по почте и поможет с решением этого вопроса. Пожалуйста, ожидайте")
-        } else {
-			sendAnswer("I checked everything and transferred all information to the mobile department. Our specialist will contact you by email and will help with the solution. Please wait for an email")
+			sendAnswer("Спасибо за ответ. Я всё передал коллегам из поддержки мобильных приложений. Пожалуйста, ожидайте их ответа в течение суток, он придет на вашу почту.")
         }
 	}
 	
@@ -197,6 +202,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('vcall_2').style.display = 'none'
 			document.getElementById('calltest').style.display = 'none'
 			document.getElementById('internet').style.display = 'none'
+			document.getElementById('mobile').style.display = 'none'
 			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
@@ -213,6 +219,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('vcall_2').style.display = ''
 			document.getElementById('calltest').style.display = ''
 			document.getElementById('internet').style.display = ''
+			document.getElementById('mobile').style.display = ''
 			document.getElementById('AF_helper').style.background = "#464451"
         }
 	}
@@ -473,7 +480,7 @@ If you have any questions, please write.")
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswerTemplate("Перевод на другой отдел (шаблон)", "перевод на другой отдел")
 		else
-			sendAnswer('Please expect me to contact you with a specialist for your question.')
+			sendAnswer('I am connecting you with a specialist who will help you. Wait please')
 	}
     document.getElementById('browser').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
