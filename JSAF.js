@@ -48,6 +48,7 @@ var win_AFhelper =
 					<button id="perevod">Др отд</button>
 					<button id="VPN">VPN</button>
 					<button id="managers_sc">SC</button>
+					<button id="anydesk">AnyDesk</button>
 				</div>
 				<div style="margin: 5px;">
 					<button id="engConv">общ на англ</button>
@@ -149,6 +150,11 @@ function move_again_AF() {
 		
     document.getElementById('managers_sc').onclick = function () {
 			sendAnswer("Вы написали в техподдержку школы. Если вопрос связан с учениками, вам в чат личного кабинета \"Managers (Student Care)\".")
+	}
+    document.getElementById('anydesk').onclick = function () {
+			sendAnswer("Пожалуйста, установите и запустите программу "AnyDesk" — она поможет мне увидеть ваш экран и быстрее решить вопрос.\n\
+Загрузить её можно по ссылке  https://download.anydesk.com/AnyDesk.exe \n\
+После загрузки запустите её и отправьте мне адрес рабочего места (<a href=\"http://joxi.ru/D2PZ0kvHJqZgYr\" target=\"_blank\" rel=\"noopener\">скрин</a>), который она покажет, обратным сообщением в чат.")
 	}
 		
     document.getElementById('thanks').onclick = function () {
