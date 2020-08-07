@@ -53,6 +53,7 @@ var win_AFhelper =
 				<div style="margin: 5px;">
 					<button id="engConv">англ</button>
 					<button id="browser">ус+брауз</button>
+					<button id="bag1">баг</button>
 					<button id="version">vers</button>
 					<button id="mobile">в моб</button>
 				</div>
@@ -509,6 +510,13 @@ If you have any questions, please write.")
 			sendAnswer("Подождите, пожалуйста, сейчас я проверю и отвечу вам")
 		else 
 			sendAnswer("Wait please. Now I will check and answer you.")
+	}
+	
+    document.getElementById('bag1').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswer("Спасибо за ожидание. Я всё проверил, есть неполадка на нашей стороне. Передал подробности в отдел разработки для дальнейшего решения вопроса")
+		else 
+			sendAnswer("")
 	}
     document.getElementById('secLine').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
