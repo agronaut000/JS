@@ -337,9 +337,9 @@ Then run it and refresh the page.")
 	}
     document.getElementById('thank').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Благодарю вас за обращение и всего доброго!")
+			sendAnswer("Благодарю вас за обращение. Всего доброго!")
 		} else {
-			sendAnswer("Thank you for contacting us and all the best!")
+			sendAnswer("Thank you for contacting us. All the best!")
 		}
 	}
     document.getElementById('micro').onclick = function () {
