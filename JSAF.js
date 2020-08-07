@@ -75,7 +75,7 @@ var win_AFhelper =
 			</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="addTmp">
 			<div style="margin: 5px; width: 300px">
-					<button id="thanks">Спс</button>
+					<button id="thanks">Спс</button> 
 					<button id="cacheSafari" style="margin: 2px">Кэш Сафари</button>
 					<button id="UnapisalSam" style="margin: 2px">П -> У написал сам</button>
 					<button id="nedozvonU">недозвон У</button>
