@@ -56,6 +56,7 @@ var win_AFhelper =
 					<button id="bag1">баг</button>
 					<button id="version">vers</button>
 					<button id="mobile">в моб</button>
+					<button id="thank">пока</button>
 				</div>
 			</span>
 			<div style="margin: 5px;">
@@ -332,6 +333,13 @@ And then reboot the device and check again, if nothing changes, please write to 
 		} else {
 			sendAnswer("Please install browser VPN extension using <a href=\"http://en_faq.usedocs.com/article/14752\" target=\"_blank\" rel=\"noopener\">this instruction</a>\n\
 Then run it and refresh the page.")
+		}
+	}
+    document.getElementById('thank').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswer("Благодарю вас за обращение и всего доброго!")
+		} else {
+			sendAnswer("Thank you for contacting us and all the best!")
 		}
 	}
     document.getElementById('micro').onclick = function () {
