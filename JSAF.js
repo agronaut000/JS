@@ -46,15 +46,14 @@ var win_AFhelper =
 				<div style="margin: 5px;">
 					<button id="NS">урок NS</button>
 					<button id="perevod">Др отд</button>
-					<button id="VPN">VPN</button>
 					<button id="managers_sc">SC</button>
+					<button id="managers_tc">TC</button>
 					<button id="anydesk">AnyDesk</button>
 				</div>
 				<div style="margin: 5px;">
-					<button id="engConv">общ на англ</button>
-					<button id="micro">микро</button>
+					<button id="engConv">англ</button>
 					<button id="browser">ус+брауз</button>
-					<button id="thanks">Спс</button>
+					<button id="version">vers</button>
 					<button id="mobile">в моб</button>
 				</div>
 			</span>
@@ -76,6 +75,7 @@ var win_AFhelper =
 			</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="addTmp">
 			<div style="margin: 5px; width: 300px">
+					<button id="thanks">Спс</button>
 					<button id="cacheSafari" style="margin: 2px">Кэш Сафари</button>
 					<button id="UnapisalSam" style="margin: 2px">П -> У написал сам</button>
 					<button id="nedozvonU">недозвон У</button>
@@ -91,7 +91,8 @@ var win_AFhelper =
 					<button id="predlozh" style="margin: 2px">Предложение</button>
 					<button id="calltest">vcall-test</button>
 					<button id="vcall_2" style="margin: 2px">vcall-2</button>
-					<button id="bag1">баг</button>
+					<button id="VPN">VPN</button>
+					<button id="micro">микро</button>
 			</div>
 		</div>
 	</span>
@@ -163,6 +164,12 @@ Once it's downloaded, please launch it and send me your desktop number. It will 
 When our employee connects, please click \"Accept\" (<a href=\"http://joxi.ru/Q2K8GKYHwzddkA\" target=\"_blank\" rel=\"noopener\">screenshot</a>)")
 		}
 	}
+    document.getElementById('version').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswer("Уточните, пожалуйста, операционную систему вашего смартфона (Android или iOS). Также уточните, пожалуйста, версию вашего приложения. Её можно посмотреть в профиле <a href=\"http://joxi.ru/YmEoRweTMZZQDA\" target=\"_blank\" rel=\"noopener\">вот так&nbsp;</a>\n\
+Я передам обращение в отдел мобильной поддержки для решения неполадки. Эта информация поможет решить вопрос быстрее")
+        } 
+	}
 		
     document.getElementById('thanks').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
@@ -184,6 +191,11 @@ And then reboot the device and check again, if nothing changes, please write to 
 			sendAnswer("Спасибо за ответ. Я всё передал коллегам из поддержки мобильных приложений. Пожалуйста, ожидайте их ответа в течение суток, он придет на вашу почту.")
         }
 	}
+    document.getElementById('managers_tc').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswer("Я всё проверил и передал обращение в отдел заботы о преподавателях. С вами свяжется наш специалист по почте и поможет с решением этого вопроса. Пожалуйста, ожидайте")
+        }
+	}
 	
 			
     document.getElementById('languageAF').onclick = function () {
@@ -203,6 +215,8 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('calltest').style.display = 'none'
 			document.getElementById('internet').style.display = 'none'
 			document.getElementById('mobile').style.display = 'none'
+			document.getElementById('version').style.display = 'none'
+			document.getElementById('managers_tc').style.display = 'none'
 			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
@@ -220,6 +234,8 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('calltest').style.display = ''
 			document.getElementById('internet').style.display = ''
 			document.getElementById('mobile').style.display = ''
+			document.getElementById('version').style.display = ''
+			document.getElementById('managers_tc').style.display = ''
 			document.getElementById('AF_helper').style.background = "#464451"
         }
 	}
@@ -496,9 +512,9 @@ If you have any questions, please write.")
 	}
     document.getElementById('bag1').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("ТП уже в разработке (есть тикет jira) (шаблон ТП)", "jira")
+			sendAnswer("Спасибо за ожидание. Я всё проверил, есть неполадка на нашей стороне. Передал подробности в отдел разработки для дальнейшего решения вопроса")
 		else 
-			sendAnswer("Sorry for the issue, our developers are already solving it. As soon as they find a way to fix this defect, they will do everything as quickly as possible.")
+			sendAnswer("")
 	}
     document.getElementById('secLine').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
