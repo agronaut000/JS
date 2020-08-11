@@ -48,6 +48,7 @@ var win_AFhelper =
 					<button id="perevod">Др отд</button>
 					<button id="managers_sc">SC</button>
 					<button id="managers_tc">TC</button>
+					<button id="hardReset">HRes</button>
 					<button id="anydesk">AnyDesk</button>
 				</div>
 				<div style="margin: 5px;">
@@ -218,6 +219,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('internet').style.display = 'none'
 			document.getElementById('mobile').style.display = 'none'
 			document.getElementById('version').style.display = 'none'
+			document.getElementById('hardReset').style.display = 'none'
 			document.getElementById('managers_tc').style.display = 'none'
 			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
@@ -238,6 +240,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('mobile').style.display = ''
 			document.getElementById('version').style.display = ''
 			document.getElementById('managers_tc').style.display = ''
+			document.getElementById('hardReset').style.display = ''
 			document.getElementById('AF_helper').style.background = "#464451"
         }
 	}
@@ -335,6 +338,22 @@ And then reboot the device and check again, if nothing changes, please write to 
 Then run it and refresh the page.")
 		}
 	}
+	
+	
+    document.getElementById('hardReset').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswer("Пожалуйста, выполните жесткую перезагрузку и очистку кэша страницы в браузере. Для этого:
+1. Нажмите на F12, CTRL+SHIFT+I или нажмите правой кнопкой мыши на странице и выберите в списке "Просмотреть код" (<a href=\"http://joxi.ru/n2YoKw7Tej3kBr\" target=\"_blank\" rel=\"noopener\">скриншот</a>)\n\
+2. Нажмите правой кнопкой мыши на значок обновления страницы (<a href=\"http://joxi.ru/Vm61qNeTvxG3Nr\" target=\"_blank\" rel=\"noopener\">скриншот</a>)\n\
+3. Выберите пункт "Очистка кэша и жесткая перезагрузка", как показано (<a href=\"http://joxi.ru/eAOMNpaTk4LoJm\" target=\"_blank\" rel=\"noopener\">на скриншоте</a>\n\
+Эта инструкция подходит для браузеров Google Chrome и Яндекс.Браузер.\n\
+Напишите, удастся ли этим способом решить неполадку.")
+		}
+	}
+	
+	
+	
+	
     document.getElementById('thank').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswer("Благодарю вас за обращение. Всего доброго!")
