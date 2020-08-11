@@ -342,14 +342,13 @@ Then run it and refresh the page.")
 	
     document.getElementById('hardReset').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Пожалуйста, выполните жесткую перезагрузку и очистку кэша страницы в браузере. Для этого:\n\
+			sendAnswer("Пожалуйста, выполните жесткую перезагрузку и очистку кеша страницы в браузере. Для этого:\n\
 1. Нажмите правой кнопкой мыши на странице и выберите в списке \"Просмотреть код\" (<a href=\"http://joxi.ru/n2YoKw7Tej3kBr\" target=\"_blank\" rel=\"noopener\">скриншот</a>)\n\
 2. Нажмите правой кнопкой мыши на значок обновления страницы (<a href=\"http://joxi.ru/Vm61qNeTvxG3Nr\" target=\"_blank\" rel=\"noopener\">скриншот</a>)\n\
-3. Выберите пункт \"Очистка кеша и жесткая перезагрузка\", как показано (<a href=\"http://joxi.ru/eAOMNpaTk4LoJm\" target=\"_blank\" rel=\"noopener\">на скриншоте</a>\n\
-Затем, пожалуйста, напишите, решит ли это неполадку.")
+3. Выберите пункт \"Очистка кэша и жесткая перезагрузка\", как показано <a href=\"http://joxi.ru/eAOMNpaTk4LoJm\" target=\"_blank\" rel=\"noopener\">на скриншоте</a>\n\
+Напишите, удастся ли этим способом решить неполадку.")
 		}
 	}
-	
 	
 	
 	
@@ -542,7 +541,7 @@ If you have any questions, please write.")
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswer("Спасибо за ожидание. Я всё проверил, есть неполадка на нашей стороне. Передал подробности в отдел разработки для дальнейшего решения вопроса")
 		else 
-			sendAnswer("")
+			sendAnswer("Thanks for waiting. I've checked the issue and found out that it is caused by the platform malfunction. All the details have been forwarded to our development team for further solution.")
 	}
     document.getElementById('secLine').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
