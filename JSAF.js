@@ -141,12 +141,6 @@ if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winTopAF', '120');
     localStorage.setItem('winLeftAF', '295');
 }
-if (localStorage.getItem('audio') == 0) {
-	document.getElementById('switcher').innerHTML = "ВЫКЛ"
-}
-if (localStorage.getItem('audio') == 1) {
-	document.getElementById('switcher').innerHTML = "ВКЛ"
-}
 
 
 let wintAF = document.createElement('div');
@@ -686,6 +680,13 @@ If you have any questions, please write.")
             this.innerHTML = "ВКЛ";
 			localStorage.setItem('audio', '1');
         }
+	}
+	
+	if (localStorage.getItem('audio') == 0) {
+		document.getElementById('switcher').innerHTML = "ВЫКЛ"
+	}
+	if (localStorage.getItem('audio') == 1) {
+		document.getElementById('switcher').innerHTML = "ВКЛ"
 	}
 }
 move_again_AF();
