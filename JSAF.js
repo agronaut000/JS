@@ -15,6 +15,42 @@ button {
     border:1px solid #566963; 
     color:#ffffff; 
     padding:2px 2px;
+}
+
+.switch-btn {
+    display: inline-block;
+    width: 62px; /* ширина переключателя */
+    height: 24px; /* высота переключателя */
+    border-radius: 12px; /* радиус скругления */
+    background: #bfbfbf; /* цвет фона */
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition-duration: 300ms; /* анимация */
+}
+.switch-btn::after {
+    content: "";
+    height: 36px; /* высота кнопки */
+    width: 36px; /* ширина кнопки */
+    border-radius: 18px; /* радиус кнопки */
+    background: #fff; /* цвет кнопки */
+    top: -6px; /* положение кнопки по вертикали относительно основы */
+    left: -6px; /* положение кнопки по горизонтали относительно основы */
+    transition-duration: 300ms; /* анимация */
+    box-shadow: 0 0 10px 0 #999999; /* тень */
+    position: absolute;
+    z-index: 1;
+}
+.switch-on {
+    background: #fff;
+    box-shadow: inset 0 0 10px 0 #999999; /* тень */
+}
+.switch-on::after {
+    left: 30px;
+    background: #118c4e;
 }`
 mstl.innerHTML = style;
 
@@ -105,6 +141,12 @@ if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winTopAF', '120');
     localStorage.setItem('winLeftAF', '295');
 }
+if (localStorage.getItem('audio') == 0) {
+	document.getElementById('switcher').innerHTML = "ВЫКЛ"
+}
+if (localStorage.getItem('audio') == 1) {
+	document.getElementById('switcher').innerHTML = "ВКЛ"
+}
 
 
 let wintAF = document.createElement('div');
@@ -112,6 +154,7 @@ document.body.append(wintAF);
 wintAF.style = 'min-height: 25px; min-width: 65px; background: #464451; top: ' + localStorage.getItem('winTopAF') + 'px; left: ' + localStorage.getItem('winLeftAF') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black;';
 wintAF.setAttribute('id' ,'AF_helper');
 wintAF.innerHTML = win_AFhelper; 
+
 
 	
 function move_again_AF() {
@@ -628,6 +671,22 @@ If you have any questions, please write.")
 	}
 	btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 	btnAdd.insertBefore(button1, btnAdd.children[0])
+	
+	let switcher = document.createElement('div');
+	switcher.id = "switcher"
+	switcher.innerHTML = "ВКЛ"
+	switcher.style.marginRight = "15px";
+	switcher.className = style="width:100px";
+	btnAdd.insertBefore(switcher, btnAdd.children[0])
+    document.getElementById('switcher').onclick = function () {
+        if(this.innerHTML == "ВКЛ") {
+            this.innerHTML = "ВЫКЛ";
+			localStorage.setItem('audio', '0');
+        } else {
+            this.innerHTML = "ВКЛ";
+			localStorage.setItem('audio', '1');
+        }
+	}
 }
 move_again_AF();
 var bool = 0;	
@@ -884,7 +943,8 @@ function refCurTimer(time) {
 	}
 }
 		
-flag = 0		
+flag = 0	
+let audio = new Audio("https://ustyugov.net/tmp/msg.mp3");	
 function startTimer() {
 	for(i = 0; i < idk; i++) {
 		var cT = new Date();
@@ -928,6 +988,14 @@ function startTimer() {
 		document.getElementsByClassName('ant-btn ant-btn-icon-only')[3].style.display = 'none'
 
 	}
+	
+	if(document.getElementById('switcher').innerHTML == "ВКЛ")
+		if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1) {
+			txt = document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].innerHTML
+			if(txt != "Взять запрос (0)")
+				audio.play()
+		}
+				
 }
 setInterval(startTimer, 1000)
 
