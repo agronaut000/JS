@@ -144,6 +144,7 @@ var win_AFhelper =
 	</span>
     </div>`;
 	
+let audio
 if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winTopAF', '120');
     localStorage.setItem('winLeftAF', '295');
@@ -204,6 +205,10 @@ function move_again_AF() {
 	}
     document.getElementById('sound_save').onclick = function () {
 		localStorage.setItem('sound_str', document.getElementById('sound_adr').value);
+		if(document.getElementById('sound_adr').value == "") 
+			audio = new Audio("https://ustyugov.net/tmp/msg.mp3");	
+		else
+			audio = new Audio(document.getElementById('sound_adr').value);
 		document.getElementById('sound_adr').value = "";
 	}
 		
@@ -964,7 +969,6 @@ function refCurTimer(time) {
 		
 flag = 0
 str = localStorage.getItem('sound_str');
-let audio
 if(str !== null && str !== "")
 	audio = new Audio(str);	
 else
