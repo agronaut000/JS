@@ -61,7 +61,8 @@ var win_AFhelper =
 				<div style="margin: 5px;">
 					<button id="languageAF" style="width:100px">Русский</button>
 					<button id="hideMenu" style="margin-left: 44px">hide</button>
-					<button id="rfrTmr" style="margin-left: 44px">T10</button>
+					<button id="setting" style="margin-left: 20px">S</button>
+					<button id="rfrTmr" style="margin-left: 4px">T10</button>
 					<button id="rfrTmr1" style="margin-left: 5px">T1</button>
 				</div>
 				<div style="margin: 5px;">
@@ -134,6 +135,12 @@ var win_AFhelper =
 					<button id="micro">микро</button>
 			</div>
 		</div>
+		<div style="border: 2px double black; display: none; background-color: #464451" id="set_bar">
+			<div style="margin: 5px; width: 300px">
+				<input id="sound_adr" placeholder="Адрес звука" autocomplete="off" type="text" style="text-align: center; width: 100px; color: black;">
+				<button id="sound_save">save</button>
+			</div>
+		</div>
 	</span>
     </div>`;
 	
@@ -187,6 +194,17 @@ function move_again_AF() {
     document.getElementById('hideMenu').onclick = function () {
 		document.getElementById('AF_helper').style.display = 'none'
 		document.getElementById('scriptBut').style.display = ''
+	}
+	
+    document.getElementById('setting').onclick = function () {
+		if(document.getElementById('set_bar').style.display == '')
+			document.getElementById('set_bar').style.display = 'none'
+		else
+			document.getElementById('set_bar').style.display = ''
+	}
+    document.getElementById('sound_save').onclick = function () {
+		localStorage.setItem('sound_str', document.getElementById('sound_adr').value);
+		document.getElementById('sound_adr').value = "";
 	}
 		
     document.getElementById('managers_sc').onclick = function () {
@@ -944,8 +962,14 @@ function refCurTimer(time) {
 	}
 }
 		
-flag = 0	
-let audio = new Audio("https://ustyugov.net/tmp/msg.mp3");	
+flag = 0
+str = localStorage.getItem('sound_str');
+let audio
+if(str !== null && str !== "")
+	audio = new Audio(str);	
+else
+	audio = new Audio("https://ustyugov.net/tmp/msg.mp3");	
+
 function startTimer() {
 	for(i = 0; i < idk; i++) {
 		var cT = new Date();
