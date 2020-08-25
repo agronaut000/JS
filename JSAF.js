@@ -705,6 +705,21 @@ If you have any questions, please write.")
         }
 	}
 	
+	
+	let hash = document.createElement('div');
+	hash.id = "hash"
+	hash.innerHTML = "Хэш"
+	hash.style.marginRight = "15px";
+	hash.className = style="width:100px";
+	btnAdd.insertBefore(hash, btnAdd.children[0])
+    document.getElementById('hash').onclick = function () {
+		adr = document.location.href
+		adr1 = document.location.pathname
+		adr1 = adr1.split('/')
+		adr1 = adr1[3]
+		copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1)
+	}
+	
 	if (localStorage.getItem('audio') == 0) {
 		document.getElementById('switcher').innerHTML = "ВЫКЛ"
 	}
@@ -1039,3 +1054,12 @@ function requestsRed () {
 }
 
 setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 200)
+
+const copyToClipboard1 = str => {
+    const el = document.createElement('textarea');
+    el.value = str;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+};
