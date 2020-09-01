@@ -69,7 +69,7 @@ var win_AFhelper =
 					<button id="helloAF">Привет</button>
 					<button id="min">Минуту</button>
 					<button id="internet">Инет</button>
-					<button id="TW">TW</button>
+					<button id="math">мат. ур</button>
 					<button id="secLine">2Л</button>
 					<button id="twoMin">Помогу</button>
 				</div>
@@ -133,6 +133,8 @@ var win_AFhelper =
 					<button id="vcall_2" style="margin: 2px">vcall-2</button>
 					<button id="VPN">VPN</button>
 					<button id="micro">микро</button>
+					<button id="TW">TW</button>
+					<button id="addMacAny">Mac+AnyDesk</button>
 			</div>
 		</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="set_bar">
@@ -218,7 +220,7 @@ function move_again_AF() {
     document.getElementById('anydesk').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswer("Пожалуйста, установите и запустите программу \"AnyDesk\" — она поможет мне увидеть ваш экран и быстрее решить вопрос.\n\
-Загрузить её можно <a href=\"https://download.anydesk.com/AnyDesk.exe\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
+Загрузить её можно по ссылке: <a href=\"https://download.anydesk.com/AnyDesk.exe\" target=\"_blank\" rel=\"noopener\">для Windows</a> и <a href=\"https://download.anydesk.com/anydesk.dmg\" target=\"_blank\" rel=\"noopener\">для MacOS</a> \n\
 После загрузки запустите её и отправьте мне адрес рабочего места (<a href=\"http://joxi.ru/D2PZ0kvHJqZgYr\" target=\"_blank\" rel=\"noopener\">скрин</a>), который она покажет, обратным сообщением в чат.\n\
 При подключении сотрудника, пожалуйста, нажмите \"Принять\" (<a href=\"http://joxi.ru/bmoMnPzs96X3kA\" target=\"_blank\" rel=\"noopener\">скрин</a>).")
         } else {
@@ -233,6 +235,9 @@ When our employee connects, please click \"Accept\" (<a href=\"http://joxi.ru/Q2
 Я передам обращение в отдел мобильной поддержки для решения неполадки. Эта информация поможет решить вопрос быстрее")
         } 
 	}
+    document.getElementById('math').onclick = function () {
+			sendAnswer("Пересоздайте, пожалуйста, урок, для этого вам нужно войти в Мой класс - Выбрать ученика - нажать на \"Начать сейчас\", после этого из вашей адресной строки скопировать ссылку и отправить её ученику. Этот урок НЕ закрывайте в правом верхнем углу, а выйдите просто на главную страницу в личный кабинет и от туда перейдите в \"Мой класс\".")
+	}
 		
     document.getElementById('thanks').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
@@ -243,7 +248,7 @@ When our employee connects, please click \"Accept\" (<a href=\"http://joxi.ru/Q2
 	}
     document.getElementById('cacheTmp').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswerTemplate("Очистка кэша общая (шаблон ТП)", "кэш")
+			sendAnswerTemplate("Очистка кэша браузера(шаблон ТП)", "кэш")
         } else {
 			sendAnswer("Please clear your browser cache using instructions: http://en_faq.usedocs.com/article/14753 \n\
 And then reboot the device and check again, if nothing changes, please write to us.")
@@ -259,6 +264,15 @@ And then reboot the device and check again, if nothing changes, please write to 
 			sendAnswer("Я всё проверил и передал обращение в отдел заботы о преподавателях. С вами свяжется наш специалист по почте и поможет с решением этого вопроса. Пожалуйста, ожидайте")
         }
 	}
+    document.getElementById('addMacAny').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswer("1) Откройте Системные настройки в меню Apple.\n\
+2) Зайдите в Защита и безопасность.\n\
+3) Перейдите на вкладку Конфиденциальность.\n\
+4) В колонке слева выберите \"Универсальный доступ\".\n\
+5) Поставьте галочки рядом с программой Anydesk")
+        }
+	}
 	
 			
     document.getElementById('languageAF').onclick = function () {
@@ -266,7 +280,8 @@ And then reboot the device and check again, if nothing changes, please write to 
             this.innerHTML = "Английский";
 			document.getElementById('TW').style.display = 'none'
 			document.getElementById('cacheSafari').style.display = 'none'
-			document.getElementById('managers_sc').style.display = ''
+			document.getElementById('math').style.display = 'none'
+			document.getElementById('managers_sc').style.display = 'none'
 			document.getElementById('macBag').style.display = 'none'
 			document.getElementById('hiddenHW').style.display = 'none'
 			document.getElementById('revision').style.display = 'none'
@@ -281,12 +296,14 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('version').style.display = 'none'
 			document.getElementById('hardReset').style.display = 'none'
 			document.getElementById('managers_tc').style.display = 'none'
+			document.getElementById('addMacAny').style.display = 'none'
 			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
 			document.getElementById('TW').style.display = ''
 			document.getElementById('managers_sc').style.display = ''
 			document.getElementById('cacheSafari').style.display = ''
+			document.getElementById('math').style.display = ''
 			document.getElementById('macBag').style.display = ''
 			document.getElementById('hiddenHW').style.display = ''
 			document.getElementById('revision').style.display = ''
@@ -301,6 +318,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('version').style.display = ''
 			document.getElementById('managers_tc').style.display = ''
 			document.getElementById('hardReset').style.display = ''
+			document.getElementById('addMacAny').style.display = ''
 			document.getElementById('AF_helper').style.background = "#464451"
         }
 	}
