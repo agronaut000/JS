@@ -167,6 +167,8 @@ button4.id = 'nextTeacherIdScript';
 button4.innerHTML = "Info";
 	
 function infoUser(user) {
+	if(document.getElementById('btn_hide').style.display != 'none')
+		btn_hide.click()
 	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
 		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == user)
 			document.getElementById('id_type_for_chat').value = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
@@ -174,6 +176,8 @@ function infoUser(user) {
 	btn1_student.click()
 }
 button2.onclick = function() {
+	if(document.getElementById('btn_hide').style.display != 'none')
+		btn_hide.click()
 	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
 		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id")
 			document.getElementById('id_type_for_chat').value = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
@@ -181,6 +185,8 @@ button2.onclick = function() {
 	btn1_student.click()
 }
 button3.onclick = function() {
+	if(document.getElementById('btn_hide').style.display != 'none')
+		btn_hide.click()
 	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
 		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-studentId")
 			document.getElementById('id_type_for_chat').value = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
