@@ -153,13 +153,36 @@ if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winLeftAF', '295');
 }
 
+
+let button2 = document.createElement('div');
+button2.id = 'userIdScript';
+button2.innerHTML = "Скопировать";
+	
+button2.onclick = function() { 
+	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id")
+			document.getElementById('id_type_for_chat').value = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
+	}
+}
+
 let addInfoUser = document.createElement('div')
 
-	let hashBut = document.createElement('button')
-	hashBut.id = "hashBut"
-	hashBut.classList = "ant-btn expert-chat-header-button ant-dropdown-trigger"
-	hashBut.type = "button"
-	hashBut.innerHTML = "Хэш"
+let hashBut = document.createElement('button')
+hashBut.id = "hashBut"
+hashBut.classList = "ant-btn expert-chat-header-button ant-dropdown-trigger"
+hashBut.type = "button"
+hashBut.innerHTML = "Хэш"
+
+hashBut.onclick = function () {
+	adr = document.location.href
+	adr1 = document.location.pathname
+	adr1 = adr1.split('/')
+	adr1 = adr1[3]
+	copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1)
+	
+	document.getElementById('hashBut').innerHTML = "Скопировано"
+	setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
+}
 
 let wintAF = document.createElement('div');
 document.body.append(wintAF);
@@ -1075,11 +1098,9 @@ function startTimer() {
 				audio.play()
 		}
 		
-	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1) {
+	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1 && document.getElementsByClassName('expert-user_details-list')[1] !== null) {
 		vertical = user = ""
-		for(i = 0; ; i++) {
-			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] == undefined)
-				break
+		for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "supportVertical" || document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "teacherVertical")
 				vertical = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "userType")
@@ -1087,21 +1108,12 @@ function startTimer() {
 		}
 		addInfoUser.innerHTML = vertical + " + " + user 
 		
+		strbuttons = document.getElementsByClassName('ant-btn-group')[0]
+		strbuttons.insertBefore(hashBut, strbuttons.children[0])
 		
-	strbuttons = document.getElementsByClassName('ant-btn-group')[0]
-
-	strbuttons.insertBefore(hashBut, strbuttons.children[0])
-    document.getElementById('hashBut').onclick = function () {
-		adr = document.location.href
-		adr1 = document.location.pathname
-		adr1 = adr1.split('/')
-		adr1 = adr1[3]
-		copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1)
-		
-		document.getElementById('hashBut').innerHTML = "Скопировано"
-		setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
+		btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[1]
+		btn.appendChild(button2)
 	}
-		}
 }
 setInterval(startTimer, 1000)
 
