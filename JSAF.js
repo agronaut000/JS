@@ -162,9 +162,9 @@ let button3 = document.createElement('div');
 button3.id = 'nextStudentIdScript';
 button3.innerHTML = "Info";
 
-let button2 = document.createElement('div');
-button3.id = 'nextTeacherIdScript';
-button3.innerHTML = "Info";
+let button4 = document.createElement('div');
+button4.id = 'nextTeacherIdScript';
+button4.innerHTML = "Info";
 	
 function infoUser(user) {
 	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
