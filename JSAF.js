@@ -167,11 +167,13 @@ button4.id = 'nextTeacherIdScript';
 button4.innerHTML = "Info";
 	
 function infoUser(user) {
-	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
-		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == user)
-			document.getElementById('id_type_for_chat').value = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
+	if(document.getElementsByClassName('expert-user_details-list')[1] != undefined) {
+		for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == user)
+				document.getElementById('id_type_for_chat').value = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
+		}
+		btn1_student.click()
 	}
-	btn1_student.click()
 }
 button2.onclick = infoUser("id")
 button3.onclick = infoUser("nextClass-studentId")
