@@ -141,6 +141,7 @@ var win_AFhelper =
 			<div style="margin: 5px; width: 300px">
 				<input id="sound_adr" placeholder="Адрес звука" autocomplete="off" type="text" style="text-align: center; width: 100px; color: black;">
 				<button id="sound_save">save</button>
+				<button id="switcher">ВКЛ</button>
 			</div>
 		</div>
 	</span>
@@ -151,6 +152,8 @@ if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winTopAF', '120');
     localStorage.setItem('winLeftAF', '295');
 }
+
+let addInfoUser = document.createElement('div')
 
 
 let wintAF = document.createElement('div');
@@ -707,12 +710,6 @@ If you have any questions, please write.")
 	btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 	btnAdd.insertBefore(button1, btnAdd.children[0])
 	
-	let switcher = document.createElement('div');
-	switcher.id = "switcher"
-	switcher.innerHTML = "ВКЛ"
-	switcher.style.marginRight = "15px";
-	switcher.className = style="width:100px";
-	btnAdd.insertBefore(switcher, btnAdd.children[0])
     document.getElementById('switcher').onclick = function () {
         if(this.innerHTML == "ВКЛ") {
             this.innerHTML = "ВЫКЛ";
@@ -723,19 +720,23 @@ If you have any questions, please write.")
         }
 	}
 	
-	
-	let hash = document.createElement('div');
-	hash.id = "hash"
-	hash.innerHTML = "Хэш"
-	hash.style.marginRight = "15px";
-	hash.className = style="width:100px";
-	btnAdd.insertBefore(hash, btnAdd.children[0])
-    document.getElementById('hash').onclick = function () {
+	strbuttons = document.getElementsByClassName('ant-btn-group')[0]
+	let hashBut = document.createElement('button')
+	hashBut.id = "hashBut"
+	hashBut.classList = "ant-btn expert-chat-header-button ant-dropdown-trigger"
+	hashBut.type = "button"
+	hashBut.innerHTML = "Хэш"
+
+	strbuttons.insertBefore(hashBut, strbuttons.children[0])
+    document.getElementById('hashBut').onclick = function () {
 		adr = document.location.href
 		adr1 = document.location.pathname
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
 		copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1)
+		
+		document.getElementById('hashBut').innerHTML = "Скопировано"
+		setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
 	}
 	
 	if (localStorage.getItem('audio') == 0) {
@@ -744,7 +745,35 @@ If you have any questions, please write.")
 	if (localStorage.getItem('audio') == 1) {
 		document.getElementById('switcher').innerHTML = "ВКЛ"
 	}
+	
+	if(localStorage.getItem('audio') != null) {
+		if(localStorage.getItem('audio') == '0')
+			document.getElementById('switcher').innerHTML = 'ВЫКЛ';
+		else
+			document.getElementById('switcher').innerHTML = 'ВКЛ';
+	}
+addInfoUser.style.textAlign = "center"
+addInfoUser.style.color = "white"
+addInfoUser.style = "color: white; text-align: center; cursor: -webkit-grab;"
+loginer = document.getElementById('testUsers')
+loginer.appendChild(addInfoUser)
+
+
+loginer.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
+var listener3 = function(e , a) {
+	loginer.style.left = Number(e.clientX - myX3) + "px";
+	loginer.style.top = Number(e.clientY - myY3) + "px";
+	localStorage.setItem('winTop3', String(Number(e.clientY - myY3)));
+	localStorage.setItem('winLeft3', String(Number(e.clientX - myX3)));
+};
+loginer.childNodes[1].onmousedown = function (a) {
+	window.myX3 = a.layerX; 
+	window.myY3 = a.layerY; 
+	document.addEventListener('mousemove', listener3);
 }
+loginer.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
+}
+
 move_again_AF();
 var bool = 0;	
 
@@ -1007,6 +1036,7 @@ if(str !== null && str !== "")
 else
 	audio = new Audio("https://ustyugov.net/tmp/msg.mp3");	
 
+
 function startTimer() {
 	for(i = 0; i < idk; i++) {
 		var cT = new Date();
@@ -1057,7 +1087,19 @@ function startTimer() {
 			if(txt != "Взять запрос (0)")
 				audio.play()
 		}
-				
+		
+	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1) {
+		vertical = user = ""
+		for(i = 0; ; i++) {
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] == undefined)
+				break
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "supportVertical")
+				vertical = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "userType")
+				user = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
+		}
+		addInfoUser.innerHTML = vertical + " + " + user 
+		}
 }
 setInterval(startTimer, 1000)
 
