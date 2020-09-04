@@ -157,14 +157,25 @@ if (localStorage.getItem('winTopAF') == null) {
 let button2 = document.createElement('div');
 button2.id = 'userIdScript';
 button2.innerHTML = "Info";
+
+let button3 = document.createElement('div');
+button3.id = 'nextStudentIdScript';
+button3.innerHTML = "Info";
+
+let button2 = document.createElement('div');
+button3.id = 'nextTeacherIdScript';
+button3.innerHTML = "Info";
 	
-button2.onclick = function() { 
+function infoUser(user) {
 	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
-		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id")
+		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == user)
 			document.getElementById('id_type_for_chat').value = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
 	}
 	btn1_student.click()
 }
+button2.onclick = infoUser("id")
+button3.onclick = infoUser("nextClass-studentId")
+button4.onclick = infoUser("nextClass-teacherId")
 
 let addInfoUser = document.createElement('div')
 
@@ -1112,8 +1123,20 @@ function startTimer() {
 		strbuttons = document.getElementsByClassName('ant-btn-group')[0]
 		strbuttons.insertBefore(hashBut, strbuttons.children[0])
 		
-		btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[1]
-		btn.appendChild(button2)
+		for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id") {
+				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[1]
+				btn.appendChild(button2)
+			}
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-studentId") {
+				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[1]
+				btn.appendChild(button3)
+			}
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-teacherId") {
+				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[1]
+				btn.appendChild(button4)
+			}
+		}
 	}
 }
 setInterval(startTimer, 1000)
