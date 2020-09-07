@@ -196,21 +196,26 @@ button4.onclick = function() {
 
 let addInfoUser = document.createElement('div')
 
-let hashBut = document.createElement('button')
+let hashBut = document.createElement('div')
 hashBut.id = "hashBut"
-hashBut.classList = "ant-btn expert-chat-header-button ant-dropdown-trigger"
-hashBut.type = "button"
 hashBut.innerHTML = "Хэш"
+hashBut.style.marginRight = "15px";
+btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
 
 hashBut.onclick = function () {
 	adr = document.location.href
 	adr1 = document.location.pathname
 	adr1 = adr1.split('/')
 	adr1 = adr1[3]
-	copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1)
-	
-	document.getElementById('hashBut').innerHTML = "Скопировано"
-	setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
+	if((adr1 == undefined || adr1 == "") || window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') === -1) {
+		document.getElementById('hashBut').innerHTML = "Ошибка"
+		setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
+	} else {
+		copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1)
+		document.getElementById('hashBut').innerHTML = "Скопировано"
+		setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
+	}
 }
 
 let wintAF = document.createElement('div');
@@ -1137,8 +1142,6 @@ function startTimer() {
 		}
 		addInfoUser.innerHTML = vertical + " + " + user 
 		
-		strbuttons = document.getElementsByClassName('ant-btn-group')[0]
-		strbuttons.insertBefore(hashBut, strbuttons.children[0])
 		
 		for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id") {
