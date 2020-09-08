@@ -1141,6 +1141,20 @@ function startTimer() {
 				user = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
 		}
 		addInfoUser.innerHTML = vertical + " + " + user 
+		if(vertical == "Math") {
+			document.getElementById('math').style.backgroundColor = "green"
+			document.getElementById('NS').style.backgroundColor = "#768d87"
+		} else {
+			document.getElementById('NS').style.backgroundColor = "green"
+			document.getElementById('math').style.backgroundColor = "#768d87"
+		}
+		
+		
+		if(user == "student") {
+			document.getElementById('math').style.display = document.getElementById('NS').style.display = "none"
+		} else {
+			document.getElementById('math').style.display = document.getElementById('NS').style.display = ""
+		}
 		
 		
 		for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
