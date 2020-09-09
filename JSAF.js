@@ -579,13 +579,9 @@ Then please write to us about the result.')
 	
     document.getElementById('serverAF').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Извините, пожалуйста, за технические неисправности.\n\
-Наши разработчики уже знают об этом и решают вопрос. \n\
-Если остались вопросы, пожалуйста, напишите.")
+			sendAnswerTemplate("Серверные проблемы (шаблон ТП)" , "Серверные")
 		else
-			sendAnswer("Sorry, please for technical issues.\n\
-Our developers already know about it and solve the issue.\n\
-If you have any questions, please write.")
+			sendAnswer("Please forgive me for technical problems. Our developers are already in the know and are working on a solution. Everything will work as usual soon.")
 	}
     document.getElementById('macBag').onclick = function () {
 		sendAnswerTemplate("Макобаг (ТП)", "мак")
