@@ -580,6 +580,7 @@ Then please write to us about the result.')
     document.getElementById('serverAF').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswerTemplate("Серверные проблемы (шаблон ТП)" , "Серверные")
+			sendComment(document.getElementById('inp').value)
 		else
 			sendAnswer("Please forgive me for technical problems. Our developers are already in the know and are working on a solution. Everything will work as usual soon.")
 	}
