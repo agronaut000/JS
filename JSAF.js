@@ -706,9 +706,9 @@ Then please write to us about the result.')
 	}
     document.getElementById('min').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Одну минуту")
+			sendAnswer("Пару минут, пожалуйста")
 		else 
-			sendAnswer("Wait a minute please")
+			sendAnswer("A few minutes please")
 	}
 	
     document.getElementById('screen').onclick = function () {
