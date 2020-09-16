@@ -273,7 +273,7 @@ function move_again_AF() {
     document.getElementById('sound_save').onclick = function () {
 		localStorage.setItem('sound_str', document.getElementById('sound_adr').value);
 		if(document.getElementById('sound_adr').value == "") 
-			audio = new Audio("https://ustyugov.net/tmp/msg.mp3");	
+			audio = new Audio("https://drive.google.com/u/0/uc?id=1832JE2IuK7AnfgkljLYytEeFL99Mt2Gv&export=download");	
 		else
 			audio = new Audio(document.getElementById('sound_adr').value);
 		document.getElementById('sound_adr').value = "";
@@ -1075,7 +1075,7 @@ str = localStorage.getItem('sound_str');
 if(str !== null && str !== "")
 	audio = new Audio(str);	
 else
-	audio = new Audio("https://ustyugov.net/tmp/msg.mp3");	
+	audio = new Audio("https://drive.google.com/u/0/uc?id=1832JE2IuK7AnfgkljLYytEeFL99Mt2Gv&export=download");	
 
 
 function startTimer() {
