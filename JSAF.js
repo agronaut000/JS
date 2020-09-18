@@ -86,7 +86,8 @@ var win_AFhelper =
 					<button id="managers_sc">SC</button>
 					<button id="managers_tc">TC</button>
 					<button id="hardReset">HRes</button>
-					<button id="anydesk">AnyDesk</button>
+					<button id="TW">TW</button>
+					<button id="anydesk">AD</button>
 				</div>
 				<div style="margin: 5px;">
 					<button id="engConv">англ</button>
@@ -133,7 +134,6 @@ var win_AFhelper =
 					<button id="vcall_2" style="margin: 2px">vcall-2</button>
 					<button id="VPN">VPN</button>
 					<button id="micro">микро</button>
-					<button id="TW">TW</button>
 					<button id="addMacAny">Mac+AnyDesk</button>
 			</div>
 		</div>
@@ -389,7 +389,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 	}
     document.getElementById('twoMin').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Сейчас я вам помогу (шаблон)", "Сейчас я вам помогу")
+			sendAnswer("Подождите, пожалуйста, несколько минут — я вам помогу.")
         else
 			sendAnswer("I will help you now. Please wait a couple of minutes.")
 	}
