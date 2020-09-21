@@ -557,9 +557,9 @@ Then please write to us about the result.')
 	
     document.getElementById('UnapisalSam').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Попросите ученика самостоятельно написать нам в чат, чтобы мы получили информацию о нем и его системе. Это поможет нам оперативно связаться с учеником и получить необходимую информацию. Спасибо за понимание!")
+			sendAnswer("Пожалуйста, попросите ученика самостоятельно написать нам в чат, чтобы мы получили информацию о нем и его системе. Это поможет нам оперативно связаться с учеником и получить необходимую информацию. Спасибо за понимание!")
 		} else {
-			sendAnswer("Ask the student to write us a chat on their own so that we receive information about him and his system. This will help us quickly contact the student and get the necessary information. Thank you for understanding!")
+			sendAnswer("Please ask the student to write us a chat on their own so that we receive information about him and his system. This will help us quickly contact the student and get the necessary information. Thank you for understanding!")
 		}
 	}
     document.getElementById('nedozvonU').onclick = function () {
