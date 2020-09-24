@@ -699,7 +699,7 @@ Then please write to us about the result.')
 		sendAnswerTemplate("Программа TeamViewer (шаблон ТП)", "jira")
 	}
     document.getElementById('internet').onclick = function () {
-		sendAnswerTemplate("Проблема с Интернетом (ТП)", "интернет")
+		sendAnswer("Проверьте, пожалуйста, скорость вашего интернета по этой <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSegaAfaOTa1BepjseqAdHIINrRH5GQVVEn-LOtXhPVOjRpOQw/viewform\" target=\"_blank\" rel=\"noopener\">инструкции</a>. После отправьте сюда ссылку с результатами тестирования скорости интернета, это поможет нам в решении.")
 	}
     document.getElementById('engConv').onclick = function () {
 		sendAnswerTemplate("Общение на англ (шаблон)", "общение на англ")
