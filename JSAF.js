@@ -209,13 +209,21 @@ hashBut.onclick = function () {
 	adr1 = adr1.split('/')
 	adr1 = adr1[3]
 	if((adr1 == undefined || adr1 == "") || window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') === -1) {
-		document.getElementById('hashBut').innerHTML = "Ошибка"
-		setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
+		if(window.location.href.indexOf('skyeng.autofaq.ai/logs') === -1) {
+			document.getElementById('hashBut').innerHTML = "Ошибка"
+			setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
+		} else {
+			adr1 = document.getElementsByClassName('ant-spin-nested-loading')[1].firstChild.firstChild.firstChild.childNodes[1]
+			copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1)
+			document.getElementById('hashBut').innerHTML = "Скопировано"
+			setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
+		}
 	} else {
 		copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1)
 		document.getElementById('hashBut').innerHTML = "Скопировано"
 		setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
 	}
+	
 }
 
 let wintAF = document.createElement('div');
@@ -326,7 +334,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 	}
     document.getElementById('managers_tc').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Я всё проверил и передал обращение в отдел заботы о преподавателях. С вами свяжется наш специалист по почте и поможет с решением этого вопроса. Пожалуйста, ожидайте")
+			sendAnswer("Я передал обращение в отдел заботы о преподавателях. С вами свяжется наш специалист по почте и поможет с решением этого вопроса. Пожалуйста, ожидайте")
         }
 	}
     document.getElementById('addMacAny').onclick = function () {
