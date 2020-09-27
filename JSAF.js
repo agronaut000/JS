@@ -704,7 +704,8 @@ Then please write to us about the result.')
 			sendAnswer("Please specify student ID")
 	}
     document.getElementById('TW').onclick = function () {
-		sendAnswerTemplate("Программа TeamViewer (шаблон ТП)", "jira")
+		sendAnswer("Пожалуйста, установите и запустите программу <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">TeamViewer</a>\n\
+Отправьте в этот чат ID и пароль, которые она покажет &mdash; это поможет мне увидеть ваш экран и разобраться с проблемой.")
 	}
     document.getElementById('internet').onclick = function () {
 		sendAnswer("Проверьте, пожалуйста, скорость вашего интернета по этой <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSegaAfaOTa1BepjseqAdHIINrRH5GQVVEn-LOtXhPVOjRpOQw/viewform\" target=\"_blank\" rel=\"noopener\">инструкции</a>. После отправьте сюда ссылку с результатами тестирования скорости интернета, это поможет нам в решении.")
