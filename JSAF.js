@@ -203,6 +203,74 @@ hashBut.style.marginRight = "15px";
 btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
 
+
+let maskBack = document.createElement('div')
+maskBack.id = "maskBack"
+maskBack.innerHTML = "Вернуть"
+maskBack.style.marginRight = "15px";
+maskBack.style.display = "none";
+btnAdd1.insertBefore(maskBack, btnAdd1.children[0])
+
+
+maskBack.onclick = function () {
+	name = document.getElementById('maskBack').getAttribute('name')
+	email = document.getElementById('maskBack').getAttribute('email')
+	phone = document.getElementById('maskBack').getAttribute('phone')
+	mask = document.getElementById('maskBack').getAttribute('mask')
+	if(document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText == name &&
+	document.getElementsByClassName('expert-user_details-list')[0].childNodes[0].childNodes[1].innerText == email &&
+	document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText == phone) {
+		document.getElementsByClassName('ant-modal-wrap')[mask].style.display = ''
+		document.getElementsByClassName('ant-modal-mask')[mask].style.display = ''
+		document.getElementsByClassName('expert-chat-header-actions-inner')[0].style.display = '' // кнопки сверху
+		document.getElementsByClassName('expert-chat-footer')[0].firstChild.firstChild.style.display = '' // кнопка заметок
+		document.getElementById('maskBack').style.display = 'none'
+	} else {
+		document.getElementById('maskBack').innerHTML = "Открыт неверный чат"
+		setTimeout(function() {document.getElementById('maskBack').innerHTML = "Вернуть"}, 3000)
+	}
+}
+
+
+
+let maskBackHide = document.createElement('div')
+maskBackHide.id = "maskBackHide"
+maskBackHide.innerHTML = "Скрыть"
+maskBackHide.style.marginRight = "15px";
+maskBackHide.style.display = "";
+
+maskBackHide.onclick = function () {
+	if(document.getElementsByClassName('ant-modal-content')[0].childNodes[1].firstChild.innerText == "Добавить комментарий к диалогу") {
+			document.getElementsByClassName('ant-modal-wrap')[0].style.display = 'none'
+			document.getElementsByClassName('ant-modal-mask')[0].style.display = 'none'
+			document.getElementsByClassName('expert-chat-header-actions-inner')[0].style.display = 'none' // кнопки сверху
+			document.getElementsByClassName('expert-chat-footer')[0].firstChild.firstChild.style.display = 'none' // кнопка заметок
+			document.getElementById('maskBack').style.display = ''
+	
+			document.getElementById('maskBack').setAttribute('name', document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText)
+			document.getElementById('maskBack').setAttribute('email', document.getElementsByClassName('expert-user_details-list')[0].childNodes[0].childNodes[1].innerText)
+			document.getElementById('maskBack').setAttribute('phone', document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText)
+			document.getElementById('maskBack').setAttribute('mask', 0)
+	} else
+		for(i = 0;; i++) {
+			if(document.getElementsByClassName('ant-modal-wrap')[i] == undefined) {
+				document.getElementsByClassName('ant-modal-wrap')[i - 1].style.display = 'none'
+				document.getElementsByClassName('ant-modal-mask')[i - 1].style.display = 'none'
+				document.getElementsByClassName('expert-chat-header-actions-inner')[0].style.display = 'none' // кнопки сверху
+				document.getElementsByClassName('expert-chat-footer')[0].firstChild.firstChild.style.display = 'none' // кнопка заметок
+				document.getElementById('maskBack').style.display = ''
+				
+		
+				document.getElementById('maskBack').setAttribute('name', document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText)
+				document.getElementById('maskBack').setAttribute('email', document.getElementsByClassName('expert-user_details-list')[0].childNodes[0].childNodes[1].innerText)
+				document.getElementById('maskBack').setAttribute('phone', document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText)
+				document.getElementById('maskBack').setAttribute('mask', i - 1)
+				break;
+			}
+		}
+}
+
+
 hashBut.onclick = function () {
 	adr = document.location.href
 	adr1 = document.location.pathname
@@ -1187,6 +1255,10 @@ function startTimer() {
 				btn.appendChild(button4)
 			}
 		}
+	}
+	
+	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined) {
+		document.getElementsByClassName('ant-modal-content')[0].childNodes[1].appendChild(maskBackHide)
 	}
 }
 setInterval(startTimer, 1000)
