@@ -223,11 +223,11 @@ maskBack.onclick = function () {
 		document.getElementsByClassName('ant-modal-wrap')[mask].style.display = ''
 		document.getElementsByClassName('ant-modal-mask')[mask].style.display = ''
 		document.getElementsByClassName('expert-chat-header-actions-inner')[0].style.display = ''
-				document.getElementsByClassName('ant-btn ant-btn-icon-only')[1].style.display = ''
+		document.getElementsByClassName('expert-chat-footer')[0].firstChild.firstChild.style.display = ''
 		document.getElementById('maskBack').style.display = 'none'
 	} else {
-		document.getElementById('hashBut').innerHTML = "Открыт неверный чат"
-		setTimeout(function() {document.getElementById('hashBut').innerHTML = "Вернуть"}, 3000)
+		document.getElementById('maskBack').innerHTML = "Открыт неверный чат"
+		setTimeout(function() {document.getElementById('maskBack').innerHTML = "Вернуть"}, 3000)
 	}
 }
 
@@ -243,7 +243,7 @@ maskBackHide.onclick = function () {
 	if(document.getElementsByClassName('ant-modal-content')[0].childNodes[1].firstChild.innerText == "Добавить комментарий к диалогу") {
 			document.getElementsByClassName('ant-modal-wrap')[0].style.display = 'none'
 			document.getElementsByClassName('ant-modal-mask')[0].style.display = 'none'
-			document.getElementsByClassName('expert-chat-header-actions-inner')[0].style.display = 'none'
+			document.getElementsByClassName('expert-chat-footer')[0].firstChild.firstChild.style.display = 'none'
 			document.getElementById('maskBack').style.display = ''
 	
 			document.getElementById('maskBack').setAttribute('name', document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText)
