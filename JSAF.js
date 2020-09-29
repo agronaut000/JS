@@ -465,9 +465,9 @@ And then reboot the device and check again, if nothing changes, please write to 
 	}
     document.getElementById('twoMin').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Подождите, пожалуйста, несколько минут — я вам помогу.")
+			sendAnswer("Сейчас я вам помогу, подождите, пожалуйста.")
         else
-			sendAnswer("I will help you now. Please wait a couple of minutes.")
+			sendAnswer("I will help you now, please wait.")
 	}
 	
     document.getElementById('rfrTmr').onclick = function () {
