@@ -78,7 +78,7 @@ var win_AFhelper =
 					<button id="svyaz3" style="margin: 2px">#Отсутствует_связь_отказ</button>
 					<button id="svyaz4" style="margin: 2px">#Отсутствует_связь_без_ответа</button>
 					
-					<input id="tag_inp" placeholder="Тэг" autocomplete="off" type="text" style="text-align: center; width: 200px; color: black;margin: 2px">
+					<textarea id="tag_inp" placeholder="Тэг" autocomplete="off" type="text" style="text-align: center; width: 200px; height = 50px; color: black;margin: 2px">
 					<button id="tag_send" style="margin: 2px">Отправить</button>
 				</div>
 				<div style="margin: 5px;" id="2str">
