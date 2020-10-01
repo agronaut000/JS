@@ -888,26 +888,28 @@ Then please write to us about the result.')
 		else
 			document.getElementById('switcher').innerHTML = 'ВКЛ';
 	}
-addInfoUser.style.textAlign = "center"
-addInfoUser.style.color = "white"
-addInfoUser.style = "color: white; text-align: center; cursor: -webkit-grab;"
-loginer = document.getElementById('testUsers')
-loginer.appendChild(addInfoUser)
+	addInfoUser.style.textAlign = "center"
+	addInfoUser.style.color = "white"
+	addInfoUser.style = "color: white; text-align: center; cursor: -webkit-grab;"
+	loginer = document.getElementById('testUsers')
+	loginer.appendChild(addInfoUser)
 
 
-loginer.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
-var listener3 = function(e , a) {
-	loginer.style.left = Number(e.clientX - myX3) + "px";
-	loginer.style.top = Number(e.clientY - myY3) + "px";
-	localStorage.setItem('winTop3', String(Number(e.clientY - myY3)));
-	localStorage.setItem('winLeft3', String(Number(e.clientX - myX3)));
-};
-loginer.childNodes[1].onmousedown = function (a) {
-	window.myX3 = a.layerX; 
-	window.myY3 = a.layerY; 
-	document.addEventListener('mousemove', listener3);
-}
-loginer.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
+	loginer.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
+	var listener3 = function(e , a) {
+		loginer.style.left = Number(e.clientX - myX3) + "px";
+		loginer.style.top = Number(e.clientY - myY3) + "px";
+		localStorage.setItem('winTop3', String(Number(e.clientY - myY3)));
+		localStorage.setItem('winLeft3', String(Number(e.clientX - myX3)));
+	};
+	loginer.childNodes[1].onmousedown = function (a) {
+		window.myX3 = a.layerX; 
+		window.myY3 = a.layerY; 
+		document.addEventListener('mousemove', listener3);
+	}
+	loginer.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
+	
+	document.getElementById('page1').style.backgroundColor = 'green'
 }
 
 move_again_AF();
