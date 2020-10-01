@@ -117,7 +117,7 @@ var win_AFhelper =
 			
 			<div style="margin: 5px; width: 300px; display: none;" id="tag_div2">
 				<textarea id="tag_inp" placeholder="Тэг" autocomplete="off" type="text" style="text-align: center; width: 291px; height = 50px; color: black;margin: 2px; resize: none"></textarea>
-				<button id="tag_send" style="margin: 110px">Отправить</button>
+				<button id="tag_send" style="margin: 0 0 0 110px">Отправить</button>
 			</div>
 			<div style="margin: 5px;" id="6str">
 				<button id="tmplt1_save">save</button>
