@@ -1042,8 +1042,12 @@ accuracy = b.accuracy
 		else if(tmpText == "")
 				console.log('Шаблон не найден')
 			else {
-				if(flag == 1)
+				if(flag == 1) {
 					tmpText = newText
+					
+					tmpText = tmpText.split("\+\"").join("\\\"")
+					tmpText = tmpText.split("\n").join("\\n")
+				}
 				refCurTimer(time)
 				template_flag = 0
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
