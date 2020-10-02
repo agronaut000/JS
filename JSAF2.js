@@ -499,7 +499,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 	}
     document.getElementById('twoMin').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Сейчас я вам помогу, подождите, пожалуйста.")
+			sendAnswerTemplate2("Сейчас я вам помогу, подождите, пожалуйста.")
         else
 			sendAnswer("I will help you now, please wait.")
 	}
@@ -740,12 +740,11 @@ Then please write to us about the result.')
 			template_flag2 = 1
 		}
 		else 
-			if(values[3])
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-				refCurTimer('10:00')
-				sendAnswerTemplate2(txt)
-		} else 
-			sendAnswer('Hello!')
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+					refCurTimer('10:00')
+					sendAnswerTemplate2(txt)
+			} else 
+				sendAnswer('Hello!')
 	}
     document.getElementById('utoch').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -1049,10 +1048,7 @@ accuracy = b.accuracy
 			word_text = word
 			template_flag = 1
 		}
-		else 
-			if(!values[3])
-				console.log('Не знаю id У')
-			else if(tmpText == "")
+		else if(tmpText == "")
 				console.log('Шаблон не найден')
 			else {
 				if(flag == 1)
@@ -1090,10 +1086,7 @@ async function sendAnswer(txt, flag = 1, time = "10:00") {
 		
 		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
 			document.getElementById('inp').value = txt
-		else 
-			if(!values[3])
-				console.log('Не знаю id У')
-			else {
+		else {
 				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
@@ -1120,9 +1113,7 @@ async function getInfo(flag1 = 1) {
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
 		sessionId = ""
-		flag = false
 		if(document.getElementById('msg1').innerHTML != "Доработать" || flag1 == 0) {
-			flag = true
 			a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
 	  "headers": {
 		"accept": "*/*",
@@ -1138,10 +1129,9 @@ async function getInfo(flag1 = 1) {
 	  "method": "GET",
 	  "mode": "cors",
 	  "credentials": "include"
-	}).then(a => b = a.json()).then(b => sessionId = b.sessionId).then(b => {if(sessionId == "")
-		flag = false});
+	}).then(a => b = a.json()).then(b => sessionId = b.sessionId);
 		}
-		return [adr, adr1, sessionId, flag]
+		return [adr, adr1, sessionId]
 }
 
 async function sendComment(txt){ 
@@ -1415,24 +1405,29 @@ const copyToClipboard1 = str => {
 };
 
 async function sendAnswerTemplate2(txt) {
-	var values = await getInfo()
-	adr = values[0]; adr1 = values[1]; uid = values[2]
-	fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
-		  "headers": {
-			"accept": "*/*",
-			"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-			"cache-control": "max-age=0",
-			"content-type": "multipart/form-data; boundary=----WebKitFormBoundarymasjvc4O46a190zh",
-			"sec-fetch-dest": "empty",
-			"sec-fetch-mode": "cors",
-			"sec-fetch-site": "same-origin"
-		  },
-		  "referrer": adr,
-		  "referrerPolicy": "no-referrer-when-downgrade",
-		  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt + "\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
-		  "method": "POST",
-		  "mode": "cors",
-		  "credentials": "include"
-	});
-	template_flag2 = 0
+	if(document.getElementById('msg1').innerHTML == "Доработать") {
+		document.getElementById('inp').value = txt
+		template_flag2 = 1
+	} else {
+		var values = await getInfo()
+		adr = values[0]; adr1 = values[1]; uid = values[2]
+		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+			  "headers": {
+				"accept": "*/*",
+				"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+				"cache-control": "max-age=0",
+				"content-type": "multipart/form-data; boundary=----WebKitFormBoundarymasjvc4O46a190zh",
+				"sec-fetch-dest": "empty",
+				"sec-fetch-mode": "cors",
+				"sec-fetch-site": "same-origin"
+			  },
+			  "referrer": adr,
+			  "referrerPolicy": "no-referrer-when-downgrade",
+			  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt + "\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
+			  "method": "POST",
+			  "mode": "cors",
+			  "credentials": "include"
+		});
+		template_flag2 = 0
+	}
 }
