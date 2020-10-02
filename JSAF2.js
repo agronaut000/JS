@@ -707,9 +707,9 @@ Then please write to us about the result.')
 		if(document.getElementById('msg').innerHTML == "Чат") {
 			if(template_flag == 1) {
 				if(template_flag2 == 1)
-					sendAnswerTemplate2(document.getElementById('inp').value, 0)
+					sendAnswerTemplate2(document.getElementById('inp').value, 1)
 				else
-					sendAnswerTemplate("", "", "10:00", 1, document.getElementById('inp').value)
+					sendAnswerTemplate("", "", "10:00", 1, document.getElementById('inp').value, 1)
 			} else {
 				sendAnswer(document.getElementById('inp').value, 0)
 			}
@@ -728,7 +728,7 @@ Then please write to us about the result.')
 		const cyrillicPattern = /^[\u0400-\u04FF]+$/;
 		
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			if(cyrillicPattern.test(a[0]))
+			if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML != "Доработать")
 				txt = "Здравствуйте, " + a[0] + "!"
 			else
 				txt = "Здравствуйте!"
@@ -995,7 +995,7 @@ function taggg1(txt, phone = "0") {
 
 var bool = 0;	
 
-async function sendAnswerTemplate(template, word, time = "10:00", flag = 0, newText = "") {
+async function sendAnswerTemplate(template, word, time = "10:00", flag = 0, newText = "", flag2 = 0) {
 	//addTimer()
 	if(flag == 1) {
 		template = template_text
@@ -1033,7 +1033,7 @@ title = b.title
 title = title.split("\"").join("\\\"")
 accuracy = b.accuracy
 }});}).then(k => {
-		if(document.getElementById('msg1').innerHTML == "Доработать") {
+		if(document.getElementById('msg1').innerHTML == "Доработать" && flag2 == 0) {
 			document.getElementById('inp').value = tmpText
 			template_text = template
 			word_text = word
@@ -1395,8 +1395,8 @@ const copyToClipboard1 = str => {
     document.body.removeChild(el);
 };
 
-async function sendAnswerTemplate2(txt) {
-	if(document.getElementById('msg1').innerHTML == "Доработать") {
+async function sendAnswerTemplate2(txt, flag = 0) {
+	if(document.getElementById('msg1').innerHTML == "Доработать" && flag == 0) {
 		document.getElementById('inp').value = txt
 		template_flag = 1
 		template_flag2 = 1
