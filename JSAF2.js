@@ -191,7 +191,11 @@ button3.innerHTML = "Info";
 let button4 = document.createElement('div');
 button4.id = 'nextTeacherIdScript';
 button4.innerHTML = "Info";
-	
+template_flag = 0
+template_flag2 = 0
+word_text = ""
+template_text = ""
+
 button2.onclick = function() {
 	if(document.getElementById('btn_hide').style.display != 'none')
 		btn_hide.click()
@@ -702,7 +706,7 @@ Then please write to us about the result.')
     document.getElementById('snd').onclick = function () {
 		if(document.getElementById('msg').innerHTML == "Чат") {
 			if(template_flag == 1) {
-				if(template_falg2 == 1)
+				if(template_flag2 == 1)
 					sendAnswerTemplate2(document.getElementById('inp').value, 0)
 				else
 					sendAnswerTemplate("", "", "10:00", 1, document.getElementById('inp').value)
@@ -731,8 +735,10 @@ Then please write to us about the result.')
 		else
 			txt = "Hello!"
 		
-		if(document.getElementById('msg1').innerHTML == "Доработать")
+		if(document.getElementById('msg1').innerHTML == "Доработать") {
 			document.getElementById('inp').value = txt
+			template_flag2 = 1
+		}
 		else 
 			if(values[3])
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
@@ -1002,8 +1008,8 @@ var bool = 0;
 async function sendAnswerTemplate(template, word, time = "10:00", flag = 0, newText = "") {
 	//addTimer()
 	if(flag == 1) {
-		template = template_flag
-		word = word_flag
+		template = template_text
+		word = word_text
 	}
 	var values = await getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
@@ -1039,8 +1045,9 @@ accuracy = b.accuracy
 }});}).then(k => {
 		if(document.getElementById('msg1').innerHTML == "Доработать") {
 			document.getElementById('inp').value = tmpText
-			template_flag = template
-			word_flag = word
+			template_text = template
+			word_text = word
+			template_flag = 1
 		}
 		else 
 			if(!values[3])
@@ -1051,6 +1058,7 @@ accuracy = b.accuracy
 				if(flag == 1)
 					tmpText = newText
 				refCurTimer(time)
+				template_flag = 0
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -1426,4 +1434,5 @@ async sendAnswerTemplate2 (txt) {
 		  "mode": "cors",
 		  "credentials": "include"
 	});
+	template_flag2 = 0
 }
