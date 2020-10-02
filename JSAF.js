@@ -431,7 +431,6 @@ And then reboot the device and check again, if nothing changes, please write to 
     document.getElementById('languageAF').onclick = function () {
         if(this.innerHTML == "Русский") {
             this.innerHTML = "Английский";
-			document.getElementById('TW').style.display = 'none'
 			document.getElementById('cacheSafari').style.display = 'none'
 			document.getElementById('math').style.display = 'none'
 			document.getElementById('managers_sc').style.display = 'none'
@@ -450,7 +449,6 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
-			document.getElementById('TW').style.display = ''
 			document.getElementById('managers_sc').style.display = ''
 			document.getElementById('cacheSafari').style.display = ''
 			document.getElementById('math').style.display = ''
