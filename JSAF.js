@@ -342,10 +342,11 @@ function move_again_AF() {
     };
 	document.getElementById('1str').ondblclick = document.getElementById('2str').ondblclick = document.getElementById('3str').ondblclick = 
 	document.getElementById('4str').ondblclick = document.getElementById('5str').ondblclick = function () {
-		if(document.getElementById('addTmp').style.display == 'none')
-			document.getElementById('addTmp').style.display = '';
-		else
-			document.getElementById('addTmp').style.display = 'none';
+		if(document.getElementById('tags').style.backgroundColor != 'green')
+			if(document.getElementById('addTmp').style.display == 'none')
+				document.getElementById('addTmp').style.display = '';
+			else
+				document.getElementById('addTmp').style.display = 'none';
 	}
     wintAF.firstElementChild.firstElementChild.firstElementChild.onmousedown = function (a) {
         window.myX2 = a.layerX; 
