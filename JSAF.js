@@ -340,7 +340,8 @@ function move_again_AF() {
         localStorage.setItem('winTopAF', String(Number(e.clientY - myY2)));
         localStorage.setItem('winLeftAF', String(Number(e.clientX - myX2)));
     };
-    wintAF.firstElementChild.firstElementChild.firstElementChild.ondblclick = function () {
+	document.getElementById('1str').ondblclick = document.getElementById('2str').ondblclick = document.getElementById('3str').ondblclick = 
+	document.getElementById('4str').ondblclick = document.getElementById('5str').ondblclick = function () {
 		if(document.getElementById('addTmp').style.display == 'none')
 			document.getElementById('addTmp').style.display = '';
 		else
@@ -940,6 +941,9 @@ function taggg() {
 	
     document.getElementById('tag_send').onclick = function () {
 		sendComment(document.getElementById('tag_inp').value)
+		document.getElementById('tag_inp').value = ""
+		document.getElementById('tag_id').value = ""
+		document.getElementById('tag_phone').value = ""
 	}
 	
     document.getElementById('page1').onclick = function () {
