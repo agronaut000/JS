@@ -63,12 +63,10 @@ var win_AFhelper =
 					<button id="languageAF" style="width:100px">Русский</button>
 					<button id="hideMenu" style="margin-left: 13px">hide</button>
 					<button id="setting" style="margin-left: 13px">S</button>
-					<button id="page1" style="margin-left: 15px; width: 40px; backgroundColor: green; ">temp</button>
-					<button id="page2" style="margin-left: 5px; width: 40px;">tags</button>
+					<button id="page1" style="margin-left: 15px; width: 40px; backgroundColor: green; display: none">temp</button>
 				</div>
 				<div style="margin: 5px;" id="2str">
 					<button id="helloAF">Привет</button>
-					<button id="min">Минуту</button>
 					<button id="internet">Инет</button>
 					<button id="math">мат. ур</button>
 					<button id="secLine">2Л</button>
@@ -99,26 +97,7 @@ var win_AFhelper =
 					<button id="thank">пока</button>
 					<button id="thanks">Спс</button>
 				</div>
-				
-				
-				<div style="margin: 5px; width: 300px; display: none;" id="tag_div1">
-					<input id="tag_id" placeholder="user ID" autocomplete="off" type="text" style="text-align: center; width: 125px; color: black; margin: 0px 0 5px 10px">
-					<input id="tag_phone" placeholder="phone" autocomplete="off" type="text" style="text-align: center; width: 125px; color: black;margin: 0px 0 5px 10px">
-					
-					<button id="necelevoi" style="margin: 2px">#Нецелевой</button>
-					<button id="next_chat" style="margin: 2px">#Продолжение_чата</button>
-					</br>
-					<button id="svyaz1" style="margin: 2px">#Отсутствует_связь</button>
-					<button id="svyaz2" style="margin: 2px">#Отсутствует_связь_ИС</button>
-					<button id="svyaz3" style="margin: 2px">#Отсутствует_связь_отказ</button>
-					<button id="svyaz4" style="margin: 2px">#Отсутствует_связь_без_ответа</button>
-				</div>
 			</span>
-			
-			<div style="margin: 5px; width: 300px; display: none;" id="tag_div2">
-				<textarea id="tag_inp" placeholder="Тэг" autocomplete="off" type="text" style="text-align: center; width: 291px; height = 50px; color: black;margin: 2px; resize: none"></textarea>
-				<button id="tag_send" style="margin: 0 0 0 110px">Отправить</button>
-			</div>
 			<div style="margin: 5px;" id="6str">
 				<button id="tmplt1_save">save</button>
 				<button id="tmplt1_snd">send</button>
@@ -156,8 +135,6 @@ var win_AFhelper =
 					<button id="micro">микро</button>
 					<button id="addMacAny">Mac+AnyDesk</button>
 			</div>
-		</div>
-		<div style="border: 2px double black; display: ; background-color: #464451" id="tags">
 		</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="set_bar">
 			<div style="margin: 5px; width: 300px">
@@ -416,7 +393,7 @@ When our employee connects, please click \"Accept\" (<a href=\"http://joxi.ru/Q2
 		
     document.getElementById('thanks').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Спасибо за ожидание")
+			sendAnswerTemplate2("Спасибо за ожидание.")
         } else {
 			sendAnswer("Thanks for waiting")
         }
@@ -599,7 +576,7 @@ Then run it and refresh the page.")
 	
     document.getElementById('thank').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Благодарю вас за обращение. Всего доброго!")
+			sendAnswer("Спасибо за обращение. Всего вам доброго!")
 		} else {
 			sendAnswer("Thank you for contacting us. All the best!")
 		}
@@ -787,16 +764,10 @@ Then please write to us about the result.')
 		sendAnswerTemplate("Программа TeamViewer (шаблон ТП)", 'jira')
 	}
     document.getElementById('internet').onclick = function () {
-		sendAnswer("Проверьте, пожалуйста, скорость вашего интернета по этой <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSegaAfaOTa1BepjseqAdHIINrRH5GQVVEn-LOtXhPVOjRpOQw/viewform\" target=\"_blank\" rel=\"noopener\">инструкции</a>. После отправьте сюда ссылку с результатами тестирования скорости интернета, это поможет нам в решении.")
+		sendAnswerTemplate("Проблема с Интернетом (ТП)", "Интернет")
 	}
     document.getElementById('engConv').onclick = function () {
 		sendAnswerTemplate("Общение на англ (шаблон)", "общение на англ")
-	}
-    document.getElementById('min').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Пару минут, пожалуйста")
-		else 
-			sendAnswer("A few minutes please")
 	}
 	
     document.getElementById('screen').onclick = function () {
@@ -907,90 +878,6 @@ Then please write to us about the result.')
 
 move_again_AF();
 
-function taggg() {
-    document.getElementById('necelevoi').onclick = function () {
-		taggg1("#Нецелевой")
-	}
-    document.getElementById('next_chat').onclick = function () {
-		taggg1("#Продолжение_чата")
-	}
-    document.getElementById('svyaz1').onclick = function () {
-		taggg1("#Отсутствует_связь")
-	}
-    document.getElementById('svyaz2').onclick = function () {
-		taggg1("#Отсутствует_связь_ИС", 1)
-	}
-    document.getElementById('svyaz3').onclick = function () {
-		taggg1("#Отсутствует_связь_отказ", 1)
-	}
-    document.getElementById('svyaz4').onclick = function () {
-		taggg1("#Отсутствует_связь_без_ответа", 1)
-	}
-	
-    document.getElementById('tag_send').onclick = function () {
-		sendComment(document.getElementById('tag_inp').value)
-		document.getElementById('tag_inp').value = ""
-		document.getElementById('tag_id').value = ""
-		document.getElementById('tag_phone').value = ""
-	}
-	
-    document.getElementById('page1').onclick = function () {
-		document.getElementById('page1').style.backgroundColor = "green"
-		document.getElementById('page2').style.backgroundColor = "#768d87"
-		
-		document.getElementById('tag_div1').style.display = 'none'
-		document.getElementById('tag_div2').style.display = 'none'
-		
-		document.getElementById('2str').style.display = ''
-		document.getElementById('3str').style.display = ''
-		document.getElementById('4str').style.display = ''
-		document.getElementById('5str').style.display = ''
-		document.getElementById('6str').style.display = ''
-		document.getElementById('7str').style.display = ''
-	}
-    document.getElementById('page2').onclick = function () {
-		document.getElementById('page1').style.backgroundColor = "#768d87"
-		document.getElementById('page2').style.backgroundColor = "green"
-		
-		document.getElementById('tag_div1').style.display = ''
-		document.getElementById('tag_div2').style.display = ''
-		
-		document.getElementById('2str').style.display = 'none'
-		document.getElementById('3str').style.display = 'none'
-		document.getElementById('4str').style.display = 'none'
-		document.getElementById('5str').style.display = 'none'
-		document.getElementById('6str').style.display = 'none'
-		document.getElementById('7str').style.display = 'none'
-	}
-	
-	
-	if (localStorage.getItem('msg') != null) {
-		document.getElementById('msg').innerHTML = localStorage.getItem('msg')
-	}
-	if (localStorage.getItem('msg1') != null) {
-		document.getElementById('msg1').innerHTML = localStorage.getItem('msg1')
-	}
-}
-taggg();
-
-function taggg1(txt, phone = "0") {
-	if(phone == 1)
-		if(document.getElementById('tag_phone').value == "")
-			phone = document.getElementById('tag_phone').placeholder
-		else
-			phone = document.getElementById('tag_phone').value
-	else
-		phone = ""
-	
-	if(document.getElementById('tag_id').value == "")
-		id = document.getElementById('tag_id').placeholder
-	else
-		id = document.getElementById('tag_id').value
-		
-	txt = txt + " " + id + " " + phone
-	
-	document.getElementById('tag_inp').value = txt
-}
 
 var bool = 0;	
 
@@ -1371,14 +1258,6 @@ function startTimer() {
 		document.getElementsByClassName('ant-modal-content')[0].childNodes[1].appendChild(maskBackHide)
 	}
 	
-	if(document.getElementsByClassName('expert-user_details-list')[1] != undefined)
-		for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
-			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id")
-				document.getElementById('tag_id').placeholder = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText.split(' ')[0]
-		}
-	
-	if(document.getElementsByClassName('expert-user_details-list')[0] != undefined)
-		document.getElementById('tag_phone').placeholder = document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText
 }
 setInterval(startTimer, 1000)
 
