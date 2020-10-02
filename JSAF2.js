@@ -1407,6 +1407,7 @@ const copyToClipboard1 = str => {
 async function sendAnswerTemplate2(txt) {
 	if(document.getElementById('msg1').innerHTML == "Доработать") {
 		document.getElementById('inp').value = txt
+		template_flag = 1
 		template_flag2 = 1
 	} else {
 		var values = await getInfo()
@@ -1428,6 +1429,7 @@ async function sendAnswerTemplate2(txt) {
 			  "mode": "cors",
 			  "credentials": "include"
 		});
+		template_flag = 0
 		template_flag2 = 0
 	}
 }
