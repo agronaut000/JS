@@ -1,4 +1,3 @@
-
 let mstl = document.createElement('style');
 document.body.append(mstl);
 var style = `.win_btn {
@@ -748,7 +747,12 @@ Then please write to us about the result.')
 			sendAnswer("Please specify student ID")
 	}
     document.getElementById('TW').onclick = function () {
-		sendAnswerTemplate("Программа TeamViewer (шаблон ТП)", 'jira')
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswerTemplate("Программа TeamViewer (шаблон ТП)", 'jira')
+		else 
+			sendAnswer("Please follow the link to download <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">TeamViewer</a> - a program for remote access. \n\
+After downloading launch TeamViewer and send me the ID and the password it will show.\n\
+This will help us see your screen and speed up the trouble shooting.")
 	}
     document.getElementById('internet').onclick = function () {
 		sendAnswerTemplate("Проблема с Интернетом (ТП)", "Интернет")
@@ -919,13 +923,12 @@ accuracy = b.accuracy
 			else {
 				if(flag == 1) {
 					tmpText = newText
-					
-					tmpText = tmpText.split("\"").join("\\\"")
-					txt2 = tmpText.split('\n')
-					txt3 = ""
-					txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
-					tmpText = txt3
 				}
+				tmpText = tmpText.split("\"").join("\\\"")
+				txt2 = tmpText.split('\n')
+				txt3 = ""
+				txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
+				tmpText = txt3
 				template_flag = 0
 				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
