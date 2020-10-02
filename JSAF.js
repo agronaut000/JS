@@ -1,4 +1,3 @@
-
 let mstl = document.createElement('style');
 document.body.append(mstl);
 var style = `.win_btn {
@@ -191,7 +190,11 @@ button3.innerHTML = "Info";
 let button4 = document.createElement('div');
 button4.id = 'nextTeacherIdScript';
 button4.innerHTML = "Info";
-	
+template_flag = 0
+template_flag2 = 0
+word_text = ""
+template_text = ""
+
 button2.onclick = function() {
 	if(document.getElementById('btn_hide').style.display != 'none')
 		btn_hide.click()
@@ -342,7 +345,7 @@ function move_again_AF() {
     };
 	document.getElementById('1str').ondblclick = document.getElementById('2str').ondblclick = document.getElementById('3str').ondblclick = 
 	document.getElementById('4str').ondblclick = document.getElementById('5str').ondblclick = function () {
-		if(document.getElementById('tags').style.backgroundColor != 'green')
+		if(document.getElementById('page2').style.backgroundColor != 'green')
 			if(document.getElementById('addTmp').style.display == 'none')
 				document.getElementById('addTmp').style.display = '';
 			else
@@ -495,7 +498,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 	}
     document.getElementById('twoMin').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Сейчас я вам помогу, подождите, пожалуйста.")
+			sendAnswerTemplate2("Сейчас я вам помогу, подождите, пожалуйста.")
         else
 			sendAnswer("I will help you now, please wait.")
 	}
@@ -700,8 +703,16 @@ Then please write to us about the result.')
         }
 	}
     document.getElementById('snd').onclick = function () {
-		if(document.getElementById('msg').innerHTML == "Чат")
-			sendAnswer(document.getElementById('inp').value, 0)
+		if(document.getElementById('msg').innerHTML == "Чат") {
+			if(template_flag == 1) {
+				if(template_flag2 == 1)
+					sendAnswerTemplate2(document.getElementById('inp').value, 1)
+				else
+					sendAnswerTemplate("", "", "10:00", 1, document.getElementById('inp').value, 1)
+			} else {
+				sendAnswer(document.getElementById('inp').value, 0)
+			}
+		}
 		else 
 			sendComment(document.getElementById('inp').value)
 		document.getElementById('inp').value = ""
@@ -716,38 +727,14 @@ Then please write to us about the result.')
 		const cyrillicPattern = /^[\u0400-\u04FF]+$/;
 		
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			if(cyrillicPattern.test(a[0]))
+			if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML == "Доработать")
 				txt = "Здравствуйте, " + a[0] + "!"
 			else
 				txt = "Здравствуйте!"
 		else
 			txt = "Hello!"
 		
-		if(document.getElementById('msg1').innerHTML == "Доработать")
-			document.getElementById('inp').value = txt
-		else 
-			if(values[3])
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-				refCurTimer('10:00')
-				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
-					  "headers": {
-						"accept": "*/*",
-						"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-						"cache-control": "max-age=0",
-						"content-type": "multipart/form-data; boundary=----WebKitFormBoundarymasjvc4O46a190zh",
-						"sec-fetch-dest": "empty",
-						"sec-fetch-mode": "cors",
-						"sec-fetch-site": "same-origin"
-					  },
-					  "referrer": adr,
-					  "referrerPolicy": "no-referrer-when-downgrade",
-					  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"Здравствуйте!\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
-					  "method": "POST",
-					  "mode": "cors",
-					  "credentials": "include"
-				});
-		} else 
-			sendAnswer('Hello!')
+		sendAnswerTemplate2(txt)
 	}
     document.getElementById('utoch').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -796,8 +783,7 @@ Then please write to us about the result.')
 			sendAnswer("Please specify student ID")
 	}
     document.getElementById('TW').onclick = function () {
-		sendAnswer("Пожалуйста, установите и запустите программу <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">TeamViewer</a>\n\
-Отправьте в этот чат ID и пароль, которые она покажет &mdash; это поможет мне увидеть ваш экран и разобраться с проблемой.")
+		sendAnswerTemplate("Программа TeamViewer (шаблон ТП)", 'jira')
 	}
     document.getElementById('internet').onclick = function () {
 		sendAnswer("Проверьте, пожалуйста, скорость вашего интернета по этой <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSegaAfaOTa1BepjseqAdHIINrRH5GQVVEn-LOtXhPVOjRpOQw/viewform\" target=\"_blank\" rel=\"noopener\">инструкции</a>. После отправьте сюда ссылку с результатами тестирования скорости интернета, это поможет нам в решении.")
@@ -1007,9 +993,13 @@ function taggg1(txt, phone = "0") {
 
 var bool = 0;	
 
-async function sendAnswerTemplate(template, word, time = "10:00") {
+async function sendAnswerTemplate(template, word, time = "10:00", flag = 0, newText = "", flag2 = 0) {
 	//addTimer()
-	var values = await getInfo()
+	if(flag == 1) {
+		template = template_text
+		word = word_text
+	}
+	var values = await getInfo(0)
 	adr = values[0]; adr1 = values[1]; uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
   "headers": {
@@ -1035,21 +1025,27 @@ serviceId = b.serviceId
 queryId = b.queryId
 AFsessionId = b.sessionId
 tmpText = b.text
-tmpText = tmpText.split("\"").join("\\\"")
+tmpText = tmpText.split("\+\"").join("\\\"")
 tmpText = tmpText.split("\n").join("\\n")
+tmpText = tmpText.replace("<br />",'\n')
+tmpText = tmpText.replace(/<\/?[^>a]+>/g,'')
 title = b.title
 title = title.split("\"").join("\\\"")
 accuracy = b.accuracy
 }});}).then(k => {
-		if(document.getElementById('msg1').innerHTML == "Доработать")
+		if(document.getElementById('msg1').innerHTML == "Доработать" && flag2 == 0) {
 			document.getElementById('inp').value = tmpText
-		else 
-			if(!values[3])
-				console.log('Не знаю id У')
-			else if(tmpText == "")
+			template_text = template
+			word_text = word
+			template_flag = 1
+		}
+		else if(tmpText == "")
 				console.log('Шаблон не найден')
 			else {
+				if(flag == 1)
+					tmpText = newText
 				refCurTimer(time)
+				template_flag = 0
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -1081,10 +1077,7 @@ async function sendAnswer(txt, flag = 1, time = "10:00") {
 		
 		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
 			document.getElementById('inp').value = txt
-		else 
-			if(!values[3])
-				console.log('Не знаю id У')
-			else {
+		else {
 				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
@@ -1111,9 +1104,7 @@ async function getInfo(flag1 = 1) {
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
 		sessionId = ""
-		flag = false
 		if(document.getElementById('msg1').innerHTML != "Доработать" || flag1 == 0) {
-			flag = true
 			a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
 	  "headers": {
 		"accept": "*/*",
@@ -1129,10 +1120,9 @@ async function getInfo(flag1 = 1) {
 	  "method": "GET",
 	  "mode": "cors",
 	  "credentials": "include"
-	}).then(a => b = a.json()).then(b => sessionId = b.sessionId).then(b => {if(sessionId == "")
-		flag = false});
+	}).then(a => b = a.json()).then(b => sessionId = b.sessionId);
 		}
-		return [adr, adr1, sessionId, flag]
+		return [adr, adr1, sessionId]
 }
 
 async function sendComment(txt){ 
@@ -1404,3 +1394,34 @@ const copyToClipboard1 = str => {
     document.execCommand('copy');
     document.body.removeChild(el);
 };
+
+async function sendAnswerTemplate2(txt, flag = 0) {
+	if(document.getElementById('msg1').innerHTML == "Доработать" && flag == 0) {
+		document.getElementById('inp').value = txt
+		template_flag = 1
+		template_flag2 = 1
+	} else {
+		var values = await getInfo(0)
+		refCurTimer("10:00")
+		adr = values[0]; adr1 = values[1]; uid = values[2]
+		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+			  "headers": {
+				"accept": "*/*",
+				"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+				"cache-control": "max-age=0",
+				"content-type": "multipart/form-data; boundary=----WebKitFormBoundarymasjvc4O46a190zh",
+				"sec-fetch-dest": "empty",
+				"sec-fetch-mode": "cors",
+				"sec-fetch-site": "same-origin"
+			  },
+			  "referrer": adr,
+			  "referrerPolicy": "no-referrer-when-downgrade",
+			  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt + "\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
+			  "method": "POST",
+			  "mode": "cors",
+			  "credentials": "include"
+		});
+		template_flag = 0
+		template_flag2 = 0
+	}
+}
