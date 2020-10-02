@@ -1001,7 +1001,7 @@ async function sendAnswerTemplate(template, word, time = "10:00", flag = 0, newT
 		template = template_text
 		word = word_text
 	}
-	var values = await getInfo()
+	var values = await getInfo(1)
 	adr = values[0]; adr1 = values[1]; uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
   "headers": {
@@ -1120,8 +1120,7 @@ async function getInfo(flag1 = 1) {
 	  "method": "GET",
 	  "mode": "cors",
 	  "credentials": "include"
-	}).then(a => b = a.json()).then(b => sessionId = b.sessionId).then(b => {if(sessionId == "")
-		flag1 = false});
+	}).then(a => b = a.json()).then(b => sessionId = b.sessionId);
 		}
 		return [adr, adr1, sessionId]
 }
@@ -1402,7 +1401,7 @@ async function sendAnswerTemplate2(txt, flag = 0) {
 		template_flag = 1
 		template_flag2 = 1
 	} else {
-		var values = await getInfo()
+		var values = await getInfo(1)
 		refCurTimer("10:00")
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
