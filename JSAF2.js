@@ -61,24 +61,10 @@ var win_AFhelper =
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;" id="1str">
 					<button id="languageAF" style="width:100px">Русский</button>
-					<button id="hideMenu" style="margin-left: 44px">hide</button>
-					<button id="setting" style="margin-left: 20px">S</button>
-					<button id="page1" style="margin-left: 15px; width: 20px; backgroundColor: green; ">1</button>
-					<button id="page2" style="margin-left: 5px; width: 20px;">2</button>
-				</div>
-				<div style="margin: 5px; width: 300px; display: none;" id="tag_div">
-					<input id="tag_id" placeholder="user ID" autocomplete="off" type="text" style="text-align: center; width: 125px; color: black; margin: 0px 0 5px 10px">
-					<input id="tag_phone" placeholder="phone" autocomplete="off" type="text" style="text-align: center; width: 125px; color: black;margin: 0px 0 5px 10px">
-					
-					<button id="necelevoi" style="margin: 2px">#Нецелевой</button>
-					<button id="next_chat" style="margin: 2px">#Продолжение_чата</button>
-					</br>
-					<button id="svyaz1" style="margin: 2px">#Отсутствует_связь</button>
-					<button id="svyaz2" style="margin: 2px">#Отсутствует_связь_ИС</button>
-					<button id="svyaz3" style="margin: 2px">#Отсутствует_связь_отказ</button>
-					<button id="svyaz4" style="margin: 2px">#Отсутствует_связь_без_ответа</button>
-					<textarea id="tag_inp" placeholder="Тэг" autocomplete="off" type="text" style="text-align: center; width: 200px; height = 50px; color: black;margin: 2px"></textarea>
-					<button id="tag_send" style="margin: 2px">Отправить</button>
+					<button id="hideMenu" style="margin-left: 13px">hide</button>
+					<button id="setting" style="margin-left: 13px">S</button>
+					<button id="page1" style="margin-left: 15px; width: 40px; backgroundColor: green; ">temp</button>
+					<button id="page2" style="margin-left: 5px; width: 40px;">tags</button>
 				</div>
 				<div style="margin: 5px;" id="2str">
 					<button id="helloAF">Привет</button>
@@ -113,7 +99,26 @@ var win_AFhelper =
 					<button id="thank">пока</button>
 					<button id="thanks">Спс</button>
 				</div>
+				
+				
+				<div style="margin: 5px; width: 300px; display: none;" id="tag_div1">
+					<input id="tag_id" placeholder="user ID" autocomplete="off" type="text" style="text-align: center; width: 125px; color: black; margin: 0px 0 5px 10px">
+					<input id="tag_phone" placeholder="phone" autocomplete="off" type="text" style="text-align: center; width: 125px; color: black;margin: 0px 0 5px 10px">
+					
+					<button id="necelevoi" style="margin: 2px">#Нецелевой</button>
+					<button id="next_chat" style="margin: 2px">#Продолжение_чата</button>
+					</br>
+					<button id="svyaz1" style="margin: 2px">#Отсутствует_связь</button>
+					<button id="svyaz2" style="margin: 2px">#Отсутствует_связь_ИС</button>
+					<button id="svyaz3" style="margin: 2px">#Отсутствует_связь_отказ</button>
+					<button id="svyaz4" style="margin: 2px">#Отсутствует_связь_без_ответа</button>
+				</div>
 			</span>
+			
+			<div style="margin: 5px; width: 300px; display: none;" id="tag_div2">
+				<textarea id="tag_inp" placeholder="Тэг" autocomplete="off" type="text" style="text-align: center; width: 291px; height = 50px; color: black;margin: 2px; resize: none"></textarea>
+				<button id="tag_send" style="margin: 0 0 0 110px">Отправить</button>
+			</div>
 			<div style="margin: 5px;" id="6str">
 				<button id="tmplt1_save">save</button>
 				<button id="tmplt1_snd">send</button>
@@ -335,11 +340,13 @@ function move_again_AF() {
         localStorage.setItem('winTopAF', String(Number(e.clientY - myY2)));
         localStorage.setItem('winLeftAF', String(Number(e.clientX - myX2)));
     };
-    wintAF.firstElementChild.firstElementChild.firstElementChild.ondblclick = function () {
-		if(document.getElementById('addTmp').style.display == 'none')
-			document.getElementById('addTmp').style.display = '';
-		else
-			document.getElementById('addTmp').style.display = 'none';
+	document.getElementById('1str').ondblclick = document.getElementById('2str').ondblclick = document.getElementById('3str').ondblclick = 
+	document.getElementById('4str').ondblclick = document.getElementById('5str').ondblclick = function () {
+		if(document.getElementById('page2').style.backgroundColor != 'green')
+			if(document.getElementById('addTmp').style.display == 'none')
+				document.getElementById('addTmp').style.display = '';
+			else
+				document.getElementById('addTmp').style.display = 'none';
 	}
     wintAF.firstElementChild.firstElementChild.firstElementChild.onmousedown = function (a) {
         window.myX2 = a.layerX; 
@@ -693,8 +700,16 @@ Then please write to us about the result.')
         }
 	}
     document.getElementById('snd').onclick = function () {
-		if(document.getElementById('msg').innerHTML == "Чат")
-			sendAnswer(document.getElementById('inp').value, 0)
+		if(document.getElementById('msg').innerHTML == "Чат") {
+			if(template_flag == 1) {
+				if(template_falg2 == 1)
+					sendAnswerTemplate2(document.getElementById('inp').value, 0)
+				else
+					sendAnswerTemplate("", "", "10:00", 1, document.getElementById('inp').value)
+			} else {
+				sendAnswer(document.getElementById('inp').value, 0)
+			}
+		}
 		else 
 			sendComment(document.getElementById('inp').value)
 		document.getElementById('inp').value = ""
@@ -722,23 +737,7 @@ Then please write to us about the result.')
 			if(values[3])
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 				refCurTimer('10:00')
-				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
-					  "headers": {
-						"accept": "*/*",
-						"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-						"cache-control": "max-age=0",
-						"content-type": "multipart/form-data; boundary=----WebKitFormBoundarymasjvc4O46a190zh",
-						"sec-fetch-dest": "empty",
-						"sec-fetch-mode": "cors",
-						"sec-fetch-site": "same-origin"
-					  },
-					  "referrer": adr,
-					  "referrerPolicy": "no-referrer-when-downgrade",
-					  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"Здравствуйте!\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
-					  "method": "POST",
-					  "mode": "cors",
-					  "credentials": "include"
-				});
+				sendAnswerTemplate2(txt)
 		} else 
 			sendAnswer('Hello!')
 	}
@@ -935,13 +934,17 @@ function taggg() {
 	
     document.getElementById('tag_send').onclick = function () {
 		sendComment(document.getElementById('tag_inp').value)
+		document.getElementById('tag_inp').value = ""
+		document.getElementById('tag_id').value = ""
+		document.getElementById('tag_phone').value = ""
 	}
 	
     document.getElementById('page1').onclick = function () {
 		document.getElementById('page1').style.backgroundColor = "green"
 		document.getElementById('page2').style.backgroundColor = "#768d87"
 		
-		document.getElementById('tag_div').style.display = 'none'
+		document.getElementById('tag_div1').style.display = 'none'
+		document.getElementById('tag_div2').style.display = 'none'
 		
 		document.getElementById('2str').style.display = ''
 		document.getElementById('3str').style.display = ''
@@ -954,7 +957,8 @@ function taggg() {
 		document.getElementById('page1').style.backgroundColor = "#768d87"
 		document.getElementById('page2').style.backgroundColor = "green"
 		
-		document.getElementById('tag_div').style.display = ''
+		document.getElementById('tag_div1').style.display = ''
+		document.getElementById('tag_div2').style.display = ''
 		
 		document.getElementById('2str').style.display = 'none'
 		document.getElementById('3str').style.display = 'none'
@@ -995,8 +999,12 @@ function taggg1(txt, phone = "0") {
 
 var bool = 0;	
 
-async function sendAnswerTemplate(template, word, time = "10:00") {
+async function sendAnswerTemplate(template, word, time = "10:00", flag = 0, newText = "") {
 	//addTimer()
+	if(flag == 1) {
+		template = template_flag
+		word = word_flag
+	}
 	var values = await getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
@@ -1029,14 +1037,19 @@ title = b.title
 title = title.split("\"").join("\\\"")
 accuracy = b.accuracy
 }});}).then(k => {
-		if(document.getElementById('msg1').innerHTML == "Доработать")
+		if(document.getElementById('msg1').innerHTML == "Доработать") {
 			document.getElementById('inp').value = tmpText
+			template_flag = template
+			word_flag = word
+		}
 		else 
 			if(!values[3])
 				console.log('Не знаю id У')
 			else if(tmpText == "")
 				console.log('Шаблон не найден')
 			else {
+				if(flag == 1)
+					tmpText = newText
 				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
@@ -1392,3 +1405,25 @@ const copyToClipboard1 = str => {
     document.execCommand('copy');
     document.body.removeChild(el);
 };
+
+function sendAnswerTemplate2 (txt) {
+	var values = await getInfo()
+	adr = values[0]; adr1 = values[1]; uid = values[2]
+	fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+		  "headers": {
+			"accept": "*/*",
+			"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+			"cache-control": "max-age=0",
+			"content-type": "multipart/form-data; boundary=----WebKitFormBoundarymasjvc4O46a190zh",
+			"sec-fetch-dest": "empty",
+			"sec-fetch-mode": "cors",
+			"sec-fetch-site": "same-origin"
+		  },
+		  "referrer": adr,
+		  "referrerPolicy": "no-referrer-when-downgrade",
+		  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt + "\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
+		  "method": "POST",
+		  "mode": "cors",
+		  "credentials": "include"
+	});
+}
