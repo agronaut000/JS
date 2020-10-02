@@ -67,6 +67,7 @@ var win_AFhelper =
 				</div>
 				<div style="margin: 5px;" id="2str">
 					<button id="helloAF">Привет</button>
+					<button id="necel">Нецел</button>
 					<button id="internet">Инет</button>
 					<button id="math">мат. ур</button>
 					<button id="secLine">2Л</button>
@@ -124,14 +125,11 @@ var win_AFhelper =
 					<button id="revision" style="margin: 2px">Ревизия</button>
 					<button id="serverAF" style="margin: 2px">Серверные</button>
 					<button id="mobApp">Переуст прил</button>
-					<button id="RK1" style="margin: 2px">Общ инф РК</button>
-					<button id="RK2" style="margin: 2px">Вход РК</button>
 					<button id="privateMode" style="margin: 2px">Инкогнито</button>
 					<button id="browser_clear" style="margin: 2px">Проверка браузера</button>
 					<button id="predlozh" style="margin: 2px">Предложение</button>
-					<button id="calltest">vcall-test</button>
-					<button id="vcall_2" style="margin: 2px">vcall-2</button>
 					<button id="VPN">VPN</button>
+					<button id="vcall">vcall-test</button>
 					<button id="micro">микро</button>
 					<button id="addMacAny">Mac+AnyDesk</button>
 			</div>
@@ -323,11 +321,10 @@ function move_again_AF() {
     };
 	document.getElementById('1str').ondblclick = document.getElementById('2str').ondblclick = document.getElementById('3str').ondblclick = 
 	document.getElementById('4str').ondblclick = document.getElementById('5str').ondblclick = function () {
-		if(document.getElementById('page2').style.backgroundColor != 'green')
-			if(document.getElementById('addTmp').style.display == 'none')
-				document.getElementById('addTmp').style.display = '';
-			else
-				document.getElementById('addTmp').style.display = 'none';
+		if(document.getElementById('addTmp').style.display == 'none')
+			document.getElementById('addTmp').style.display = '';
+		else
+			document.getElementById('addTmp').style.display = 'none';
 	}
     wintAF.firstElementChild.firstElementChild.firstElementChild.onmousedown = function (a) {
         window.myX2 = a.layerX; 
@@ -390,6 +387,11 @@ When our employee connects, please click \"Accept\" (<a href=\"http://joxi.ru/Q2
     document.getElementById('math').onclick = function () {
 			sendAnswer("Пересоздайте, пожалуйста, урок, для этого вам нужно войти в Мой класс - Выбрать ученика - нажать на \"Начать сейчас\", после этого из вашей адресной строки скопировать ссылку и отправить её ученику. Этот урок НЕ закрывайте в правом верхнем углу, а выйдите просто на главную страницу в личный кабинет и от туда перейдите в \"Мой класс\".")
 	}
+    document.getElementById('necel').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswerTemplate("Нецелевой запрос (шаблон ТП)", "Нецелевой запрос")
+		}
+	}
 		
     document.getElementById('thanks').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
@@ -438,17 +440,14 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('hiddenHW').style.display = 'none'
 			document.getElementById('revision').style.display = 'none'
 			document.getElementById('mobApp').style.display = 'none'
-			document.getElementById('RK1').style.display = 'none'
-			document.getElementById('RK2').style.display = 'none'
 			document.getElementById('predlozh').style.display = 'none'
-			document.getElementById('vcall_2').style.display = 'none'
-			document.getElementById('calltest').style.display = 'none'
 			document.getElementById('internet').style.display = 'none'
 			document.getElementById('mobile').style.display = 'none'
 			document.getElementById('version').style.display = 'none'
 			document.getElementById('hardReset').style.display = 'none'
 			document.getElementById('managers_tc').style.display = 'none'
 			document.getElementById('addMacAny').style.display = 'none'
+			document.getElementById('necel').style.display = 'none'
 			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
@@ -460,17 +459,14 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('hiddenHW').style.display = ''
 			document.getElementById('revision').style.display = ''
 			document.getElementById('mobApp').style.display = ''
-			document.getElementById('RK1').style.display = ''
-			document.getElementById('RK2').style.display = ''
 			document.getElementById('predlozh').style.display = ''
-			document.getElementById('vcall_2').style.display = ''
-			document.getElementById('calltest').style.display = ''
 			document.getElementById('internet').style.display = ''
 			document.getElementById('mobile').style.display = ''
 			document.getElementById('version').style.display = ''
 			document.getElementById('managers_tc').style.display = ''
 			document.getElementById('hardReset').style.display = ''
 			document.getElementById('addMacAny').style.display = ''
+			document.getElementById('necel').style.display = ''
 			document.getElementById('AF_helper').style.background = "#464451"
         }
 	}
@@ -553,8 +549,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 	
     document.getElementById('VPN').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Пожалуйста, установите VPN-расширение для браузера <a href=\"https://skyeng.ru/go/brvpn\" target=\"_blank\" rel=\"noopener\">по инструкции</a>\n\
-Затем запустите его и обновите страницу.")
+			sendAnswerTemplate("Установка VPN в браузер (шаблон ТП)", 'VPN')
 		} else {
 			sendAnswer("Please install browser VPN extension using <a href=\"http://en_faq.usedocs.com/article/14752\" target=\"_blank\" rel=\"noopener\">this instruction</a>\n\
 Then run it and refresh the page.")
@@ -590,16 +585,7 @@ Then run it and refresh the page.")
 Then please write to us about the result.")
 		}
 	}
-    document.getElementById('RK1').onclick = function () {
-		sendAnswerTemplate("Информация о разговорных клубов", "РК")
-	}
-    document.getElementById('RK2').onclick = function () {
-		sendAnswerTemplate("Как войти в РК (шаблон)", "РК")
-	}
 	
-    document.getElementById('vcall_2').onclick = function () {
-		sendAnswer("Также на этой странице есть кнопка \"Проверить динамики\", нажав на которую вы должны услышать звук")
-	}
     document.getElementById('browser_clear').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswer("Попробуйте, пожалуйста, воспользоваться следующими инструкциями, а затем проверить ещё раз\n\
@@ -628,7 +614,7 @@ And check how the platform works in it. \n\
 Then please write to us about the result.')
 	}
     document.getElementById('predlozh').onclick = function () {
-		sendAnswerTemplate("Платформа: Пожелания/Отзыв по платформе и личному кабинету", "предложение")
+		sendAnswerTemplate("Платформа: Пожелания/Отзыв по платформе и личному кабинету", "пожелание")
 	}
 
 
@@ -661,13 +647,17 @@ Then please write to us about the result.')
 			sendAnswerTemplate("Серверные проблемы (шаблон ТП)" , "Серверные")
 		else
 			sendAnswer("Please forgive me for technical problems. Our developers are already in the know and are working on a solution. Everything will work as usual soon.")
-		sendComment(document.getElementById('inp').value)
+		if(document.getElementById('msg1').innerHTML != "Доработать")
+			sendComment(document.getElementById('inp').value)
 	}
     document.getElementById('macBag').onclick = function () {
 		sendAnswerTemplate("Макобаг (ТП)", "мак")
 	}
     document.getElementById('revision').onclick = function () {
 		sendAnswerTemplate("Старая ревизия (шаблон ТП)", "ревизия")
+	}
+    document.getElementById('vcall').onclick = function () {
+		sendAnswerTemplate("Тест видеосвязи (ТП)", "тест видеосвязи")
 	}
 	
 	
@@ -719,9 +709,6 @@ Then please write to us about the result.')
 			sendAnswer("Уточните, пожалуйста, у вас остались дополнительные вопросы?")
 		else
 			sendAnswer("Do you have any additional questions?")
-	}
-    document.getElementById('calltest').onclick = function () {
-		sendAnswerTemplate("Тест видеосвязи (ТП)", "тест видеосвязи")
 	}
     document.getElementById('perevod').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
