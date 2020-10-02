@@ -1406,7 +1406,7 @@ const copyToClipboard1 = str => {
     document.body.removeChild(el);
 };
 
-function sendAnswerTemplate2 (txt) {
+async sendAnswerTemplate2 (txt) {
 	var values = await getInfo()
 	adr = values[0]; adr1 = values[1]; uid = values[2]
 	fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
