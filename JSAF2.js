@@ -1001,7 +1001,7 @@ async function sendAnswerTemplate(template, word, time = "10:00", flag = 0, newT
 		template = template_text
 		word = word_text
 	}
-	var values = await getInfo(1)
+	var values = await getInfo(0)
 	adr = values[0]; adr1 = values[1]; uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
   "headers": {
@@ -1401,7 +1401,7 @@ async function sendAnswerTemplate2(txt, flag = 0) {
 		template_flag = 1
 		template_flag2 = 1
 	} else {
-		var values = await getInfo(1)
+		var values = await getInfo(0)
 		refCurTimer("10:00")
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
