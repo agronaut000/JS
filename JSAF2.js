@@ -728,7 +728,7 @@ Then please write to us about the result.')
 		const cyrillicPattern = /^[\u0400-\u04FF]+$/;
 		
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML != "Доработать")
+			if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML == "Доработать")
 				txt = "Здравствуйте, " + a[0] + "!"
 			else
 				txt = "Здравствуйте!"
@@ -1120,7 +1120,8 @@ async function getInfo(flag1 = 1) {
 	  "method": "GET",
 	  "mode": "cors",
 	  "credentials": "include"
-	}).then(a => b = a.json()).then(b => sessionId = b.sessionId);
+	}).then(a => b = a.json()).then(b => sessionId = b.sessionId).then(b => {if(sessionId == "")
+		flag1 = false});
 		}
 		return [adr, adr1, sessionId]
 }
