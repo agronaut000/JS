@@ -735,16 +735,7 @@ Then please write to us about the result.')
 		else
 			txt = "Hello!"
 		
-		if(document.getElementById('msg1').innerHTML == "Доработать") {
-			document.getElementById('inp').value = txt
-			template_flag2 = 1
-		}
-		else 
-			if(document.getElementById('languageAF').innerHTML == "Русский") {
-					refCurTimer('10:00')
-					sendAnswerTemplate2(txt)
-			} else 
-				sendAnswer('Hello!')
+		sendAnswerTemplate2(txt)
 	}
     document.getElementById('utoch').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -1411,6 +1402,7 @@ async function sendAnswerTemplate2(txt) {
 		template_flag2 = 1
 	} else {
 		var values = await getInfo()
+		refCurTimer("10:00")
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 			  "headers": {
