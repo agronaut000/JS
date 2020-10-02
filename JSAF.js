@@ -568,7 +568,7 @@ Then run it and refresh the page.")
 	
     document.getElementById('thank').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Спасибо за обращение. Всего вам доброго!")
+			sendAnswerTemplate2("Спасибо за обращение. Всего вам доброго!")
 		} else {
 			sendAnswer("Thank you for contacting us. All the best!")
 		}
