@@ -725,7 +725,7 @@ Then please write to us about the result.')
 	}
     document.getElementById('perevod').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Соединяю со специалистом, который вам поможет. Дождитесь, пожалуйста.")
+			sendAnswerTemplate2("Соединяю со специалистом, который вам поможет. Дождитесь, пожалуйста.")
 		else
 			sendAnswer('I am connecting you with a specialist who will help you. Wait please')
 	}
