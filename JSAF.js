@@ -1,3 +1,4 @@
+
 let mstl = document.createElement('style');
 document.body.append(mstl);
 var style = `.win_btn {
@@ -708,7 +709,7 @@ Then please write to us about the result.')
 				if(template_flag2 == 1)
 					sendAnswerTemplate2(document.getElementById('inp').value, 1)
 				else
-					sendAnswerTemplate("", "", "10:00", 1, document.getElementById('inp').value, 1)
+					sendAnswerTemplate("", "", 1, document.getElementById('inp').value, 1)
 			} else {
 				sendAnswer(document.getElementById('inp').value, 0)
 			}
@@ -993,8 +994,9 @@ function taggg1(txt, phone = "0") {
 
 var bool = 0;	
 
-async function sendAnswerTemplate(template, word, time = "10:00", flag = 0, newText = "", flag2 = 0) {
+async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 = 0) {
 	//addTimer()
+	time = "10:00"
 	if(flag == 1) {
 		template = template_text
 		word = word_text
@@ -1025,7 +1027,6 @@ serviceId = b.serviceId
 queryId = b.queryId
 AFsessionId = b.sessionId
 tmpText = b.text
-tmpText = tmpText.split("\+\"").join("\\\"")
 tmpText = tmpText.split("\n").join("\\n")
 tmpText = tmpText.replace("<br />",'\n')
 tmpText = tmpText.replace(/<\/?[^>a]+>/g,'')
@@ -1045,11 +1046,14 @@ accuracy = b.accuracy
 				if(flag == 1) {
 					tmpText = newText
 					
-					tmpText = tmpText.split("\+\"").join("\\\"")
-					tmpText = tmpText.split("\n").join("\\n")
+					tmpText = tmpText.split("\"").join("\\\"")
+					txt2 = tmpText.split('\n')
+					txt3 = ""
+					txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
+					tmpText = txt3
 				}
-				refCurTimer(time)
 				template_flag = 0
+				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
