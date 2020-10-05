@@ -872,6 +872,8 @@ This will help us see your screen and speed up the trouble shooting.")
 	}
 	loginer.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
 	document.getElementById('page1_button').style.backgroundColor = 'green'
+	
+	user = "student"
 }
 
 move_again_AF();
