@@ -1,4 +1,3 @@
-
 let mstl = document.createElement('style');
 document.body.append(mstl);
 var style = `.win_btn {
@@ -61,64 +60,79 @@ var win_AFhelper =
 			<span style="cursor: -webkit-grab;">
 				<div style="margin: 5px;" id="1str">
 					<button id="languageAF" style="width:100px">Русский</button>
-					<button id="hideMenu" style="margin-left: 13px">hide</button>
-					<button id="setting" style="margin-left: 13px">S</button>
-					<button id="page1" style="margin-left: 15px; width: 40px; backgroundColor: green; ">temp</button>
-					<button id="page2" style="margin-left: 5px; width: 40px;">tags</button>
+					<button id="hideMenu" style="margin-left: 50px">hide</button>
+					<button id="setting" style="margin-left: 80px">S</button>
 				</div>
-				<div style="margin: 5px;" id="2str">
-					<button id="helloAF">Привет</button>
-					<button id="min">Минуту</button>
-					<button id="internet">Инет</button>
-					<button id="math">мат. ур</button>
-					<button id="secLine">2Л</button>
-					<button id="twoMin">Помогу</button>
+				<div style="margin: 5px;" id="pages">
+					<button id="page1_button">Шаблоны</button>
+					<button id="page2_button">Баги</button>
+					<button id="page3_button">Переводы</button>
 				</div>
-				<div style="margin: 5px;" id="3str">
-					<button id="utoch">Доп впр</button>
-					<button id="bag">Подождите</button>
-					<button id="idU">ID У</button>
-					<button id="screen">скрин</button>
-					<button id="cacheTmp">кэш</button>
+				<div id="page1">
+					<div style="margin: 5px;" id="2str">
+						<button id="helloAF">Привет</button>
+						<button id="necel">Нецел</button>
+						<button id="internet">Инет</button>
+						<button id="math">мат. ур</button>
+						<button id="secLine">2Л</button>
+						<button id="twoMin">Помогу</button>
+					</div>
+					<div style="margin: 5px;" id="3str">
+						<button id="utoch">Доп впр</button>
+						<button id="bag">Подождите</button>
+						<button id="idU">ID У</button>
+						<button id="screen">скрин</button>
+						<button id="cacheTmp">кэш</button>
+					</div>
+					<div style="margin: 5px;" id="4str">
+						<button id="NS">урок NS</button>
+						<button id="perevod">Др отд</button>
+						<button id="hardReset">HRes</button>
+						<button id="TW">TW</button>
+						<button id="anydesk">AD</button>
+					</div>
+					<div style="margin: 5px;" id="5str">
+						<button id="engConv">англ</button>
+						<button id="browser">ус+брауз</button>
+						<button id="bag1">баг</button>
+						<button id="version">vers</button>
+						<button id="mobile">в моб</button>
+						<button id="thank">пока</button>
+						<button id="thanks">Спс</button>
+					</div>
 				</div>
-				<div style="margin: 5px;" id="4str">
-					<button id="NS">урок NS</button>
-					<button id="perevod">Др отд</button>
-					<button id="managers_sc">SC</button>
-					<button id="managers_tc">TC</button>
-					<button id="hardReset">HRes</button>
-					<button id="TW">TW</button>
-					<button id="anydesk">AD</button>
+				<div style="margin: 5px; display: none" id="page_bags">	
+					<p style="color:white; margin: 0 0 5px 0">Нет сроков и альтернатив: <button style="width: 20px;" id="bagg11">1</button> <button style="width: 20px;" id="bagg12">2</button> </p>
+					<p style="color:white; margin: 0 0 5px 0">Повторное обращение: <button style="width: 20px;" id="bagg21">1</button> <button style="width: 20px;" id="bagg22">2</button> <button style="width: 20px;" id="bagg23">3</button></p>
+					<p style="color:white; margin: 0 0 5px 0">Проблема с ДЗ: <button style="width: 20px;" id="bagg31">1</button> <button style="width: 20px;" id="bagg32">2</button> <button style="width: 20px;" id="bagg33">3</button> </p>
+					<p style="color:white; margin: 0 0 5px 0">Проблема с медиа-контентом: <button style="width: 20px;" id="bagg41">1</button> <button style="width: 20px;" id="bagg42">2</button></p>
+					<p style="color:white; margin: 0 0 5px 0">Проблема с заметками: <button style="width: 20px;" id="bagg51">1</button> <button style="width: 20px;" id="bagg52">2</button> <button style="width: 20px;" id="bagg53">3</button></p>
+					<p style="color:white; margin: 0 0 5px 0">Передача в QA: <button style="width: 20px;" id="qa1">1</button> <button style="width: 20px;" id="qa2">2</button></p>
 				</div>
-				<div style="margin: 5px;" id="5str">
-					<button id="engConv">англ</button>
-					<button id="browser">ус+брауз</button>
-					<button id="bag1">баг</button>
-					<button id="version">vers</button>
-					<button id="mobile">в моб</button>
-					<button id="thank">пока</button>
-					<button id="thanks">Спс</button>
-				</div>
-				
-				
-				<div style="margin: 5px; width: 300px; display: none;" id="tag_div1">
-					<input id="tag_id" placeholder="user ID" autocomplete="off" type="text" style="text-align: center; width: 125px; color: black; margin: 0px 0 5px 10px">
-					<input id="tag_phone" placeholder="phone" autocomplete="off" type="text" style="text-align: center; width: 125px; color: black;margin: 0px 0 5px 10px">
-					
-					<button id="necelevoi" style="margin: 2px">#Нецелевой</button>
-					<button id="next_chat" style="margin: 2px">#Продолжение_чата</button>
-					</br>
-					<button id="svyaz1" style="margin: 2px">#Отсутствует_связь</button>
-					<button id="svyaz2" style="margin: 2px">#Отсутствует_связь_ИС</button>
-					<button id="svyaz3" style="margin: 2px">#Отсутствует_связь_отказ</button>
-					<button id="svyaz4" style="margin: 2px">#Отсутствует_связь_без_ответа</button>
+				<div style="display: none" id="page_transf">
+					<div style="margin: 5px;">
+						<input id="phone_tr" placeholder="Телефон" autocomplete="off" type="text" style="text-align: center; width: 100px; color: black; margin-left: 10px">
+						<input id="email_tr" placeholder="Почта" autocomplete="off" type="text" style="text-align: center; width: 150px; color: black;  margin-left: 10px">
+					</div>
+					<div style="margin: 5px;">
+						<button id="secLineNoww">2Л-сейчас?</button>
+						<button id="secLineNow">2Л</button>
+						<button id="secLineCall">2Л-калик?</button>
+						<button id="secLineCal">2Л</button>
+						<button id="bagSecLine">Баг-2Л</button> 
+					</div>
+					<div style="margin: 5px;">
+						<button id="mobDevice">Устр</button>
+						<button id="mobCrit">Моб-крит</button>
+						<button id="mobHigh">Моб-высок</button>
+						<button id="mobMinor">Моб-минор</button>
+					</div>
+					<div style="margin: 5px;">
+						<button id="managers_sc">SC</button>
+						<button id="managers_tc">TC</button>
+					</div>
 				</div>
 			</span>
-			
-			<div style="margin: 5px; width: 300px; display: none;" id="tag_div2">
-				<textarea id="tag_inp" placeholder="Тэг" autocomplete="off" type="text" style="text-align: center; width: 291px; height = 50px; color: black;margin: 2px; resize: none"></textarea>
-				<button id="tag_send" style="margin: 0 0 0 110px">Отправить</button>
-			</div>
 			<div style="margin: 5px;" id="6str">
 				<button id="tmplt1_save">save</button>
 				<button id="tmplt1_snd">send</button>
@@ -144,20 +158,14 @@ var win_AFhelper =
 					<button id="hiddenHW" style="margin: 2px">Скрытое ДЗ</button>
 					<button id="revision" style="margin: 2px">Ревизия</button>
 					<button id="serverAF" style="margin: 2px">Серверные</button>
-					<button id="mobApp">Переуст прил</button>
-					<button id="RK1" style="margin: 2px">Общ инф РК</button>
-					<button id="RK2" style="margin: 2px">Вход РК</button>
 					<button id="privateMode" style="margin: 2px">Инкогнито</button>
 					<button id="browser_clear" style="margin: 2px">Проверка браузера</button>
 					<button id="predlozh" style="margin: 2px">Предложение</button>
-					<button id="calltest">vcall-test</button>
-					<button id="vcall_2" style="margin: 2px">vcall-2</button>
 					<button id="VPN">VPN</button>
+					<button id="vcall">vcall-test</button>
 					<button id="micro">микро</button>
-					<button id="addMacAny">Mac+AnyDesk</button>
+					<button id="addMacTW">Mac+TW</button>
 			</div>
-		</div>
-		<div style="border: 2px double black; display: ; background-color: #464451" id="tags">
 		</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="set_bar">
 			<div style="margin: 5px; width: 300px">
@@ -346,11 +354,10 @@ function move_again_AF() {
     };
 	document.getElementById('1str').ondblclick = document.getElementById('2str').ondblclick = document.getElementById('3str').ondblclick = 
 	document.getElementById('4str').ondblclick = document.getElementById('5str').ondblclick = function () {
-		if(document.getElementById('page2').style.backgroundColor != 'green')
-			if(document.getElementById('addTmp').style.display == 'none')
-				document.getElementById('addTmp').style.display = '';
-			else
-				document.getElementById('addTmp').style.display = 'none';
+		if(document.getElementById('addTmp').style.display == 'none')
+			document.getElementById('addTmp').style.display = '';
+		else
+			document.getElementById('addTmp').style.display = 'none';
 	}
     wintAF.firstElementChild.firstElementChild.firstElementChild.onmousedown = function (a) {
         window.myX2 = a.layerX; 
@@ -389,9 +396,6 @@ function move_again_AF() {
 		document.getElementById('sound_adr').value = "";
 	}
 		
-    document.getElementById('managers_sc').onclick = function () {
-			sendAnswer("Вы написали в техподдержку школы. Если вопрос связан с учениками, вам в чат личного кабинета \"Managers (Student Care)\".")
-	}
     document.getElementById('anydesk').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswer("Пожалуйста, установите и запустите программу \"AnyDesk\" — она поможет мне увидеть ваш экран и быстрее решить вопрос.\n\
@@ -413,10 +417,15 @@ When our employee connects, please click \"Accept\" (<a href=\"http://joxi.ru/Q2
     document.getElementById('math').onclick = function () {
 			sendAnswer("Пересоздайте, пожалуйста, урок, для этого вам нужно войти в Мой класс - Выбрать ученика - нажать на \"Начать сейчас\", после этого из вашей адресной строки скопировать ссылку и отправить её ученику. Этот урок НЕ закрывайте в правом верхнем углу, а выйдите просто на главную страницу в личный кабинет и от туда перейдите в \"Мой класс\".")
 	}
+    document.getElementById('necel').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswerTemplate("Нецелевой запрос (шаблон ТП)", "Нецелевой запрос")
+		}
+	}
 		
     document.getElementById('thanks').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Спасибо за ожидание")
+			sendAnswerTemplate2("Спасибо за ожидание.")
         } else {
 			sendAnswer("Thanks for waiting")
         }
@@ -434,18 +443,13 @@ And then reboot the device and check again, if nothing changes, please write to 
 			sendAnswer("Спасибо за ответ. Я всё передал коллегам из поддержки мобильных приложений. Пожалуйста, ожидайте их ответа в течение суток, он придет на вашу почту.")
         }
 	}
-    document.getElementById('managers_tc').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Я передал обращение в отдел заботы о преподавателях. С вами свяжется наш специалист по почте и поможет с решением этого вопроса. Пожалуйста, ожидайте")
-        }
-	}
-    document.getElementById('addMacAny').onclick = function () {
+    document.getElementById('addMacTW').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswer("1) Откройте Системные настройки в меню Apple.\n\
 2) Зайдите в Защита и безопасность.\n\
 3) Перейдите на вкладку Конфиденциальность.\n\
 4) В колонке слева выберите \"Универсальный доступ\".\n\
-5) Поставьте галочки рядом с программой Anydesk")
+5) Поставьте галочки рядом с программой TeamViewer")
         }
 	}
 	
@@ -453,47 +457,39 @@ And then reboot the device and check again, if nothing changes, please write to 
     document.getElementById('languageAF').onclick = function () {
         if(this.innerHTML == "Русский") {
             this.innerHTML = "Английский";
-			document.getElementById('TW').style.display = 'none'
 			document.getElementById('cacheSafari').style.display = 'none'
+			document.getElementById('nedozvonU').style.display = 'none'
 			document.getElementById('math').style.display = 'none'
 			document.getElementById('managers_sc').style.display = 'none'
 			document.getElementById('macBag').style.display = 'none'
 			document.getElementById('hiddenHW').style.display = 'none'
 			document.getElementById('revision').style.display = 'none'
-			document.getElementById('mobApp').style.display = 'none'
-			document.getElementById('RK1').style.display = 'none'
-			document.getElementById('RK2').style.display = 'none'
 			document.getElementById('predlozh').style.display = 'none'
-			document.getElementById('vcall_2').style.display = 'none'
-			document.getElementById('calltest').style.display = 'none'
 			document.getElementById('internet').style.display = 'none'
 			document.getElementById('mobile').style.display = 'none'
 			document.getElementById('version').style.display = 'none'
 			document.getElementById('hardReset').style.display = 'none'
 			document.getElementById('managers_tc').style.display = 'none'
 			document.getElementById('addMacAny').style.display = 'none'
+			document.getElementById('necel').style.display = 'none'
 			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
-			document.getElementById('TW').style.display = ''
 			document.getElementById('managers_sc').style.display = ''
+			document.getElementById('nedozvonU').style.display = ''
 			document.getElementById('cacheSafari').style.display = ''
 			document.getElementById('math').style.display = ''
 			document.getElementById('macBag').style.display = ''
 			document.getElementById('hiddenHW').style.display = ''
 			document.getElementById('revision').style.display = ''
-			document.getElementById('mobApp').style.display = ''
-			document.getElementById('RK1').style.display = ''
-			document.getElementById('RK2').style.display = ''
 			document.getElementById('predlozh').style.display = ''
-			document.getElementById('vcall_2').style.display = ''
-			document.getElementById('calltest').style.display = ''
 			document.getElementById('internet').style.display = ''
 			document.getElementById('mobile').style.display = ''
 			document.getElementById('version').style.display = ''
 			document.getElementById('managers_tc').style.display = ''
 			document.getElementById('hardReset').style.display = ''
 			document.getElementById('addMacAny').style.display = ''
+			document.getElementById('necel').style.display = ''
 			document.getElementById('AF_helper').style.background = "#464451"
         }
 	}
@@ -576,8 +572,7 @@ And then reboot the device and check again, if nothing changes, please write to 
 	
     document.getElementById('VPN').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Пожалуйста, установите VPN-расширение для браузера <a href=\"https://skyeng.ru/go/brvpn\" target=\"_blank\" rel=\"noopener\">по инструкции</a>\n\
-Затем запустите его и обновите страницу.")
+			sendAnswerTemplate("Установка VPN в браузер (шаблон ТП)", 'VPN')
 		} else {
 			sendAnswer("Please install browser VPN extension using <a href=\"http://en_faq.usedocs.com/article/14752\" target=\"_blank\" rel=\"noopener\">this instruction</a>\n\
 Then run it and refresh the page.")
@@ -599,30 +594,20 @@ Then run it and refresh the page.")
 	
     document.getElementById('thank').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Благодарю вас за обращение. Всего доброго!")
+			sendAnswerTemplate2("Спасибо за обращение. Всего вам доброго!")
 		} else {
 			sendAnswer("Thank you for contacting us. All the best!")
 		}
 	}
     document.getElementById('micro').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Проверьте, пожалуйста, настройки микрофона следуя <a href=\"http://faq.usedocs.com/article/7648\" target=\"_blank\" rel=\"noopener\">этой инструкции</a> \n\
-Затем, пожалуйста, напишите нам о результате")
+			sendAnswerTemplate('Настройка микрофона в системе (Windows/OS X) (шаблон ТП)', 'Настройка микрофона в системе (Windows/OS X) (шаблон ТП)')
 		} else {
 			sendAnswer("Please check your microphone settings using <a href=\"http://en_faq.usedocs.com/article/14747\" target=\"_blank\" rel=\"noopener\">this instruction</a> \n\
 Then please write to us about the result.")
 		}
 	}
-    document.getElementById('RK1').onclick = function () {
-		sendAnswerTemplate("Информация о разговорных клубов", "РК")
-	}
-    document.getElementById('RK2').onclick = function () {
-		sendAnswerTemplate("Как войти в РК (шаблон)", "РК")
-	}
 	
-    document.getElementById('vcall_2').onclick = function () {
-		sendAnswer("Также на этой странице есть кнопка \"Проверить динамики\", нажав на которую вы должны услышать звук")
-	}
     document.getElementById('browser_clear').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswer("Попробуйте, пожалуйста, воспользоваться следующими инструкциями, а затем проверить ещё раз\n\
@@ -651,7 +636,7 @@ And check how the platform works in it. \n\
 Then please write to us about the result.')
 	}
     document.getElementById('predlozh').onclick = function () {
-		sendAnswerTemplate("Платформа: Пожелания/Отзыв по платформе и личному кабинету", "предложение")
+		sendAnswerTemplate("Платформа: Пожелания/Отзыв по платформе и личному кабинету", "пожелание")
 	}
 
 
@@ -666,10 +651,8 @@ Then please write to us about the result.')
 	}
     document.getElementById('nedozvonU').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Напишите, пожалуйста, повторно в этот чат позже или попросите ученика написать в чат Support самостоятельно в удобное для него время и мы свяжемся с ним")
-		} else {
-			sendAnswer("Please write again to this chat later or ask a student to write Support chat on their own at a convenient time for him and we will contact him")
-		}
+			sendAnswer("Не удалось дозвониться до ученика. Попросите, пожалуйста, ученика самостоятельно написать в Support Chat <a href=\"http://joxi.ru/eAOopwaTkaQolA\" target=\"_blank\" rel=\"noopener\">вот так</a>. Мы обязательно поможем")
+		} 
 	}
 	
 	
@@ -684,13 +667,17 @@ Then please write to us about the result.')
 			sendAnswerTemplate("Серверные проблемы (шаблон ТП)" , "Серверные")
 		else
 			sendAnswer("Please forgive me for technical problems. Our developers are already in the know and are working on a solution. Everything will work as usual soon.")
-		sendComment(document.getElementById('inp').value)
+		if(document.getElementById('msg1').innerHTML != "Доработать")
+			sendComment(document.getElementById('inp').value)
 	}
     document.getElementById('macBag').onclick = function () {
 		sendAnswerTemplate("Макобаг (ТП)", "мак")
 	}
     document.getElementById('revision').onclick = function () {
 		sendAnswerTemplate("Старая ревизия (шаблон ТП)", "ревизия")
+	}
+    document.getElementById('vcall').onclick = function () {
+		sendAnswerTemplate("Тест видеосвязи (ТП)", "тест видеосвязи")
 	}
 	
 	
@@ -709,7 +696,7 @@ Then please write to us about the result.')
 				if(template_flag2 == 1)
 					sendAnswerTemplate2(document.getElementById('inp').value, 1)
 				else
-					sendAnswerTemplate("", "", "10:00", 1, document.getElementById('inp').value, 1)
+					sendAnswerTemplate("", "", 1, document.getElementById('inp').value, 1)
 			} else {
 				sendAnswer(document.getElementById('inp').value, 0)
 			}
@@ -743,12 +730,9 @@ Then please write to us about the result.')
 		else
 			sendAnswer("Do you have any additional questions?")
 	}
-    document.getElementById('calltest').onclick = function () {
-		sendAnswerTemplate("Тест видеосвязи (ТП)", "тест видеосвязи")
-	}
     document.getElementById('perevod').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Соединяю со специалистом, который вам поможет. Дождитесь, пожалуйста.")
+			sendAnswerTemplate2("Соединяю со специалистом, который вам поможет. Дождитесь, пожалуйста.")
 		else
 			sendAnswer('I am connecting you with a specialist who will help you. Wait please')
 	}
@@ -760,7 +744,7 @@ Then please write to us about the result.')
 	}
     document.getElementById('bag').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Подождите, пожалуйста, сейчас я проверю и отвечу вам")
+			sendAnswerTemplate2("Подождите, пожалуйста, несколько минут — я вам помогу.")
 		else 
 			sendAnswer("Wait please. Now I will check and answer you.")
 	}
@@ -784,20 +768,18 @@ Then please write to us about the result.')
 			sendAnswer("Please specify student ID")
 	}
     document.getElementById('TW').onclick = function () {
-		sendAnswer("Пожалуйста, установите и запустите программу <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">TeamViewer</a>\n\
-Отправьте в этот чат ID и пароль, которые она покажет &mdash; это поможет мне увидеть ваш экран и разобраться с проблемой.")
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			sendAnswerTemplate("Программа TeamViewer (шаблон ТП)", 'jira')
+		else 
+			sendAnswer("Please follow the link to download <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">TeamViewer</a> - a program for remote access. \n\
+After downloading launch TeamViewer and send me the ID and the password it will show.\n\
+This will help us see your screen and speed up the trouble shooting.")
 	}
     document.getElementById('internet').onclick = function () {
-		sendAnswer("Проверьте, пожалуйста, скорость вашего интернета по этой <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSegaAfaOTa1BepjseqAdHIINrRH5GQVVEn-LOtXhPVOjRpOQw/viewform\" target=\"_blank\" rel=\"noopener\">инструкции</a>. После отправьте сюда ссылку с результатами тестирования скорости интернета, это поможет нам в решении.")
+		sendAnswerTemplate("Проблема с Интернетом (ТП)", "Интернет")
 	}
     document.getElementById('engConv').onclick = function () {
 		sendAnswerTemplate("Общение на англ (шаблон)", "общение на англ")
-	}
-    document.getElementById('min').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Пару минут, пожалуйста")
-		else 
-			sendAnswer("A few minutes please")
 	}
 	
     document.getElementById('screen').onclick = function () {
@@ -806,16 +788,6 @@ Then please write to us about the result.')
 		else 
 			sendAnswer("Please send a link to a screenshot of your problem and we will help you. To quickly create a screenshot, you can use <a href=\"http://skyeng.ru/go/prnt\" target=\"_blank\" rel=\"noopener\">this service</a>&nbsp")
 		
-	}
-	
-    document.getElementById('mobApp').onclick = function () {
-		sendAnswer("Чтобы исправить неполадку, пожалуйста, воспользуйтесь следующей инструкцией:\n\
-1.Закрыть все приложения на устройстве.\n\
-2.Удалить приложение Skyeng.\n\
-3.Установить приложение Skyeng.\n\
-4.Не открывать приложение.\n\
-5.Перезапустить устройство(выключение/включение).\n\
-После этого, пожалуйста, проверьте приложение ещё раз")
 	}
     document.getElementById('NS').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -902,101 +874,313 @@ Then please write to us about the result.')
 		document.addEventListener('mousemove', listener3);
 	}
 	loginer.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
-	
-	document.getElementById('page1').style.backgroundColor = 'green'
+	document.getElementById('page1_button').style.backgroundColor = 'green'
 }
 
 move_again_AF();
 
-function taggg() {
-    document.getElementById('necelevoi').onclick = function () {
-		taggg1("#Нецелевой")
+function pages() {
+	document.getElementById('page1_button').onclick = function() {
+		document.getElementById('page1_button').style.backgroundColor = 'green'
+		document.getElementById('page2_button').style.backgroundColor = '#768d87'
+		document.getElementById('page3_button').style.backgroundColor = '#768d87'
+		
+		document.getElementById('page1').style.display = ''
+		document.getElementById('page_bags').style.display = 'none'
+		document.getElementById('page_transf').style.display = 'none'
 	}
-    document.getElementById('next_chat').onclick = function () {
-		taggg1("#Продолжение_чата")
+	document.getElementById('page2_button').onclick = function() {
+		document.getElementById('page1_button').style.backgroundColor = '#768d87'
+		document.getElementById('page2_button').style.backgroundColor = 'green'
+		document.getElementById('page3_button').style.backgroundColor = '#768d87'
+		
+		document.getElementById('page1').style.display = 'none'
+		document.getElementById('page_bags').style.display = ''
+		document.getElementById('page_transf').style.display = 'none'
 	}
-    document.getElementById('svyaz1').onclick = function () {
-		taggg1("#Отсутствует_связь")
-	}
-    document.getElementById('svyaz2').onclick = function () {
-		taggg1("#Отсутствует_связь_ИС", 1)
-	}
-    document.getElementById('svyaz3').onclick = function () {
-		taggg1("#Отсутствует_связь_отказ", 1)
-	}
-    document.getElementById('svyaz4').onclick = function () {
-		taggg1("#Отсутствует_связь_без_ответа", 1)
+	document.getElementById('page3_button').onclick = function() {
+		document.getElementById('page1_button').style.backgroundColor = '#768d87'
+		document.getElementById('page2_button').style.backgroundColor = '#768d87'
+		document.getElementById('page3_button').style.backgroundColor = 'green'
+		
+		document.getElementById('page1').style.display = 'none'
+		document.getElementById('page_bags').style.display = 'none'
+		document.getElementById('page_transf').style.display = ''
 	}
 	
-    document.getElementById('tag_send').onclick = function () {
-		sendComment(document.getElementById('tag_inp').value)
-		document.getElementById('tag_inp').value = ""
-		document.getElementById('tag_id').value = ""
-		document.getElementById('tag_phone').value = ""
+}
+pages()
+
+function perevod() {
+	function secondLine() {
+		document.getElementById('secLineCall').onclick = function() {
+			document.getElementById('inp').value = "Простите, сейчас нет возможности провести проверку. Подскажите, пожалуйста, вам будет удобно если специалист свяжется с вами в (время по МСК) для проведения более детальной проверки?"
+		}
+		document.getElementById('secLineCal').onclick = function() {
+			if(user == "student") {
+				if(document.getElementById('phone_tr').innerText == "")
+					phone = document.getElementById('phone_tr').placeholder
+				else
+					phone = document.getElementById('phone_tr').innerText
+				
+				if(phone == "Телефон")
+					document.getElementById('inp').value = "Введите номер телефона"
+				else
+					if(document.getElementById('languageAF').innerHTML == "Русский") {
+						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
+Пожалуйста, запустите TeamViewer и продиктуйте специалисту ID и пароль, которые будут в открывшемся окне.\n\
+Программа поможет увидеть ваш экран и ускорит решение вопроса.\n\
+Сотрудник позвонит вам на ваш номер, указанный в заявке: " + phone
+					}
+			} else {
+						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
+Пожалуйста, запустите TeamViewer и продиктуйте специалисту ID и пароль, которые будут в открывшемся окне.\n\
+Программа поможет увидеть ваш экран и ускорит решение вопроса.\n\
+Сотрудник напишет вам в Slack"
+			}
+		}
+		document.getElementById('secLineNoww').onclick = function() {
+			document.getElementById('inp').value = "Простите, пожалуйста, не получается быстро настроить связь, могу ли я перевести вас на опытного специалиста, который сможет помочь вам?"
+		}
+		document.getElementById('secLineNow').onclick = function() {
+			if(user == "student") {
+				if(document.getElementById('phone_tr').innerText == "")
+					phone = document.getElementById('phone_tr').placeholder
+				else
+					phone = document.getElementById('phone_tr').innerText
+				
+				if(phone == "Телефон")
+					document.getElementById('inp').value = "Введите номер телефона"
+				else
+					if(document.getElementById('languageAF').innerHTML == "Русский") {
+						document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
+Загрузить её можно <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
+После загрузки запустите TeamViewer и ожидайте звонок.\n\
+\n\
+Сотрудник позвонит вам на ваш номер " + phone + " в течение 15 минут.\n\
+Спасибо за ваше обращение"
+					}
+			} else {
+				if(document.getElementById('languageAF').innerHTML == "Русский") {
+					document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
+Загрузить её можно <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
+После загрузки запустите TeamViewer и ожидайте звонок.\n\
+\n\
+Сотрудник напишет вам в Slack в течение 15 минут.\n\
+Спасибо за ваше обращение"
+				}
+				
+			}
+		}	
+		document.getElementById('bagSecLine').onclick = function() {
+			if(document.getElementById('phone_tr').innerText == "")
+				phone = document.getElementById('phone_tr').placeholder
+			else
+				phone = document.getElementById('phone_tr').innerText
+			
+			if(phone == "Телефон")
+				document.getElementById('inp').value = "Введите номер телефона"
+			else {
+				if(document.getElementById('email_tr').innerText == "")
+					email = document.getElementById('email_tr').placeholder
+				else
+					email = document.getElementById('email_tr').innerText
+				
+				if(email == "Почта")
+					document.getElementById('inp').value = "Введите почту"
+				else {
+					if(document.getElementById('languageAF').innerHTML == "Русский") {
+						document.getElementById('inp').value = "Спасибо за ожидание\n\
+\n\
+Я передам ваше обращение специалисту по этому вопросу. После проверки он отправит ответ на вашу почту " + email + ", если понадобится дополнительная информация, свяжется с вами по номеру " + phone + "\n\
+Был рад с вами пообщаться."
+					} else {
+						
+					}
+				}
+			}
+		}
+	}
+	secondLine()
+	function mobile() {
+		document.getElementById('mobDevice').onclick = function() {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				sendAnswer("Уточните, пожалуйста, модель вашего устройства и версию приложения.\n\
+Если вы пишете из мобильного приложения, то скопировать информацию можно через кнопку «Написать разработчикам».")
+			} else {
+				
+			}
+		}
+		document.getElementById('mobCrit').onclick = function() {
+			if(document.getElementById('phone_tr').innerText == "")
+				phone = document.getElementById('phone_tr').placeholder
+			else
+				phone = document.getElementById('phone_tr').innerText
+			
+			if(phone == "Телефон")
+				document.getElementById('inp').value = "Введите номер телефона"
+			else
+				if(document.getElementById('languageAF').innerHTML == "Русский") {
+					sendAnswer("Спасибо за ответ. Я сам не смогу вам помочь в полной мере, мне нужно передать запрос компетентному специалисту из мобильной поддержки, который свяжется с вами в течение 8 минут по телефону " + phone + " и поможет решить неполадку.")
+				} else {
+					
+				}
+		}
+		
+		document.getElementById('mobHigh').onclick = function() {
+			if(document.getElementById('email_tr').innerText == "")
+				email = document.getElementById('email_tr').placeholder
+			else
+				email = document.getElementById('email_tr').innerText
+			
+			if(email == "Почта")
+				document.getElementById('inp').value = "Введите почту"
+			else
+				if(document.getElementById('languageAF').innerHTML == "Русский") {
+					sendAnswer("Спасибо за ответ. Я всю информацию передал коллегам из поддержки мобильных приложений. Пожалуйста, ожидайте их ответа в течение часа, он придет на вашу почту " + email)
+				} else {
+					
+				}
+		}
+		
+		document.getElementById('mobMinor').onclick = function() {
+			if(document.getElementById('email_tr').innerText == "")
+				email = document.getElementById('email_tr').placeholder
+			else
+				email = document.getElementById('email_tr').innerText
+			
+			if(email == "Почта")
+				document.getElementById('inp').value = "Введите почту"
+			else
+				if(document.getElementById('languageAF').innerHTML == "Русский") {
+					sendAnswer("Спасибо за ответ. Я всю информацию передал коллегам из поддержки мобильных приложений. Они свяжутся с вами по почте " + email)
+				} else {
+					
+				}
+		}
+	}
+	mobile()
+	function utc() {
+		document.getElementById('managers_tc').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				if(document.getElementById('email_tr').innerText == "")
+					email = document.getElementById('email_tr').placeholder
+				else
+					email = document.getElementById('email_tr').innerText
+				sendAnswer("Я передал обращение в отдел заботы о преподавателях. С вами свяжется наш специалист по почте " + email + " и поможет с решением этого вопроса. \n\
+Если в течение суток вы не получите ответа, пожалуйста, напишите в этот чат ещё раз, мы всё проверим.")
+			}
+		}
+		
+		document.getElementById('managers_sc').onclick = function () {
+			sendAnswer("Вы написали в техподдержку школы. Если вопрос связан с учениками, пожалуйста, напишите в чат \"Managers (Student Care)\".")
+		}
+	}
+	utc()
+}
+perevod()
+
+function bagggs() {
+	document.getElementById('bagg11').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Спасибо за ожидание.\n\
+Я проверил (краткое описание бага, с которым пришел клиент), причина - неполадки с нашей стороны. Все подробности передал разработчикам."
+		}
+	}
+	document.getElementById('bagg12').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Извините за эти сложности, понимаю, что подобные нюансы не скрашивают процесс обучения. Со своей стороны мы делаем все, чтобы они случались как можно реже.\n\
+Спасибо за понимание."
+		}
 	}
 	
-    document.getElementById('page1').onclick = function () {
-		document.getElementById('page1').style.backgroundColor = "green"
-		document.getElementById('page2').style.backgroundColor = "#768d87"
-		
-		document.getElementById('tag_div1').style.display = 'none'
-		document.getElementById('tag_div2').style.display = 'none'
-		
-		document.getElementById('2str').style.display = ''
-		document.getElementById('3str').style.display = ''
-		document.getElementById('4str').style.display = ''
-		document.getElementById('5str').style.display = ''
-		document.getElementById('6str').style.display = ''
-		document.getElementById('7str').style.display = ''
+	document.getElementById('bagg21').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Извините, что решение затягивается и полностью вас понимаю. Однако вижу, что вопрос уже в работе и разработчики в процессе его решения."
+		}
 	}
-    document.getElementById('page2').onclick = function () {
-		document.getElementById('page1').style.backgroundColor = "#768d87"
-		document.getElementById('page2').style.backgroundColor = "green"
-		
-		document.getElementById('tag_div1').style.display = ''
-		document.getElementById('tag_div2').style.display = ''
-		
-		document.getElementById('2str').style.display = 'none'
-		document.getElementById('3str').style.display = 'none'
-		document.getElementById('4str').style.display = 'none'
-		document.getElementById('5str').style.display = 'none'
-		document.getElementById('6str').style.display = 'none'
-		document.getElementById('7str').style.display = 'none'
+	document.getElementById('bagg22').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "````Если можно предложить альтернативу: Пока ребята из разработки решают вопрос вы можете использовать эту функцию таким способом (описание как)/в мобильном браузере (опишите как найти его)."
+		}
+	}
+	document.getElementById('bagg23').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Понимаю, что это не то решение, которое вы ожидали, но это даст вам возможность... (описание для чего используется функционал)."
+		}
 	}
 	
-	
-	if (localStorage.getItem('msg') != null) {
-		document.getElementById('msg').innerHTML = localStorage.getItem('msg')
+	document.getElementById('bagg31').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Спасибо за ожидание. \n\
+Я проверил ДЗ (название/слайд, с которым обратился клиент), причина неполадки - сбой с нашей стороны. Все подробности передал разработчикам."
+		}
 	}
-	if (localStorage.getItem('msg1') != null) {
-		document.getElementById('msg1').innerHTML = localStorage.getItem('msg1')
+	document.getElementById('bagg32').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Извините за эти сложности, понимаю, что домашние задания - это очень важный процесс в обучении, который нельзя оставлять без внимания."
+		}
+	}
+	document.getElementById('bagg33').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Могу предложить вам альтернативу, так как сроки решения будут зависеть от приоритетности и количества задач разработки.  \n\
+На время исправления можно скрыть это домашнее задание, чтобы оно не влияло на вашу статистику обучения. \n\
+Что скажете?"
+		}
+	}
+	
+	document.getElementById('bagg41').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Спасибо за ожидание.\n\
+Я проверил ДЗ (название/слайд, с которым обратился клиент), причина неполадки - сбой в работе плеера. Все подробности передал разработчикам."
+		}
+	}
+	document.getElementById('bagg42').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Извините за эти сложности, как временное решение я отправляю вам ссылку (ссылка), по которой вы сможете прослушать эту запись. \n\
+Пожалуйста, скачайте ее (пишем куда нажать, чтобы скачать)\n\
+Если будет нужна помощь, пожалуйста, напишите."
+		}
+	}
+	
+	document.getElementById('bagg51').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Спасибо за ожидание.\n\
+Я проверил работу заметок, причина неполадки - технический сбой. Все подробности передал разработчикам."
+		}
+	}
+	document.getElementById('bagg52').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Извините за эти сложности, понимаю, как важно делать пометки во время урока для прогресса в обучении."
+		}
+	}
+	document.getElementById('bagg53').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Хочу предложить вам на время решения альтернативу.\n\
+Используйте, пожалуйста, для заметок в  разделе lesson Attachments функцию add text - инструкция.\n\
+Если будет нужна помощь, пожалуйста, напишите."
+		}
+	}
+	
+	document.getElementById('qa1').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "Спасибо за ожидание\n\
+Я все проверил и здесь не обойтись без помощи наших разработчиков. Извините, что не получается решить вопрос быстрее. Информацию по вашему обращению передал и они уже занимаются поиском решения. Спасибо, что написали об этом."
+		}
+	}
+	document.getElementById('qa2').onclick = function() {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			document.getElementById('inp').value = "````Также если можно предложить альтернативу: Пока ребята из разработки решают вопрос вы можете использовать эту функцию таким способом (описание как)/в мобильном браузере (описание как)/в мобильном браузере (опишите как найти его).\n\
+Понимаю, что это не то решение, которое вы ожидали, но это даст вам возможность... (описание для чего используется функционал)."
+		}
 	}
 }
-taggg();
-
-function taggg1(txt, phone = "0") {
-	if(phone == 1)
-		if(document.getElementById('tag_phone').value == "")
-			phone = document.getElementById('tag_phone').placeholder
-		else
-			phone = document.getElementById('tag_phone').value
-	else
-		phone = ""
-	
-	if(document.getElementById('tag_id').value == "")
-		id = document.getElementById('tag_id').placeholder
-	else
-		id = document.getElementById('tag_id').value
-		
-	txt = txt + " " + id + " " + phone
-	
-	document.getElementById('tag_inp').value = txt
-}
-
+bagggs()
 var bool = 0;	
 
-async function sendAnswerTemplate(template, word, time = "10:00", flag = 0, newText = "", flag2 = 0) {
+async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 = 0) {
 	//addTimer()
+	time = "10:00"
 	if(flag == 1) {
 		template = template_text
 		word = word_text
@@ -1027,8 +1211,9 @@ serviceId = b.serviceId
 queryId = b.queryId
 AFsessionId = b.sessionId
 tmpText = b.text
-tmpText = tmpText.split("\"").join("\\\"")
 tmpText = tmpText.split("\n").join("\\n")
+tmpText = tmpText.replace("<br />",'\n')
+tmpText = tmpText.replace(/<\/?[^>a]+>/g,'')
 title = b.title
 title = title.split("\"").join("\\\"")
 accuracy = b.accuracy
@@ -1042,10 +1227,16 @@ accuracy = b.accuracy
 		else if(tmpText == "")
 				console.log('Шаблон не найден')
 			else {
-				if(flag == 1)
+				if(flag == 1) {
 					tmpText = newText
-				refCurTimer(time)
+				}
+				tmpText = tmpText.split("\"").join("\\\"")
+				txt2 = tmpText.split('\n')
+				txt3 = ""
+				txt2.forEach(el => txt3 += + el + "</br>\\n")
+				tmpText = txt3
 				template_flag = 0
+				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
 						"accept": "*/*",
@@ -1072,7 +1263,7 @@ async function sendAnswer(txt, flag = 1, time = "10:00") {
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n')
 		txt3 = ""
-		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
+		txt2.forEach(el => txt3 += el + "</br>\\n")
 		txt3 = txt3.split("\"").join("\\\"")
 		
 		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
@@ -1362,15 +1553,26 @@ function startTimer() {
 	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined) {
 		document.getElementsByClassName('ant-modal-content')[0].childNodes[1].appendChild(maskBackHide)
 	}
+
 	
-	if(document.getElementsByClassName('expert-user_details-list')[1] != undefined)
-		for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
-			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id")
-				document.getElementById('tag_id').placeholder = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText.split(' ')[0]
+	if(document.getElementsByClassName('expert-user_details-list')[0] != undefined) {
+		phone = document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText
+		if(phone == "—") {
+			phone = ""
+			document.getElementById('phone_tr').placeholder = "Телефон" 
+		} else 
+			document.getElementById('phone_tr').placeholder = phone
+		
+		email = document.getElementsByClassName('expert-user_details-list')[0].childNodes[0].childNodes[1].innerText
+		if(email == "—") {
+			email = ""
+			document.getElementById('email_tr').placeholder	= "Почта"
 		}
-	
-	if(document.getElementsByClassName('expert-user_details-list')[0] != undefined)
-		document.getElementById('tag_phone').placeholder = document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText
+		document.getElementById('email_tr').placeholder	= email
+	} else {
+		document.getElementById('email_tr').placeholder	= "Почта"
+		document.getElementById('phone_tr').placeholder = "Телефон" 
+	}
 }
 setInterval(startTimer, 1000)
 
