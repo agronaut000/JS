@@ -721,7 +721,7 @@ Then please write to us about the result.')
 	}
     document.getElementById('bag').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Подождите, пожалуйста, сейчас я проверю и отвечу вам")
+			sendAnswerTemplate2("Подождите, пожалуйста, несколько минут — я вам помогу.")
 		else 
 			sendAnswer("Wait please. Now I will check and answer you.")
 	}
