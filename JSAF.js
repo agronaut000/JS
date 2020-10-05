@@ -874,6 +874,13 @@ This will help us see your screen and speed up the trouble shooting.")
 	document.getElementById('page1_button').style.backgroundColor = 'green'
 	
 	user = "student"
+	
+	if(localStorage.getItem('msg') != null) {
+		document.getElementById('msg').innerHTML = localStorage.getItem('msg') 
+	}
+	if(localStorage.getItem('msg1') != null) {
+		document.getElementById('msg1').innerHTML = localStorage.getItem('msg1') 
+	}
 }
 
 move_again_AF();
