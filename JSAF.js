@@ -917,10 +917,10 @@ function perevod() {
 		}
 		document.getElementById('secLineCal').onclick = function() {
 			if(user == "student") {
-				if(document.getElementById('phone_tr').innerText == "")
+				if(document.getElementById('phone_tr').value == "")
 					phone = document.getElementById('phone_tr').placeholder
 				else
-					phone = document.getElementById('phone_tr').innerText
+					phone = document.getElementById('phone_tr').value
 				
 				if(phone == "Телефон")
 					document.getElementById('inp').value = "Введите номер телефона"
@@ -943,10 +943,10 @@ function perevod() {
 		}
 		document.getElementById('secLineNow').onclick = function() {
 			if(user == "student") {
-				if(document.getElementById('phone_tr').innerText == "")
+				if(document.getElementById('phone_tr').value == "")
 					phone = document.getElementById('phone_tr').placeholder
 				else
-					phone = document.getElementById('phone_tr').innerText
+					phone = document.getElementById('phone_tr').value
 				
 				if(phone == "Телефон")
 					document.getElementById('inp').value = "Введите номер телефона"
@@ -972,18 +972,18 @@ function perevod() {
 			}
 		}	
 		document.getElementById('bagSecLine').onclick = function() {
-			if(document.getElementById('phone_tr').innerText == "")
+			if(document.getElementById('phone_tr').value == "")
 				phone = document.getElementById('phone_tr').placeholder
 			else
-				phone = document.getElementById('phone_tr').innerText
+				phone = document.getElementById('phone_tr').value
 			
 			if(phone == "Телефон")
 				document.getElementById('inp').value = "Введите номер телефона"
 			else {
-				if(document.getElementById('email_tr').innerText == "")
+				if(document.getElementById('email_tr').value == "")
 					email = document.getElementById('email_tr').placeholder
 				else
-					email = document.getElementById('email_tr').innerText
+					email = document.getElementById('email_tr').value
 				
 				if(email == "Почта")
 					document.getElementById('inp').value = "Введите почту"
@@ -1011,10 +1011,10 @@ function perevod() {
 			}
 		}
 		document.getElementById('mobCrit').onclick = function() {
-			if(document.getElementById('phone_tr').innerText == "")
+			if(document.getElementById('phone_tr').value == "")
 				phone = document.getElementById('phone_tr').placeholder
 			else
-				phone = document.getElementById('phone_tr').innerText
+				phone = document.getElementById('phone_tr').value
 			
 			if(phone == "Телефон")
 				document.getElementById('inp').value = "Введите номер телефона"
@@ -1027,10 +1027,10 @@ function perevod() {
 		}
 		
 		document.getElementById('mobHigh').onclick = function() {
-			if(document.getElementById('email_tr').innerText == "")
+			if(document.getElementById('email_tr').value == "")
 				email = document.getElementById('email_tr').placeholder
 			else
-				email = document.getElementById('email_tr').innerText
+				email = document.getElementById('email_tr').value
 			
 			if(email == "Почта")
 				document.getElementById('inp').value = "Введите почту"
@@ -1043,10 +1043,10 @@ function perevod() {
 		}
 		
 		document.getElementById('mobMinor').onclick = function() {
-			if(document.getElementById('email_tr').innerText == "")
+			if(document.getElementById('email_tr').value == "")
 				email = document.getElementById('email_tr').placeholder
 			else
-				email = document.getElementById('email_tr').innerText
+				email = document.getElementById('email_tr').value
 			
 			if(email == "Почта")
 				document.getElementById('inp').value = "Введите почту"
@@ -1062,10 +1062,10 @@ function perevod() {
 	function utc() {
 		document.getElementById('managers_tc').onclick = function () {
 			if(document.getElementById('languageAF').innerHTML == "Русский") {
-				if(document.getElementById('email_tr').innerText == "")
+				if(document.getElementById('email_tr').value == "")
 					email = document.getElementById('email_tr').placeholder
 				else
-					email = document.getElementById('email_tr').innerText
+					email = document.getElementById('email_tr').value
 				if (email == "")
 					document.getElementById('inp').value = "Введите почту"
 				else
