@@ -469,11 +469,9 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('version').style.display = 'none'
 			document.getElementById('hardReset').style.display = 'none'
 			document.getElementById('managers_tc').style.display = 'none'
-			document.getElementById('addMacAny').style.display = 'none'
+			document.getElementById('addMacTW').style.display = 'none'
 			document.getElementById('necel').style.display = 'none'
-			document.getElementById('page1').style.background = "#EBC7DF"
-			document.getElementById('page_bags').style.background = "#EBC7DF"
-			document.getElementById('page_transf').style.background = "#EBC7DF"
+			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
 			document.getElementById('managers_sc').style.display = ''
@@ -489,11 +487,9 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('version').style.display = ''
 			document.getElementById('managers_tc').style.display = ''
 			document.getElementById('hardReset').style.display = ''
-			document.getElementById('addMacAny').style.display = ''
+			document.getElementById('addMacTW').style.display = ''
 			document.getElementById('necel').style.display = ''
-			document.getElementById('page1').style.background = "#464451"
-			document.getElementById('page_bags').style.background = "#464451"
-			document.getElementById('page_transf').style.background = "#464451"
+			document.getElementById('AF_helper').style.background = "#464451"
         }
 	}
     document.getElementById('twoMin').onclick = function () {
