@@ -699,6 +699,8 @@ Then please write to us about the result.')
 		else 
 			sendComment(document.getElementById('inp').value)
 		document.getElementById('inp').value = ""
+		document.getElementById('phone_tr').value = ""
+		document.getElementById('email_tr').value = ""
 	}
 	
 	
