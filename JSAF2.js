@@ -352,8 +352,7 @@ function move_again_AF() {
         localStorage.setItem('winTopAF', String(Number(e.clientY - myY2)));
         localStorage.setItem('winLeftAF', String(Number(e.clientX - myX2)));
     };
-	document.getElementById('1str').ondblclick = document.getElementById('2str').ondblclick = document.getElementById('3str').ondblclick = 
-	document.getElementById('4str').ondblclick = document.getElementById('5str').ondblclick = function () {
+	document.getElementById('page1').ondblclick = function () {
 		if(document.getElementById('addTmp').style.display == 'none')
 			document.getElementById('addTmp').style.display = '';
 		else
@@ -472,7 +471,9 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('managers_tc').style.display = 'none'
 			document.getElementById('addMacAny').style.display = 'none'
 			document.getElementById('necel').style.display = 'none'
-			document.getElementById('AF_helper').style.background = "#EBC7DF"
+			document.getElementById('page1').style.background = "#EBC7DF"
+			document.getElementById('page_bags').style.background = "#EBC7DF"
+			document.getElementById('page_transf').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
 			document.getElementById('managers_sc').style.display = ''
@@ -490,7 +491,9 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('hardReset').style.display = ''
 			document.getElementById('addMacAny').style.display = ''
 			document.getElementById('necel').style.display = ''
-			document.getElementById('AF_helper').style.background = "#464451"
+			document.getElementById('page1').style.background = "#464451"
+			document.getElementById('page_bags').style.background = "#464451"
+			document.getElementById('page_transf').style.background = "#464451"
         }
 	}
     document.getElementById('twoMin').onclick = function () {
@@ -1067,7 +1070,10 @@ function perevod() {
 					email = document.getElementById('email_tr').placeholder
 				else
 					email = document.getElementById('email_tr').innerText
-				document.getElementById('inp').value = "Я передал обращение в отдел заботы о преподавателях. С вами свяжется наш специалист по почте " + email + " и поможет с решением этого вопроса. \n\
+				if (email == "")
+					document.getElementById('inp').value = "Введите почту"
+				else
+					document.getElementById('inp').value = "Я передал обращение в отдел заботы о преподавателях. С вами свяжется наш специалист по почте " + email + " и поможет с решением этого вопроса. \n\
 Если в течение суток вы не получите ответа, пожалуйста, напишите в этот чат ещё раз, мы всё проверим."
 			}
 		}
