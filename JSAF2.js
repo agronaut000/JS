@@ -459,7 +459,6 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('cacheSafari').style.display = 'none'
 			document.getElementById('nedozvonU').style.display = 'none'
 			document.getElementById('math').style.display = 'none'
-			document.getElementById('managers_sc').style.display = 'none'
 			document.getElementById('macBag').style.display = 'none'
 			document.getElementById('hiddenHW').style.display = 'none'
 			document.getElementById('revision').style.display = 'none'
@@ -468,13 +467,11 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('mobile').style.display = 'none'
 			document.getElementById('version').style.display = 'none'
 			document.getElementById('hardReset').style.display = 'none'
-			document.getElementById('managers_tc').style.display = 'none'
 			document.getElementById('addMacTW').style.display = 'none'
 			document.getElementById('necel').style.display = 'none'
 			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
-			document.getElementById('managers_sc').style.display = ''
 			document.getElementById('nedozvonU').style.display = ''
 			document.getElementById('cacheSafari').style.display = ''
 			document.getElementById('math').style.display = ''
@@ -485,7 +482,6 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('internet').style.display = ''
 			document.getElementById('mobile').style.display = ''
 			document.getElementById('version').style.display = ''
-			document.getElementById('managers_tc').style.display = ''
 			document.getElementById('hardReset').style.display = ''
 			document.getElementById('addMacTW').style.display = ''
 			document.getElementById('necel').style.display = ''
@@ -1075,7 +1071,9 @@ function perevod() {
 		}
 		
 		document.getElementById('managers_sc').onclick = function () {
-			document.getElementById('inp').value = "Вы написали в техподдержку школы. Если вопрос связан с учениками, пожалуйста, напишите в чат \"Managers (Student Care)\"."
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				document.getElementById('inp').value = "Вы написали в техподдержку школы. Если вопрос связан с учениками, пожалуйста, напишите в чат \"Managers (Student Care)\"."
+			}
 		}
 	}
 	utc()
