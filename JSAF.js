@@ -706,9 +706,9 @@ Then please write to us about the result.')
 	
 	
     document.getElementById('helloAF').onclick = async function () {
-		var values = await getInfo()
-		adr = values[0]; adr1 = values[1]; uid = values[2]
-		var timeDiff = ansTimeDiff(adr1, uid)
+		adr = adr1 = uid = timeDoff = ""
+		var values = await getInfo().then(values => {adr = values[0]; adr1 = values[1]; uid = values[2]; timeDiff = ansTimeDiff(adr1, uid);});
+		
 		timeDiff = timeDiff / 1000 / 60
 		if(timeDiff < 300 && timeDiffFlag == 0) {
 			sendAnswerTemplate2("Сейчас я вам помогу")
