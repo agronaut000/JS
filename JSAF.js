@@ -1626,8 +1626,8 @@ async function ansTimeDiff(adr1, uid) {
 	  "mode": "cors",
 	  "credentials": "include"
 	});
-	b = a.json().then((array) => {d1 = array.items[0].tsCreate; d2 = array.items[1].tsCreate});
-	return d1-d2
+	b = a.json().then((array) => {d1 = array.items[0].tsCreate; d2 = array.items[1].tsCreate; 
+	return d1-d2});
 }
 
 const copyToClipboard1 = str => {
