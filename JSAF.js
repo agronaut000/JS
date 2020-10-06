@@ -1245,7 +1245,7 @@ accuracy = b.accuracy
 				tmpText = tmpText.split("\"").join("\\\"")
 				txt2 = tmpText.split('\n')
 				txt3 = ""
-				txt2.forEach(el => txt3 += + el + "</br>\\n")
+				txt2.forEach(el => txt3 += el + "</br>\\n")
 				tmpText = txt3
 				template_flag = 0
 				refCurTimer(time)
@@ -1266,7 +1266,7 @@ accuracy = b.accuracy
 					  "mode": "cors",
 					  "credentials": "include"
 					});
-				}
+			}
 			});
 }
 async function sendAnswer(txt, flag = 1, time = "10:00") {
