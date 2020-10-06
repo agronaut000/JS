@@ -201,7 +201,6 @@ button4.id = 'nextTeacherIdScript';
 button4.innerHTML = "Info";
 template_flag = 0
 template_flag2 = 0
-timeDiffFlag = 0
 word_text = ""
 template_text = ""
 
@@ -706,29 +705,22 @@ Then please write to us about the result.')
 	
 	
     document.getElementById('helloAF').onclick = async function () {
-		adr = adr1 = uid = timeDoff = ""
-		var values = await getInfo(0).then(values => {adr = values[0]; adr1 = values[1]; uid = values[2]; timeDiff = ansTimeDiff(adr1, uid.split(',')[0]);});
+		adr = adr1 = uid = ""
+		var values = await getInfo().then(values => {adr = values[0]; adr1 = values[1]; uid = values[2];});
+
+		a = document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText
+		a = a.split(' ')
+		const cyrillicPattern = /^[\u0400-\u04FF]+$/;
 		
-		timeDiff = timeDiff / 1000 / 60
-		if(timeDiff < 300 && timeDiffFlag == 0) {
-			sendAnswerTemplate2("Сейчас я вам помогу")
-			timeDiffFlag = 1
-		} else {
-			a = document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText
-			a = a.split(' ')
-			const cyrillicPattern = /^[\u0400-\u04FF]+$/;
-			
-			if(document.getElementById('languageAF').innerHTML == "Русский")
-				if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML == "Доработать")
-					txt = "Здравствуйте, " + a[0] + "!"
-				else
-					txt = "Здравствуйте!"
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML == "Доработать")
+				txt = "Здравствуйте, " + a[0] + "!"
 			else
-				txt = "Hello!"
-			
-			sendAnswerTemplate2(txt)
-			timeDiffFlag = 0
-		}
+				txt = "Здравствуйте!"
+		else
+			txt = "Hello!"
+		
+		sendAnswerTemplate2(txt)
 	}
     document.getElementById('utoch').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -1607,28 +1599,6 @@ function requestsRed () {
 }
 
 setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 200)
-
-async function ansTimeDiff(adr1, uid) {
-	d1 = new Date()
-	d2 = new Date()
-	a = await fetch("https://skyeng.autofaq.ai/api/reason8/operator/conversationHistory?channelUserId=" + uid + "&operatorId=all&orderBy=tsCreate&isOrderByDesc=true", {
-	  "headers": {
-		"accept": "*/*",
-		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-		"sec-fetch-dest": "empty",
-		"sec-fetch-mode": "cors",
-		"sec-fetch-site": "same-origin"
-	  },
-	  "referrer": adr1,
-	  "referrerPolicy": "strict-origin-when-cross-origin",
-	  "body": null,
-	  "method": "GET",
-	  "mode": "cors",
-	  "credentials": "include"
-	});
-	b = a.json().then((array) => {d1 = array.items[0].tsCreate; d2 = array.items[1].tsCreate; 
-	return d1-d2});
-}
 
 const copyToClipboard1 = str => {
     const el = document.createElement('textarea');
