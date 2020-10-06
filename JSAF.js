@@ -707,7 +707,7 @@ Then please write to us about the result.')
 	
     document.getElementById('helloAF').onclick = async function () {
 		adr = adr1 = uid = timeDoff = ""
-		var values = await getInfo(0).then(values => {adr = values[0]; adr1 = values[1]; uid = values[2]; timeDiff = ansTimeDiff(adr1, uid);});
+		var values = await getInfo(0).then(values => {adr = values[0]; adr1 = values[1]; uid = values[2]; timeDiff = ansTimeDiff(adr1, uid.split(',')[0]);});
 		
 		timeDiff = timeDiff / 1000 / 60
 		if(timeDiff < 300 && timeDiffFlag == 0) {
