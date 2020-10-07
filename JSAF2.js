@@ -203,6 +203,7 @@ template_flag = 0
 template_flag2 = 0
 word_text = ""
 template_text = ""
+flagggg = 0
 
 button2.onclick = function() {
 	if(document.getElementById('btn_hide').style.display != 'none')
@@ -458,6 +459,7 @@ And then reboot the device and check again, if nothing changes, please write to 
             this.innerHTML = "Английский";
 			document.getElementById('cacheSafari').style.display = 'none'
 			document.getElementById('nedozvonU').style.display = 'none'
+			document.getElementById('none').style.display = ''
 			document.getElementById('math').style.display = 'none'
 			document.getElementById('macBag').style.display = 'none'
 			document.getElementById('hiddenHW').style.display = 'none'
@@ -473,6 +475,7 @@ And then reboot the device and check again, if nothing changes, please write to 
         } else {
             this.innerHTML = "Русский";
 			document.getElementById('nedozvonU').style.display = ''
+			document.getElementById('vcall').style.display = ''
 			document.getElementById('cacheSafari').style.display = ''
 			document.getElementById('math').style.display = ''
 			document.getElementById('macBag').style.display = ''
@@ -699,24 +702,36 @@ Then please write to us about the result.')
 		else 
 			sendComment(document.getElementById('inp').value)
 		document.getElementById('inp').value = ""
+		document.getElementById('phone_tr').value = ""
+		document.getElementById('email_tr').value = ""
 	}
 	
 	
     document.getElementById('helloAF').onclick = async function () {
-		var values = await getInfo()
-		adr = values[0]; adr1 = values[1]; uid = values[2]
-		a = document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText
-		a = a.split(' ')
-		const cyrillicPattern = /^[\u0400-\u04FF]+$/;
-		
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML == "Доработать")
-				txt = "Здравствуйте, " + a[0] + "!"
+		adr = adr1 = uid = ""
+		var values = await getInfo(0).then(values => {adr = values[0]; adr1 = values[1]; uid = values[2];});
+
+		count = await checkHistory(uid.split(',')[0])
+		if(count > 1 && flagggg == 0) {
+			if(document.getElementById('languageAF').innerHTML == "Русский")
+				txt = "Сейчас я вам помогу, подождите, пожалуйста."
 			else
-				txt = "Здравствуйте!"
-		else
-			txt = "Hello!"
-		
+				txt = "I will help you now, please wait."
+			flagggg = 1
+		} else {
+			flagggg = 0
+			a = document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText
+			a = a.split(' ')
+			const cyrillicPattern = /^[\u0400-\u04FF]+$/;
+			
+			if(document.getElementById('languageAF').innerHTML == "Русский")
+				if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML == "Доработать")
+					txt = "Здравствуйте, " + a[0] + "!"
+				else
+					txt = "Здравствуйте!"
+			else
+				txt = "Hello!"
+		}
 		sendAnswerTemplate2(txt)
 	}
     document.getElementById('utoch').onclick = function () {
@@ -870,6 +885,15 @@ This will help us see your screen and speed up the trouble shooting.")
 	}
 	loginer.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
 	document.getElementById('page1_button').style.backgroundColor = 'green'
+	
+	user = "student"
+	
+	if(localStorage.getItem('msg') != null) {
+		document.getElementById('msg').innerHTML = localStorage.getItem('msg') 
+	}
+	if(localStorage.getItem('msg1') != null) {
+		document.getElementById('msg1').innerHTML = localStorage.getItem('msg1') 
+	}
 }
 
 move_again_AF();
@@ -913,10 +937,10 @@ function perevod() {
 		}
 		document.getElementById('secLineCal').onclick = function() {
 			if(user == "student") {
-				if(document.getElementById('phone_tr').innerText == "")
+				if(document.getElementById('phone_tr').value == "")
 					phone = document.getElementById('phone_tr').placeholder
 				else
-					phone = document.getElementById('phone_tr').innerText
+					phone = document.getElementById('phone_tr').value
 				
 				if(phone == "Телефон")
 					document.getElementById('inp').value = "Введите номер телефона"
@@ -939,10 +963,10 @@ function perevod() {
 		}
 		document.getElementById('secLineNow').onclick = function() {
 			if(user == "student") {
-				if(document.getElementById('phone_tr').innerText == "")
+				if(document.getElementById('phone_tr').value == "")
 					phone = document.getElementById('phone_tr').placeholder
 				else
-					phone = document.getElementById('phone_tr').innerText
+					phone = document.getElementById('phone_tr').value
 				
 				if(phone == "Телефон")
 					document.getElementById('inp').value = "Введите номер телефона"
@@ -968,18 +992,18 @@ function perevod() {
 			}
 		}	
 		document.getElementById('bagSecLine').onclick = function() {
-			if(document.getElementById('phone_tr').innerText == "")
+			if(document.getElementById('phone_tr').value == "")
 				phone = document.getElementById('phone_tr').placeholder
 			else
-				phone = document.getElementById('phone_tr').innerText
+				phone = document.getElementById('phone_tr').value
 			
 			if(phone == "Телефон")
 				document.getElementById('inp').value = "Введите номер телефона"
 			else {
-				if(document.getElementById('email_tr').innerText == "")
+				if(document.getElementById('email_tr').value == "")
 					email = document.getElementById('email_tr').placeholder
 				else
-					email = document.getElementById('email_tr').innerText
+					email = document.getElementById('email_tr').value
 				
 				if(email == "Почта")
 					document.getElementById('inp').value = "Введите почту"
@@ -1007,10 +1031,10 @@ function perevod() {
 			}
 		}
 		document.getElementById('mobCrit').onclick = function() {
-			if(document.getElementById('phone_tr').innerText == "")
+			if(document.getElementById('phone_tr').value == "")
 				phone = document.getElementById('phone_tr').placeholder
 			else
-				phone = document.getElementById('phone_tr').innerText
+				phone = document.getElementById('phone_tr').value
 			
 			if(phone == "Телефон")
 				document.getElementById('inp').value = "Введите номер телефона"
@@ -1023,10 +1047,10 @@ function perevod() {
 		}
 		
 		document.getElementById('mobHigh').onclick = function() {
-			if(document.getElementById('email_tr').innerText == "")
+			if(document.getElementById('email_tr').value == "")
 				email = document.getElementById('email_tr').placeholder
 			else
-				email = document.getElementById('email_tr').innerText
+				email = document.getElementById('email_tr').value
 			
 			if(email == "Почта")
 				document.getElementById('inp').value = "Введите почту"
@@ -1039,10 +1063,10 @@ function perevod() {
 		}
 		
 		document.getElementById('mobMinor').onclick = function() {
-			if(document.getElementById('email_tr').innerText == "")
+			if(document.getElementById('email_tr').value == "")
 				email = document.getElementById('email_tr').placeholder
 			else
-				email = document.getElementById('email_tr').innerText
+				email = document.getElementById('email_tr').value
 			
 			if(email == "Почта")
 				document.getElementById('inp').value = "Введите почту"
@@ -1058,10 +1082,10 @@ function perevod() {
 	function utc() {
 		document.getElementById('managers_tc').onclick = function () {
 			if(document.getElementById('languageAF').innerHTML == "Русский") {
-				if(document.getElementById('email_tr').innerText == "")
+				if(document.getElementById('email_tr').value == "")
 					email = document.getElementById('email_tr').placeholder
 				else
-					email = document.getElementById('email_tr').innerText
+					email = document.getElementById('email_tr').value
 				if (email == "")
 					document.getElementById('inp').value = "Введите почту"
 				else
@@ -1233,9 +1257,12 @@ accuracy = b.accuracy
 				tmpText = tmpText.split("\"").join("\\\"")
 				txt2 = tmpText.split('\n')
 				txt3 = ""
-				txt2.forEach(el => txt3 += + el + "</br>\\n")
+				txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
 				tmpText = txt3
-				template_flag = 0
+				tmpText = tmpText.split('<p></p>').join("<p><br></p>")
+				tmpText = tmpText.substr(0, tmpText.length - 2)
+				
+				resetFlags()
 				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
@@ -1254,7 +1281,7 @@ accuracy = b.accuracy
 					  "mode": "cors",
 					  "credentials": "include"
 					});
-				}
+			}
 			});
 }
 async function sendAnswer(txt, flag = 1, time = "10:00") {
@@ -1263,8 +1290,10 @@ async function sendAnswer(txt, flag = 1, time = "10:00") {
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n')
 		txt3 = ""
-		txt2.forEach(el => txt3 += el + "</br>\\n")
+		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
 		txt3 = txt3.split("\"").join("\\\"")
+		txt3 = txt3.split('<p></p>').join("<p><br></p>")
+		txt3 = txt3.substr(0, txt3.length - 2)
 		
 		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
 			document.getElementById('inp').value = txt
@@ -1287,6 +1316,7 @@ async function sendAnswer(txt, flag = 1, time = "10:00") {
 					  "mode": "cors",
 					  "credentials": "include"
 				});
+				resetFlags()
 			}
 }
 async function getInfo(flag1 = 1) {
@@ -1311,17 +1341,16 @@ async function getInfo(flag1 = 1) {
 	  "method": "GET",
 	  "mode": "cors",
 	  "credentials": "include"
-	}).then(a => b = a.json()).then(b => sessionId = b.sessionId);
+	}).then(a => b = a.json()).then(b => {sessionId = b.sessionId; localStorage.setItem('serviceIdGlob', b.serviceId)});
 		}
 		return [adr, adr1, sessionId]
 }
-
 async function sendComment(txt){ 
 		var values = await getInfo(0)
 		adr = values[0]; adr1 = values[1]; uid = values[2]
 		txt2 = txt.split('\n').join('\\n')
 		txt2 = txt2.split("\"").join("\\\"")
-		
+		resetFlags()
 	fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 	  "headers": {
 		"accept": "*/*",
@@ -1603,6 +1632,13 @@ async function sendAnswerTemplate2(txt, flag = 0) {
 		template_flag = 1
 		template_flag2 = 1
 	} else {
+		txt = txt.split("\"").join("\\\"")
+		txt2 = txt.split('\n')
+		txt3 = ""
+		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
+		txt = txt3
+		txt = txt.split('<p></p>').join("<p><br></p>")
+		txt = txt.substr(0, txt.length - 2)
 		var values = await getInfo(0)
 		refCurTimer("10:00")
 		adr = values[0]; adr1 = values[1]; uid = values[2]
@@ -1623,7 +1659,85 @@ async function sendAnswerTemplate2(txt, flag = 0) {
 			  "mode": "cors",
 			  "credentials": "include"
 		});
-		template_flag = 0
-		template_flag2 = 0
+		resetFlags()
 	}
+}
+function resetFlags() {
+	template_flag = 0
+	template_flag2 = 0
+	flagggg = 0
+}
+async function checkHistory(id) {
+	var date = new Date()
+	var date2 = new Date()
+	date2.setTime(date - 8 * 60 * 60 * 1000)
+
+	day = month = ""
+	if(date.getMonth() < 9)
+		month = "0" + (date.getMonth() + 1)
+	else 
+		month = (date.getMonth() + 1)
+	if(date.getDate() < 10)
+		day = "0" + date.getDate()
+	else
+		day = date.getDate()
+
+	if(date.getHours() < 10)
+		hours = '0' + date.getHours()
+	else
+		hours = date.getHours()
+	if(date.getMinutes() < 10)
+		minutes = '0' + date.getMinutes()
+	else
+		minutes = date.getMinutes()
+	if(date.getSeconds() < 10)
+		seconds = '0' + date.getSeconds()
+	else
+		seconds = date.getSeconds()
+
+	secondDate = date.getFullYear() + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":" + seconds + ".000z"
+
+	if(date2.getMonth() < 9)
+		month2 = "0" + (date2.getMonth() + 1)
+	else 
+		month2 = (date2.getMonth() + 1)
+	if(date2.getDate() < 10)
+		day2 = "0" + date2.getDate()
+	else
+		day2 = date2.getDate()
+
+	if(date2.getHours() < 10)
+		hours2 = '0' + date2.getHours()
+	else
+		hours2 = date2.getHours()
+	if(date2.getMinutes() < 10)
+		minutes2 = '0' + date2.getMinutes()
+	else
+		minutes2 = date2.getMinutes()
+	if(date2.getSeconds() < 10)
+		seconds2 = '0' + date2.getSeconds()
+	else
+		seconds2 = date2.getSeconds()
+
+	firstDate = date2.getFullYear() + "-" + month2 + "-" + day2 + "T" + hours2 + ":" + minutes2 + ":" + seconds2 + ".000z"
+    count = -1
+	serviceId = localStorage.getItem('serviceIdGlob')
+	a = await fetch("https://skyeng.autofaq.ai/api/conversations/history", {
+	  "headers": {
+		"accept": "*/*",
+		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+		"cache-control": "max-age=0",
+		"content-type": "application/json",
+		"sec-fetch-dest": "empty",
+		"sec-fetch-mode": "cors",
+		"sec-fetch-site": "same-origin"
+	  },
+	  "referrer": "https://skyeng.autofaq.ai/logs",
+	  "referrerPolicy": "strict-origin-when-cross-origin",
+	  "body": "{\"serviceId\":\"" + serviceId + "\",\"mode\":\"Json\",\"channelUserIds\":[\"" + id + "\"],\"tsFrom\":\"" + firstDate + "\",\"tsTo\":\"" + secondDate + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":10}",
+	  "method": "POST",
+	  "mode": "cors",
+	  "credentials": "include"
+	}).then(a => b = a.json()).then(b => {count = b.items.length})
+	return count
 }
