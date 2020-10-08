@@ -92,6 +92,7 @@ var win_AFhelper =
 						<button id="browser">ус+брауз</button>
 						<button id="thank">пока</button>
 						<button id="thanks">Спс</button>
+						<button id="gladToHelp">рад</button>
 					</div>
 				</div>
 				<div style="margin: 5px; display: none" id="page_bags">	
@@ -411,6 +412,13 @@ When our employee connects, please click \"Accept\" (<a href=\"http://joxi.ru/Q2
 			sendAnswerTemplate2("Спасибо за ожидание.")
         } else {
 			sendAnswer("Thanks for waiting")
+        }
+	}
+    document.getElementById('gladToHelp').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswerTemplate2("Был рад помочь!")
+        } else {
+			sendAnswer("I was glad to help!")
         }
 	}
     document.getElementById('cacheTmp').onclick = function () {
