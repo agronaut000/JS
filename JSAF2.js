@@ -1228,8 +1228,10 @@ async function sendAnswer(txt, flag = 1, time = "10:00") {
 		txt3 = txt3.split('<p></p>').join("<p><br></p>")
 		txt3 = txt3.substr(0, txt3.length - 2)
 		
-		if(document.getElementById('msg1').innerHTML == "Доработать" && flag)
+		if(document.getElementById('msg1').innerHTML == "Доработать" && flag) {
+			resetFlags()
 			document.getElementById('inp').value = txt
+		}
 		else {
 				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
