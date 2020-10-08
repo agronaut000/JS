@@ -73,13 +73,9 @@ var win_AFhelper =
 						<button id="helloAF">Привет</button>
 						<button id="necel">Нецел</button>
 						<button id="internet">Инет</button>
-						<button id="math">мат. ур</button>
-						<button id="secLine">2Л</button>
 						<button id="twoMin">Помогу</button>
 					</div>
 					<div style="margin: 5px;" id="3str">
-						<button id="utoch">Доп впр</button>
-						<button id="bag">Подождите</button>
 						<button id="idU">ID У</button>
 						<button id="screen">скрин</button>
 						<button id="cacheTmp">кэш</button>
@@ -94,9 +90,6 @@ var win_AFhelper =
 					<div style="margin: 5px;" id="5str">
 						<button id="engConv">англ</button>
 						<button id="browser">ус+брауз</button>
-						<button id="bag1">баг</button>
-						<button id="version">vers</button>
-						<button id="mobile">в моб</button>
 						<button id="thank">пока</button>
 						<button id="thanks">Спс</button>
 					</div>
@@ -159,7 +152,6 @@ var win_AFhelper =
 					<button id="revision" style="margin: 2px">Ревизия</button>
 					<button id="serverAF" style="margin: 2px">Серверные</button>
 					<button id="privateMode" style="margin: 2px">Инкогнито</button>
-					<button id="browser_clear" style="margin: 2px">Проверка браузера</button>
 					<button id="predlozh" style="margin: 2px">Предложение</button>
 					<button id="VPN">VPN</button>
 					<button id="vcall">vcall-test</button>
@@ -408,15 +400,6 @@ Once it's downloaded, please launch it and send me your desktop number. It will 
 When our employee connects, please click \"Accept\" (<a href=\"http://joxi.ru/Q2K8GKYHwzddkA\" target=\"_blank\" rel=\"noopener\">screenshot</a>)")
 		}
 	}
-    document.getElementById('version').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Уточните, пожалуйста, операционную систему вашего смартфона (Android или iOS). Также уточните, пожалуйста, версию вашего приложения. Её можно посмотреть в профиле <a href=\"http://joxi.ru/YmEoRweTMZZQDA\" target=\"_blank\" rel=\"noopener\">вот так&nbsp;</a>\n\
-Я передам обращение в отдел мобильной поддержки для решения неполадки. Эта информация поможет решить вопрос быстрее")
-        } 
-	}
-    document.getElementById('math').onclick = function () {
-			sendAnswer("Пересоздайте, пожалуйста, урок, для этого вам нужно войти в Мой класс - Выбрать ученика - нажать на \"Начать сейчас\", после этого из вашей адресной строки скопировать ссылку и отправить её ученику. Этот урок НЕ закрывайте в правом верхнем углу, а выйдите просто на главную страницу в личный кабинет и от туда перейдите в \"Мой класс\".")
-	}
     document.getElementById('necel').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswerTemplate("Нецелевой запрос (шаблон ТП)", "Нецелевой запрос")
@@ -438,11 +421,6 @@ When our employee connects, please click \"Accept\" (<a href=\"http://joxi.ru/Q2
 And then reboot the device and check again, if nothing changes, please write to us.")
         }
 	}
-    document.getElementById('mobile').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Спасибо за ответ. Я всё передал коллегам из поддержки мобильных приложений. Пожалуйста, ожидайте их ответа в течение суток, он придет на вашу почту.")
-        }
-	}
     document.getElementById('addMacTW').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswer("1) Откройте Системные настройки в меню Apple.\n\
@@ -459,15 +437,12 @@ And then reboot the device and check again, if nothing changes, please write to 
             this.innerHTML = "Английский";
 			document.getElementById('cacheSafari').style.display = 'none'
 			document.getElementById('nedozvonU').style.display = 'none'
-			document.getElementById('none').style.display = ''
-			document.getElementById('math').style.display = 'none'
+			document.getElementById('vcall').style.display = 'none'
 			document.getElementById('macBag').style.display = 'none'
 			document.getElementById('hiddenHW').style.display = 'none'
 			document.getElementById('revision').style.display = 'none'
 			document.getElementById('predlozh').style.display = 'none'
 			document.getElementById('internet').style.display = 'none'
-			document.getElementById('mobile').style.display = 'none'
-			document.getElementById('version').style.display = 'none'
 			document.getElementById('hardReset').style.display = 'none'
 			document.getElementById('addMacTW').style.display = 'none'
 			document.getElementById('necel').style.display = 'none'
@@ -477,14 +452,11 @@ And then reboot the device and check again, if nothing changes, please write to 
 			document.getElementById('nedozvonU').style.display = ''
 			document.getElementById('vcall').style.display = ''
 			document.getElementById('cacheSafari').style.display = ''
-			document.getElementById('math').style.display = ''
 			document.getElementById('macBag').style.display = ''
 			document.getElementById('hiddenHW').style.display = ''
 			document.getElementById('revision').style.display = ''
 			document.getElementById('predlozh').style.display = ''
 			document.getElementById('internet').style.display = ''
-			document.getElementById('mobile').style.display = ''
-			document.getElementById('version').style.display = ''
 			document.getElementById('hardReset').style.display = ''
 			document.getElementById('addMacTW').style.display = ''
 			document.getElementById('necel').style.display = ''
@@ -605,22 +577,7 @@ Then run it and refresh the page.")
 Then please write to us about the result.")
 		}
 	}
-	
-    document.getElementById('browser_clear').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Попробуйте, пожалуйста, воспользоваться следующими инструкциями, а затем проверить ещё раз\n\
-1. <a href=\"http://faq.usedocs.com/article/7652\" target=\"_blank\" rel=\"noopener\">проверить обновления браузера&nbsp;</a> \n\
-2. <a href=\"http://faq.usedocs.com/article/7656\" target=\"_blank\" rel=\"noopener\">удалить Cookies сайта Skyeng&nbsp;</a> \n\
-3. <a href=\"http://faq.usedocs.com/article/7654\" target=\"_blank\" rel=\"noopener\">очистить кэш&nbsp;</a> \n\
-4. <a href=\"http://faq.usedocs.com/article/7655\" target=\"_blank\" rel=\"noopener\">очистить браузер от лишних расширений&nbsp;</a>")
-		else 
-			sendAnswer("Please use instructions and then check again \n\
-1. <a href=\"http://en_faq.usedocs.com/article/14744\" target=\"_blank\" rel=\"noopener\">check browser for updates&nbsp;</a> \n\
-2. <a href=\"http://en_faq.usedocs.com/article/14751\" target=\"_blank\" rel=\"noopener\">delete Skyeng cookies&nbsp;</a> \n\
-3. <a href=\"http://en_faq.usedocs.com/article/14753\" target=\"_blank\" rel=\"noopener\">clean browser's cache&nbsp;</a> \n\
-4. <a href=\"http://en_faq.usedocs.com/article/14749\" target=\"_blank\" rel=\"noopener\">clean browser from addons&nbsp;</a>")
-	
-	}
+
     document.getElementById('privateMode').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") 
 			sendAnswer("Пожалуйста, откройте новую вкладку в режиме инкогнито сочетанием клавиш Ctrl + Shift + N. Либо через специальное меню как <a href=\"https://skyeng.ru/go/screen6\" target=\"_blank\" rel=\"noopener\">на скриншоте&nbsp;</a> \n\
@@ -734,12 +691,6 @@ Then please write to us about the result.')
 		}
 		sendAnswerTemplate2(txt)
 	}
-    document.getElementById('utoch').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Уточните, пожалуйста, у вас остались дополнительные вопросы?")
-		else
-			sendAnswer("Do you have any additional questions?")
-	}
     document.getElementById('perevod').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswerTemplate2("Соединяю со специалистом, который вам поможет. Дождитесь, пожалуйста.")
@@ -752,25 +703,7 @@ Then please write to us about the result.')
 		else 
 			sendAnswer("Please specify which device and browser you are using.")
 	}
-    document.getElementById('bag').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate2("Подождите, пожалуйста, несколько минут — я вам помогу.")
-		else 
-			sendAnswer("Wait please. Now I will check and answer you.")
-	}
 	
-    document.getElementById('bag1').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Спасибо за ожидание. Я всё проверил, есть неполадка на нашей стороне. Передал подробности в отдел разработки для дальнейшего решения вопроса")
-		else 
-			sendAnswer("Thanks for waiting. I've checked the issue and found out that it is caused by the platform malfunction. All the details have been forwarded to our development team for further solution.")
-	}
-    document.getElementById('secLine').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Передал обращение старшему специалисту, пожалуйста, ожидайте")
-		else 
-			sendAnswer("Reffered the appeal to a senior specialist, please wait")
-	}
     document.getElementById('idU').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswerTemplate("Уточнение ID ученика (шаблон ТП)", "id")
@@ -1223,7 +1156,7 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
   },
   "referrer": adr,
   "referrerPolicy": "no-referrer-when-downgrade",
-  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119636,119638,119646,119649,118980,119841,119843,119844,120181,120969,121286,121299,121300,121305]}",
+  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646]}",
   "method": "POST",
   "mode": "cors",
   "credentials": "include"
@@ -1538,18 +1471,20 @@ function startTimer() {
 		}
 		addInfoUser.innerHTML = vertical + " + " + user 
 		if(vertical == "Math") {
-			document.getElementById('math').style.backgroundColor = "green"
+			//document.getElementById('math').style.backgroundColor = "green"
 			document.getElementById('NS').style.backgroundColor = "#768d87"
 		} else {
 			document.getElementById('NS').style.backgroundColor = "green"
-			document.getElementById('math').style.backgroundColor = "#768d87"
+			//document.getElementById('math').style.backgroundColor = "#768d87"
 		}
 		
 		
 		if(user == "student") {
-			document.getElementById('math').style.display = document.getElementById('NS').style.display = "none"
+			//document.getElementById('math').style.display = 
+			document.getElementById('NS').style.display = "none"
 		} else {
-			document.getElementById('math').style.display = document.getElementById('NS').style.display = ""
+			//document.getElementById('math').style.display = 
+			document.getElementById('NS').style.display = ""
 		}
 		if(user == "teacher") {
 			for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
