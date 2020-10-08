@@ -689,7 +689,10 @@ Then please write to us about the result.')
 			else
 				txt = "Hello!"
 		}
-		sendAnswerTemplate2(txt)
+		if(txt == "I will help you now, please wait.")
+			sendAnswer(txt)
+		else
+			sendAnswerTemplate2(txt)
 	}
     document.getElementById('perevod').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
