@@ -903,10 +903,6 @@ function perevod() {
 			}
 		}
 		document.getElementById('secLineNoww').onclick = function() {
-			document.getElementById('inp').value = "Простите, пожалуйста, не получается быстро настроить связь, могу ли я перевести вас на опытного специалиста, который сможет помочь вам?"
-		}
-		document.getElementById('secLineNow').onclick = function() {
-			if(user == "student") {
 				if(document.getElementById('phone_tr').value == "")
 					phone = document.getElementById('phone_tr').placeholder
 				else
@@ -915,26 +911,18 @@ function perevod() {
 				if(phone == "Телефон")
 					document.getElementById('inp').value = "Введите номер телефона"
 				else
-					if(document.getElementById('languageAF').innerHTML == "Русский") {
-						document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
+					document.getElementById('inp').value = "Простите, пожалуйста, не получается быстро настроить связь, могу ли я перевести вас на опытного специалиста, который сможет помочь вам?\n\
+Сотрудник позвонит вам на ваш номер " + phone + " в течение 15 минут.\n"
+		}
+		document.getElementById('secLineNow').onclick = function() {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
 Загрузить её можно <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
 После загрузки запустите TeamViewer и ожидайте звонок.\n\
 \n\
-Сотрудник позвонит вам на ваш номер " + phone + " в течение 15 минут.\n\
 Спасибо за ваше обращение"
-					}
-			} else {
-				if(document.getElementById('languageAF').innerHTML == "Русский") {
-					document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
-Загрузить её можно <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
-После загрузки запустите TeamViewer и ожидайте звонок.\n\
-\n\
-Сотрудник напишет вам в Slack в течение 15 минут.\n\
-Спасибо за ваше обращение"
-				}
-				
 			}
-		}	
+		}
 		document.getElementById('bagSecLine').onclick = function() {
 			if(document.getElementById('phone_tr').value == "")
 				phone = document.getElementById('phone_tr').placeholder
