@@ -1004,7 +1004,7 @@ function perevod() {
 				document.getElementById('inp').value = "Введите почту"
 			else
 				if(document.getElementById('languageAF').innerHTML == "Русский") {
-					document.getElementById('inp').value = "Спасибо за ответ. Я всю информацию передал коллегам из поддержки мобильных приложений. Они свяжутся с вами по почте " + email
+					document.getElementById('inp').value = "Спасибо за ответ. Я всю информацию передал коллегам из поддержки мобильных приложений. Они свяжутся с вами по почте " + email + " в течение 24 часов"
 				} else {
 					
 				}
