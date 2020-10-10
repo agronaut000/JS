@@ -1478,14 +1478,14 @@ function startTimer() {
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "userType")
 				user = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
 			
-			name = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0].childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
+			name = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0].childNodes[0].childNodes[0].childNodes[0].childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-statusHTML")
-				for (i = 0; i < idk; i++) {
-					if(tmrs[i][1] == name) {
+				for (k = 0; k < idk; k++) {
+					if(tmrs[k][1] == name) {
 						if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText == "идет урок")
-							tmrs[i][4] = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
+							tmrs[k][4] = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
 						else 
-							tmrs[i][4] = ""
+							tmrs[k][4] = ""
 					}
 				}
 		}
