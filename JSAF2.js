@@ -1,3 +1,4 @@
+
 let mstl = document.createElement('style');
 document.body.append(mstl);
 var style = `.win_btn {
@@ -92,6 +93,7 @@ var win_AFhelper =
 						<button id="browser">ус+брауз</button>
 						<button id="thank">пока</button>
 						<button id="thanks">Спс</button>
+						<button id="gladToHelp">рад</button>
 					</div>
 				</div>
 				<div style="margin: 5px; display: none" id="page_bags">	
@@ -411,6 +413,13 @@ When our employee connects, please click \"Accept\" (<a href=\"http://joxi.ru/Q2
 			sendAnswerTemplate2("Спасибо за ожидание.")
         } else {
 			sendAnswer("Thanks for waiting")
+        }
+	}
+    document.getElementById('gladToHelp').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			sendAnswerTemplate2("Был рад помочь!")
+        } else {
+			sendAnswer("I was glad to help!")
         }
 	}
     document.getElementById('cacheTmp').onclick = function () {
@@ -895,10 +904,6 @@ function perevod() {
 			}
 		}
 		document.getElementById('secLineNoww').onclick = function() {
-			document.getElementById('inp').value = "Простите, пожалуйста, не получается быстро настроить связь, могу ли я перевести вас на опытного специалиста, который сможет помочь вам?"
-		}
-		document.getElementById('secLineNow').onclick = function() {
-			if(user == "student") {
 				if(document.getElementById('phone_tr').value == "")
 					phone = document.getElementById('phone_tr').placeholder
 				else
@@ -907,26 +912,18 @@ function perevod() {
 				if(phone == "Телефон")
 					document.getElementById('inp').value = "Введите номер телефона"
 				else
-					if(document.getElementById('languageAF').innerHTML == "Русский") {
-						document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
+					document.getElementById('inp').value = "Простите, пожалуйста, не получается быстро настроить связь, могу ли я перевести вас на опытного специалиста, который сможет помочь вам?\n\
+Сотрудник позвонит вам на ваш номер " + phone + " в течение 15 минут.\n"
+		}
+		document.getElementById('secLineNow').onclick = function() {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
 Загрузить её можно <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
 После загрузки запустите TeamViewer и ожидайте звонок.\n\
 \n\
-Сотрудник позвонит вам на ваш номер " + phone + " в течение 15 минут.\n\
 Спасибо за ваше обращение"
-					}
-			} else {
-				if(document.getElementById('languageAF').innerHTML == "Русский") {
-					document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
-Загрузить её можно <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
-После загрузки запустите TeamViewer и ожидайте звонок.\n\
-\n\
-Сотрудник напишет вам в Slack в течение 15 минут.\n\
-Спасибо за ваше обращение"
-				}
-				
 			}
-		}	
+		}
 		document.getElementById('bagSecLine').onclick = function() {
 			if(document.getElementById('phone_tr').value == "")
 				phone = document.getElementById('phone_tr').placeholder
@@ -1008,7 +1005,7 @@ function perevod() {
 				document.getElementById('inp').value = "Введите почту"
 			else
 				if(document.getElementById('languageAF').innerHTML == "Русский") {
-					document.getElementById('inp').value = "Спасибо за ответ. Я всю информацию передал коллегам из поддержки мобильных приложений. Они свяжутся с вами по почте " + email
+					document.getElementById('inp').value = "Спасибо за ответ. Я всю информацию передал коллегам из поддержки мобильных приложений. Они свяжутся с вами по почте " + email + " в течение 24 часов"
 				} else {
 					
 				}
@@ -1314,10 +1311,15 @@ function addTimer() {
 	tm = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0].childNodes[0].childNodes[0]
 	if(tm.childNodes[0].childNodes[2] === undefined) {
 		let serv = document.createElement('div')
+		let serv2 = document.createElement('div')
+		serv2.style.backgroundColor = 'red'
+		serv2.style.color = 'white'
+		serv2.style.style.textAlign = 'center'
 		tm.childNodes[0].appendChild(serv)
+		tm.childNodes[1].appendChild(serv2)
 		tm.childNodes[0].childNodes[2].innerHTML = "10:00"
 		let d = new Date()
-		tmrs[idk] = ["10:00", tm.childNodes[1].childNodes[0].innerText, 1, number(d)]
+		tmrs[idk] = ["10:00", tm.childNodes[1].childNodes[0].innerText, 1, number(d), ""]
 		idk++
 	}
 }
@@ -1341,7 +1343,7 @@ function addTimers() {
 			}
 		}
 		if(flag == 0)
-			tmrs[idk++] = ["10:00", nm, 1, Number(d)]
+			tmrs[idk++] = ["10:00", nm, 1, Number(d), ""]
 
 		k++
 	}	
@@ -1351,8 +1353,14 @@ function addTimers() {
 	while (true) {
 		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k] == undefined)
 			break;
-		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
+		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined) {
 			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[0].appendChild(document.createElement('div'))
+			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].appendChild(document.createElement('div'))
+			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.backgroundColor = 'red'
+			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.color = 'white'
+			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.textAlign = 'center'
+			
+		}
 		k++
 	}
 }
@@ -1378,7 +1386,8 @@ function refreshTimer() {
 						btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#FBCEB1"
 				else
 					btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "white"
-					
+				
+				btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[3].innerText = tmrs[i][4]
 				var cT = new Date();
 				var curT1 = tmrs[i][3]
 				var curT2 = Number(cT);
@@ -1473,6 +1482,17 @@ function startTimer() {
 				vertical = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "userType")
 				user = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
+			
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-statusHTML") {
+					btns = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0]
+
+					name = btns.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
+					for (k = 0; k < idk; k++) {
+						if(tmrs[k][1] == name) {
+							tmrs[k][4] = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
+						}
+					}
+				}
 		}
 		addInfoUser.innerHTML = vertical + " + " + user 
 		if(vertical == "Math") {
