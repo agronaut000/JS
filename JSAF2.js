@@ -1,4 +1,3 @@
-
 let mstl = document.createElement('style');
 document.body.append(mstl);
 var style = `.win_btn {
@@ -1312,9 +1311,6 @@ function addTimer() {
 	if(tm.childNodes[0].childNodes[2] === undefined) {
 		let serv = document.createElement('div')
 		let serv2 = document.createElement('div')
-		serv2.style.backgroundColor = 'red'
-		serv2.style.color = 'white'
-		serv2.style.style.textAlign = 'center'
 		tm.childNodes[0].appendChild(serv)
 		tm.childNodes[1].appendChild(serv2)
 		tm.childNodes[0].childNodes[2].innerHTML = "10:00"
@@ -1353,14 +1349,8 @@ function addTimers() {
 	while (true) {
 		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k] == undefined)
 			break;
-		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined) {
+		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
 			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[0].appendChild(document.createElement('div'))
-			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].appendChild(document.createElement('div'))
-			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.backgroundColor = 'red'
-			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.color = 'white'
-			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.textAlign = 'center'
-			
-		}
 		k++
 	}
 }
@@ -1483,14 +1473,14 @@ function startTimer() {
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "userType")
 				user = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
 			
-			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-statusHTML") {
-					btns = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0]
-
-					name = btns.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
-					for (k = 0; k < idk; k++) {
-						if(tmrs[k][1] == name) {
-							tmrs[k][4] = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
-						}
+			name = document.getElementsByClassName('ant-list expert-sidebar-list ant-list-split')[0].childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-statusHTML")
+				for (i = 0; i < idk; i++) {
+					if(tmrs[i][1] == name) {
+						if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText == "идёт урок")
+							tmrs[i][4] = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
+						else 
+							tmrs[i][4] = ""
 					}
 				}
 		}
