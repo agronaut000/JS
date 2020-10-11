@@ -800,7 +800,7 @@ function buttonsFromDoc() {
 		msgFromTable(this.innerText)		
 	}
 }
-
+buttonsFromDoc()
 function pages() {
 	document.getElementById('page1_button').onclick = function() {
 		document.getElementById('page1_button').style.backgroundColor = 'green'
@@ -1419,9 +1419,9 @@ if(str !== null && str !== "")
 else
 	audio = new Audio("https://drive.google.com/u/0/uc?id=1832JE2IuK7AnfgkljLYytEeFL99Mt2Gv&export=download");	
 
-var timeStart = Date()
+var timeStart = new Date()
 function startTimer() {
-	var timeNow = Date()
+	var timeNow = new Date()
 	if(timeNow - timeStart > 1 * 60 * 1000) {
 		getText()
 		timeStart = timeNow
