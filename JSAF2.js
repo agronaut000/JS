@@ -1152,23 +1152,9 @@ function getText() {
             var r = JSON.parse(xhr.responseText),
                result = r["result"];
 	   table = result;
-		for(i = 0; i < table.length; i++) {
-			if(table[i][1] == "Быстрый шаблон") {
-				document.getElementById(table[i][0]).onclick = function() {
-					sendAnswerTemplate2(table[i][2])
-				}
-			}
-			if(table[i][1] == "Текст") {
-				document.getElementById(table[i][0]).onclick = function() {
-					sendAnswer(table[i][2])
-				}
-			}
-			if(table[i][1] == "Шаблон") {
-				document.getElementById(table[i][0]).onclick = function() {
-					sendAnswerTemplate(table[i][2], table[i][3])
-			}
+		for(l = 0; l < table.length; l++) {
+			document.getElementById(table[i][0]).onclick = msgFromTable()
 		}
-	}
         } catch(e) {}
      } 
    
@@ -1178,6 +1164,23 @@ function getText() {
    
 }
 getText()
+
+function msgFromTable(btnName) {
+	for(l = 0; l < table.length; l++) {
+		if(btnName == table[i][0]) {
+			if(table[l][1] == "Быстрый шаблон") {
+				sendAnswerTemplate2(table[l][2])
+			}
+			if(table[l][1] == "Текст") {
+				sendAnswer(table[l][2])
+			}
+			if(table[l][1] == "Шаблон") {
+				sendAnswerTemplate(table[l][2], table[l][3])
+			}
+			break
+		}
+	}
+}
 
 async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 = 0) {
 	//addTimer()
