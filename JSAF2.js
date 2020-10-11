@@ -1151,31 +1151,31 @@ function getText() {
         try {
             var r = JSON.parse(xhr.responseText),
                result = r["result"];
+	   table = result;
+		for(i = 0; i < table.length; i++) {
+			if(table[i][1] == "Быстрый шаблон") {
+				document.getElementById(table[i][0]).onclick = function() {
+					sendAnswerTemplate2(table[i][2])
+				}
+			}
+			if(table[i][1] == "Текст") {
+				document.getElementById(table[i][0]).onclick = function() {
+					sendAnswerAnswer(table[i][2])
+				}
+			}
+			if(table[i][1] == "Шаблон") {
+				document.getElementById(table[i][0]).onclick = function() {
+					sendAnswerTemplate(table[i][2], table[i][3])
+			}
+		}
+	}
         } catch(e) {}
      } 
    
-   table = result;
 
    }
    xhr.send()
    
-	for(i = 0; i < table.length; i++) {
-		if(table[i][1] == "Быстрый шаблон") {
-			document.getElementById(table[i][0]).onclick = function() {
-				sendAnswerTemplate2(table[i][2])
-			}
-		}
-		if(table[i][1] == "Текст") {
-			document.getElementById(table[i][0]).onclick = function() {
-				sendAnswerAnswer(table[i][2])
-			}
-		}
-		if(table[i][1] == "Шаблон") {
-			document.getElementById(table[i][0]).onclick = function() {
-				sendAnswerTemplate(table[i][2], table[i][3])
-			}
-		}
-	}
 }
 getText()
 
