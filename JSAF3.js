@@ -1120,7 +1120,7 @@ getText()
 
 function msgFromTable(btnName) {
 	for(l = 0; l < table.length; l++) {
-		if(btnName == table[i][0]) {
+		if(btnName == table[l][0]) {
 			if(table[l][1] == "Быстрый шаблон") {
 				sendAnswerTemplate2(table[l][2])
 			}
