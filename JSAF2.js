@@ -158,6 +158,9 @@ var win_AFhelper =
 					<button id="vcall">vcall-test</button>
 					<button id="micro">микро</button>
 					<button id="addMacTW">Mac+TW</button>
+					<button id="testBut1">Тест1</button>
+					<button id="testBut2">Тест2</button>
+					<button id="testBut3">Тест3</button>
 			</div>
 		</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="set_bar">
@@ -1133,6 +1136,48 @@ function bagggs() {
 }
 bagggs()
 var bool = 0;	
+
+
+var table
+function getText() {
+   var app = `https://script.googleusercontent.com/macros/echo?user_content_key=uWuKfiMxHkf9IMQrxJT9zh_hkxwcbm7VP-oZXUSHPARwFbsKxoNt90TdiRneuuk_CyHSJB1Hex0_xmsT6b6Nwq8u-ELWyfL1m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnEcE-yJQNoyZEzrqjglXCkHHoHtCBDm70uc48xcTv21Fm2bsom7VhzVSXGIRRRxE7Npytj_A4aoE&lib=MxMcm2I9EBgYsAhmFrSyUGRwhIa3xdtnt`,
+      output = '',
+      xhr = new XMLHttpRequest();
+   xhr.open('GET', app);
+   xhr.onreadystatechange = function() {
+     if (xhr.readyState !== 4) return;
+
+     if (xhr.status == 200) {
+        try {
+            var r = JSON.parse(xhr.responseText),
+               result = r["result"];
+        } catch(e) {}
+     } 
+   
+   table = result;
+
+   }
+   xhr.send()
+   
+	for(i = 0; i < table.length; i++) {
+		if(table[i][1] == "Быстрый шаблон") {
+			document.getElementById(table[i][0]).onclick = function() {
+				sendAnswerTemplate2(table[i][2])
+			}
+		}
+		if(table[i][1] == "Текст") {
+			document.getElementById(table[i][0]).onclick = function() {
+				sendAnswerAnswer(table[i][2])
+			}
+		}
+		if(table[i][1] == "Шаблон") {
+			document.getElementById(table[i][0]).onclick = function() {
+				sendAnswerTemplate(table[i][2], table[i][3])
+			}
+		}
+	}
+}
+getText()
 
 async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 = 0) {
 	//addTimer()
