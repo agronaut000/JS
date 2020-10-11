@@ -1160,7 +1160,7 @@ function getText() {
 			}
 			if(table[i][1] == "Текст") {
 				document.getElementById(table[i][0]).onclick = function() {
-					sendAnswerAnswer(table[i][2])
+					sendAnswer(table[i][2])
 				}
 			}
 			if(table[i][1] == "Шаблон") {
