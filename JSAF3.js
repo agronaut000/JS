@@ -796,7 +796,7 @@ This will help us see your screen and speed up the trouble shooting.")
 move_again_AF();
 
 function buttonsFromDoc() {
-	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = function() {
+	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = function() {
 		msgFromTable(this.innerText)		
 	}
 }
