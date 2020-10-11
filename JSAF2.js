@@ -1463,8 +1463,13 @@ if(str !== null && str !== "")
 else
 	audio = new Audio("https://drive.google.com/u/0/uc?id=1832JE2IuK7AnfgkljLYytEeFL99Mt2Gv&export=download");	
 
-
+var timeStart = Date()
 function startTimer() {
+	var timeNow = Date()
+	if(timeNow - timeStart > 1 * 60 * 1000) {
+		getText()
+		timeStart = timeNow
+	}
 	for(i = 0; i < idk; i++) {
 		var cT = new Date();
 		var curTime1 = tmrs[i][3]
