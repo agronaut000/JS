@@ -725,7 +725,7 @@ Then please write to us about the result.')
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswerTemplate("Программа TeamViewer (шаблон ТП)", 'jira')
 		else 
-			sendAnswer("Please follow the link to download <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">TeamViewer</a> - a program for remote access. \n\
+			sendAnswer("Please follow the link to download <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">TeamViewer</a> - a program for remote access. \n\
 After downloading launch TeamViewer and send me the ID and the password it will show.\n\
 This will help us see your screen and speed up the trouble shooting.")
 	}
@@ -738,7 +738,9 @@ This will help us see your screen and speed up the trouble shooting.")
 	
     document.getElementById('screen').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Отправьте, пожалуйста, ссылку на скриншот вашей неполадки и мы поможем вам. Для быстрого создания скриншота вы можете воспользоваться <a href=\"http://skyeng.ru/go/prnt\" target=\"_blank\" rel=\"noopener\">этим сервисом</a>&nbsp;")
+			sendAnswerTemplate2("Отправьте, пожалуйста, ссылку на скриншот вашей неполадки и мы поможем. Вот два удобных сервиса:\n\
+- <a href=\"https://prnt.sc/\" target=\"_blank\" rel=\"noopener\">первый</a>\n\
+- <a href=\"https://pastenow.ru/\" target=\"_blank\" rel=\"noopener\">второй</a>")
 		else 
 			sendAnswer("Please send a link to a screenshot of your problem and we will help you. To quickly create a screenshot, you can use <a href=\"http://skyeng.ru/go/prnt\" target=\"_blank\" rel=\"noopener\">this service</a>&nbsp")
 		
@@ -890,13 +892,13 @@ function perevod() {
 					document.getElementById('inp').value = "Введите номер телефона"
 				else
 					if(document.getElementById('languageAF').innerHTML == "Русский") {
-						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
+						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
 Пожалуйста, запустите TeamViewer и продиктуйте специалисту ID и пароль, которые будут в открывшемся окне.\n\
 Программа поможет увидеть ваш экран и ускорит решение вопроса.\n\
 Сотрудник позвонит вам на ваш номер, указанный в заявке: " + phone
 					}
 			} else {
-						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
+						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
 Пожалуйста, запустите TeamViewer и продиктуйте специалисту ID и пароль, которые будут в открывшемся окне.\n\
 Программа поможет увидеть ваш экран и ускорит решение вопроса.\n\
 Сотрудник напишет вам в Slack"
@@ -917,7 +919,7 @@ function perevod() {
 		document.getElementById('secLineNow').onclick = function() {
 			if(document.getElementById('languageAF').innerHTML == "Русский") {
 				document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
-Загрузить её можно <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
+Загрузить её можно <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
 После загрузки запустите TeamViewer и ожидайте звонок.\n\
 \n\
 Спасибо за ваше обращение"
