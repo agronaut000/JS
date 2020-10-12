@@ -678,7 +678,7 @@ Then please write to us about the result.')
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswerTemplate("Программа TeamViewer (шаблон ТП)", 'jira')
 		else 
-			sendAnswer("Please follow the link to download <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">TeamViewer</a> - a program for remote access. \n\
+			sendAnswer("Please follow the link to download <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">TeamViewer</a> - a program for remote access. \n\
 After downloading launch TeamViewer and send me the ID and the password it will show.\n\
 This will help us see your screen and speed up the trouble shooting.")
 	}
@@ -691,7 +691,9 @@ This will help us see your screen and speed up the trouble shooting.")
 	
     document.getElementById('screen').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Отправьте, пожалуйста, ссылку на скриншот вашей неполадки и мы поможем вам. Для быстрого создания скриншота вы можете воспользоваться <a href=\"http://skyeng.ru/go/prnt\" target=\"_blank\" rel=\"noopener\">этим сервисом</a>&nbsp;")
+			sendAnswerTemplate2("Отправьте, пожалуйста, ссылку на скриншот вашей неполадки и мы поможем. Вот два удобных сервиса:\n\
+- <a href=\"https://prnt.sc/\" target=\"_blank\" rel=\"noopener\">первый</a>\n\
+- <a href=\"https://pastenow.ru/\" target=\"_blank\" rel=\"noopener\">второй</a>")
 		else 
 			sendAnswer("Please send a link to a screenshot of your problem and we will help you. To quickly create a screenshot, you can use <a href=\"http://skyeng.ru/go/prnt\" target=\"_blank\" rel=\"noopener\">this service</a>&nbsp")
 		
@@ -836,9 +838,11 @@ pages()
 function perevod() {
 	function secondLine() {
 		document.getElementById('secLineCall').onclick = function() {
+			resetFlags()
 			document.getElementById('inp').value = "Простите, сейчас нет возможности провести проверку. Подскажите, пожалуйста, вам будет удобно если специалист свяжется с вами в (время по МСК) для проведения более детальной проверки?"
 		}
 		document.getElementById('secLineCal').onclick = function() {
+			resetFlags()
 			if(user == "student") {
 				if(document.getElementById('phone_tr').value == "")
 					phone = document.getElementById('phone_tr').placeholder
@@ -849,19 +853,20 @@ function perevod() {
 					document.getElementById('inp').value = "Введите номер телефона"
 				else
 					if(document.getElementById('languageAF').innerHTML == "Русский") {
-						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
+						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
 Пожалуйста, запустите TeamViewer и продиктуйте специалисту ID и пароль, которые будут в открывшемся окне.\n\
 Программа поможет увидеть ваш экран и ускорит решение вопроса.\n\
 Сотрудник позвонит вам на ваш номер, указанный в заявке: " + phone
 					}
 			} else {
-						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
+						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
 Пожалуйста, запустите TeamViewer и продиктуйте специалисту ID и пароль, которые будут в открывшемся окне.\n\
 Программа поможет увидеть ваш экран и ускорит решение вопроса.\n\
 Сотрудник напишет вам в Slack"
 			}
 		}
 		document.getElementById('secLineNoww').onclick = function() {
+			resetFlags()
 				if(document.getElementById('phone_tr').value == "")
 					phone = document.getElementById('phone_tr').placeholder
 				else
@@ -874,15 +879,17 @@ function perevod() {
 Сотрудник позвонит вам на ваш номер " + phone + " в течение 15 минут.\n"
 		}
 		document.getElementById('secLineNow').onclick = function() {
+			resetFlags()
 			if(document.getElementById('languageAF').innerHTML == "Русский") {
 				document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
-Загрузить её можно <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
+Загрузить её можно <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
 После загрузки запустите TeamViewer и ожидайте звонок.\n\
 \n\
 Спасибо за ваше обращение"
 			}
 		}
 		document.getElementById('bagSecLine').onclick = function() {
+			resetFlags()
 			if(document.getElementById('phone_tr').value == "")
 				phone = document.getElementById('phone_tr').placeholder
 			else
@@ -914,6 +921,7 @@ function perevod() {
 	secondLine()
 	function mobile() {
 		document.getElementById('mobDevice').onclick = function() {
+			resetFlags()
 			if(document.getElementById('languageAF').innerHTML == "Русский") {
 				document.getElementById('inp').value = "Уточните, пожалуйста, модель вашего устройства и версию приложения.\n\
 Если вы пишете из мобильного приложения, то скопировать информацию можно через кнопку «Написать разработчикам»."
@@ -922,6 +930,7 @@ function perevod() {
 			}
 		}
 		document.getElementById('mobCrit').onclick = function() {
+			resetFlags()
 			if(document.getElementById('phone_tr').value == "")
 				phone = document.getElementById('phone_tr').placeholder
 			else
@@ -938,6 +947,7 @@ function perevod() {
 		}
 		
 		document.getElementById('mobHigh').onclick = function() {
+			resetFlags()
 			if(document.getElementById('email_tr').value == "")
 				email = document.getElementById('email_tr').placeholder
 			else
@@ -954,6 +964,7 @@ function perevod() {
 		}
 		
 		document.getElementById('mobMinor').onclick = function() {
+			resetFlags()
 			if(document.getElementById('email_tr').value == "")
 				email = document.getElementById('email_tr').placeholder
 			else
@@ -972,6 +983,7 @@ function perevod() {
 	mobile()
 	function utc() {
 		document.getElementById('managers_tc').onclick = function () {
+			resetFlags()
 			if(document.getElementById('languageAF').innerHTML == "Русский") {
 				if(document.getElementById('email_tr').value == "")
 					email = document.getElementById('email_tr').placeholder
@@ -986,6 +998,7 @@ function perevod() {
 		}
 		
 		document.getElementById('managers_sc').onclick = function () {
+			resetFlags()
 			if(document.getElementById('languageAF').innerHTML == "Русский") {
 				document.getElementById('inp').value = "Вы написали в техподдержку школы. Если вопрос связан с учениками, пожалуйста, напишите в чат \"Managers (Student Care)\"."
 			}
@@ -997,12 +1010,14 @@ perevod()
 
 function bagggs() {
 	document.getElementById('bagg11').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Спасибо за ожидание.\n\
 Я проверил (краткое описание бага, с которым пришел клиент), причина - неполадки с нашей стороны. Все подробности передал разработчикам."
 		}
 	}
 	document.getElementById('bagg12').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Извините за эти сложности, понимаю, что подобные нюансы не скрашивают процесс обучения. Со своей стороны мы делаем все, чтобы они случались как можно реже.\n\
 Спасибо за понимание."
@@ -1010,33 +1025,39 @@ function bagggs() {
 	}
 	
 	document.getElementById('bagg21').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Извините, что решение затягивается и полностью вас понимаю. Однако вижу, что вопрос уже в работе и разработчики в процессе его решения."
 		}
 	}
 	document.getElementById('bagg22').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "````Если можно предложить альтернативу: Пока ребята из разработки решают вопрос вы можете использовать эту функцию таким способом (описание как)/в мобильном браузере (опишите как найти его)."
 		}
 	}
 	document.getElementById('bagg23').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Понимаю, что это не то решение, которое вы ожидали, но это даст вам возможность... (описание для чего используется функционал)."
 		}
 	}
 	
 	document.getElementById('bagg31').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Спасибо за ожидание. \n\
 Я проверил ДЗ (название/слайд, с которым обратился клиент), причина неполадки - сбой с нашей стороны. Все подробности передал разработчикам."
 		}
 	}
 	document.getElementById('bagg32').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Извините за эти сложности, понимаю, что домашние задания - это очень важный процесс в обучении, который нельзя оставлять без внимания."
 		}
 	}
 	document.getElementById('bagg33').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Могу предложить вам альтернативу, так как сроки решения будут зависеть от приоритетности и количества задач разработки.  \n\
 На время исправления можно скрыть это домашнее задание, чтобы оно не влияло на вашу статистику обучения. \n\
@@ -1045,12 +1066,14 @@ function bagggs() {
 	}
 	
 	document.getElementById('bagg41').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Спасибо за ожидание.\n\
 Я проверил ДЗ (название/слайд, с которым обратился клиент), причина неполадки - сбой в работе плеера. Все подробности передал разработчикам."
 		}
 	}
 	document.getElementById('bagg42').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Извините за эти сложности, как временное решение я отправляю вам ссылку (ссылка), по которой вы сможете прослушать эту запись. \n\
 Пожалуйста, скачайте ее (пишем куда нажать, чтобы скачать)\n\
@@ -1059,17 +1082,20 @@ function bagggs() {
 	}
 	
 	document.getElementById('bagg51').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Спасибо за ожидание.\n\
 Я проверил работу заметок, причина неполадки - технический сбой. Все подробности передал разработчикам."
 		}
 	}
 	document.getElementById('bagg52').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Извините за эти сложности, понимаю, как важно делать пометки во время урока для прогресса в обучении."
 		}
 	}
 	document.getElementById('bagg53').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Хочу предложить вам на время решения альтернативу.\n\
 Используйте, пожалуйста, для заметок в  разделе lesson Attachments функцию add text - инструкция.\n\
@@ -1078,12 +1104,14 @@ function bagggs() {
 	}
 	
 	document.getElementById('qa1').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Спасибо за ожидание\n\
 Я все проверил и здесь не обойтись без помощи наших разработчиков. Извините, что не получается решить вопрос быстрее. Информацию по вашему обращению передал и они уже занимаются поиском решения. Спасибо, что написали об этом."
 		}
 	}
 	document.getElementById('qa2').onclick = function() {
+		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "````Также если можно предложить альтернативу: Пока ребята из разработки решают вопрос вы можете использовать эту функцию таким способом (описание как)/в мобильном браузере (описание как)/в мобильном браузере (опишите как найти его).\n\
 Понимаю, что это не то решение, которое вы ожидали, но это даст вам возможность... (описание для чего используется функционал)."
