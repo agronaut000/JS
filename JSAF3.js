@@ -494,14 +494,6 @@ function move_again_AF() {
 		else 
 			sendAnswer(txt)
 	}
-	
-    document.getElementById('thank').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswerTemplate2("Спасибо за обращение. Всего вам доброго!")
-		} else {
-			sendAnswer("Thank you for contacting us. All the best!")
-		}
-	}
     document.getElementById('micro').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswerTemplate('Настройка микрофона в системе (Windows/OS X) (шаблон ТП)', 'Настройка микрофона в системе (Windows/OS X) (шаблон ТП)')
@@ -735,7 +727,7 @@ Then please write to us about the result.')
 move_again_AF();
 
 function buttonsFromDoc() {
-	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = function() {
+	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = function() {
 		msgFromTable(this.innerText)		
 	}
 }
