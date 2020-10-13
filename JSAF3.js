@@ -1047,7 +1047,7 @@ function bagggs() {
 		resetFlags()
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Спасибо за ожидание. \n\
-Я проверил ДЗ (название/слайд, с которым обратился клиент), причина неполадки - сбой с нашей стороны. Все подробности передал разработчикам."
+Я проверил домашнее задание (название/слайд, с которым обратился клиент), причина неполадки - сбой с нашей стороны. Все подробности передал разработчикам."
 		}
 	}
 	document.getElementById('bagg32').onclick = function() {
@@ -1124,7 +1124,7 @@ var bool = 0;
 
 var table
 function getText() {
-   var app = `https://script.googleusercontent.com/macros/echo?user_content_key=uWuKfiMxHkf9IMQrxJT9zh_hkxwcbm7VP-oZXUSHPARwFbsKxoNt90TdiRneuuk_CyHSJB1Hex0_xmsT6b6Nwq8u-ELWyfL1m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnEcE-yJQNoyZEzrqjglXCkHHoHtCBDm70uc48xcTv21Fm2bsom7VhzVSXGIRRRxE7Npytj_A4aoE&lib=MxMcm2I9EBgYsAhmFrSyUGRwhIa3xdtnt`,
+   var app = `https://script.googleusercontent.com/macros/echo?user_content_key=BrKeFkKk8F0kwYo1hPhTinQclmrya5jC4tqhzi3viGydeH2PXGsr4BwQcvwkvmim0GDF6mnAR0u9J0msP2BbCFH8cC8DvjR_m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnK8kmHKw-s9uEOO-mowUiqRQcoSpZSZyv1mhO3y8L5sB6MOcViIYcCeEZWU5C-oY6g&lib=MxMcm2I9EBgYsAhmFrSyUGRwhIa3xdtnt`,
       output = '',
       xhr = new XMLHttpRequest();
    xhr.open('GET', app);
@@ -1148,17 +1148,32 @@ getText()
 
 function msgFromTable(btnName) {
 	for(l = 0; l < table.length; l++) {
-		if(btnName == table[l][0]) {
-			if(table[l][1] == "Быстрый шаблон") {
-				sendAnswerTemplate2(table[l][2])
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			if(btnName == table[l][0]) {
+				if(table[l][1] == "Быстрый шаблон") {
+					sendAnswerTemplate2(table[l][2])
+				}
+				if(table[l][1] == "Текст") {
+					sendAnswer(table[l][2])
+				}
+				if(table[l][1] == "Шаблон") {
+					sendAnswerTemplate(table[l][2], table[l][3])
+				}
+				break
 			}
-			if(table[l][1] == "Текст") {
-				sendAnswer(table[l][2])
+		} else {
+			if(btnName == table[l][0]) {
+				if(table[l][5] == "Быстрый шаблон") {
+					sendAnswerTemplate2(table[l][6])
+				}
+				if(table[l][5] == "Текст") {
+					sendAnswer(table[l][6])
+				}
+				if(table[l][5] == "Шаблон") {
+					sendAnswerTemplate(table[l][6], table[l][7])
+				}
+				break
 			}
-			if(table[l][1] == "Шаблон") {
-				sendAnswerTemplate(table[l][2], table[l][3])
-			}
-			break
 		}
 	}
 }
