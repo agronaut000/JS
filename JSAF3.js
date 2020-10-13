@@ -1027,7 +1027,7 @@ var bool = 0;
 
 var table
 function getText() {
-   var app = `https://script.googleusercontent.com/macros/echo?user_content_key=mf3QPRIE6KieM0PHhc7Q3jDrZMQGKsj8Fo-aHboHKsu5K3L9VptHdiYhCeOvAdbMwTp8-Iop9bgHjlA1uYIScsTiggqY4WNVm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnK8kmHKw-s9uEOO-mowUiqRQcoSpZSZyv1mhO3y8L5sB6MOcViIYcCeEZWU5C-oY6g&lib=MxMcm2I9EBgYsAhmFrSyUGRwhIa3xdtnt`,
+   var app = `https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec`,
       output = '',
       xhr = new XMLHttpRequest();
    xhr.open('GET', app);
