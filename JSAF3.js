@@ -424,12 +424,6 @@ function move_again_AF() {
 			document.getElementById('AF_helper').style.background = "#464451"
         }
 	}
-    document.getElementById('twoMin').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate2("Сейчас я вам помогу, подождите, пожалуйста.")
-        else
-			sendAnswer("I will help you now, please wait.")
-	}
 	
     document.getElementById('cacheSafari').onclick = function () {
 		sendAnswer("Давайте попробуем очистить кэш Safari:\n\
@@ -633,12 +627,6 @@ Then please write to us about the result.')
 		else
 			sendAnswerTemplate2(txt)
 	}
-    document.getElementById('perevod').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate2("Соединяю со специалистом, который вам поможет. Дождитесь, пожалуйста.")
-		else
-			sendAnswer('I am connecting you with a specialist who will help you. Wait please')
-	}
     document.getElementById('browser').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 			sendAnswer("Уточните, пожалуйста, какое устройство и какой браузер используете")
@@ -646,34 +634,7 @@ Then please write to us about the result.')
 			sendAnswer("Please specify which device and browser you are using.")
 	}
 	
-    document.getElementById('idU').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Уточнение ID ученика (шаблон ТП)", "id")
-		else 
-			sendAnswer("Please specify student ID")
-	}
-    document.getElementById('TW').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Программа TeamViewer (шаблон ТП)", 'jira')
-		else 
-			sendAnswer("Please follow the link to download <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">TeamViewer</a> - a program for remote access. \n\
-After downloading launch TeamViewer and send me the ID and the password it will show.\n\
-This will help us see your screen and speed up the trouble shooting.")
-	}
-    document.getElementById('internet').onclick = function () {
-		sendAnswerTemplate("Проблема с Интернетом (ТП)", "Интернет")
-	}
-    document.getElementById('engConv').onclick = function () {
-		sendAnswerTemplate("Общение на англ (шаблон)", "общение на англ")
-	}
 	
-    document.getElementById('screen').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Отправьте, пожалуйста, ссылку на скриншот вашей неполадки и мы поможем вам. Для быстрого создания скриншота вы можете воспользоваться <a href=\"http://skyeng.ru/go/prnt\" target=\"_blank\" rel=\"noopener\">этим сервисом</a>&nbsp;")
-		else 
-			sendAnswer("Please send a link to a screenshot of your problem and we will help you. To quickly create a screenshot, you can use <a href=\"http://skyeng.ru/go/prnt\" target=\"_blank\" rel=\"noopener\">this service</a>&nbsp")
-		
-	}
     document.getElementById('NS').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
 		txt = "Пожалуйста, воспользуйтесь инструкцией, а затем напишите, удалось ли вам наладить связь\n\
@@ -774,7 +735,7 @@ This will help us see your screen and speed up the trouble shooting.")
 move_again_AF();
 
 function buttonsFromDoc() {
-	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = function() {
+	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = function() {
 		msgFromTable(this.innerText)		
 	}
 }
