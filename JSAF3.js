@@ -1099,17 +1099,36 @@ getText()
 
 function msgFromTable(btnName) {
 	for(l = 0; l < table.length; l++) {
-		if(btnName == table[l][0]) {
-			if(table[l][1] == "Быстрый шаблон") {
-				sendAnswerTemplate2(table[l][2])
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			if(btnName == table[l][0]) {
+				if(table[l][1] == "Быстрый шаблон") {
+					sendAnswerTemplate2(table[l][2])
+				}
+				if(table[l][1] == "Текст") {
+					sendAnswer(table[l][2])
+				}
+				if(table[l][1] == "Шаблон") {
+					sendAnswerTemplate(table[l][2], table[l][3])
+				}
+				break
 			}
-			if(table[l][1] == "Текст") {
-				sendAnswer(table[l][2])
+		} else {
+			if(btnName == table[l][0]) {
+				if(table[l][4] == "") {
+					document.getElementById('inp').value = "Нет такого шаблона"
+				} else {
+					if(table[l][5] == "Быстрый шаблон") {
+						sendAnswerTemplate2(table[l][6])
+					}
+					if(table[l][5] == "Текст") {
+						sendAnswer(table[l][6])
+					}
+					if(table[l][5] == "Шаблон") {
+						sendAnswerTemplate(table[l][6], table[l][7])
+					}
+					break
+				}
 			}
-			if(table[l][1] == "Шаблон") {
-				sendAnswerTemplate(table[l][2], table[l][3])
-			}
-			break
 		}
 	}
 }
