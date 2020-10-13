@@ -735,7 +735,7 @@ Then please write to us about the result.')
 move_again_AF();
 
 function buttonsFromDoc() {
-	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = function() {
+	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = function() {
 		msgFromTable(this.innerText)		
 	}
 }
@@ -1035,7 +1035,7 @@ var bool = 0;
 
 var table
 function getText() {
-   var app = `https://script.googleusercontent.com/macros/echo?user_content_key=uWuKfiMxHkf9IMQrxJT9zh_hkxwcbm7VP-oZXUSHPARwFbsKxoNt90TdiRneuuk_CyHSJB1Hex0_xmsT6b6Nwq8u-ELWyfL1m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnEcE-yJQNoyZEzrqjglXCkHHoHtCBDm70uc48xcTv21Fm2bsom7VhzVSXGIRRRxE7Npytj_A4aoE&lib=MxMcm2I9EBgYsAhmFrSyUGRwhIa3xdtnt`,
+   var app = `https://script.googleusercontent.com/macros/echo?user_content_key=mf3QPRIE6KieM0PHhc7Q3jDrZMQGKsj8Fo-aHboHKsu5K3L9VptHdiYhCeOvAdbMwTp8-Iop9bgHjlA1uYIScsTiggqY4WNVm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnK8kmHKw-s9uEOO-mowUiqRQcoSpZSZyv1mhO3y8L5sB6MOcViIYcCeEZWU5C-oY6g&lib=MxMcm2I9EBgYsAhmFrSyUGRwhIa3xdtnt`,
       output = '',
       xhr = new XMLHttpRequest();
    xhr.open('GET', app);
