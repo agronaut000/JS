@@ -619,12 +619,6 @@ Then please write to us about the result.')
 		else
 			sendAnswerTemplate2(txt)
 	}
-    document.getElementById('browser').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Уточните, пожалуйста, какое устройство и какой браузер используете")
-		else 
-			sendAnswer("Please specify which device and browser you are using.")
-	}
 	
 	
     document.getElementById('NS').onclick = function () {
@@ -727,7 +721,7 @@ Then please write to us about the result.')
 move_again_AF();
 
 function buttonsFromDoc() {
-	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = function() {
+	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = document.getElementById('browser').onclick = function() {
 		msgFromTable(this.innerText)		
 	}
 }
@@ -1373,7 +1367,7 @@ else
 var timeStart = new Date()
 function startTimer() {
 	var timeNow = new Date()
-	if(timeNow - timeStart > 1 * 60 * 1000) {
+	if(timeNow - timeStart > 60 * 60 * 1000) {
 		getText()
 		timeStart = timeNow
 	}
@@ -1574,12 +1568,12 @@ async function sendAnswerTemplate2(txt, flag = 0) {
 			  "credentials": "include"
 		});
 		resetFlags()
+		flagggg = 0
 	}
 }
 function resetFlags() {
 	template_flag = 0
 	template_flag2 = 0
-	flagggg = 0
 }
 async function checkHistory(id) {
 	var date = new Date()
