@@ -1163,16 +1163,20 @@ function msgFromTable(btnName) {
 			}
 		} else {
 			if(btnName == table[l][0]) {
-				if(table[l][5] == "Быстрый шаблон") {
-					sendAnswerTemplate2(table[l][6])
+				{if(table[l][4] == "") {
+					document.getElementById('inp').value = "Нет такого шаблона"
+				} else {
+					if(table[l][5] == "Быстрый шаблон") {
+						sendAnswerTemplate2(table[l][6])
+					}
+					if(table[l][5] == "Текст") {
+						sendAnswer(table[l][6])
+					}
+					if(table[l][5] == "Шаблон") {
+						sendAnswerTemplate(table[l][6], table[l][7])
+					}
+					break
 				}
-				if(table[l][5] == "Текст") {
-					sendAnswer(table[l][6])
-				}
-				if(table[l][5] == "Шаблон") {
-					sendAnswerTemplate(table[l][6], table[l][7])
-				}
-				break
 			}
 		}
 	}
