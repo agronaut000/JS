@@ -1163,7 +1163,7 @@ function msgFromTable(btnName) {
 			}
 		} else {
 			if(btnName == table[l][0]) {
-				{if(table[l][4] == "") {
+				if(table[l][4] == "") {
 					document.getElementById('inp').value = "Нет такого шаблона"
 				} else {
 					if(table[l][5] == "Быстрый шаблон") {
