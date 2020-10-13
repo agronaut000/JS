@@ -425,13 +425,6 @@ function move_again_AF() {
         }
 	}
 	
-    document.getElementById('cacheSafari').onclick = function () {
-		sendAnswer("Давайте попробуем очистить кэш Safari:\n\
-1. Зайдите в Настройки->Safari.\n\
-2. Найдите пункт \"Очистить историю и данные сайтов\". Жмите по этой кнопке.\n\
-3. В новом окне прочитайте сообщение и нажмите \"Очистить\"")
-	}
-	
 	
     document.getElementById('tmplt1_save').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
@@ -502,13 +495,17 @@ function move_again_AF() {
 Then please write to us about the result.")
 		}
 	}
+	
+    document.getElementById('cacheSafari').onclick = function () {
+		sendAnswer("Давайте попробуем очистить кэш Safari:\n\
+1. Зайдите в Настройки->Safari.\n\
+2. Найдите пункт \"Очистить историю и данные сайтов\". Жмите по этой кнопке.\n\
+3. В новом окне прочитайте сообщение и нажмите \"Очистить\"")
+	}
 
     document.getElementById('privateMode').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") 
-			sendAnswer("Пожалуйста, откройте новую вкладку в режиме инкогнито сочетанием клавиш Ctrl + Shift + N. Либо через специальное меню как <a href=\"https://skyeng.ru/go/screen6\" target=\"_blank\" rel=\"noopener\">на скриншоте&nbsp;</a> \n\
-Для Макбука: Нажмите ⌘ + Shift + N. \n\
-И проверьте как работает платформа в нем.\n\
-Затем, пожалуйста, напишите нам о результате")
+			sendAnswerTemplate("Инкогнито/приватное окно (шаблон ТП)", "Инкогнито")
 		else 
 			sendAnswer('Please open a new tab in incognito mode by pressing Ctrl + Shift + N. \n\
 For MacBook: Press ⌘ + Shift + N. \n\
@@ -518,10 +515,6 @@ Then please write to us about the result.')
     document.getElementById('predlozh').onclick = function () {
 		sendAnswerTemplate("Платформа: Пожелания/Отзыв по платформе и личному кабинету", "пожелание")
 	}
-
-
-	
-	
     document.getElementById('UnapisalSam').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			sendAnswer("Пожалуйста, попросите ученика самостоятельно написать нам в чат, чтобы мы получили информацию о нем и его системе. Это поможет нам оперативно связаться с учеником и получить необходимую информацию. Спасибо за понимание!")
@@ -534,13 +527,10 @@ Then please write to us about the result.')
 			sendAnswer("Не удалось дозвониться до ученика. Попросите, пожалуйста, ученика самостоятельно написать в Support Chat <a href=\"http://joxi.ru/eAOopwaTkaQolA\" target=\"_blank\" rel=\"noopener\">вот так</a>. Мы обязательно поможем")
 		} 
 	}
-	
-	
     document.getElementById('hiddenHW').onclick = function () {
 		sendAnswer("Ваш преподаватель забыл открыть для вас скрытый раздел, выполнение которого влияет на подсчет балла и завершение домашнего задания.\n\
 Мы открыли его для вас, теперь после выполнения вы сможете завершить это домашнее задание.")
 	}
-	
 	
     document.getElementById('serverAF').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -558,6 +548,19 @@ Then please write to us about the result.')
 	}
     document.getElementById('vcall').onclick = function () {
 		sendAnswerTemplate("Тест видеосвязи (ТП)", "тест видеосвязи")
+	}
+    document.getElementById('NS').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+		txt = "Пожалуйста, воспользуйтесь инструкцией, а затем напишите, удалось ли вам наладить связь\n\
+1. Завершаете урок через Finish\n\
+2. Создаете урок через New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">вот так&nbsp;</a> \n\
+3. Копируете ссылку и отправляете в чат ученику, заранее предупредив его об этом, так как кнопка войти в класс уже не будет функционировать."
+		else 
+			txt = "Use this instruction, and then write if you managed to establish a connection \n\
+1. End the lesson by clicking Finish \n\
+2. Create a lesson through New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">like this&nbsp;</a> \n\
+3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
+		sendAnswer(txt)
 	}
 	
 	
@@ -620,20 +623,6 @@ Then please write to us about the result.')
 			sendAnswerTemplate2(txt)
 	}
 	
-	
-    document.getElementById('NS').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-		txt = "Пожалуйста, воспользуйтесь инструкцией, а затем напишите, удалось ли вам наладить связь\n\
-1. Завершаете урок через Finish\n\
-2. Создаете урок через New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">вот так&nbsp;</a> \n\
-3. Копируете ссылку и отправляете в чат ученику, заранее предупредив его об этом, так как кнопка войти в класс уже не будет функционировать."
-		else 
-			txt = "Use this instruction, and then write if you managed to establish a connection \n\
-1. End the lesson by clicking Finish \n\
-2. Create a lesson through New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">like this&nbsp;</a> \n\
-3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
-		sendAnswer(txt)
-	}
 	
 
 	window.onkeydown = function(e) {
