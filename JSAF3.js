@@ -626,7 +626,7 @@ function move_again_AF() {
 move_again_AF();
 
 function buttonsFromDoc() {
-	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = document.getElementById('browser').onclick = document.getElementById('privateMode').onclick = document.getElementById('managers_tc').onclick = document.getElementById('micro').onclick = document.getElementById('cacheSafari').onclick = document.getElementById('predlozh').onclick = document.getElementById('UnapisalSam').onclick = document.getElementById('hiddenHW').onclick = document.getElementById('serverAF').onclick = document.getElementById('macBag').onclick = document.getElementById('revision').onclick = document.getElementById('vcall').onclick = function() {
+	document.getElementById('anydesk').onclick = document.getElementById('nedozvonU').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = document.getElementById('browser').onclick = document.getElementById('privateMode').onclick = document.getElementById('managers_tc').onclick = document.getElementById('micro').onclick = document.getElementById('cacheSafari').onclick = document.getElementById('predlozh').onclick = document.getElementById('UnapisalSam').onclick = document.getElementById('hiddenHW').onclick = document.getElementById('serverAF').onclick = document.getElementById('macBag').onclick = document.getElementById('revision').onclick = document.getElementById('vcall').onclick = function() {
 		butName = this.innerText
 		if(butName == "ус+брауз")
 			if(user == 'student')
@@ -1015,7 +1015,7 @@ queryId = b.queryId
 AFsessionId = b.sessionId
 tmpText = b.text
 tmpText = tmpText.split("\n").join("\\n")
-tmpText = tmpText.replace("<br />",'\n')
+tmpText = tmpText.split("<br />").join('\n')
 tmpText = tmpText.replace(/<\/?[^>a]+>/g,'')
 title = b.title
 title = title.split("\"").join("\\\"")
