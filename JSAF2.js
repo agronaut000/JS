@@ -158,9 +158,6 @@ var win_AFhelper =
 					<button id="vcall">vcall-test</button>
 					<button id="micro">микро</button>
 					<button id="addMacTW">Mac+TW</button>
-					<button id="testBut1">Тест1</button>
-					<button id="testBut2">Тест2</button>
-					<button id="testBut3">Тест3</button>
 			</div>
 		</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="set_bar">
