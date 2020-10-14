@@ -396,31 +396,9 @@ function move_again_AF() {
     document.getElementById('languageAF').onclick = function () {
         if(this.innerHTML == "Русский") {
             this.innerHTML = "Английский";
-			document.getElementById('cacheSafari').style.display = 'none'
-			document.getElementById('nedozvonU').style.display = 'none'
-			document.getElementById('vcall').style.display = 'none'
-			document.getElementById('macBag').style.display = 'none'
-			document.getElementById('hiddenHW').style.display = 'none'
-			document.getElementById('revision').style.display = 'none'
-			document.getElementById('predlozh').style.display = 'none'
-			document.getElementById('internet').style.display = 'none'
-			document.getElementById('hardReset').style.display = 'none'
-			document.getElementById('addMacTW').style.display = 'none'
-			document.getElementById('necel').style.display = 'none'
 			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
-			document.getElementById('nedozvonU').style.display = ''
-			document.getElementById('vcall').style.display = ''
-			document.getElementById('cacheSafari').style.display = ''
-			document.getElementById('macBag').style.display = ''
-			document.getElementById('hiddenHW').style.display = ''
-			document.getElementById('revision').style.display = ''
-			document.getElementById('predlozh').style.display = ''
-			document.getElementById('internet').style.display = ''
-			document.getElementById('hardReset').style.display = ''
-			document.getElementById('addMacTW').style.display = ''
-			document.getElementById('necel').style.display = ''
 			document.getElementById('AF_helper').style.background = "#464451"
         }
 	}
@@ -486,68 +464,6 @@ function move_again_AF() {
 			document.getElementById('inp').value = "Не введен текст 3 шаблона"
 		else 
 			sendAnswer(txt)
-	}
-    document.getElementById('micro').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswerTemplate('Настройка микрофона в системе (Windows/OS X) (шаблон ТП)', 'Настройка микрофона в системе (Windows/OS X) (шаблон ТП)')
-		} else {
-			sendAnswer("Please check your microphone settings using <a href=\"http://en_faq.usedocs.com/article/14747\" target=\"_blank\" rel=\"noopener\">this instruction</a> \n\
-Then please write to us about the result.")
-		}
-	}
-	
-    document.getElementById('cacheSafari').onclick = function () {
-		sendAnswer("Давайте попробуем очистить кэш Safari:\n\
-1. Зайдите в Настройки->Safari.\n\
-2. Найдите пункт \"Очистить историю и данные сайтов\". Жмите по этой кнопке.\n\
-3. В новом окне прочитайте сообщение и нажмите \"Очистить\"")
-	}
-
-    document.getElementById('privateMode').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") 
-			sendAnswerTemplate("Инкогнито/приватное окно (шаблон ТП)", "Инкогнито")
-		else 
-			sendAnswer('Please open a new tab in incognito mode by pressing Ctrl + Shift + N. \n\
-For MacBook: Press ⌘ + Shift + N. \n\
-And check how the platform works in it. \n\
-Then please write to us about the result.')
-	}
-    document.getElementById('predlozh').onclick = function () {
-		sendAnswerTemplate("Платформа: Пожелания/Отзыв по платформе и личному кабинету", "пожелание")
-	}
-    document.getElementById('UnapisalSam').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Пожалуйста, попросите ученика самостоятельно написать нам в чат, чтобы мы получили информацию о нем и его системе. Это поможет нам оперативно связаться с учеником и получить необходимую информацию. Спасибо за понимание!")
-		} else {
-			sendAnswer("Please ask the student to write us a chat on their own so that we receive information about him and his system. This will help us quickly contact the student and get the necessary information. Thank you for understanding!")
-		}
-	}
-    document.getElementById('nedozvonU').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Не удалось дозвониться до ученика. Попросите, пожалуйста, ученика самостоятельно написать в Support Chat <a href=\"http://joxi.ru/eAOopwaTkaQolA\" target=\"_blank\" rel=\"noopener\">вот так</a>. Мы обязательно поможем")
-		} 
-	}
-    document.getElementById('hiddenHW').onclick = function () {
-		sendAnswer("Ваш преподаватель забыл открыть для вас скрытый раздел, выполнение которого влияет на подсчет балла и завершение домашнего задания.\n\
-Мы открыли его для вас, теперь после выполнения вы сможете завершить это домашнее задание.")
-	}
-	
-    document.getElementById('serverAF').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Серверные проблемы (шаблон ТП)" , "Серверные")
-		else
-			sendAnswer("Please forgive me for technical problems. Our developers are already in the know and are working on a solution. Everything will work as usual soon.")
-		if(document.getElementById('msg1').innerHTML != "Доработать")
-			sendComment(document.getElementById('inp').value)
-	}
-    document.getElementById('macBag').onclick = function () {
-		sendAnswerTemplate("Макобаг (ТП)", "мак")
-	}
-    document.getElementById('revision').onclick = function () {
-		sendAnswerTemplate("Старая ревизия (шаблон ТП)", "ревизия")
-	}
-    document.getElementById('vcall').onclick = function () {
-		sendAnswerTemplate("Тест видеосвязи (ТП)", "тест видеосвязи")
 	}
     document.getElementById('NS').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
@@ -710,8 +626,11 @@ Then please write to us about the result.')
 move_again_AF();
 
 function buttonsFromDoc() {
-	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = document.getElementById('browser').onclick = function() {
-		msgFromTable(this.innerText)		
+	document.getElementById('anydesk').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = document.getElementById('browser').onclick = document.getElementById('privateMode').onclick = document.getElementById('managers_tc').onclick = document.getElementById('micro').onclick = document.getElementById('cacheSafari').onclick = document.getElementById('predlozh').onclick = document.getElementById('UnapisalSam').onclick = document.getElementById('hiddenHW').onclick = document.getElementById('serverAF').onclick = document.getElementById('macBag').onclick = document.getElementById('revision').onclick = document.getElementById('vcall').onclick = function() {
+		msgFromTable(this.innerText)
+		if(this.innerText == "Серверные")
+			if(document.getElementById('msg1').innerHTML != "Доработать")
+				sendComment(document.getElementById('inp').value)
 	}
 }
 buttonsFromDoc()
@@ -885,20 +804,6 @@ function perevod() {
 	}
 	mobile()
 	function utc() {
-		document.getElementById('managers_tc').onclick = function () {
-			if(document.getElementById('languageAF').innerHTML == "Русский") {
-				if(document.getElementById('email_tr').value == "")
-					email = document.getElementById('email_tr').placeholder
-				else
-					email = document.getElementById('email_tr').value
-				if (email == "")
-					document.getElementById('inp').value = "Введите почту"
-				else
-					document.getElementById('inp').value = "Я передал обращение в отдел заботы о преподавателях. С вами свяжется наш специалист по почте " + email + " и поможет с решением этого вопроса. \n\
-Если в течение суток вы не получите ответа, пожалуйста, напишите в этот чат ещё раз, мы всё проверим."
-			}
-		}
-		
 		document.getElementById('managers_sc').onclick = function () {
 			if(document.getElementById('languageAF').innerHTML == "Русский") {
 				document.getElementById('inp').value = "Вы написали в техподдержку школы. Если вопрос связан с учениками, пожалуйста, напишите в чат \"Managers (Student Care)\"."
@@ -1238,7 +1143,6 @@ async function sendComment(txt){
 	  "credentials": "include"
 	});
 }
-
 idk = 0
 var tmrs = []
 function addTimer() {
@@ -1254,7 +1158,6 @@ function addTimer() {
 		idk++
 	}
 }
-
 
 function addTimers() {
 	k = 0
