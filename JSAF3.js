@@ -158,9 +158,6 @@ var win_AFhelper =
 					<button id="vcall">vcall-test</button>
 					<button id="micro">микро</button>
 					<button id="addMacTW">Mac+TW</button>
-					<button id="testBut1">Тест1</button>
-					<button id="testBut2">Тест2</button>
-					<button id="testBut3">Тест3</button>
 			</div>
 		</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="set_bar">
@@ -626,7 +623,7 @@ function move_again_AF() {
 move_again_AF();
 
 function buttonsFromDoc() {
-	document.getElementById('anydesk').onclick = document.getElementById('nedozvonU').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = document.getElementById('browser').onclick = document.getElementById('privateMode').onclick = document.getElementById('managers_tc').onclick = document.getElementById('micro').onclick = document.getElementById('cacheSafari').onclick = document.getElementById('predlozh').onclick = document.getElementById('UnapisalSam').onclick = document.getElementById('hiddenHW').onclick = document.getElementById('serverAF').onclick = document.getElementById('macBag').onclick = document.getElementById('revision').onclick = document.getElementById('vcall').onclick = function() {
+	document.getElementById('anydesk').onclick = document.getElementById('nedozvonU').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = document.getElementById('browser').onclick = document.getElementById('privateMode').onclick = document.getElementById('managers_tc').onclick = document.getElementById('micro').onclick = document.getElementById('cacheSafari').onclick = document.getElementById('predlozh').onclick = document.getElementById('UnapisalSam').onclick = document.getElementById('hiddenHW').onclick = document.getElementById('serverAF').onclick = document.getElementById('macBag').onclick = document.getElementById('revision').onclick = document.getElementById('vcall').onclick = function() {
 		butName = this.innerText
 		if(butName == "ус+брауз")
 			if(user == 'student')
@@ -1227,7 +1224,7 @@ function refreshTimer() {
 				else
 					btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "white"
 				
-				btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[3].innerText = tmrs[i][4]
+				btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[3].innerText = tmrs[i][4].bold()
 				var cT = new Date();
 				var curT1 = tmrs[i][3]
 				var curT2 = Number(cT);
