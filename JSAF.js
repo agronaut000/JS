@@ -158,6 +158,9 @@ var win_AFhelper =
 					<button id="vcall">vcall-test</button>
 					<button id="micro">микро</button>
 					<button id="addMacTW">Mac+TW</button>
+					<button id="testBut1">Тест1</button>
+					<button id="testBut2">Тест2</button>
+					<button id="testBut3">Тест3</button>
 			</div>
 		</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="set_bar">
@@ -388,101 +391,16 @@ function move_again_AF() {
 			audio = new Audio(document.getElementById('sound_adr').value);
 		document.getElementById('sound_adr').value = "";
 	}
-		
-    document.getElementById('anydesk').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Пожалуйста, установите и запустите программу \"AnyDesk\" — она поможет мне увидеть ваш экран и быстрее решить вопрос.\n\
-Загрузить её можно по ссылке: <a href=\"https://download.anydesk.com/AnyDesk.exe\" target=\"_blank\" rel=\"noopener\">для Windows</a> и <a href=\"https://download.anydesk.com/anydesk.dmg\" target=\"_blank\" rel=\"noopener\">для MacOS</a> \n\
-После загрузки запустите её и отправьте мне адрес рабочего места (<a href=\"http://joxi.ru/D2PZ0kvHJqZgYr\" target=\"_blank\" rel=\"noopener\">скрин</a>), который она покажет, обратным сообщением в чат.\n\
-При подключении сотрудника, пожалуйста, нажмите \"Принять\" (<a href=\"http://joxi.ru/bmoMnPzs96X3kA\" target=\"_blank\" rel=\"noopener\">скрин</a>).")
-        } else {
-			sendAnswer("Please use this link to download AnyDesk; this program will allow me to see your screen and fix the issue more efficiently: <a href=\"https://download.anydesk.com/AnyDesk.exe\" target=\"_blank\" rel=\"noopener\">link</a>\n\
-Once it's downloaded, please launch it and send me your desktop number. It will be shown in the top left corner (<a href=\"http://joxi.ru/D2PZ0kvHJqZgYr\" target=\"_blank\" rel=\"noopener\">screenshot</a>)\n\
-When our employee connects, please click \"Accept\" (<a href=\"http://joxi.ru/Q2K8GKYHwzddkA\" target=\"_blank\" rel=\"noopener\">screenshot</a>)")
-		}
-	}
-    document.getElementById('necel').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswerTemplate("Нецелевой запрос (шаблон ТП)", "Нецелевой запрос")
-		}
-	}
-		
-    document.getElementById('thanks').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswerTemplate2("Спасибо за ожидание.")
-        } else {
-			sendAnswer("Thanks for waiting")
-        }
-	}
-    document.getElementById('gladToHelp').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswerTemplate2("Был рад помочь!")
-        } else {
-			sendAnswer("I was glad to help!")
-        }
-	}
-    document.getElementById('cacheTmp').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswerTemplate("Очистка кэша браузера(шаблон ТП)", "кэш")
-        } else {
-			sendAnswer("Please clear your browser cache using instructions: http://en_faq.usedocs.com/article/14753 \n\
-And then reboot the device and check again, if nothing changes, please write to us.")
-        }
-	}
-    document.getElementById('addMacTW').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("1) Откройте Системные настройки в меню Apple.\n\
-2) Зайдите в Защита и безопасность.\n\
-3) Перейдите на вкладку Конфиденциальность.\n\
-4) В колонке слева выберите \"Универсальный доступ\".\n\
-5) Поставьте галочки рядом с программой TeamViewer")
-        }
-	}
 	
 			
     document.getElementById('languageAF').onclick = function () {
         if(this.innerHTML == "Русский") {
             this.innerHTML = "Английский";
-			document.getElementById('cacheSafari').style.display = 'none'
-			document.getElementById('nedozvonU').style.display = 'none'
-			document.getElementById('vcall').style.display = 'none'
-			document.getElementById('macBag').style.display = 'none'
-			document.getElementById('hiddenHW').style.display = 'none'
-			document.getElementById('revision').style.display = 'none'
-			document.getElementById('predlozh').style.display = 'none'
-			document.getElementById('internet').style.display = 'none'
-			document.getElementById('hardReset').style.display = 'none'
-			document.getElementById('addMacTW').style.display = 'none'
-			document.getElementById('necel').style.display = 'none'
 			document.getElementById('AF_helper').style.background = "#EBC7DF"
         } else {
             this.innerHTML = "Русский";
-			document.getElementById('nedozvonU').style.display = ''
-			document.getElementById('vcall').style.display = ''
-			document.getElementById('cacheSafari').style.display = ''
-			document.getElementById('macBag').style.display = ''
-			document.getElementById('hiddenHW').style.display = ''
-			document.getElementById('revision').style.display = ''
-			document.getElementById('predlozh').style.display = ''
-			document.getElementById('internet').style.display = ''
-			document.getElementById('hardReset').style.display = ''
-			document.getElementById('addMacTW').style.display = ''
-			document.getElementById('necel').style.display = ''
 			document.getElementById('AF_helper').style.background = "#464451"
         }
-	}
-    document.getElementById('twoMin').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate2("Сейчас я вам помогу, подождите, пожалуйста.")
-        else
-			sendAnswer("I will help you now, please wait.")
-	}
-	
-    document.getElementById('cacheSafari').onclick = function () {
-		sendAnswer("Давайте попробуем очистить кэш Safari:\n\
-1. Зайдите в Настройки->Safari.\n\
-2. Найдите пункт \"Очистить историю и данные сайтов\". Жмите по этой кнопке.\n\
-3. В новом окне прочитайте сообщение и нажмите \"Очистить\"")
 	}
 	
 	
@@ -547,100 +465,18 @@ And then reboot the device and check again, if nothing changes, please write to 
 		else 
 			sendAnswer(txt)
 	}
-	
-    document.getElementById('VPN').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswerTemplate("Установка VPN в браузер (шаблон ТП)", 'VPN')
-		} else {
-			sendAnswer("Please install browser VPN extension using <a href=\"http://en_faq.usedocs.com/article/14752\" target=\"_blank\" rel=\"noopener\">this instruction</a>\n\
-Then run it and refresh the page.")
-		}
-	}
-	
-	
-    document.getElementById('hardReset').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Пожалуйста, выполните жесткую перезагрузку и очистку кеша страницы в браузере. Для этого:\n\
-1. Нажмите правой кнопкой мыши на странице и выберите в списке \"Просмотреть код\" (<a href=\"http://joxi.ru/n2YoKw7Tej3kBr\" target=\"_blank\" rel=\"noopener\">скриншот</a>)\n\
-2. Нажмите правой кнопкой мыши на значок обновления страницы (<a href=\"http://joxi.ru/Vm61qNeTvxG3Nr\" target=\"_blank\" rel=\"noopener\">скриншот</a>)\n\
-3. Выберите пункт \"Очистка кэша и жесткая перезагрузка\", как показано <a href=\"http://joxi.ru/eAOMNpaTk4LoJm\" target=\"_blank\" rel=\"noopener\">на скриншоте</a>\n\
-Напишите, удастся ли этим способом решить неполадку.")
-		}
-	}
-	
-	
-	
-    document.getElementById('thank').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswerTemplate2("Спасибо за обращение. Всего вам доброго!")
-		} else {
-			sendAnswer("Thank you for contacting us. All the best!")
-		}
-	}
-    document.getElementById('micro').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswerTemplate('Настройка микрофона в системе (Windows/OS X) (шаблон ТП)', 'Настройка микрофона в системе (Windows/OS X) (шаблон ТП)')
-		} else {
-			sendAnswer("Please check your microphone settings using <a href=\"http://en_faq.usedocs.com/article/14747\" target=\"_blank\" rel=\"noopener\">this instruction</a> \n\
-Then please write to us about the result.")
-		}
-	}
-
-    document.getElementById('privateMode').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") 
-			sendAnswer("Пожалуйста, откройте новую вкладку в режиме инкогнито сочетанием клавиш Ctrl + Shift + N. Либо через специальное меню как <a href=\"https://skyeng.ru/go/screen6\" target=\"_blank\" rel=\"noopener\">на скриншоте&nbsp;</a> \n\
-Для Макбука: Нажмите ⌘ + Shift + N. \n\
-И проверьте как работает платформа в нем.\n\
-Затем, пожалуйста, напишите нам о результате")
-		else 
-			sendAnswer('Please open a new tab in incognito mode by pressing Ctrl + Shift + N. \n\
-For MacBook: Press ⌘ + Shift + N. \n\
-And check how the platform works in it. \n\
-Then please write to us about the result.')
-	}
-    document.getElementById('predlozh').onclick = function () {
-		sendAnswerTemplate("Платформа: Пожелания/Отзыв по платформе и личному кабинету", "пожелание")
-	}
-
-
-	
-	
-    document.getElementById('UnapisalSam').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Пожалуйста, попросите ученика самостоятельно написать нам в чат, чтобы мы получили информацию о нем и его системе. Это поможет нам оперативно связаться с учеником и получить необходимую информацию. Спасибо за понимание!")
-		} else {
-			sendAnswer("Please ask the student to write us a chat on their own so that we receive information about him and his system. This will help us quickly contact the student and get the necessary information. Thank you for understanding!")
-		}
-	}
-    document.getElementById('nedozvonU').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			sendAnswer("Не удалось дозвониться до ученика. Попросите, пожалуйста, ученика самостоятельно написать в Support Chat <a href=\"http://joxi.ru/eAOopwaTkaQolA\" target=\"_blank\" rel=\"noopener\">вот так</a>. Мы обязательно поможем")
-		} 
-	}
-	
-	
-    document.getElementById('hiddenHW').onclick = function () {
-		sendAnswer("Ваш преподаватель забыл открыть для вас скрытый раздел, выполнение которого влияет на подсчет балла и завершение домашнего задания.\n\
-Мы открыли его для вас, теперь после выполнения вы сможете завершить это домашнее задание.")
-	}
-	
-	
-    document.getElementById('serverAF').onclick = function () {
+    document.getElementById('NS').onclick = function () {
 		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Серверные проблемы (шаблон ТП)" , "Серверные")
-		else
-			sendAnswer("Please forgive me for technical problems. Our developers are already in the know and are working on a solution. Everything will work as usual soon.")
-		if(document.getElementById('msg1').innerHTML != "Доработать")
-			sendComment(document.getElementById('inp').value)
-	}
-    document.getElementById('macBag').onclick = function () {
-		sendAnswerTemplate("Макобаг (ТП)", "мак")
-	}
-    document.getElementById('revision').onclick = function () {
-		sendAnswerTemplate("Старая ревизия (шаблон ТП)", "ревизия")
-	}
-    document.getElementById('vcall').onclick = function () {
-		sendAnswerTemplate("Тест видеосвязи (ТП)", "тест видеосвязи")
+		txt = "Пожалуйста, воспользуйтесь инструкцией, а затем напишите, удалось ли вам наладить связь\n\
+1. Завершаете урок через Finish\n\
+2. Создаете урок через New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">вот так&nbsp;</a> \n\
+3. Копируете ссылку и отправляете в чат ученику, заранее предупредив его об этом, так как кнопка войти в класс уже не будет функционировать."
+		else 
+			txt = "Use this instruction, and then write if you managed to establish a connection \n\
+1. End the lesson by clicking Finish \n\
+2. Create a lesson through New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">like this&nbsp;</a> \n\
+3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
+		sendAnswer(txt)
 	}
 	
 	
@@ -702,62 +538,7 @@ Then please write to us about the result.')
 		else
 			sendAnswerTemplate2(txt)
 	}
-    document.getElementById('perevod').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate2("Соединяю со специалистом, который вам поможет. Дождитесь, пожалуйста.")
-		else
-			sendAnswer('I am connecting you with a specialist who will help you. Wait please')
-	}
-    document.getElementById('browser').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswer("Уточните, пожалуйста, какое устройство и какой браузер используете")
-		else 
-			sendAnswer("Please specify which device and browser you are using.")
-	}
 	
-    document.getElementById('idU').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Уточнение ID ученика (шаблон ТП)", "id")
-		else 
-			sendAnswer("Please specify student ID")
-	}
-    document.getElementById('TW').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate("Программа TeamViewer (шаблон ТП)", 'jira')
-		else 
-			sendAnswer("Please follow the link to download <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">TeamViewer</a> - a program for remote access. \n\
-After downloading launch TeamViewer and send me the ID and the password it will show.\n\
-This will help us see your screen and speed up the trouble shooting.")
-	}
-    document.getElementById('internet').onclick = function () {
-		sendAnswerTemplate("Проблема с Интернетом (ТП)", "Интернет")
-	}
-    document.getElementById('engConv').onclick = function () {
-		sendAnswerTemplate("Общение на англ (шаблон)", "общение на англ")
-	}
-	
-    document.getElementById('screen').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			sendAnswerTemplate2("Отправьте, пожалуйста, ссылку на скриншот вашей неполадки и мы поможем. Вот два удобных сервиса:\n\
-- <a href=\"https://prnt.sc/\" target=\"_blank\" rel=\"noopener\">первый</a>\n\
-- <a href=\"https://pastenow.ru/\" target=\"_blank\" rel=\"noopener\">второй</a>")
-		else 
-			sendAnswer("Please send a link to a screenshot of your problem and we will help you. To quickly create a screenshot, you can use <a href=\"http://skyeng.ru/go/prnt\" target=\"_blank\" rel=\"noopener\">this service</a>&nbsp")
-		
-	}
-    document.getElementById('NS').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-		txt = "Пожалуйста, воспользуйтесь инструкцией, а затем напишите, удалось ли вам наладить связь\n\
-1. Завершаете урок через Finish\n\
-2. Создаете урок через New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">вот так&nbsp;</a> \n\
-3. Копируете ссылку и отправляете в чат ученику, заранее предупредив его об этом, так как кнопка войти в класс уже не будет функционировать."
-		else 
-			txt = "Use this instruction, and then write if you managed to establish a connection \n\
-1. End the lesson by clicking Finish \n\
-2. Create a lesson through New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">like this&nbsp;</a> \n\
-3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
-		sendAnswer(txt)
-	}
 	
 
 	window.onkeydown = function(e) {
@@ -844,6 +625,22 @@ This will help us see your screen and speed up the trouble shooting.")
 
 move_again_AF();
 
+function buttonsFromDoc() {
+	document.getElementById('anydesk').onclick = document.getElementById('nedozvonU').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('testBut1').onclick = document.getElementById('testBut2').onclick = document.getElementById('testBut3').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = document.getElementById('browser').onclick = document.getElementById('privateMode').onclick = document.getElementById('managers_tc').onclick = document.getElementById('micro').onclick = document.getElementById('cacheSafari').onclick = document.getElementById('predlozh').onclick = document.getElementById('UnapisalSam').onclick = document.getElementById('hiddenHW').onclick = document.getElementById('serverAF').onclick = document.getElementById('macBag').onclick = document.getElementById('revision').onclick = document.getElementById('vcall').onclick = function() {
+		butName = this.innerText
+		if(butName == "ус+брауз")
+			if(user == 'student')
+				butName = "ус+брауз (У)"
+			else
+				butName = "ус+брауз (П)"
+			
+		msgFromTable(butName)
+		if(butName == "Серверные")
+			if(document.getElementById('msg1').innerHTML != "Доработать")
+				sendComment(document.getElementById('inp').value)
+	}
+}
+buttonsFromDoc()
 function pages() {
 	document.getElementById('page1_button').onclick = function() {
 		document.getElementById('page1_button').style.backgroundColor = 'green'
@@ -892,13 +689,13 @@ function perevod() {
 					document.getElementById('inp').value = "Введите номер телефона"
 				else
 					if(document.getElementById('languageAF').innerHTML == "Русский") {
-						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
+						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
 Пожалуйста, запустите TeamViewer и продиктуйте специалисту ID и пароль, которые будут в открывшемся окне.\n\
 Программа поможет увидеть ваш экран и ускорит решение вопроса.\n\
 Сотрудник позвонит вам на ваш номер, указанный в заявке: " + phone
 					}
 			} else {
-						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
+						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
 Пожалуйста, запустите TeamViewer и продиктуйте специалисту ID и пароль, которые будут в открывшемся окне.\n\
 Программа поможет увидеть ваш экран и ускорит решение вопроса.\n\
 Сотрудник напишет вам в Slack"
@@ -919,7 +716,7 @@ function perevod() {
 		document.getElementById('secLineNow').onclick = function() {
 			if(document.getElementById('languageAF').innerHTML == "Русский") {
 				document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
-Загрузить её можно <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
+Загрузить её можно <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
 После загрузки запустите TeamViewer и ожидайте звонок.\n\
 \n\
 Спасибо за ваше обращение"
@@ -1014,20 +811,6 @@ function perevod() {
 	}
 	mobile()
 	function utc() {
-		document.getElementById('managers_tc').onclick = function () {
-			if(document.getElementById('languageAF').innerHTML == "Русский") {
-				if(document.getElementById('email_tr').value == "")
-					email = document.getElementById('email_tr').placeholder
-				else
-					email = document.getElementById('email_tr').value
-				if (email == "")
-					document.getElementById('inp').value = "Введите почту"
-				else
-					document.getElementById('inp').value = "Я передал обращение в отдел заботы о преподавателях. С вами свяжется наш специалист по почте " + email + " и поможет с решением этого вопроса. \n\
-Если в течение суток вы не получите ответа, пожалуйста, напишите в этот чат ещё раз, мы всё проверим."
-			}
-		}
-		
 		document.getElementById('managers_sc').onclick = function () {
 			if(document.getElementById('languageAF').innerHTML == "Русский") {
 				document.getElementById('inp').value = "Вы написали в техподдержку школы. Если вопрос связан с учениками, пожалуйста, напишите в чат \"Managers (Student Care)\"."
@@ -1071,7 +854,7 @@ function bagggs() {
 	document.getElementById('bagg31').onclick = function() {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Спасибо за ожидание. \n\
-Я проверил ДЗ (название/слайд, с которым обратился клиент), причина неполадки - сбой с нашей стороны. Все подробности передал разработчикам."
+Я проверил домашнее задание (название/слайд, с которым обратился клиент), причина неполадки - сбой с нашей стороны. Все подробности передал разработчикам."
 		}
 	}
 	document.getElementById('bagg32').onclick = function() {
@@ -1090,7 +873,7 @@ function bagggs() {
 	document.getElementById('bagg41').onclick = function() {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			document.getElementById('inp').value = "Спасибо за ожидание.\n\
-Я проверил ДЗ (название/слайд, с которым обратился клиент), причина неполадки - сбой в работе плеера. Все подробности передал разработчикам."
+Я проверил домашнее задание (название/слайд, с которым обратился клиент), причина неполадки - сбой в работе плеера. Все подробности передал разработчикам."
 		}
 	}
 	document.getElementById('bagg42').onclick = function() {
@@ -1136,6 +919,68 @@ function bagggs() {
 bagggs()
 var bool = 0;	
 
+
+var table
+function getText() {
+   var app = `https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec`,
+      output = '',
+      xhr = new XMLHttpRequest();
+   xhr.open('GET', app);
+   xhr.onreadystatechange = function() {
+     if (xhr.readyState !== 4) return;
+
+     if (xhr.status == 200) {
+        try {
+            var r = JSON.parse(xhr.responseText),
+               result = r["result"];
+			table = result;
+			console.log('Обновили шаблоны')
+        } catch(e) {}
+     } 
+   
+
+   }
+   xhr.send()
+   
+}
+getText()
+
+function msgFromTable(btnName) {
+	for(l = 0; l < table.length; l++) {
+		if(document.getElementById('languageAF').innerHTML == "Русский") {
+			if(btnName == table[l][0]) {
+				if(table[l][1] == "Быстрый шаблон") {
+					sendAnswerTemplate2(table[l][2])
+				}
+				if(table[l][1] == "Текст") {
+					sendAnswer(table[l][2])
+				}
+				if(table[l][1] == "Шаблон") {
+					sendAnswerTemplate(table[l][2], table[l][3])
+				}
+				break
+			}
+		} else {
+			if(btnName == table[l][0]) {
+				if(table[l][4] == "") {
+					document.getElementById('inp').value = "Нет такого шаблона"
+				} else {
+					if(table[l][5] == "Быстрый шаблон") {
+						sendAnswerTemplate2(table[l][6])
+					}
+					if(table[l][5] == "Текст") {
+						sendAnswer(table[l][6])
+					}
+					if(table[l][5] == "Шаблон") {
+						sendAnswerTemplate(table[l][6], table[l][7])
+					}
+					break
+				}
+			}
+		}
+	}
+}
+
 async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 = 0) {
 	//addTimer()
 	time = "10:00"
@@ -1170,7 +1015,7 @@ queryId = b.queryId
 AFsessionId = b.sessionId
 tmpText = b.text
 tmpText = tmpText.split("\n").join("\\n")
-tmpText = tmpText.replace("<br />",'\n')
+tmpText = tmpText.split("<br />").join('\n')
 tmpText = tmpText.replace(/<\/?[^>a]+>/g,'')
 title = b.title
 title = title.split("\"").join("\\\"")
@@ -1305,21 +1150,21 @@ async function sendComment(txt){
 	  "credentials": "include"
 	});
 }
-
 idk = 0
 var tmrs = []
 function addTimer() {
 	tm = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0].childNodes[0].childNodes[0]
 	if(tm.childNodes[0].childNodes[2] === undefined) {
 		let serv = document.createElement('div')
+		let serv2 = document.createElement('div')
 		tm.childNodes[0].appendChild(serv)
+		tm.childNodes[1].appendChild(serv2)
 		tm.childNodes[0].childNodes[2].innerHTML = "10:00"
 		let d = new Date()
-		tmrs[idk] = ["10:00", tm.childNodes[1].childNodes[0].innerText, 1, number(d)]
+		tmrs[idk] = ["10:00", tm.childNodes[1].childNodes[0].innerText, 1, number(d), ""]
 		idk++
 	}
 }
-
 
 function addTimers() {
 	k = 0
@@ -1339,7 +1184,7 @@ function addTimers() {
 			}
 		}
 		if(flag == 0)
-			tmrs[idk++] = ["10:00", nm, 1, Number(d)]
+			tmrs[idk++] = ["10:00", nm, 1, Number(d), ""]
 
 		k++
 	}	
@@ -1349,8 +1194,13 @@ function addTimers() {
 	while (true) {
 		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k] == undefined)
 			break;
-		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined)
+		if(btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[0].childNodes[2] == undefined) {
 			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[0].appendChild(document.createElement('div'))
+			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].appendChild(document.createElement('div'))
+			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.backgroundColor = 'red'
+			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.color = 'white'
+			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.textAlign = 'center'
+		}
 		k++
 	}
 }
@@ -1376,7 +1226,8 @@ function refreshTimer() {
 						btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#FBCEB1"
 				else
 					btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "white"
-					
+				
+				btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[3].innerText = tmrs[i][4]
 				var cT = new Date();
 				var curT1 = tmrs[i][3]
 				var curT2 = Number(cT);
@@ -1412,8 +1263,13 @@ if(str !== null && str !== "")
 else
 	audio = new Audio("https://drive.google.com/u/0/uc?id=1832JE2IuK7AnfgkljLYytEeFL99Mt2Gv&export=download");	
 
-
+var timeStart = new Date()
 function startTimer() {
+	var timeNow = new Date()
+	if(timeNow - timeStart > 60 * 60 * 1000) {
+		getText()
+		timeStart = timeNow
+	}
 	for(i = 0; i < idk; i++) {
 		var cT = new Date();
 		var curTime1 = tmrs[i][3]
@@ -1471,6 +1327,19 @@ function startTimer() {
 				vertical = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "userType")
 				user = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
+			
+			btns = document.getElementsByClassName('ant-btn expert-item-block expert-item-block-selected ant-btn-block')[0]
+
+			name = btns.childNodes[0].childNodes[0].childNodes[1].childNodes[0].childNodes[0].innerHTML
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-statusHTML")
+				for (k = 0; k < idk; k++) {
+					if(tmrs[k][1] == name) {
+						if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText == "идет урок")
+							tmrs[k][4] = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
+						else 
+							tmrs[k][4] = ""
+					}
+				}
 		}
 		addInfoUser.innerHTML = vertical + " + " + user 
 		if(vertical == "Math") {
@@ -1598,12 +1467,12 @@ async function sendAnswerTemplate2(txt, flag = 0) {
 			  "credentials": "include"
 		});
 		resetFlags()
+		flagggg = 0
 	}
 }
 function resetFlags() {
 	template_flag = 0
 	template_flag2 = 0
-	flagggg = 0
 }
 async function checkHistory(id) {
 	var date = new Date()
