@@ -1223,8 +1223,9 @@ function refreshTimer() {
 						btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#FBCEB1"
 				else
 					btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "white"
-				
-				btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[3].innerText = tmrs[i][4].bold()
+				if(tmrs[i][4] == "идет урок")
+					tmrs[i][4] = tmrs[i][4].bold()
+				btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[3].innerText = tmrs[i][4]
 				var cT = new Date();
 				var curT1 = tmrs[i][3]
 				var curT2 = Number(cT);
