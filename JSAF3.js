@@ -62,6 +62,7 @@ var win_AFhelper =
 					<button id="languageAF" style="width:100px">Русский</button>
 					<button id="hideMenu" style="margin-left: 50px">hide</button>
 					<button id="setting" style="margin-left: 80px">S</button>
+					<button id="setting2" style="margin-left: 80px">S2</button>
 				</div>
 				<div style="margin: 5px;" id="pages">
 					<button id="page1_button">Шаблоны</button>
@@ -475,6 +476,13 @@ function move_again_AF() {
 3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
 		sendAnswer(txt)
 	}
+    document.getElementById('setting2').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			txt = 'ru text'
+		else 
+			txt = 'en txt'
+		sendAnswer(txt)
+	}
 	
 	
     document.getElementById('msg1').onclick = function () {
@@ -686,13 +694,13 @@ function perevod() {
 					document.getElementById('inp').value = "Введите номер телефона"
 				else
 					if(document.getElementById('languageAF').innerHTML == "Русский") {
-						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
+						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
 Пожалуйста, запустите TeamViewer и продиктуйте специалисту ID и пароль, которые будут в открывшемся окне.\n\
 Программа поможет увидеть ваш экран и ускорит решение вопроса.\n\
 Сотрудник позвонит вам на ваш номер, указанный в заявке: " + phone
 					}
 			} else {
-						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
+						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
 Пожалуйста, запустите TeamViewer и продиктуйте специалисту ID и пароль, которые будут в открывшемся окне.\n\
 Программа поможет увидеть ваш экран и ускорит решение вопроса.\n\
 Сотрудник напишет вам в Slack"
@@ -713,7 +721,7 @@ function perevod() {
 		document.getElementById('secLineNow').onclick = function() {
 			if(document.getElementById('languageAF').innerHTML == "Русский") {
 				document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
-Загрузить её можно <a href=\"https://www.898.tv/skysupp\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
+Загрузить её можно <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
 После загрузки запустите TeamViewer и ожидайте звонок.\n\
 \n\
 Спасибо за ваше обращение"
@@ -1197,6 +1205,7 @@ function addTimers() {
 			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.backgroundColor = 'red'
 			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.color = 'white'
 			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.textAlign = 'center'
+			btns.childNodes[0].childNodes[0].childNodes[0].childNodes[k].childNodes[0].childNodes[0].childNodes[1].childNodes[3].style.fontWeight = 'bold'
 		}
 		k++
 	}
@@ -1223,8 +1232,7 @@ function refreshTimer() {
 						btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#FBCEB1"
 				else
 					btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "white"
-				
-				btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[3].innerText = tmrs[i][4].bold()
+				btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].childNodes[1].childNodes[3].innerText = tmrs[i][4]
 				var cT = new Date();
 				var curT1 = tmrs[i][3]
 				var curT2 = Number(cT);
