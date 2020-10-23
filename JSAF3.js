@@ -551,33 +551,47 @@ function move_again_AF() {
 	getText()
 	
 	setTimeout(function() {
-		iter = 0
-		b = document.getElementById('page1')
-		
+		countOfStr = 0
+		countOfPages = 0
+		b = document.getElementById('document.getElementById(\'AF_helper\').childNodes[0].childNodes[1].childNodes[1]')
 		console.log(table)
 		function addTemplates() {
 			for(i = 0; i < table.length; i++) {
 				c = table[i]
-				if(c[0] == '') {
-					iter++
-					var newStr = document.createElement('div')
-					newStr.style.margin = "5px"
-					newStr.id = iter + "str"
-					b.appendChild(newStr)
-				} else if(c[0] == 'Additional templates') {
-					return
-				} else {
-					var newBut = document.createElement('button')
-					newBut.innerText = c[0]
-					newBut.style.marginRight = '3px'
-					newBut.setAttribute('onclick', 'buttonsFromDoc(this.innerText)')
-					if(newBut.innerText == 'Урок NS')
-						newBut.id = "NS"
-					if(newBut.innerText == 'ус+брауз (У)')
-						newBut.innerText = "ус+брауз"
-					if(newBut.innerText == 'ус+брауз (П)')
-						continue
-					b.childNodes[iter].appendChild(newBut)
+				switch(c[0]) {
+					case '': 
+						countOfStr++
+						var newStr = document.createElement('div')
+						newStr.style.margin = "5px"
+						newStr.id = countOfStr + "str"
+						b.appendChild(newStr)
+						break
+					
+					case 'Additional templates': 
+						return
+					case 'Страница':
+						var newPage = document.createElement('div')
+						newPage.innerText = c[1]
+						b.appendChild(newPage)
+						countOfPages++
+						countOfStr = 0
+						var newStr = document.createElement('div')
+						newStr.style.margin = "5px"
+						newStr.id = countOfStr + "str"
+						b.appendChild(newStr)
+						break
+					default:
+						var newBut = document.createElement('button')
+						newBut.innerText = c[0]
+						newBut.style.marginRight = '3px'
+						newBut.setAttribute('onclick', 'buttonsFromDoc(this.innerText)')
+						if(newBut.innerText == 'Урок NS')
+							newBut.id = "NS"
+						if(newBut.innerText == 'ус+брауз (У)')
+							newBut.innerText = "ус+брауз"
+						if(newBut.innerText == 'ус+брауз (П)')
+							continue
+						b.childNodes[countOfPages].childNodes[countOfStr].appendChild(newBut)
 				}
 			}
 		}
