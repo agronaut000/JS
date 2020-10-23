@@ -583,7 +583,7 @@ function move_again_AF() {
 						countOfStr = 1
 						var newStr = document.createElement('div')
 						newStr.style.margin = "5px"
-						newStr.id = countOfPages + countOfStr + "str"
+						newStr.id = countOfPages + "page_" + countOfStr + "str"
 						b.lastElementChild.appendChild(newStr)
 						break
 					default:
@@ -602,7 +602,7 @@ function move_again_AF() {
 			}
 		}
 		addTemplates()
-	}, 2000)
+	}, 3000)
 	
 }
 
@@ -616,27 +616,34 @@ async function buttonsFromDoc(butName) {
 			butName = "ус+брауз (П)"
 		
 	if(butName == 'Привет') {
-		adr = adr1 = uid = ""
-		var values = await getInfo(0).then(values => {adr = values[0]; adr1 = values[1]; uid = values[2];});
+		try{
+			adr = adr1 = uid = ""
+			var values = await getInfo(0).then(values => {adr = values[0]; adr1 = values[1]; uid = values[2];});
 
-		count = await checkHistory(uid.split(',')[0])
-		if(count > 1 && flagggg == 0) {
-			if(document.getElementById('languageAF').innerHTML == "Русский")
-				txt = "Сейчас я вам помогу, подождите, пожалуйста."
-			else
-				txt = "I will help you now, please wait."
-			flagggg = 1
-		} else {
-			flagggg = 0
-			a = document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText
-			a = a.split(' ')
-			const cyrillicPattern = /^[\u0400-\u04FF]+$/;
-			
-			if(document.getElementById('languageAF').innerHTML == "Русский")
-				if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML == "Доработать")
-					txt = "Здравствуйте, " + a[0] + "!"
+			count = await checkHistory(uid.split(',')[0])
+			if(count > 1 && flagggg == 0) {
+				if(document.getElementById('languageAF').innerHTML == "Русский")
+					txt = "Сейчас я вам помогу, подождите, пожалуйста."
 				else
-					txt = "Здравствуйте!"
+					txt = "I will help you now, please wait."
+				flagggg = 1
+			} else {
+				flagggg = 0
+				a = document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText
+				a = a.split(' ')
+				const cyrillicPattern = /^[\u0400-\u04FF]+$/;
+				
+				if(document.getElementById('languageAF').innerHTML == "Русский")
+					if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML == "Доработать")
+						txt = "Здравствуйте, " + a[0] + "!"
+					else
+						txt = "Здравствуйте!"
+				else
+					txt = "Hello!"
+			}
+		} catch(e) {
+			if(document.getElementById('languageAF').innerHTML == "Русский")
+				txt = "Здравствуйте!"
 			else
 				txt = "Hello!"
 		}
