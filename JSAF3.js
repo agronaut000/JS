@@ -577,6 +577,7 @@ function move_again_AF() {
 					if(newBut.innerText == 'ус+брауз (П)')
 						continue
 					b.childNodes[iter].appendChild(newBut)
+					b.lastElementChild.lastElementChild.onclick = buttonsFromDoc(this.innerText)
 				}
 			}
 		}
