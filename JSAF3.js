@@ -548,6 +548,41 @@ function move_again_AF() {
 		document.getElementById('msg1').innerHTML = localStorage.getItem('msg1') 
 	}
 	
+	getText()
+	
+	setTimeout(function() {
+		iter = 0
+		b = document.getElementById('page1')
+		
+		console.log(table)
+		function addTemplates() {
+			for(i = 0; i < table.length; i++) {
+				c = table[i]
+				if(c[0] == '') {
+					iter++
+					var newStr = document.createElement('div')
+					newStr.style.margin = "5px"
+					newStr.id = iter + "str"
+					b.appendChild(newStr)
+				} else if(c[0] == 'Additional templates') {
+					return
+				} else {
+					var newBut = document.createElement('button')
+					newBut.innerText = c[0]
+					newBut.style.marginRight = '3px'
+					if(newBut.innerText == 'Урок NS')
+						newBut.id = "NS"
+					if(newBut.innerText == 'ус+брауз (У)')
+						newBut.innerText = "ус+брауз"
+					if(newBut.innerText == 'ус+брауз (П)')
+						continue
+					b.childNodes[iter].appendChild(newBut)
+				}
+			}
+		}
+		addTemplates()
+	}, 2000)
+	
 }
 
 move_again_AF();
@@ -889,38 +924,17 @@ function getText() {
             var r = JSON.parse(xhr.responseText),
                result = r["result"];
 			   
-			b = document.getElementById('page1')
-			var newStr = document.createElement('div')
-			b.appendChild(newStr)
-			newStr.style.margin = "5px"
-			newStr.id = iter + "str"
 			table = result;
-			table.forEach(c => {
-				if(c[0] == '') {
-					iter++
-					var newStr = document.createElement('div')
-					newStr.style.margin = "5px"
-					newStr.id = iter + "str"
-					b.appendChild(newStr)
-				} else {
-					var newBut = document.createElement('button')
-					newBut.innerText = c[0]
-					newBut.onclick = buttonsFromDoc(this.innerText)
-					if(newBut.innerText == 'Урок NS')
-						newBut.id = "NS"
-					b.childNodes[iter].appendChild(newBut)
-				}
-			})
 			console.log('Обновили шаблоны')
-        } catch(e) {}
-     } 
+
+        } catch(e) {console.log(e)}
+     }
    
 
    }
    xhr.send()
    
 }
-getText()
 
 function msgFromTable(btnName) {
 	for(l = 0; l < table.length; l++) {
