@@ -307,12 +307,7 @@ function move_again_AF() {
         localStorage.setItem('winTopAF', String(Number(e.clientY - myY2)));
         localStorage.setItem('winLeftAF', String(Number(e.clientX - myX2)));
     };
-	document.getElementById('0page').ondblclick = function () {
-		if(document.getElementById('addTmp').style.display == 'none')
-			document.getElementById('addTmp').style.display = '';
-		else
-			document.getElementById('addTmp').style.display = 'none';
-	}
+
     wintAF.firstElementChild.firstElementChild.firstElementChild.onmousedown = function (a) {
         window.myX2 = a.layerX; 
         window.myY2 = a.layerY; 
@@ -522,7 +517,6 @@ function move_again_AF() {
 		document.addEventListener('mousemove', listener3);
 	}
 	loginer.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
-	document.getElementById('page1_button').style.backgroundColor = 'green'
 	
 	user = "student"
 	
@@ -590,7 +584,13 @@ function move_again_AF() {
 						else
 							document.getElementById('addTmp').children[0].appendChild(newBut)
 				}
-			}
+			}	
+			document.getElementById('0page').ondblclick = function () {
+			if(document.getElementById('addTmp').style.display == 'none')
+				document.getElementById('addTmp').style.display = '';
+			else
+				document.getElementById('addTmp').style.display = 'none';
+	}
 		}
 		addTemplates()
 	}, 3000)
@@ -601,8 +601,10 @@ move_again_AF();
 function pageClick(pageId) {
 	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 	for(i = 0; i < b.childElementCount; i++) {
-		b.children[1].children[i].style.backgroundColor = '#768d87'
-		document.getElementById(i + "page").style.display = 'none'
+		try {
+			b.children[1].children[i].style.backgroundColor = '#768d87'
+			document.getElementById(i + "page").style.display = 'none'
+		} catch (e){}
 	}
 	document.getElementById(pageId).style.backgroundColor = 'green'
 		document.getElementById(pageId[0] + "page").style.display = ''
