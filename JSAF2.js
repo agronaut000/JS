@@ -62,7 +62,6 @@ var win_AFhelper =
 					<button id="languageAF" style="width:100px">Русский</button>
 					<button id="hideMenu" style="margin-left: 50px">hide</button>
 					<button id="setting" style="margin-left: 80px">S</button>
-					<button id="setting2" style="margin-left: 80px">S2</button>
 				</div>
 				<div style="margin: 5px;" id="pages">
 					<button id="page1_button">Шаблоны</button>
