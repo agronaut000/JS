@@ -572,6 +572,7 @@ function move_again_AF() {
 					case 'Страница':
 						var newPageBut = document.createElement('button')
 						newPageBut.innerText = c[1]
+						newBut.setAttribute('onclick', 'pageClick(this.id)')
 						newPageBut.id = countOfPages + 'page_button'
 						b.childNodes[3].appendChild(newPageBut)
 						
@@ -607,7 +608,46 @@ function move_again_AF() {
 }
 
 move_again_AF();
+function pageClick(pageId) {
+	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
+	for(i = 0; i < b.childElementCount; i++) {
+		b.childNodes[3].childNodes[i].style.backgroundColor = '#768d87'
+		document.getElementById(i + "page").style.display = 'none'
+	}
+	document.getElementById(pageId).style.backgroundColor = 'green'
+		document.getElementById(pageId[0] + "page").style.display = ''
+}
 
+function pages() {
+	document.getElementById('page1_button').onclick = function() {
+		document.getElementById('page1_button').style.backgroundColor = 'green'
+		document.getElementById('page2_button').style.backgroundColor = '#768d87'
+		document.getElementById('page3_button').style.backgroundColor = '#768d87'
+		
+		document.getElementById('page1').style.display = ''
+		document.getElementById('page_bags').style.display = 'none'
+		document.getElementById('page_transf').style.display = 'none'
+	}
+	document.getElementById('page2_button').onclick = function() {
+		document.getElementById('page1_button').style.backgroundColor = '#768d87'
+		document.getElementById('page2_button').style.backgroundColor = 'green'
+		document.getElementById('page3_button').style.backgroundColor = '#768d87'
+		
+		document.getElementById('page1').style.display = 'none'
+		document.getElementById('page_bags').style.display = ''
+		document.getElementById('page_transf').style.display = 'none'
+	}
+	document.getElementById('page3_button').onclick = function() {
+		document.getElementById('page1_button').style.backgroundColor = '#768d87'
+		document.getElementById('page2_button').style.backgroundColor = '#768d87'
+		document.getElementById('page3_button').style.backgroundColor = 'green'
+		
+		document.getElementById('page1').style.display = 'none'
+		document.getElementById('page_bags').style.display = 'none'
+		document.getElementById('page_transf').style.display = ''
+	}
+	
+}
 async function buttonsFromDoc(butName) {
 	if(butName == "ус+брауз")
 		if(user == 'student')
@@ -658,36 +698,6 @@ async function buttonsFromDoc(butName) {
 	if(butName == "Серверные")
 		if(document.getElementById('msg1').innerHTML != "Доработать")
 			sendComment(document.getElementById('inp').value)
-}
-function pages() {
-	document.getElementById('page1_button').onclick = function() {
-		document.getElementById('page1_button').style.backgroundColor = 'green'
-		document.getElementById('page2_button').style.backgroundColor = '#768d87'
-		document.getElementById('page3_button').style.backgroundColor = '#768d87'
-		
-		document.getElementById('page1').style.display = ''
-		document.getElementById('page_bags').style.display = 'none'
-		document.getElementById('page_transf').style.display = 'none'
-	}
-	document.getElementById('page2_button').onclick = function() {
-		document.getElementById('page1_button').style.backgroundColor = '#768d87'
-		document.getElementById('page2_button').style.backgroundColor = 'green'
-		document.getElementById('page3_button').style.backgroundColor = '#768d87'
-		
-		document.getElementById('page1').style.display = 'none'
-		document.getElementById('page_bags').style.display = ''
-		document.getElementById('page_transf').style.display = 'none'
-	}
-	document.getElementById('page3_button').onclick = function() {
-		document.getElementById('page1_button').style.backgroundColor = '#768d87'
-		document.getElementById('page2_button').style.backgroundColor = '#768d87'
-		document.getElementById('page3_button').style.backgroundColor = 'green'
-		
-		document.getElementById('page1').style.display = 'none'
-		document.getElementById('page_bags').style.display = 'none'
-		document.getElementById('page_transf').style.display = ''
-	}
-	
 }
 pages()
 
