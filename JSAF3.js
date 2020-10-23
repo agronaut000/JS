@@ -65,17 +65,6 @@ var win_AFhelper =
 					<button id="setting" style="margin-left: 80px">S</button>
 				</div>
 				<div style="margin: 5px;" id="pages">
-					<button id="page1_button">Шаблоны</button>
-					<button id="page2_button">Баги</button>
-					<button id="page3_button">Переводы</button>
-				</div>
-				<div style="margin: 5px; display: none" id="page_bags">	
-					<p style="color:white; margin: 0 0 5px 0">Нет сроков и альтернатив: <button style="width: 20px;" id="bagg11">1</button> <button style="width: 20px;" id="bagg12">2</button> </p>
-					<p style="color:white; margin: 0 0 5px 0">Повторное обращение: <button style="width: 20px;" id="bagg21">1</button> <button style="width: 20px;" id="bagg22">2</button> <button style="width: 20px;" id="bagg23">3</button></p>
-					<p style="color:white; margin: 0 0 5px 0">Проблема с ДЗ: <button style="width: 20px;" id="bagg31">1</button> <button style="width: 20px;" id="bagg32">2</button> <button style="width: 20px;" id="bagg33">3</button> </p>
-					<p style="color:white; margin: 0 0 5px 0">Проблема с медиа-контентом: <button style="width: 20px;" id="bagg41">1</button> <button style="width: 20px;" id="bagg42">2</button></p>
-					<p style="color:white; margin: 0 0 5px 0">Проблема с заметками: <button style="width: 20px;" id="bagg51">1</button> <button style="width: 20px;" id="bagg52">2</button> <button style="width: 20px;" id="bagg53">3</button></p>
-					<p style="color:white; margin: 0 0 5px 0">Передача в QA: <button style="width: 20px;" id="qa1">1</button> <button style="width: 20px;" id="qa2">2</button></p>
 				</div>
 				<div style="display: none" id="page_transf">
 					<div style="margin: 5px;">
@@ -532,6 +521,7 @@ function move_again_AF() {
 	setTimeout(function() {
 		countOfStr = 0
 		countOfPages = 0
+		pageName = ""
 		addTmpFlag = 0
 		b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 		console.log(table)
@@ -543,16 +533,17 @@ function move_again_AF() {
 						countOfStr++
 						var newStr = document.createElement('div')
 						newStr.style.margin = "5px"
-						newStr.id = countOfPages + countOfStr + "str"
+						newStr.id = countOfPages + "page_" + countOfStr + "str"
 						b.lastElementChild.appendChild(newStr)
 						break
 					
 					case 'Additional templates': 
 						addTmpFlag = 1
-						return
+						break
 					case 'Страница':
 						var newPageBut = document.createElement('button')
 						newPageBut.innerText = c[1]
+						pageType = c[2]
 						newPageBut.setAttribute('onclick', 'pageClick(this.id)')
 						newPageBut.id = countOfPages + 'page_button'
 						b.childNodes[3].appendChild(newPageBut)
@@ -569,20 +560,40 @@ function move_again_AF() {
 						b.lastElementChild.appendChild(newStr)
 						break
 					default:
-						var newBut = document.createElement('button')
-						newBut.innerText = c[0]
-						newBut.style.marginRight = '3px'
-						newBut.setAttribute('onclick', 'buttonsFromDoc(this.innerText)')
-						if(newBut.innerText == 'Урок NS')
-							newBut.id = "NS"
-						if(newBut.innerText == 'ус+брауз (У)')
-							newBut.innerText = "ус+брауз"
-						if(newBut.innerText == 'ус+брауз (П)')
-							continue
-						if(addTmpFlag == 0)
-							b.lastElementChild.lastElementChild.appendChild(newBut)
-						else
-							document.getElementById('addTmp').children[0].appendChild(newBut)
+						switch(pageType) {
+							case 'Баги':
+								var newString = document.createElement('p')
+								newString.style.color = 'white'
+								newString.style.margin = '0 0 5px 0'
+								newString.innerText = c[0]
+								for(i = 0; i < c[1]; i++) {
+									var newBut = document.createElement('button')
+									newBut.style.width = '20px'
+									newBut.id = countOfStr + 'str' + (i + 1) 
+									newBut.setAttribute('onclick', 'bagPageButtons(this.id)')
+									newString.appendChild(newBut)
+								}
+								break
+							case 'Шаблоны':
+								var newBut = document.createElement('button')
+								newBut.innerText = c[0]
+								newBut.style.marginRight = '3px'
+								newBut.setAttribute('onclick', 'buttonsFromDoc(this.innerText)')
+								if(newBut.innerText == 'Урок NS')
+									newBut.id = "NS"
+								if(newBut.innerText == 'ус+брауз (У)')
+									newBut.innerText = "ус+брауз"
+								if(newBut.innerText == 'ус+брауз (П)')
+									continue
+								if(addTmpFlag == 0)
+									b.lastElementChild.lastElementChild.appendChild(newBut)
+								else
+									document.getElementById('addTmp').children[0].appendChild(newBut)
+								break
+							default:
+								break
+						}
+						break
 				}
 			}	
 			document.getElementById('0page').ondblclick = function () {
@@ -609,6 +620,16 @@ function pageClick(pageId) {
 	document.getElementById(pageId).style.backgroundColor = 'green'
 		document.getElementById(pageId[0] + "page").style.display = ''
 }
+
+function bagPageButtons(butId) {
+	txt = document.getElementById('butId').parentElement.innerText
+	for(l = 0; l < table.length; l++)
+		if(table[l][0] == txt) {
+			document.getElementById('inp').value = table[l][butId[4]]
+			break
+		}
+}
+
 async function buttonsFromDoc(butName) {
 	if(butName == "ус+брауз")
 		if(user == 'student')
@@ -904,7 +925,7 @@ function bagggs() {
 		}
 	}
 }
-bagggs()
+
 var bool = 0;	
 
 
