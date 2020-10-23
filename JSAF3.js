@@ -570,16 +570,22 @@ function move_again_AF() {
 					case 'Additional templates': 
 						return
 					case 'Страница':
+						var newPageBut = document.createElement('button')
+						newPageBut.innerText = c[1]
+						newPageBut.id = countOfPages + 'page_button'
+						b.childNodes[1].appendChild(newPageBut)
+						
 						var newPage = document.createElement('div')
-						newPage.innerText = c[1]
 						newPage.id = countOfPages + 'page'
 						b.appendChild(newPage)
-						countOfPages++
+						
 						countOfStr = 0
 						var newStr = document.createElement('div')
 						newStr.style.margin = "5px"
-						newStr.id = countOfStr + "str"
-						b.appendChild(newStr)
+						newStr.id = countOfPages + countOfStr + "str"
+						b.lastElementChild.appendChild(newStr)
+						
+						countOfPages++
 						break
 					default:
 						var newBut = document.createElement('button')
