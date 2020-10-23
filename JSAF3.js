@@ -563,7 +563,7 @@ function move_again_AF() {
 						countOfStr++
 						var newStr = document.createElement('div')
 						newStr.style.margin = "5px"
-						newStr.id = countOfStr + "str"
+						newStr.id = countOfPages + countOfStr + "str"
 						b.appendChild(newStr)
 						break
 					
@@ -572,6 +572,7 @@ function move_again_AF() {
 					case 'Страница':
 						var newPage = document.createElement('div')
 						newPage.innerText = c[1]
+						newPage.id = countOfPages + 'page'
 						b.appendChild(newPage)
 						countOfPages++
 						countOfStr = 0
@@ -591,7 +592,7 @@ function move_again_AF() {
 							newBut.innerText = "ус+брауз"
 						if(newBut.innerText == 'ус+брауз (П)')
 							continue
-						b.childNodes[countOfPages].childNodes[countOfStr].appendChild(newBut)
+						b.lastElementChild.lastElementChild.appendChild(newBut)
 				}
 			}
 		}
