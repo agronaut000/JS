@@ -573,6 +573,7 @@ function move_again_AF() {
 									newBut.setAttribute('onclick', 'bagPageButtons(this.id)')
 									newString.appendChild(newBut)
 								}
+								b.lastElementChild.lastElementChild.appendChild(newString)
 								break
 							case 'Шаблоны':
 								var newBut = document.createElement('button')
