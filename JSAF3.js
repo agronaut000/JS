@@ -567,10 +567,10 @@ function move_again_AF() {
 								newString.style.color = 'white'
 								newString.style.margin = '0 0 5px 0'
 								newString.innerText = c[0]
-								for(i = 0; i < c[1]; i++) {
+								for(j = 0; j < c[1]; j++) {
 									var newBut = document.createElement('button')
 									newBut.style.width = '20px'
-									newBut.id = countOfStr + 'str' + (i + 1) 
+									newBut.id = countOfStr + 'str' + (j + 1) 
 									newBut.setAttribute('onclick', 'bagPageButtons(this.id)')
 									newString.appendChild(newBut)
 								}
