@@ -553,7 +553,7 @@ function move_again_AF() {
 	setTimeout(function() {
 		countOfStr = 0
 		countOfPages = 0
-		b = document.getElementById('document.getElementById(\'AF_helper\').childNodes[0].childNodes[1].childNodes[1]')
+		b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 		console.log(table)
 		function addTemplates() {
 			for(i = 0; i < table.length; i++) {
