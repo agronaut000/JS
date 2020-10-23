@@ -476,13 +476,6 @@ function move_again_AF() {
 3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
 		sendAnswer(txt)
 	}
-    document.getElementById('setting2').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			txt = 'ru text'
-		else 
-			txt = 'en txt'
-		sendAnswer(txt)
-	}
 	
 	
     document.getElementById('msg1').onclick = function () {
