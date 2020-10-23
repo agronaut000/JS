@@ -69,8 +69,6 @@ var win_AFhelper =
 					<button id="page2_button">Баги</button>
 					<button id="page3_button">Переводы</button>
 				</div>
-				<div id="page1">
-				</div>
 				<div style="margin: 5px; display: none" id="page_bags">	
 					<p style="color:white; margin: 0 0 5px 0">Нет сроков и альтернатив: <button style="width: 20px;" id="bagg11">1</button> <button style="width: 20px;" id="bagg12">2</button> </p>
 					<p style="color:white; margin: 0 0 5px 0">Повторное обращение: <button style="width: 20px;" id="bagg21">1</button> <button style="width: 20px;" id="bagg22">2</button> <button style="width: 20px;" id="bagg23">3</button></p>
@@ -121,19 +119,6 @@ var win_AFhelper =
 			</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="addTmp">
 			<div style="margin: 5px; width: 300px">
-					<button id="cacheSafari" style="margin: 2px">Кэш Сафари</button>
-					<button id="UnapisalSam" style="margin: 2px">П -> У написал сам</button>
-					<button id="nedozvonU">недозвон У</button>
-					<button id="macBag" style="margin: 2px">Макобаг</button>
-					<button id="hiddenHW" style="margin: 2px">Скрытое ДЗ</button>
-					<button id="revision" style="margin: 2px">Ревизия</button>
-					<button id="serverAF" style="margin: 2px">Серверные</button>
-					<button id="privateMode" style="margin: 2px">Инкогнито</button>
-					<button id="predlozh" style="margin: 2px">Предложение</button>
-					<button id="VPN">VPN</button>
-					<button id="vcall">vcall-test</button>
-					<button id="micro">микро</button>
-					<button id="addMacTW">Mac+TW</button>
 			</div>
 		</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="set_bar">
@@ -322,7 +307,7 @@ function move_again_AF() {
         localStorage.setItem('winTopAF', String(Number(e.clientY - myY2)));
         localStorage.setItem('winLeftAF', String(Number(e.clientX - myX2)));
     };
-	document.getElementById('page1').ondblclick = function () {
+	document.getElementById('0page').ondblclick = function () {
 		if(document.getElementById('addTmp').style.display == 'none')
 			document.getElementById('addTmp').style.display = '';
 		else
@@ -553,6 +538,7 @@ function move_again_AF() {
 	setTimeout(function() {
 		countOfStr = 0
 		countOfPages = 0
+		addTmpFlag = 0
 		b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 		console.log(table)
 		function addTemplates() {
@@ -568,6 +554,7 @@ function move_again_AF() {
 						break
 					
 					case 'Additional templates': 
+						addTmpFlag = 1
 						return
 					case 'Страница':
 						var newPageBut = document.createElement('button')
@@ -598,7 +585,10 @@ function move_again_AF() {
 							newBut.innerText = "ус+брауз"
 						if(newBut.innerText == 'ус+брауз (П)')
 							continue
-						b.lastElementChild.lastElementChild.appendChild(newBut)
+						if(addTmpFlag == 0)
+							b.lastElementChild.lastElementChild.appendChild(newBut)
+						else
+							document.getElementById('addTmp').children[0].appendChild(newBut)
 				}
 			}
 		}
@@ -611,7 +601,7 @@ move_again_AF();
 function pageClick(pageId) {
 	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 	for(i = 0; i < b.childElementCount; i++) {
-		b.childNodes[3].childNodes[i].style.backgroundColor = '#768d87'
+		b.children[1].children[i].style.backgroundColor = '#768d87'
 		document.getElementById(i + "page").style.display = 'none'
 	}
 	document.getElementById(pageId).style.backgroundColor = 'green'
