@@ -570,6 +570,7 @@ function move_again_AF() {
 					var newBut = document.createElement('button')
 					newBut.innerText = c[0]
 					newBut.style.marginRight = '3px'
+					newBut.setAttribute('onclick', 'buttonsFromDoc(this.innerText)')
 					if(newBut.innerText == 'Урок NS')
 						newBut.id = "NS"
 					if(newBut.innerText == 'ус+брауз (У)')
@@ -577,7 +578,6 @@ function move_again_AF() {
 					if(newBut.innerText == 'ус+брауз (П)')
 						continue
 					b.childNodes[iter].appendChild(newBut)
-					b.lastElementChild.lastElementChild.onclick = buttonsFromDoc(this.innerText)
 				}
 			}
 		}
