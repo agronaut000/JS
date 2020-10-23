@@ -572,7 +572,7 @@ function move_again_AF() {
 					case 'Страница':
 						var newPageBut = document.createElement('button')
 						newPageBut.innerText = c[1]
-						newBut.setAttribute('onclick', 'pageClick(this.id)')
+						newPageBut.setAttribute('onclick', 'pageClick(this.id)')
 						newPageBut.id = countOfPages + 'page_button'
 						b.childNodes[3].appendChild(newPageBut)
 						
