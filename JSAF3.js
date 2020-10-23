@@ -544,6 +544,7 @@ function move_again_AF() {
 						var newPageBut = document.createElement('button')
 						newPageBut.innerText = c[1]
 						pageType = c[2]
+						newPageBut.style.marginRight = '3px'
 						newPageBut.setAttribute('onclick', 'pageClick(this.id)')
 						newPageBut.id = countOfPages + 'page_button'
 						b.childNodes[3].appendChild(newPageBut)
