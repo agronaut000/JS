@@ -62,6 +62,7 @@ var win_AFhelper =
 					<button id="languageAF" style="width:100px">Русский</button>
 					<button id="hideMenu" style="margin-left: 50px">hide</button>
 					<button id="setting" style="margin-left: 80px">S</button>
+					<button id="setting2" style="margin-left: 80px">S2</button>
 				</div>
 				<div style="margin: 5px;" id="pages">
 					<button id="page1_button">Шаблоны</button>
@@ -74,6 +75,7 @@ var win_AFhelper =
 						<button id="necel">Нецел</button>
 						<button id="internet">Инет</button>
 						<button id="twoMin">Помогу</button>
+						<button id="moreTime">Время</button>
 					</div>
 					<div style="margin: 5px;" id="3str">
 						<button id="idU">ID У</button>
@@ -475,6 +477,13 @@ function move_again_AF() {
 3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
 		sendAnswer(txt)
 	}
+    document.getElementById('setting2').onclick = function () {
+		if(document.getElementById('languageAF').innerHTML == "Русский")
+			txt = 'ru text'
+		else 
+			txt = 'en txt'
+		sendAnswer(txt)
+	}
 	
 	
     document.getElementById('msg1').onclick = function () {
@@ -623,7 +632,7 @@ function move_again_AF() {
 move_again_AF();
 
 function buttonsFromDoc() {
-	document.getElementById('anydesk').onclick = document.getElementById('nedozvonU').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = document.getElementById('browser').onclick = document.getElementById('privateMode').onclick = document.getElementById('managers_tc').onclick = document.getElementById('micro').onclick = document.getElementById('cacheSafari').onclick = document.getElementById('predlozh').onclick = document.getElementById('UnapisalSam').onclick = document.getElementById('hiddenHW').onclick = document.getElementById('serverAF').onclick = document.getElementById('macBag').onclick = document.getElementById('revision').onclick = document.getElementById('vcall').onclick = function() {
+	document.getElementById('anydesk').onclick = document.getElementById('nedozvonU').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = document.getElementById('browser').onclick = document.getElementById('privateMode').onclick = document.getElementById('managers_tc').onclick = document.getElementById('micro').onclick = document.getElementById('cacheSafari').onclick = document.getElementById('predlozh').onclick = document.getElementById('UnapisalSam').onclick = document.getElementById('hiddenHW').onclick = document.getElementById('serverAF').onclick = document.getElementById('macBag').onclick = document.getElementById('revision').onclick = document.getElementById('vcall').onclick = document.getElementById('moreTime').onclick = function() {
 		butName = this.innerText
 		if(butName == "ус+брауз")
 			if(user == 'student')
@@ -1013,7 +1022,9 @@ AFsessionId = b.sessionId
 tmpText = b.text
 tmpText = tmpText.split("\n").join("\\n")
 tmpText = tmpText.split("<br />").join('\n')
-tmpText = tmpText.replace(/<\/?[^>a]+>/g,'')
+tmpText = tmpText.replace('<a', 'TMPaTMP').replace('</a', 'TMPENDaTMEPEND')
+tmpText = tmpText.replace(/<\/?[^>]+>/g,'')
+tmpText = tmpText.replace('TMPaTMP','<a').replace('TMPENDaTMEPEND', '</a')
 title = b.title
 title = title.split("\"").join("\\\"")
 accuracy = b.accuracy
