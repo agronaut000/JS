@@ -564,7 +564,7 @@ function move_again_AF() {
 						var newStr = document.createElement('div')
 						newStr.style.margin = "5px"
 						newStr.id = countOfPages + countOfStr + "str"
-						b.appendChild(newStr)
+						b.lastElementChild.appendChild(newStr)
 						break
 					
 					case 'Additional templates': 
@@ -573,19 +573,18 @@ function move_again_AF() {
 						var newPageBut = document.createElement('button')
 						newPageBut.innerText = c[1]
 						newPageBut.id = countOfPages + 'page_button'
-						b.childNodes[1].appendChild(newPageBut)
+						b.childNodes[3].appendChild(newPageBut)
 						
 						var newPage = document.createElement('div')
 						newPage.id = countOfPages + 'page'
 						b.appendChild(newPage)
 						
-						countOfStr = 0
+						countOfPages++
+						countOfStr = 1
 						var newStr = document.createElement('div')
 						newStr.style.margin = "5px"
 						newStr.id = countOfPages + countOfStr + "str"
 						b.lastElementChild.appendChild(newStr)
-						
-						countOfPages++
 						break
 					default:
 						var newBut = document.createElement('button')
