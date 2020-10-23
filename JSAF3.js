@@ -617,37 +617,6 @@ function pageClick(pageId) {
 	document.getElementById(pageId).style.backgroundColor = 'green'
 		document.getElementById(pageId[0] + "page").style.display = ''
 }
-
-function pages() {
-	document.getElementById('page1_button').onclick = function() {
-		document.getElementById('page1_button').style.backgroundColor = 'green'
-		document.getElementById('page2_button').style.backgroundColor = '#768d87'
-		document.getElementById('page3_button').style.backgroundColor = '#768d87'
-		
-		document.getElementById('page1').style.display = ''
-		document.getElementById('page_bags').style.display = 'none'
-		document.getElementById('page_transf').style.display = 'none'
-	}
-	document.getElementById('page2_button').onclick = function() {
-		document.getElementById('page1_button').style.backgroundColor = '#768d87'
-		document.getElementById('page2_button').style.backgroundColor = 'green'
-		document.getElementById('page3_button').style.backgroundColor = '#768d87'
-		
-		document.getElementById('page1').style.display = 'none'
-		document.getElementById('page_bags').style.display = ''
-		document.getElementById('page_transf').style.display = 'none'
-	}
-	document.getElementById('page3_button').onclick = function() {
-		document.getElementById('page1_button').style.backgroundColor = '#768d87'
-		document.getElementById('page2_button').style.backgroundColor = '#768d87'
-		document.getElementById('page3_button').style.backgroundColor = 'green'
-		
-		document.getElementById('page1').style.display = 'none'
-		document.getElementById('page_bags').style.display = 'none'
-		document.getElementById('page_transf').style.display = ''
-	}
-	
-}
 async function buttonsFromDoc(butName) {
 	if(butName == "ус+брауз")
 		if(user == 'student')
@@ -699,7 +668,6 @@ async function buttonsFromDoc(butName) {
 		if(document.getElementById('msg1').innerHTML != "Доработать")
 			sendComment(document.getElementById('inp').value)
 }
-pages()
 
 function perevod() {
 	function secondLine() {
