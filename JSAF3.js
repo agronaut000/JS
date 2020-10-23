@@ -1,3 +1,4 @@
+
 let mstl = document.createElement('style');
 document.body.append(mstl);
 var style = `.win_btn {
@@ -62,7 +63,6 @@ var win_AFhelper =
 					<button id="languageAF" style="width:100px">Русский</button>
 					<button id="hideMenu" style="margin-left: 50px">hide</button>
 					<button id="setting" style="margin-left: 80px">S</button>
-					<button id="setting2" style="margin-left: 80px">S2</button>
 				</div>
 				<div style="margin: 5px;" id="pages">
 					<button id="page1_button">Шаблоны</button>
@@ -70,31 +70,6 @@ var win_AFhelper =
 					<button id="page3_button">Переводы</button>
 				</div>
 				<div id="page1">
-					<div style="margin: 5px;" id="2str">
-						<button id="helloAF">Привет</button>
-						<button id="necel">Нецел</button>
-						<button id="internet">Инет</button>
-						<button id="twoMin">Помогу</button>
-					</div>
-					<div style="margin: 5px;" id="3str">
-						<button id="idU">ID У</button>
-						<button id="screen">скрин</button>
-						<button id="cacheTmp">кэш</button>
-					</div>
-					<div style="margin: 5px;" id="4str">
-						<button id="NS">урок NS</button>
-						<button id="perevod">Др отд</button>
-						<button id="hardReset">HRes</button>
-						<button id="TW">TW</button>
-						<button id="anydesk">AD</button>
-					</div>
-					<div style="margin: 5px;" id="5str">
-						<button id="engConv">англ</button>
-						<button id="browser">ус+брауз</button>
-						<button id="thank">пока</button>
-						<button id="thanks">Спс</button>
-						<button id="gladToHelp">рад</button>
-					</div>
 				</div>
 				<div style="margin: 5px; display: none" id="page_bags">	
 					<p style="color:white; margin: 0 0 5px 0">Нет сроков и альтернатив: <button style="width: 20px;" id="bagg11">1</button> <button style="width: 20px;" id="bagg12">2</button> </p>
@@ -463,26 +438,6 @@ function move_again_AF() {
 		else 
 			sendAnswer(txt)
 	}
-    document.getElementById('NS').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-		txt = "Пожалуйста, воспользуйтесь инструкцией, а затем напишите, удалось ли вам наладить связь\n\
-1. Завершаете урок через Finish\n\
-2. Создаете урок через New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">вот так&nbsp;</a> \n\
-3. Копируете ссылку и отправляете в чат ученику, заранее предупредив его об этом, так как кнопка войти в класс уже не будет функционировать."
-		else 
-			txt = "Use this instruction, and then write if you managed to establish a connection \n\
-1. End the lesson by clicking Finish \n\
-2. Create a lesson through New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">like this&nbsp;</a> \n\
-3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
-		sendAnswer(txt)
-	}
-    document.getElementById('setting2').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-			txt = 'ru text'
-		else 
-			txt = 'en txt'
-		sendAnswer(txt)
-	}
 	
 	
     document.getElementById('msg1').onclick = function () {
@@ -510,41 +465,7 @@ function move_again_AF() {
 		document.getElementById('inp').value = ""
 		document.getElementById('phone_tr').value = ""
 		document.getElementById('email_tr').value = ""
-	}
-	
-	
-    document.getElementById('helloAF').onclick = async function () {
-		adr = adr1 = uid = ""
-		var values = await getInfo(0).then(values => {adr = values[0]; adr1 = values[1]; uid = values[2];});
-
-		count = await checkHistory(uid.split(',')[0])
-		if(count > 1 && flagggg == 0) {
-			if(document.getElementById('languageAF').innerHTML == "Русский")
-				txt = "Сейчас я вам помогу, подождите, пожалуйста."
-			else
-				txt = "I will help you now, please wait."
-			flagggg = 1
-		} else {
-			flagggg = 0
-			a = document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText
-			a = a.split(' ')
-			const cyrillicPattern = /^[\u0400-\u04FF]+$/;
-			
-			if(document.getElementById('languageAF').innerHTML == "Русский")
-				if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML == "Доработать")
-					txt = "Здравствуйте, " + a[0] + "!"
-				else
-					txt = "Здравствуйте!"
-			else
-				txt = "Hello!"
-		}
-		if(txt == "I will help you now, please wait.")
-			sendAnswer(txt)
-		else
-			sendAnswerTemplate2(txt)
-	}
-	
-	
+	}	
 
 	window.onkeydown = function(e) {
 			if(e.key == 'Control') {
@@ -626,26 +547,55 @@ function move_again_AF() {
 	if(localStorage.getItem('msg1') != null) {
 		document.getElementById('msg1').innerHTML = localStorage.getItem('msg1') 
 	}
+	
 }
 
 move_again_AF();
 
-function buttonsFromDoc() {
-	document.getElementById('anydesk').onclick = document.getElementById('nedozvonU').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = document.getElementById('browser').onclick = document.getElementById('privateMode').onclick = document.getElementById('managers_tc').onclick = document.getElementById('micro').onclick = document.getElementById('cacheSafari').onclick = document.getElementById('predlozh').onclick = document.getElementById('UnapisalSam').onclick = document.getElementById('hiddenHW').onclick = document.getElementById('serverAF').onclick = document.getElementById('macBag').onclick = document.getElementById('revision').onclick = document.getElementById('vcall').onclick = function() {
-		butName = this.innerText
-		if(butName == "ус+брауз")
-			if(user == 'student')
-				butName = "ус+брауз (У)"
+async function buttonsFromDoc(butName) {
+	if(butName == "ус+брауз")
+		if(user == 'student')
+			butName = "ус+брауз (У)"
+		else
+			butName = "ус+брауз (П)"
+		
+	if(butName == 'Привет') {
+		adr = adr1 = uid = ""
+		var values = await getInfo(0).then(values => {adr = values[0]; adr1 = values[1]; uid = values[2];});
+
+		count = await checkHistory(uid.split(',')[0])
+		if(count > 1 && flagggg == 0) {
+			if(document.getElementById('languageAF').innerHTML == "Русский")
+				txt = "Сейчас я вам помогу, подождите, пожалуйста."
 			else
-				butName = "ус+брауз (П)"
+				txt = "I will help you now, please wait."
+			flagggg = 1
+		} else {
+			flagggg = 0
+			a = document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText
+			a = a.split(' ')
+			const cyrillicPattern = /^[\u0400-\u04FF]+$/;
 			
-		msgFromTable(butName)
-		if(butName == "Серверные")
-			if(document.getElementById('msg1').innerHTML != "Доработать")
-				sendComment(document.getElementById('inp').value)
-	}
+			if(document.getElementById('languageAF').innerHTML == "Русский")
+				if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML == "Доработать")
+					txt = "Здравствуйте, " + a[0] + "!"
+				else
+					txt = "Здравствуйте!"
+			else
+				txt = "Hello!"
+		}
+		if(txt == "I will help you now, please wait.")
+			sendAnswer(txt)
+		else
+			sendAnswerTemplate2(txt)
+		return
+	}		
+	
+	msgFromTable(butName)
+	if(butName == "Серверные")
+		if(document.getElementById('msg1').innerHTML != "Доработать")
+			sendComment(document.getElementById('inp').value)
 }
-buttonsFromDoc()
 function pages() {
 	document.getElementById('page1_button').onclick = function() {
 		document.getElementById('page1_button').style.backgroundColor = 'green'
@@ -938,7 +888,29 @@ function getText() {
         try {
             var r = JSON.parse(xhr.responseText),
                result = r["result"];
+			   
+			b = document.getElementById('page1')
+			var newStr = document.createElement('div')
+			b.appendChild(newStr)
+			newStr.style.margin = "5px"
+			newStr.id = iter + "str"
 			table = result;
+			table.forEach(c => {
+				if(c[0] == '') {
+					iter++
+					var newStr = document.createElement('div')
+					newStr.style.margin = "5px"
+					newStr.id = iter + "str"
+					b.appendChild(newStr)
+				} else {
+					var newBut = document.createElement('button')
+					newBut.innerText = c[0]
+					newBut.onclick = buttonsFromDoc(this.innerText)
+					if(newBut.innerText == 'Урок NS')
+						newBut.id = "NS"
+					b.childNodes[iter].appendChild(newBut)
+				}
+			})
 			console.log('Обновили шаблоны')
         } catch(e) {}
      } 
@@ -1021,7 +993,9 @@ AFsessionId = b.sessionId
 tmpText = b.text
 tmpText = tmpText.split("\n").join("\\n")
 tmpText = tmpText.split("<br />").join('\n')
-tmpText = tmpText.replace(/<\/?[^>a]+>/g,'')
+tmpText = tmpText.replace('<a', 'TMPaTMP').replace('</a', 'TMPENDaTMEPEND')
+tmpText = tmpText.replace(/<\/?[^>]+>/g,'')
+tmpText = tmpText.replace('TMPaTMP','<a').replace('TMPENDaTMEPEND', '</a')
 title = b.title
 title = title.split("\"").join("\\\"")
 accuracy = b.accuracy
