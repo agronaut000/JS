@@ -571,6 +571,7 @@ function move_again_AF() {
 									var newBut = document.createElement('button')
 									newBut.style.width = '20px'
 									newBut.id = countOfStr + 'str' + (j + 1) 
+									newBut.innerText = (j + 1) 
 									newBut.setAttribute('onclick', 'bagPageButtons(this.id)')
 									newString.appendChild(newBut)
 								}
@@ -603,7 +604,8 @@ function move_again_AF() {
 				document.getElementById('addTmp').style.display = '';
 			else
 				document.getElementById('addTmp').style.display = 'none';
-	}
+			}
+			document.getElementById('0page_button').click()
 		}
 		addTemplates()
 	}, 3000)
@@ -624,7 +626,7 @@ function pageClick(pageId) {
 }
 
 function bagPageButtons(butId) {
-	txt = document.getElementById('butId').parentElement.innerText
+	txt = document.getElementById(butId).parentElement.innerText
 	for(l = 0; l < table.length; l++)
 		if(table[l][0] == txt) {
 			document.getElementById('inp').value = table[l][butId[4]]
