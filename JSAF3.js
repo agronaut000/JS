@@ -531,14 +531,9 @@ function move_again_AF() {
 						b.appendChild(newPage)
 						
 						countOfPages++
-						countOfStr = 1
-						var newStr = document.createElement('div')
-						newStr.style.margin = "5px"
-						newStr.id = countOfPages + "page_" + countOfStr + "str"
-						b.lastElementChild.appendChild(newStr)
 						
+						countOfStr = 1
 						if(pageType == "Переводы") {
-							countOfStr++
 							var newDiv = document.createElement('div')
 							newDiv.id = countOfPages + "page_" + countOfStr + "str"
 							newDiv.style.margin = "5px"
@@ -561,7 +556,12 @@ function move_again_AF() {
 							newDiv.appendChild(newInputEmail)
 							
 							b.lastElementChild.appendChild(newDiv)
+							countOfStr++
 						}
+						var newStr = document.createElement('div')
+						newStr.style.margin = "5px"
+						newStr.id = countOfPages + "page_" + countOfStr + "str"
+						b.lastElementChild.appendChild(newStr)
 						break
 					default:
 						switch(pageType) {
