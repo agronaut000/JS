@@ -537,7 +537,7 @@ function move_again_AF() {
 						newStr.id = countOfPages + "page_" + countOfStr + "str"
 						b.lastElementChild.appendChild(newStr)
 						
-						if(pageType == "Переводы) {
+						if(pageType == "Переводы") {
 							countOfStr++
 							var newDiv = document.createElement('div')
 							newDiv.id = countOfPages + "page_" + countOfStr + "str"
