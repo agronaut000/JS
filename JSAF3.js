@@ -66,29 +66,6 @@ var win_AFhelper =
 				</div>
 				<div style="margin: 5px;" id="pages">
 				</div>
-				<div style="display: none" id="page_transf">
-					<div style="margin: 5px;">
-						<input id="phone_tr" placeholder="Телефон" autocomplete="off" type="text" style="text-align: center; width: 100px; color: black; margin-left: 10px">
-						<input id="email_tr" placeholder="Почта" autocomplete="off" type="text" style="text-align: center; width: 150px; color: black;  margin-left: 10px">
-					</div>
-					<div style="margin: 5px;">
-						<button id="secLineNoww">2Л-сейчас?</button>
-						<button id="secLineNow">2Л</button>
-						<button id="secLineCall">2Л-калик?</button>
-						<button id="secLineCal">2Л</button>
-						<button id="bagSecLine">Баг-2Л</button> 
-					</div>
-					<div style="margin: 5px;">
-						<button id="mobDevice">Устр</button>
-						<button id="mobCrit">Моб-крит</button>
-						<button id="mobHigh">Моб-высок</button>
-						<button id="mobMinor">Моб-минор</button>
-					</div>
-					<div style="margin: 5px;">
-						<button id="managers_sc">SC</button>
-						<button id="managers_tc">TC</button>
-					</div>
-				</div>
 			</span>
 			<div style="margin: 5px;" id="6str">
 				<button id="tmplt1_save">save</button>
@@ -570,6 +547,7 @@ function move_again_AF() {
 								for(j = 0; j < c[1]; j++) {
 									var newBut = document.createElement('button')
 									newBut.style.width = '20px'
+									newBut.style.marginRight = '3px'
 									newBut.id = countOfStr + 'str' + (j + 1) 
 									newBut.innerText = (j + 1) 
 									newBut.setAttribute('onclick', 'bagPageButtons(this.id)')
@@ -592,6 +570,13 @@ function move_again_AF() {
 									b.lastElementChild.lastElementChild.appendChild(newBut)
 								else
 									document.getElementById('addTmp').children[0].appendChild(newBut)
+								break
+							case 'Переводы':
+								var newBut = document.createElement('button')
+								newBut.innerText = c[0]
+								newBut.style.marginRight = '3px'
+								newBut.setAttribute('onclick', 'transfPageButtons(this.innerText)')
+								b.lastElementChild.lastElementChild.appendChild(newBut)
 								break
 							default:
 								break
@@ -626,12 +611,52 @@ function pageClick(pageId) {
 }
 
 function bagPageButtons(butId) {
-	txt = document.getElementById(butId).parentElement.innerText
+	txt = document.getElementById(butId).parentElement.childNodes[0].textContent
 	for(l = 0; l < table.length; l++)
 		if(table[l][0] == txt) {
-			document.getElementById('inp').value = table[l][butId[4]]
+			document.getElementById('inp').value = table[l][Number(butId[4]) + 1]
 			break
 		}
+}
+function transfPageButtons(butName) {
+	textFromTable = ""
+	for(l = 0; l < table.length; l++)
+		if(table[l][0] == butName) {
+			if(table[l][1] == "Поле") {
+				textFromTable = table[l][2]
+			} else {
+				msgFromTable(table[l][0])
+			}
+			break
+		}
+	phone = ""
+	textFromTable = textFromTable.split('(phone)')
+	if(textFromTable.lenght > 1) {
+		if(document.getElementById('phone_tr').value == "")
+			phone = document.getElementById('phone_tr').placeholder
+		else
+			phone = document.getElementById('phone_tr').value
+		if(phone == "Телефон") {
+			document.getElementById('inp').value = "Введите номер телефона"
+			return
+		} else
+			textFromTable = textFromTable.join(phone)
+	}
+	
+	textFromTable = textFromTable.split('(email)')
+	if(textFromTable.lenght > 1) {
+		if(document.getElementById('email_tr').value == "")
+			email = document.getElementById('email_tr').placeholder
+		else
+			email = document.getElementById('email_tr').value
+		if(email == "Почта") {
+			document.getElementById('inp').value = "Введите почту"
+			return
+		} else
+			textFromTable = textFromTable.join(email)
+	}
+	
+	document.getElementById('inp').value = textFromTable
 }
 
 async function buttonsFromDoc(butName) {
