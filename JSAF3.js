@@ -536,6 +536,32 @@ function move_again_AF() {
 						newStr.style.margin = "5px"
 						newStr.id = countOfPages + "page_" + countOfStr + "str"
 						b.lastElementChild.appendChild(newStr)
+						
+						if(pageType == "Переводы) {
+							countOfStr++
+							var newDiv = document.createElement('div')
+							newDiv.id = countOfPages + "page_" + countOfStr + "str"
+							newDiv.style.margin = "5px"
+							
+							var newInputPhone = document.createElement('input')
+							newInputPhone.id = 'phone_tr'
+							newInputPhone.placeholder = 'Телефон'
+							newInputPhone.autocomplete = 'off'
+							newInputPhone.type = 'text'
+							newInputPhone.style = 'text-align: center; width: 100px; color: black; margin-left: 10px'
+							
+							var newInputEmail = document.createElement('input')
+							newInputEmail.id = 'email_tr'
+							newInputEmail.placeholder = 'Почта'
+							newInputEmail.autocomplete = 'off'
+							newInputEmail.type = 'text'
+							newInputEmail.style = 'text-align: center; width: 100px; color: black; margin-left: 10px'
+							
+							newDiv.appendChild(newInputPhone)
+							newDiv.appendChild(newInputEmail)
+							
+							b.lastElementChild.appendChild(newDiv)
+						}
 						break
 					default:
 						switch(pageType) {
