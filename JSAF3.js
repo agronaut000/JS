@@ -507,6 +507,7 @@ function move_again_AF() {
 				c = table[i]
 				switch(c[0]) {
 					case '': 
+						addTmpFlag = 0
 						countOfStr++
 						var newStr = document.createElement('div')
 						newStr.style.margin = "5px"
@@ -521,7 +522,7 @@ function move_again_AF() {
 						var newPageBut = document.createElement('button')
 						newPageBut.innerText = c[1]
 						pageType = c[2]
-						newPageBut.style.marginRight = '3px'
+						newPageBut.style.marginRight = '4px'
 						newPageBut.setAttribute('onclick', 'pageClick(this.id)')
 						newPageBut.id = countOfPages + 'page_button'
 						b.childNodes[3].appendChild(newPageBut)
@@ -557,6 +558,27 @@ function move_again_AF() {
 							
 							b.lastElementChild.appendChild(newDiv)
 							countOfStr++
+							
+							setInterval(function() {
+								if(document.getElementsByClassName('expert-user_details-list')[0] != undefined) {
+									phone = document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText
+									if(phone == "-") {
+										phone = ""
+										document.getElementById('phone_tr').placeholder = "Телефон" 
+									} else 
+										document.getElementById('phone_tr').placeholder = phone
+									
+									email = document.getElementsByClassName('expert-user_details-list')[0].childNodes[0].childNodes[1].innerText
+									if(email == "-") {
+										email = ""
+										document.getElementById('email_tr').placeholder	= "Почта"
+									}
+									document.getElementById('email_tr').placeholder	= email
+								} else {
+									document.getElementById('email_tr').placeholder	= "Почта"
+									document.getElementById('phone_tr').placeholder = "Телефон" 
+								}
+							}, 1000)
 						}
 						var newStr = document.createElement('div')
 						newStr.style.margin = "5px"
@@ -573,7 +595,7 @@ function move_again_AF() {
 								for(j = 0; j < c[1]; j++) {
 									var newBut = document.createElement('button')
 									newBut.style.width = '20px'
-									newBut.style.marginRight = '3px'
+									newBut.style.marginRight = '4px'
 									newBut.id = countOfStr + 'str' + (j + 1) 
 									newBut.innerText = (j + 1) 
 									newBut.setAttribute('onclick', 'bagPageButtons(this.id)')
@@ -584,7 +606,7 @@ function move_again_AF() {
 							case 'Шаблоны':
 								var newBut = document.createElement('button')
 								newBut.innerText = c[0]
-								newBut.style.marginRight = '3px'
+								newBut.style.marginRight = '4px'
 								newBut.setAttribute('onclick', 'buttonsFromDoc(this.innerText)')
 								if(newBut.innerText == 'Урок NS')
 									newBut.id = "NS"
@@ -594,13 +616,15 @@ function move_again_AF() {
 									continue
 								if(addTmpFlag == 0)
 									b.lastElementChild.lastElementChild.appendChild(newBut)
-								else
+								else {
+									newBut.style.marginTop = '4px'
 									document.getElementById('addTmp').children[0].appendChild(newBut)
+								}
 								break
 							case 'Переводы':
 								var newBut = document.createElement('button')
 								newBut.innerText = c[0]
-								newBut.style.marginRight = '3px'
+								newBut.style.marginRight = '4px'
 								newBut.setAttribute('onclick', 'transfPageButtons(this.innerText)')
 								b.lastElementChild.lastElementChild.appendChild(newBut)
 								break
@@ -661,7 +685,7 @@ function transfPageButtons(butName) {
 		return
 	phone = ""
 	textFromTable = textFromTable.split('(phone)')
-	if(textFromTable.lenght > 1) {
+	if(textFromTable.length > 1) {
 		if(document.getElementById('phone_tr').value == "")
 			phone = document.getElementById('phone_tr').placeholder
 		else
@@ -669,12 +693,13 @@ function transfPageButtons(butName) {
 		if(phone == "Телефон") {
 			document.getElementById('inp').value = "Введите номер телефона"
 			return
-		} else
-			textFromTable = textFromTable.join(phone)
+		}
 	}
+	textFromTable = textFromTable.join(phone)
 	
+	email = ""
 	textFromTable = textFromTable.split('(email)')
-	if(textFromTable.lenght > 1) {
+	if(textFromTable.length > 1) {
 		if(document.getElementById('email_tr').value == "")
 			email = document.getElementById('email_tr').placeholder
 		else
@@ -682,9 +707,9 @@ function transfPageButtons(butName) {
 		if(email == "Почта") {
 			document.getElementById('inp').value = "Введите почту"
 			return
-		} else
-			textFromTable = textFromTable.join(email)
+		}
 	}
+	textFromTable = textFromTable.join(email)
 	
 	document.getElementById('inp').value = textFromTable
 }
@@ -1167,7 +1192,7 @@ function startTimer() {
 				}
 		}
 		addInfoUser.innerHTML = vertical + " + " + user 
-		if(vertical == "Math") {
+		if(vertical == "Math" || "math_flow") {
 			//document.getElementById('math').style.backgroundColor = "green"
 			document.getElementById('NS').style.backgroundColor = "#768d87"
 		} else {
@@ -1216,24 +1241,6 @@ function startTimer() {
 	}
 
 	
-	if(document.getElementsByClassName('expert-user_details-list')[0] != undefined) {
-		phone = document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText
-		if(phone == "—") {
-			phone = ""
-			document.getElementById('phone_tr').placeholder = "Телефон" 
-		} else 
-			document.getElementById('phone_tr').placeholder = phone
-		
-		email = document.getElementsByClassName('expert-user_details-list')[0].childNodes[0].childNodes[1].innerText
-		if(email == "—") {
-			email = ""
-			document.getElementById('email_tr').placeholder	= "Почта"
-		}
-		document.getElementById('email_tr').placeholder	= email
-	} else {
-		document.getElementById('email_tr').placeholder	= "Почта"
-		document.getElementById('phone_tr').placeholder = "Телефон" 
-	}
 }
 setInterval(startTimer, 1000)
 
