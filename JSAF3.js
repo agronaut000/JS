@@ -601,6 +601,7 @@ function move_again_AF() {
 									newBut.setAttribute('onclick', 'bagPageButtons(this.id)')
 									newString.appendChild(newBut)
 								}
+								countOfStr++
 								b.lastElementChild.lastElementChild.appendChild(newString)
 								break
 							case 'Шаблоны':
@@ -955,6 +956,8 @@ async function getInfo(flag1 = 1) {
 		adr1 = document.location.pathname
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
+		if(adr1 == undefined)
+			adr1 = ""
 		sessionId = ""
 		if(document.getElementById('msg1').innerHTML != "Доработать" || flag1 == 0) {
 			a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
