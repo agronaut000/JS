@@ -893,7 +893,6 @@ serviceId = b.serviceId
 queryId = b.queryId
 AFsessionId = b.sessionId
 tmpText = b.text
-tmpText = tmpText.split("\n").join("\\n")
 tmpText = tmpText.split("<br>↵").join('\n')
 tmpText = tmpText.split("&nbsp;").join(' ')
 tmpText = tmpText.split("<br />").join('\n')
