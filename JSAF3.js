@@ -167,7 +167,6 @@ hashBut.id = "hashBut"
 hashBut.innerHTML = "Хэш"
 hashBut.style.marginRight = "15px";
 btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
-btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
 
 
 let maskBack = document.createElement('div')
@@ -175,8 +174,10 @@ maskBack.id = "maskBack"
 maskBack.innerHTML = "Вернуть"
 maskBack.style.marginRight = "15px";
 maskBack.style.display = "none";
+setTimeout(function() {
+btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
 btnAdd1.insertBefore(maskBack, btnAdd1.children[0])
-
+}, 2000)
 
 maskBack.onclick = function () {
 	name = document.getElementById('maskBack').getAttribute('name')
@@ -1226,12 +1227,14 @@ function startTimer() {
 				}
 		}
 		addInfoUser.innerHTML = vertical + " + " + user 
-		if(vertical == "Math" || "math_flow") {
-			//document.getElementById('math').style.backgroundColor = "green"
-			document.getElementById('NS').style.backgroundColor = "#768d87"
-		} else {
-			document.getElementById('NS').style.backgroundColor = "green"
-			//document.getElementById('math').style.backgroundColor = "#768d87"
+		if(document.getElementById('NS') != undefined) {
+			if(vertical == "Math" || "math_flow") {
+				//document.getElementById('math').style.backgroundColor = "green"
+				document.getElementById('NS').style.backgroundColor = "#768d87"
+			} else {
+				document.getElementById('NS').style.backgroundColor = "green"
+				//document.getElementById('math').style.backgroundColor = "#768d87"
+			}
 		}
 		
 		
