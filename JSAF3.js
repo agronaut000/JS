@@ -93,6 +93,11 @@ var win_AFhelper =
 				<button id="sound_save">save</button>
 				<button id="switcher">ВКЛ</button>
 			</div>
+			<div style="margin: 5px; width: 300px">
+				<button id="type_KC">КЦ</button>
+				<button id="type_TP">ТП</button>
+				<button id="type_TS">TS</button>
+			</div>
 		</div>
 	</span>
     </div>`;
@@ -290,6 +295,18 @@ function move_again_AF() {
             this.innerHTML = "Чат";
 			localStorage.setItem('msg', 'Чат')
         }
+	}
+    document.getElementById('type_KC').onclick = function () {
+		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec')
+		document.getElementById('msg1').style.display = 'none'
+		document.getElementById('msg1').innerHTML = 'Доработать'
+		
+	}
+    document.getElementById('type_TP').onclick = function () {
+		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec')
+	}
+    document.getElementById('type_TS').onclick = function () {
+		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec')
 	}
     document.getElementById('hideMenu').onclick = function () {
 		document.getElementById('AF_helper').style.display = 'none'
@@ -618,7 +635,7 @@ async function buttonsFromDoc(butName) {
 var bool = 0;	
 var table
 function getText() {
-   var app = `https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec`,
+   var app = localStorage.getItem('scriptAdr'),
       output = '',
       xhr = new XMLHttpRequest();
    xhr.open('GET', app);
