@@ -494,158 +494,6 @@ function move_again_AF() {
 	}
 	
 	getText()
-	
-	setTimeout(function() {
-		countOfStr = 0
-		countOfPages = 0
-		pageName = ""
-		addTmpFlag = 0
-		b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
-		console.log(table)
-		function addTemplates() {
-			for(i = 0; i < table.length; i++) {
-				c = table[i]
-				switch(c[0]) {
-					case '': 
-						addTmpFlag = 0
-						countOfStr++
-						var newStr = document.createElement('div')
-						newStr.style.margin = "5px"
-						newStr.id = countOfPages + "page_" + countOfStr + "str"
-						b.lastElementChild.appendChild(newStr)
-						break
-					
-					case 'Additional templates': 
-						addTmpFlag = 1
-						break
-					case 'Страница':
-						var newPageBut = document.createElement('button')
-						newPageBut.innerText = c[1]
-						pageType = c[2]
-						newPageBut.style.marginRight = '4px'
-						newPageBut.setAttribute('onclick', 'pageClick(this.id)')
-						newPageBut.id = countOfPages + 'page_button'
-						b.childNodes[3].appendChild(newPageBut)
-						
-						var newPage = document.createElement('div')
-						newPage.id = countOfPages + 'page'
-						b.appendChild(newPage)
-						
-						countOfPages++
-						
-						countOfStr = 1
-						if(pageType == "Переводы") {
-							var newDiv = document.createElement('div')
-							newDiv.id = countOfPages + "page_" + countOfStr + "str"
-							newDiv.style.margin = "5px"
-							
-							var newInputPhone = document.createElement('input')
-							newInputPhone.id = 'phone_tr'
-							newInputPhone.placeholder = 'Телефон'
-							newInputPhone.autocomplete = 'off'
-							newInputPhone.type = 'text'
-							newInputPhone.style = 'text-align: center; width: 100px; color: black; margin-left: 10px'
-							
-							var newInputEmail = document.createElement('input')
-							newInputEmail.id = 'email_tr'
-							newInputEmail.placeholder = 'Почта'
-							newInputEmail.autocomplete = 'off'
-							newInputEmail.type = 'text'
-							newInputEmail.style = 'text-align: center; width: 100px; color: black; margin-left: 10px'
-							
-							newDiv.appendChild(newInputPhone)
-							newDiv.appendChild(newInputEmail)
-							
-							b.lastElementChild.appendChild(newDiv)
-							countOfStr++
-							
-							setInterval(function() {
-								if(document.getElementsByClassName('expert-user_details-list')[0] != undefined) {
-									phone = document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText
-									if(phone == "-") {
-										phone = ""
-										document.getElementById('phone_tr').placeholder = "Телефон" 
-									} else 
-										document.getElementById('phone_tr').placeholder = phone
-									
-									email = document.getElementsByClassName('expert-user_details-list')[0].childNodes[0].childNodes[1].innerText
-									if(email == "-") {
-										email = ""
-										document.getElementById('email_tr').placeholder	= "Почта"
-									}
-									document.getElementById('email_tr').placeholder	= email
-								} else {
-									document.getElementById('email_tr').placeholder	= "Почта"
-									document.getElementById('phone_tr').placeholder = "Телефон" 
-								}
-							}, 1000)
-						}
-						var newStr = document.createElement('div')
-						newStr.style.margin = "5px"
-						newStr.id = countOfPages + "page_" + countOfStr + "str"
-						b.lastElementChild.appendChild(newStr)
-						break
-					default:
-						switch(pageType) {
-							case 'Баги':
-								var newString = document.createElement('p')
-								newString.style.color = 'white'
-								newString.style.margin = '0 0 5px 0'
-								newString.innerText = c[0]
-								for(j = 0; j < c[1]; j++) {
-									var newBut = document.createElement('button')
-									newBut.style.width = '20px'
-									newBut.style.marginRight = '4px'
-									newBut.id = countOfStr + 'str' + (j + 1) 
-									newBut.innerText = (j + 1) 
-									newBut.setAttribute('onclick', 'bagPageButtons(this.id)')
-									newString.appendChild(newBut)
-								}
-								countOfStr++
-								b.lastElementChild.lastElementChild.appendChild(newString)
-								break
-							case 'Шаблоны':
-								var newBut = document.createElement('button')
-								newBut.innerText = c[0]
-								newBut.style.marginRight = '4px'
-								newBut.setAttribute('onclick', 'buttonsFromDoc(this.innerText)')
-								if(newBut.innerText == 'Урок NS')
-									newBut.id = "NS"
-								if(newBut.innerText == 'ус+брауз (У)')
-									newBut.innerText = "ус+брауз"
-								if(newBut.innerText == 'ус+брауз (П)')
-									continue
-								if(addTmpFlag == 0)
-									b.lastElementChild.lastElementChild.appendChild(newBut)
-								else {
-									newBut.style.marginTop = '4px'
-									document.getElementById('addTmp').children[0].appendChild(newBut)
-								}
-								break
-							case 'Переводы':
-								var newBut = document.createElement('button')
-								newBut.innerText = c[0]
-								newBut.style.marginRight = '4px'
-								newBut.setAttribute('onclick', 'transfPageButtons(this.innerText)')
-								b.lastElementChild.lastElementChild.appendChild(newBut)
-								break
-							default:
-								break
-						}
-						break
-				}
-			}	
-			document.getElementById('0page').ondblclick = function () {
-			if(document.getElementById('addTmp').style.display == 'none')
-				document.getElementById('addTmp').style.display = '';
-			else
-				document.getElementById('addTmp').style.display = 'none';
-			}
-			document.getElementById('0page_button').click()
-		}
-		addTemplates()
-	}, 3000)
-	
 }
 
 move_again_AF();
@@ -784,6 +632,7 @@ function getText() {
 			   
 			table = result;
 			console.log('Обновили шаблоны')
+			refreshTemplates()
 
         } catch(e) {console.log(e)}
      }
@@ -792,6 +641,153 @@ function getText() {
    }
    xhr.send()
    
+}
+function refreshTemplates() {
+	countOfStr = 0
+	countOfPages = 0
+	pageName = ""
+	addTmpFlag = 0
+	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
+	console.log(table)
+	for(i = 0; i < table.length; i++) {
+		c = table[i]
+		switch(c[0]) {
+			case '': 
+				addTmpFlag = 0
+				countOfStr++
+				var newStr = document.createElement('div')
+				newStr.style.margin = "5px"
+				newStr.id = countOfPages + "page_" + countOfStr + "str"
+				b.lastElementChild.appendChild(newStr)
+				break
+			
+			case 'Additional templates': 
+				addTmpFlag = 1
+				break
+			case 'Страница':
+				var newPageBut = document.createElement('button')
+				newPageBut.innerText = c[1]
+				pageType = c[2]
+				newPageBut.style.marginRight = '4px'
+				newPageBut.setAttribute('onclick', 'pageClick(this.id)')
+				newPageBut.id = countOfPages + 'page_button'
+				b.childNodes[3].appendChild(newPageBut)
+				
+				var newPage = document.createElement('div')
+				newPage.id = countOfPages + 'page'
+				b.appendChild(newPage)
+				
+				countOfPages++
+				
+				countOfStr = 1
+				if(pageType == "Переводы") {
+					var newDiv = document.createElement('div')
+					newDiv.id = countOfPages + "page_" + countOfStr + "str"
+					newDiv.style.margin = "5px"
+					
+					var newInputPhone = document.createElement('input')
+					newInputPhone.id = 'phone_tr'
+					newInputPhone.placeholder = 'Телефон'
+					newInputPhone.autocomplete = 'off'
+					newInputPhone.type = 'text'
+					newInputPhone.style = 'text-align: center; width: 100px; color: black; margin-left: 10px'
+					
+					var newInputEmail = document.createElement('input')
+					newInputEmail.id = 'email_tr'
+					newInputEmail.placeholder = 'Почта'
+					newInputEmail.autocomplete = 'off'
+					newInputEmail.type = 'text'
+					newInputEmail.style = 'text-align: center; width: 100px; color: black; margin-left: 10px'
+					
+					newDiv.appendChild(newInputPhone)
+					newDiv.appendChild(newInputEmail)
+					
+					b.lastElementChild.appendChild(newDiv)
+					countOfStr++
+					
+					setInterval(function() {
+						if(document.getElementsByClassName('expert-user_details-list')[0] != undefined) {
+							phone = document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText
+							if(phone == "-") {
+								phone = ""
+								document.getElementById('phone_tr').placeholder = "Телефон" 
+							} else 
+								document.getElementById('phone_tr').placeholder = phone
+							
+							email = document.getElementsByClassName('expert-user_details-list')[0].childNodes[0].childNodes[1].innerText
+							if(email == "-") {
+								email = ""
+								document.getElementById('email_tr').placeholder	= "Почта"
+							}
+							document.getElementById('email_tr').placeholder	= email
+						} else {
+							document.getElementById('email_tr').placeholder	= "Почта"
+							document.getElementById('phone_tr').placeholder = "Телефон" 
+						}
+					}, 1000)
+				}
+				var newStr = document.createElement('div')
+				newStr.style.margin = "5px"
+				newStr.id = countOfPages + "page_" + countOfStr + "str"
+				b.lastElementChild.appendChild(newStr)
+				break
+			default:
+				switch(pageType) {
+					case 'Баги':
+						var newString = document.createElement('p')
+						newString.style.color = 'white'
+						newString.style.margin = '0 0 5px 0'
+						newString.innerText = c[0]
+						for(j = 0; j < c[1]; j++) {
+							var newBut = document.createElement('button')
+							newBut.style.width = '20px'
+							newBut.style.marginRight = '4px'
+							newBut.id = countOfStr + 'str' + (j + 1) 
+							newBut.innerText = (j + 1) 
+							newBut.setAttribute('onclick', 'bagPageButtons(this.id)')
+							newString.appendChild(newBut)
+						}
+						countOfStr++
+						b.lastElementChild.lastElementChild.appendChild(newString)
+						break
+					case 'Шаблоны':
+						var newBut = document.createElement('button')
+						newBut.innerText = c[0]
+						newBut.style.marginRight = '4px'
+						newBut.setAttribute('onclick', 'buttonsFromDoc(this.innerText)')
+						if(newBut.innerText == 'Урок NS')
+							newBut.id = "NS"
+						if(newBut.innerText == 'ус+брауз (У)')
+							newBut.innerText = "ус+брауз"
+						if(newBut.innerText == 'ус+брауз (П)')
+							continue
+						if(addTmpFlag == 0)
+							b.lastElementChild.lastElementChild.appendChild(newBut)
+						else {
+							newBut.style.marginTop = '4px'
+							document.getElementById('addTmp').children[0].appendChild(newBut)
+						}
+						break
+					case 'Переводы':
+						var newBut = document.createElement('button')
+						newBut.innerText = c[0]
+						newBut.style.marginRight = '4px'
+						newBut.setAttribute('onclick', 'transfPageButtons(this.innerText)')
+						b.lastElementChild.lastElementChild.appendChild(newBut)
+						break
+					default:
+						break
+				}
+				break
+		}
+	}	
+	document.getElementById('0page').ondblclick = function () {
+	if(document.getElementById('addTmp').style.display == 'none')
+		document.getElementById('addTmp').style.display = '';
+	else
+		document.getElementById('addTmp').style.display = 'none';
+	}
+	document.getElementById('0page_button').click()
 }
 
 function msgFromTable(btnName) {
