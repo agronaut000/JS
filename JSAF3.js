@@ -523,7 +523,7 @@ function move_again_AF() {
 	getText()
 }
 
-move_again_AF();
+setTimeout(move_again_AF(), 1000)
 function pageClick(pageId) {
 	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 	for(i = 0; i < b.childElementCount; i++) {
