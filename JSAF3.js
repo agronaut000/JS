@@ -754,8 +754,10 @@ function refreshTemplates() {
 								document.getElementById('email_tr').placeholder	= email
 							}
 						} else {
-							document.getElementById('email_tr').placeholder	= "Почта"
-							document.getElementById('phone_tr').placeholder = "Телефон" 
+							if(document.getElementById('email_tr') != undefined) 
+								document.getElementById('email_tr').placeholder	= "Почта"
+							if(document.getElementById('phone_tr') != undefined)
+								document.getElementById('phone_tr').placeholder = "Телефон" 
 						}
 					}, 1000)
 				}
