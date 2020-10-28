@@ -301,7 +301,7 @@ function move_again_AF() {
     document.getElementById('type_KC').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec')
 		document.getElementById('msg1').style.display = 'none'
-		document.getElementById('snd').style.marginLeft = '116px'
+		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		getText()
 	}
@@ -737,19 +737,22 @@ function refreshTemplates() {
 					
 					setInterval(function() {
 						if(document.getElementsByClassName('expert-user_details-list')[0] != undefined) {
-							phone = document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText
-							if(phone == "-") {
-								phone = ""
-								document.getElementById('phone_tr').placeholder = "Телефон" 
-							} else 
-								document.getElementById('phone_tr').placeholder = phone
-							
-							email = document.getElementsByClassName('expert-user_details-list')[0].childNodes[0].childNodes[1].innerText
-							if(email == "-") {
-								email = ""
-								document.getElementById('email_tr').placeholder	= "Почта"
+							if(document.getElementById('phone_tr') != undefined) {
+								phone = document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText
+								if(phone == "-") {
+									phone = ""
+									document.getElementById('phone_tr').placeholder = "Телефон" 
+								} else 
+									document.getElementById('phone_tr').placeholder = phone
 							}
-							document.getElementById('email_tr').placeholder	= email
+							if(document.getElementById('email_tr') != undefined) {
+								email = document.getElementsByClassName('expert-user_details-list')[0].childNodes[0].childNodes[1].innerText
+								if(email == "-") {
+									email = ""
+									document.getElementById('email_tr').placeholder	= "Почта"
+								}
+								document.getElementById('email_tr').placeholder	= email
+							}
 						} else {
 							document.getElementById('email_tr').placeholder	= "Почта"
 							document.getElementById('phone_tr').placeholder = "Телефон" 
