@@ -677,8 +677,8 @@ function refreshTemplates() {
 		document.getElementById('pages').children[0].remove()
 	for(i = 0; document.getElementById(i + 'page') != undefined; i++)
 		document.getElementById(i + 'page').remove()
-	while(document.getElementById('addTmp').children[0] != undefined)
-		document.getElementById('addTmp').children[0].remove()
+	while(document.getElementById('addTmp').children[0].children[0] != undefined)
+		document.getElementById('addTmp').children[0].children[0].remove()
 	countOfStr = 0
 	countOfPages = 0
 	pageName = ""
