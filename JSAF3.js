@@ -94,9 +94,11 @@ var win_AFhelper =
 				<button id="switcher">ВКЛ</button>
 			</div>
 			<div style="margin: 5px; width: 300px">
+				<p style="color:white; margin:0 0 5px 0;"> Отдел: 
 				<button id="type_KC">КЦ</button>
 				<button id="type_TP">ТП</button>
 				<button id="type_TS">TS</button>
+				</p>
 			</div>
 		</div>
 	</span>
@@ -299,18 +301,20 @@ function move_again_AF() {
     document.getElementById('type_KC').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec')
 		document.getElementById('msg1').style.display = 'none'
+		document.getElementById('snd').style.marginLeft = '116px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		getText()
-		
 	}
     document.getElementById('type_TP').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec')
 		document.getElementById('msg1').style.display = ''
+		document.getElementById('snd').style.marginLeft = '16px'
 		getText()
 	}
     document.getElementById('type_TS').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec')
 		document.getElementById('msg1').style.display = ''
+		document.getElementById('snd').style.marginLeft = '16px'
 		getText()
 	}
     document.getElementById('hideMenu').onclick = function () {
