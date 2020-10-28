@@ -643,6 +643,10 @@ function getText() {
    
 }
 function refreshTemplates() {
+	while(document.getElementById('pages').children[0] != undefined)
+		document.getElementById('pages').children[0].remove()
+	for(i = 0; document.getElementById(i + 'page') != undefined; i++)
+		document.getElementById(i + 'page').remove()
 	countOfStr = 0
 	countOfPages = 0
 	pageName = ""
