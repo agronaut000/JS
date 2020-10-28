@@ -300,13 +300,18 @@ function move_again_AF() {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec')
 		document.getElementById('msg1').style.display = 'none'
 		document.getElementById('msg1').innerHTML = 'Доработать'
+		getText()
 		
 	}
     document.getElementById('type_TP').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec')
+		document.getElementById('msg1').style.display = ''
+		getText()
 	}
     document.getElementById('type_TS').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec')
+		document.getElementById('msg1').style.display = ''
+		getText()
 	}
     document.getElementById('hideMenu').onclick = function () {
 		document.getElementById('AF_helper').style.display = 'none'
