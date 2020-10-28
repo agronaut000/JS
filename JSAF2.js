@@ -440,8 +440,11 @@ function move_again_AF() {
 		else 
 			sendComment(document.getElementById('inp').value)
 		document.getElementById('inp').value = ""
-		document.getElementById('phone_tr').value = ""
-		document.getElementById('email_tr').value = ""
+		
+		if(document.getElementById('phone_tr') != undefined)
+			document.getElementById('phone_tr').value = ""
+		if(document.getElementById('email_tr') != undefined)
+			document.getElementById('email_tr').value = ""
 	}	
 
 	window.onkeydown = function(e) {
