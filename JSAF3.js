@@ -1238,12 +1238,14 @@ function startTimer() {
 		}
 		
 		
-		if(user == "student") {
-			//document.getElementById('math').style.display = 
-			document.getElementById('NS').style.display = "none"
-		} else {
-			//document.getElementById('math').style.display = 
-			document.getElementById('NS').style.display = ""
+		if(document.getElementById('NS') != undefined) {
+			if(user == "student") {
+				//document.getElementById('math').style.display = 
+				document.getElementById('NS').style.display = "none"
+			} else {
+				//document.getElementById('math').style.display = 
+				document.getElementById('NS').style.display = ""
+			}
 		}
 		if(user == "teacher") {
 			for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
