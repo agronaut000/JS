@@ -308,6 +308,7 @@ function move_again_AF() {
 		document.getElementById('msg1').style.display = 'none'
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
+		document.getElementById('testUsers').style.display = 'none'
 		getText()
 	}
     document.getElementById('type_TP').onclick = function () {
@@ -318,10 +319,22 @@ function move_again_AF() {
 	}
     document.getElementById('type_TS').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec')
-		document.getElementById('msg1').style.display = ''
-		document.getElementById('snd').style.marginLeft = '16px'
+		document.getElementById('msg1').style.display = 'none'
+		document.getElementById('snd').style.marginLeft = '120px'
+		document.getElementById('msg1').innerHTML = 'Доработать'
+		document.getElementById('testUsers').style.display = 'none'
 		getText()
 	}
+	if(localStorage.getItem('scriptAdr') != 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec') {
+		document.getElementById('msg1').style.display = 'none'
+		document.getElementById('snd').style.marginLeft = '120px'
+		document.getElementById('msg1').innerHTML = 'Доработать'
+		document.getElementById('testUsers').style.display = 'none'
+	} else {
+		document.getElementById('msg1').style.display = ''
+		document.getElementById('snd').style.marginLeft = '16px'
+	}
+	
     document.getElementById('hideMenu').onclick = function () {
 		document.getElementById('AF_helper').style.display = 'none'
 		document.getElementById('scriptBut').style.display = ''
