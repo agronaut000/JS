@@ -1,3 +1,4 @@
+
 let mstl = document.createElement('style');
 document.body.append(mstl);
 var style = `.win_btn {
@@ -64,68 +65,6 @@ var win_AFhelper =
 					<button id="setting" style="margin-left: 80px">S</button>
 				</div>
 				<div style="margin: 5px;" id="pages">
-					<button id="page1_button">Шаблоны</button>
-					<button id="page2_button">Баги</button>
-					<button id="page3_button">Переводы</button>
-				</div>
-				<div id="page1">
-					<div style="margin: 5px;" id="2str">
-						<button id="helloAF">Привет</button>
-						<button id="necel">Нецел</button>
-						<button id="internet">Инет</button>
-						<button id="twoMin">Помогу</button>
-						<button id="moreTime">Время</button>
-					</div>
-					<div style="margin: 5px;" id="3str">
-						<button id="idU">ID У</button>
-						<button id="screen">скрин</button>
-						<button id="cacheTmp">кэш</button>
-					</div>
-					<div style="margin: 5px;" id="4str">
-						<button id="NS">урок NS</button>
-						<button id="perevod">Др отд</button>
-						<button id="hardReset">HRes</button>
-						<button id="TW">TW</button>
-						<button id="anydesk">AD</button>
-					</div>
-					<div style="margin: 5px;" id="5str">
-						<button id="engConv">англ</button>
-						<button id="browser">ус+брауз</button>
-						<button id="thank">пока</button>
-						<button id="thanks">Спс</button>
-						<button id="gladToHelp">рад</button>
-					</div>
-				</div>
-				<div style="margin: 5px; display: none" id="page_bags">	
-					<p style="color:white; margin: 0 0 5px 0">Нет сроков и альтернатив: <button style="width: 20px;" id="bagg11">1</button> <button style="width: 20px;" id="bagg12">2</button> </p>
-					<p style="color:white; margin: 0 0 5px 0">Повторное обращение: <button style="width: 20px;" id="bagg21">1</button> <button style="width: 20px;" id="bagg22">2</button> <button style="width: 20px;" id="bagg23">3</button></p>
-					<p style="color:white; margin: 0 0 5px 0">Проблема с ДЗ: <button style="width: 20px;" id="bagg31">1</button> <button style="width: 20px;" id="bagg32">2</button> <button style="width: 20px;" id="bagg33">3</button> </p>
-					<p style="color:white; margin: 0 0 5px 0">Проблема с медиа-контентом: <button style="width: 20px;" id="bagg41">1</button> <button style="width: 20px;" id="bagg42">2</button></p>
-					<p style="color:white; margin: 0 0 5px 0">Проблема с заметками: <button style="width: 20px;" id="bagg51">1</button> <button style="width: 20px;" id="bagg52">2</button> <button style="width: 20px;" id="bagg53">3</button></p>
-					<p style="color:white; margin: 0 0 5px 0">Передача в QA: <button style="width: 20px;" id="qa1">1</button> <button style="width: 20px;" id="qa2">2</button></p>
-				</div>
-				<div style="display: none" id="page_transf">
-					<div style="margin: 5px;">
-						<input id="phone_tr" placeholder="Телефон" autocomplete="off" type="text" style="text-align: center; width: 100px; color: black; margin-left: 10px">
-						<input id="email_tr" placeholder="Почта" autocomplete="off" type="text" style="text-align: center; width: 150px; color: black;  margin-left: 10px">
-					</div>
-					<div style="margin: 5px;">
-						<button id="secLineNoww">2Л-сейчас?</button>
-						<button id="secLineNow">2Л</button>
-						<button id="secLineCall">2Л-калик?</button>
-						<button id="secLineCal">2Л</button>
-						<button id="bagSecLine">Баг-2Л</button> 
-					</div>
-					<div style="margin: 5px;">
-						<button id="mobDevice">Устр</button>
-						<button id="mobCrit">Моб-крит</button>
-						<button id="mobHigh">Моб-высок</button>
-						<button id="mobMinor">Моб-минор</button>
-					</div>
-					<div style="margin: 5px;">
-						<button id="managers_sc">SC</button>
-						<button id="managers_tc">TC</button>
-					</div>
 				</div>
 			</span>
 			<div style="margin: 5px;" id="6str">
@@ -146,19 +85,6 @@ var win_AFhelper =
 			</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="addTmp">
 			<div style="margin: 5px; width: 300px">
-					<button id="cacheSafari" style="margin: 2px">Кэш Сафари</button>
-					<button id="UnapisalSam" style="margin: 2px">П -> У написал сам</button>
-					<button id="nedozvonU">недозвон У</button>
-					<button id="macBag" style="margin: 2px">Макобаг</button>
-					<button id="hiddenHW" style="margin: 2px">Скрытое ДЗ</button>
-					<button id="revision" style="margin: 2px">Ревизия</button>
-					<button id="serverAF" style="margin: 2px">Серверные</button>
-					<button id="privateMode" style="margin: 2px">Инкогнито</button>
-					<button id="predlozh" style="margin: 2px">Предложение</button>
-					<button id="VPN">VPN</button>
-					<button id="vcall">vcall-test</button>
-					<button id="micro">микро</button>
-					<button id="addMacTW">Mac+TW</button>
 			</div>
 		</div>
 		<div style="border: 2px double black; display: none; background-color: #464451" id="set_bar">
@@ -166,6 +92,13 @@ var win_AFhelper =
 				<input id="sound_adr" placeholder="Адрес звука" autocomplete="off" type="text" style="text-align: center; width: 100px; color: black;">
 				<button id="sound_save">save</button>
 				<button id="switcher">ВКЛ</button>
+			</div>
+			<div style="margin: 5px; width: 300px">
+				<p style="color:white; margin:0 0 5px 0;"> Отдел: 
+				<button id="type_KC">КЦ</button>
+				<button id="type_TP">ТП</button>
+				<button id="type_TS">TS</button>
+				</p>
 			</div>
 		</div>
 	</span>
@@ -180,6 +113,10 @@ if (localStorage.getItem('winTopAF') == null) {
 if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winTopAF', '120');
     localStorage.setItem('winLeftAF', '295');
+}
+
+if (localStorage.getItem('scriptAdr') == null) {
+    localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec');
 }
 
 let button2 = document.createElement('div');
@@ -234,7 +171,6 @@ hashBut.id = "hashBut"
 hashBut.innerHTML = "Хэш"
 hashBut.style.marginRight = "15px";
 btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
-btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
 
 
 let maskBack = document.createElement('div')
@@ -242,8 +178,10 @@ maskBack.id = "maskBack"
 maskBack.innerHTML = "Вернуть"
 maskBack.style.marginRight = "15px";
 maskBack.style.display = "none";
+setTimeout(function() {
+btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
 btnAdd1.insertBefore(maskBack, btnAdd1.children[0])
-
+}, 2000)
 
 maskBack.onclick = function () {
 	name = document.getElementById('maskBack').getAttribute('name')
@@ -347,12 +285,7 @@ function move_again_AF() {
         localStorage.setItem('winTopAF', String(Number(e.clientY - myY2)));
         localStorage.setItem('winLeftAF', String(Number(e.clientX - myX2)));
     };
-	document.getElementById('page1').ondblclick = function () {
-		if(document.getElementById('addTmp').style.display == 'none')
-			document.getElementById('addTmp').style.display = '';
-		else
-			document.getElementById('addTmp').style.display = 'none';
-	}
+
     wintAF.firstElementChild.firstElementChild.firstElementChild.onmousedown = function (a) {
         window.myX2 = a.layerX; 
         window.myY2 = a.layerY; 
@@ -369,6 +302,25 @@ function move_again_AF() {
             this.innerHTML = "Чат";
 			localStorage.setItem('msg', 'Чат')
         }
+	}
+    document.getElementById('type_KC').onclick = function () {
+		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec')
+		document.getElementById('msg1').style.display = 'none'
+		document.getElementById('snd').style.marginLeft = '120px'
+		document.getElementById('msg1').innerHTML = 'Доработать'
+		getText()
+	}
+    document.getElementById('type_TP').onclick = function () {
+		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec')
+		document.getElementById('msg1').style.display = ''
+		document.getElementById('snd').style.marginLeft = '16px'
+		getText()
+	}
+    document.getElementById('type_TS').onclick = function () {
+		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec')
+		document.getElementById('msg1').style.display = ''
+		document.getElementById('snd').style.marginLeft = '16px'
+		getText()
 	}
     document.getElementById('hideMenu').onclick = function () {
 		document.getElementById('AF_helper').style.display = 'none'
@@ -463,19 +415,6 @@ function move_again_AF() {
 		else 
 			sendAnswer(txt)
 	}
-    document.getElementById('NS').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский")
-		txt = "Пожалуйста, воспользуйтесь инструкцией, а затем напишите, удалось ли вам наладить связь\n\
-1. Завершаете урок через Finish\n\
-2. Создаете урок через New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">вот так&nbsp;</a> \n\
-3. Копируете ссылку и отправляете в чат ученику, заранее предупредив его об этом, так как кнопка войти в класс уже не будет функционировать."
-		else 
-			txt = "Use this instruction, and then write if you managed to establish a connection \n\
-1. End the lesson by clicking Finish \n\
-2. Create a lesson through New Student <a href=\"http://joxi.ru/v298jgeTzKyKYm\" target=\"_blank\" rel=\"noopener\">like this&nbsp;</a> \n\
-3. Copy the link and send the student to the chat, warning him about this in advance, since the button to enter the class will no longer function."
-		sendAnswer(txt)
-	}
 	
 	
     document.getElementById('msg1').onclick = function () {
@@ -501,43 +440,12 @@ function move_again_AF() {
 		else 
 			sendComment(document.getElementById('inp').value)
 		document.getElementById('inp').value = ""
-		document.getElementById('phone_tr').value = ""
-		document.getElementById('email_tr').value = ""
-	}
-	
-	
-    document.getElementById('helloAF').onclick = async function () {
-		adr = adr1 = uid = ""
-		var values = await getInfo(0).then(values => {adr = values[0]; adr1 = values[1]; uid = values[2];});
-
-		count = await checkHistory(uid.split(',')[0])
-		if(count > 1 && flagggg == 0) {
-			if(document.getElementById('languageAF').innerHTML == "Русский")
-				txt = "Сейчас я вам помогу, подождите, пожалуйста."
-			else
-				txt = "I will help you now, please wait."
-			flagggg = 1
-		} else {
-			flagggg = 0
-			a = document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText
-			a = a.split(' ')
-			const cyrillicPattern = /^[\u0400-\u04FF]+$/;
-			
-			if(document.getElementById('languageAF').innerHTML == "Русский")
-				if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML == "Доработать")
-					txt = "Здравствуйте, " + a[0] + "!"
-				else
-					txt = "Здравствуйте!"
-			else
-				txt = "Hello!"
-		}
-		if(txt == "I will help you now, please wait.")
-			sendAnswer(txt)
-		else
-			sendAnswerTemplate2(txt)
-	}
-	
-	
+		
+		if(document.getElementById('phone_tr') != undefined)
+			document.getElementById('phone_tr').value = ""
+		if(document.getElementById('email_tr') != undefined)
+			document.getElementById('email_tr').value = ""
+	}	
 
 	window.onkeydown = function(e) {
 			if(e.key == 'Control') {
@@ -609,7 +517,6 @@ function move_again_AF() {
 		document.addEventListener('mousemove', listener3);
 	}
 	loginer.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
-	document.getElementById('page1_button').style.backgroundColor = 'green'
 	
 	user = "student"
 	
@@ -619,309 +526,133 @@ function move_again_AF() {
 	if(localStorage.getItem('msg1') != null) {
 		document.getElementById('msg1').innerHTML = localStorage.getItem('msg1') 
 	}
-}
-
-move_again_AF();
-
-function buttonsFromDoc() {
-	document.getElementById('anydesk').onclick = document.getElementById('nedozvonU').onclick = document.getElementById('necel').onclick = document.getElementById('thanks').onclick = document.getElementById('thank').onclick = document.getElementById('gladToHelp').onclick = document.getElementById('cacheTmp').onclick = document.getElementById('addMacTW').onclick = document.getElementById('VPN').onclick = document.getElementById('hardReset').onclick = document.getElementById('internet').onclick = document.getElementById('twoMin').onclick = document.getElementById('screen').onclick = document.getElementById('idU').onclick = document.getElementById('TW').onclick = document.getElementById('perevod').onclick = document.getElementById('engConv').onclick = document.getElementById('browser').onclick = document.getElementById('privateMode').onclick = document.getElementById('managers_tc').onclick = document.getElementById('micro').onclick = document.getElementById('cacheSafari').onclick = document.getElementById('predlozh').onclick = document.getElementById('UnapisalSam').onclick = document.getElementById('hiddenHW').onclick = document.getElementById('serverAF').onclick = document.getElementById('macBag').onclick = document.getElementById('revision').onclick = document.getElementById('vcall').onclick = document.getElementById('moreTime').onclick = function() {
-		butName = this.innerText
-		if(butName == "ус+брауз")
-			if(user == 'student')
-				butName = "ус+брауз (У)"
-			else
-				butName = "ус+брауз (П)"
-			
-		msgFromTable(butName)
-		if(butName == "Серверные")
-			if(document.getElementById('msg1').innerHTML != "Доработать")
-				sendComment(document.getElementById('inp').value)
-	}
-}
-buttonsFromDoc()
-function pages() {
-	document.getElementById('page1_button').onclick = function() {
-		document.getElementById('page1_button').style.backgroundColor = 'green'
-		document.getElementById('page2_button').style.backgroundColor = '#768d87'
-		document.getElementById('page3_button').style.backgroundColor = '#768d87'
-		
-		document.getElementById('page1').style.display = ''
-		document.getElementById('page_bags').style.display = 'none'
-		document.getElementById('page_transf').style.display = 'none'
-	}
-	document.getElementById('page2_button').onclick = function() {
-		document.getElementById('page1_button').style.backgroundColor = '#768d87'
-		document.getElementById('page2_button').style.backgroundColor = 'green'
-		document.getElementById('page3_button').style.backgroundColor = '#768d87'
-		
-		document.getElementById('page1').style.display = 'none'
-		document.getElementById('page_bags').style.display = ''
-		document.getElementById('page_transf').style.display = 'none'
-	}
-	document.getElementById('page3_button').onclick = function() {
-		document.getElementById('page1_button').style.backgroundColor = '#768d87'
-		document.getElementById('page2_button').style.backgroundColor = '#768d87'
-		document.getElementById('page3_button').style.backgroundColor = 'green'
-		
-		document.getElementById('page1').style.display = 'none'
-		document.getElementById('page_bags').style.display = 'none'
-		document.getElementById('page_transf').style.display = ''
-	}
 	
+	getText()
 }
-pages()
 
-function perevod() {
-	function secondLine() {
-		document.getElementById('secLineCall').onclick = function() {
-			document.getElementById('inp').value = "Простите, сейчас нет возможности провести проверку. Подскажите, пожалуйста, вам будет удобно если специалист свяжется с вами в (время по МСК) для проведения более детальной проверки?"
+setTimeout(move_again_AF(), 1000)
+function pageClick(pageId) {
+	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
+	for(i = 0; i < b.childElementCount; i++) {
+		try {
+			b.children[1].children[i].style.backgroundColor = '#768d87'
+			document.getElementById(i + "page").style.display = 'none'
+		} catch (e){}
+	}
+	document.getElementById(pageId).style.backgroundColor = 'green'
+		document.getElementById(pageId[0] + "page").style.display = ''
+}
+
+function bagPageButtons(butId) {
+	txt = document.getElementById(butId).parentElement.childNodes[0].textContent
+	for(l = 0; l < table.length; l++)
+		if(table[l][0] == txt) {
+			resetFlags()
+			document.getElementById('inp').value = table[l][Number(butId[4]) + 1]
+			break
 		}
-		document.getElementById('secLineCal').onclick = function() {
-			if(user == "student") {
-				if(document.getElementById('phone_tr').value == "")
-					phone = document.getElementById('phone_tr').placeholder
-				else
-					phone = document.getElementById('phone_tr').value
-				
-				if(phone == "Телефон")
-					document.getElementById('inp').value = "Введите номер телефона"
-				else
-					if(document.getElementById('languageAF').innerHTML == "Русский") {
-						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
-Пожалуйста, запустите TeamViewer и продиктуйте специалисту ID и пароль, которые будут в открывшемся окне.\n\
-Программа поможет увидеть ваш экран и ускорит решение вопроса.\n\
-Сотрудник позвонит вам на ваш номер, указанный в заявке: " + phone
-					}
+}
+function transfPageButtons(butName) {
+	resetFlags()
+	textFromTable = ""
+	for(l = 0; l < table.length; l++)
+		if(table[l][0] == butName) {
+			if(table[l][1] == "Поле") {
+				textFromTable = table[l][2]
 			} else {
-						document.getElementById('inp').value = "Для того, чтобы быстрее помочь вам, понадобится программа для удалённого доступа TeamViewer, скачайте её <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a> \n\
-Пожалуйста, запустите TeamViewer и продиктуйте специалисту ID и пароль, которые будут в открывшемся окне.\n\
-Программа поможет увидеть ваш экран и ускорит решение вопроса.\n\
-Сотрудник напишет вам в Slack"
+				msgFromTable(table[l][0])
 			}
+			break
 		}
-		document.getElementById('secLineNoww').onclick = function() {
-				if(document.getElementById('phone_tr').value == "")
-					phone = document.getElementById('phone_tr').placeholder
-				else
-					phone = document.getElementById('phone_tr').value
-				
-				if(phone == "Телефон")
-					document.getElementById('inp').value = "Введите номер телефона"
-				else
-					document.getElementById('inp').value = "Простите, пожалуйста, не получается быстро настроить связь, могу ли я перевести вас на опытного специалиста, который сможет помочь вам?\n\
-Сотрудник позвонит вам на ваш номер " + phone + " в течение 15 минут.\n"
-		}
-		document.getElementById('secLineNow').onclick = function() {
-			if(document.getElementById('languageAF').innerHTML == "Русский") {
-				document.getElementById('inp').value = "Пожалуйста, установите и запустите программу \"TeamViewer\" — она поможет старшему специалисту удалённо подключиться к вашему компьютеру и быстрее решить вопрос.\n\
-Загрузить её можно <a href=\"https://www.898.tv/skyeng\" target=\"_blank\" rel=\"noopener\">по ссылке</a>.\n\
-После загрузки запустите TeamViewer и ожидайте звонок.\n\
-\n\
-Спасибо за ваше обращение"
-			}
-		}
-		document.getElementById('bagSecLine').onclick = function() {
-			if(document.getElementById('phone_tr').value == "")
-				phone = document.getElementById('phone_tr').placeholder
-			else
-				phone = document.getElementById('phone_tr').value
-			
-			if(phone == "Телефон")
-				document.getElementById('inp').value = "Введите номер телефона"
-			else {
-				if(document.getElementById('email_tr').value == "")
-					email = document.getElementById('email_tr').placeholder
-				else
-					email = document.getElementById('email_tr').value
-				
-				if(email == "Почта")
-					document.getElementById('inp').value = "Введите почту"
-				else {
-					if(document.getElementById('languageAF').innerHTML == "Русский") {
-						document.getElementById('inp').value = "Спасибо за ожидание\n\
-\n\
-Я передам ваше обращение специалисту по этому вопросу. После проверки он отправит ответ на вашу почту " + email + ", если понадобится дополнительная информация, свяжется с вами по номеру " + phone + "\n\
-Был рад с вами пообщаться."
-					} else {
-						
-					}
-				}
-			}
+	if(textFromTable == "")
+		return
+	phone = ""
+	textFromTable = textFromTable.split('(phone)')
+	if(textFromTable.length > 1) {
+		if(document.getElementById('phone_tr').value == "")
+			phone = document.getElementById('phone_tr').placeholder
+		else
+			phone = document.getElementById('phone_tr').value
+		if(phone == "Телефон") {
+			document.getElementById('inp').value = "Введите номер телефона"
+			return
 		}
 	}
-	secondLine()
-	function mobile() {
-		document.getElementById('mobDevice').onclick = function() {
-			if(document.getElementById('languageAF').innerHTML == "Русский") {
-				document.getElementById('inp').value = "Уточните, пожалуйста, модель вашего устройства и версию приложения.\n\
-Если вы пишете из мобильного приложения, то скопировать информацию можно через кнопку «Написать разработчикам»."
-			} else {
-				
-			}
-		}
-		document.getElementById('mobCrit').onclick = function() {
-			if(document.getElementById('phone_tr').value == "")
-				phone = document.getElementById('phone_tr').placeholder
-			else
-				phone = document.getElementById('phone_tr').value
-			
-			if(phone == "Телефон")
-				document.getElementById('inp').value = "Введите номер телефона"
-			else
-				if(document.getElementById('languageAF').innerHTML == "Русский") {
-					document.getElementById('inp').value = "Спасибо за ответ. Я сам не смогу вам помочь в полной мере, мне нужно передать запрос компетентному специалисту из мобильной поддержки, который свяжется с вами в течение 8 минут по телефону " + phone + " и поможет решить неполадку."
-				} else {
-					
-				}
-		}
-		
-		document.getElementById('mobHigh').onclick = function() {
-			if(document.getElementById('email_tr').value == "")
-				email = document.getElementById('email_tr').placeholder
-			else
-				email = document.getElementById('email_tr').value
-			
-			if(email == "Почта")
-				document.getElementById('inp').value = "Введите почту"
-			else
-				if(document.getElementById('languageAF').innerHTML == "Русский") {
-					document.getElementById('inp').value = "Спасибо за ответ. Я всю информацию передал коллегам из поддержки мобильных приложений. Пожалуйста, ожидайте их ответа в течение часа, он придет на вашу почту " + email
-				} else {
-					
-				}
-		}
-		
-		document.getElementById('mobMinor').onclick = function() {
-			if(document.getElementById('email_tr').value == "")
-				email = document.getElementById('email_tr').placeholder
-			else
-				email = document.getElementById('email_tr').value
-			
-			if(email == "Почта")
-				document.getElementById('inp').value = "Введите почту"
-			else
-				if(document.getElementById('languageAF').innerHTML == "Русский") {
-					document.getElementById('inp').value = "Спасибо за ответ. Я всю информацию передал коллегам из поддержки мобильных приложений. Они свяжутся с вами по почте " + email + " в течение 24 часов"
-				} else {
-					
-				}
+	textFromTable = textFromTable.join(phone)
+	
+	email = ""
+	textFromTable = textFromTable.split('(email)')
+	if(textFromTable.length > 1) {
+		if(document.getElementById('email_tr').value == "")
+			email = document.getElementById('email_tr').placeholder
+		else
+			email = document.getElementById('email_tr').value
+		if(email == "Почта") {
+			document.getElementById('inp').value = "Введите почту"
+			return
 		}
 	}
-	mobile()
-	function utc() {
-		document.getElementById('managers_sc').onclick = function () {
-			if(document.getElementById('languageAF').innerHTML == "Русский") {
-				document.getElementById('inp').value = "Вы написали в техподдержку школы. Если вопрос связан с учениками, пожалуйста, напишите в чат \"Managers (Student Care)\"."
-			}
-		}
-	}
-	utc()
+	textFromTable = textFromTable.join(email)
+	
+	document.getElementById('inp').value = textFromTable
 }
-perevod()
 
-function bagggs() {
-	document.getElementById('bagg11').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Спасибо за ожидание.\n\
-Я проверил (краткое описание бага, с которым пришел клиент), причина - неполадки с нашей стороны. Все подробности передал разработчикам."
+async function buttonsFromDoc(butName) {
+	if(butName == "ус+брауз")
+		if(user == 'student')
+			butName = "ус+брауз (У)"
+		else
+			butName = "ус+брауз (П)"
+		
+	if(butName == 'Привет') {
+		try{
+			adr = adr1 = uid = ""
+			var values = await getInfo(0).then(values => {adr = values[0]; adr1 = values[1]; uid = values[2];});
+
+			count = await checkHistory(uid.split(',')[0])
+			if(count > 1 && flagggg == 0) {
+				if(document.getElementById('languageAF').innerHTML == "Русский")
+					txt = "Сейчас я вам помогу, подождите, пожалуйста."
+				else
+					txt = "I will help you now, please wait."
+				flagggg = 1
+			} else {
+				flagggg = 0
+				a = document.getElementsByClassName('expert-user_info_panel')[0].firstChild.firstChild.innerText
+				a = a.split(' ')
+				const cyrillicPattern = /^[\u0400-\u04FF]+$/;
+				
+				if(document.getElementById('languageAF').innerHTML == "Русский")
+					if(cyrillicPattern.test(a[0]) && document.getElementById('msg1').innerHTML == "Доработать")
+						txt = "Здравствуйте, " + a[0] + "!"
+					else
+						txt = "Здравствуйте!"
+				else
+					txt = "Hello!"
+			}
+		} catch(e) {
+			if(document.getElementById('languageAF').innerHTML == "Русский")
+				txt = "Здравствуйте!"
+			else
+				txt = "Hello!"
 		}
-	}
-	document.getElementById('bagg12').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Извините за эти сложности, понимаю, что подобные нюансы не скрашивают процесс обучения. Со своей стороны мы делаем все, чтобы они случались как можно реже.\n\
-Спасибо за понимание."
-		}
-	}
+		if(txt == "I will help you now, please wait.")
+			sendAnswer(txt)
+		else
+			sendAnswerTemplate2(txt)
+		return
+	}		
 	
-	document.getElementById('bagg21').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Извините, что решение затягивается и полностью вас понимаю. Однако вижу, что вопрос уже в работе и разработчики в процессе его решения."
-		}
-	}
-	document.getElementById('bagg22').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "````Если можно предложить альтернативу: Пока ребята из разработки решают вопрос вы можете использовать эту функцию таким способом (описание как)/в мобильном браузере (опишите как найти его)."
-		}
-	}
-	document.getElementById('bagg23').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Понимаю, что это не то решение, которое вы ожидали, но это даст вам возможность... (описание для чего используется функционал)."
-		}
-	}
-	
-	document.getElementById('bagg31').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Спасибо за ожидание. \n\
-Я проверил домашнее задание (название/слайд, с которым обратился клиент), причина неполадки - сбой с нашей стороны. Все подробности передал разработчикам."
-		}
-	}
-	document.getElementById('bagg32').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Извините за эти сложности, понимаю, что домашние задания - это очень важный процесс в обучении, который нельзя оставлять без внимания."
-		}
-	}
-	document.getElementById('bagg33').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Могу предложить вам альтернативу, так как сроки решения будут зависеть от приоритетности и количества задач разработки.  \n\
-На время исправления можно скрыть это домашнее задание, чтобы оно не влияло на вашу статистику обучения. \n\
-Что скажете?"
-		}
-	}
-	
-	document.getElementById('bagg41').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Спасибо за ожидание.\n\
-Я проверил домашнее задание (название/слайд, с которым обратился клиент), причина неполадки - сбой в работе плеера. Все подробности передал разработчикам."
-		}
-	}
-	document.getElementById('bagg42').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Извините за эти сложности, как временное решение я отправляю вам ссылку (ссылка), по которой вы сможете прослушать эту запись. \n\
-Пожалуйста, скачайте ее (пишем куда нажать, чтобы скачать)\n\
-Если будет нужна помощь, пожалуйста, напишите."
-		}
-	}
-	
-	document.getElementById('bagg51').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Спасибо за ожидание.\n\
-Я проверил работу заметок, причина неполадки - технический сбой. Все подробности передал разработчикам."
-		}
-	}
-	document.getElementById('bagg52').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Извините за эти сложности, понимаю, как важно делать пометки во время урока для прогресса в обучении."
-		}
-	}
-	document.getElementById('bagg53').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Хочу предложить вам на время решения альтернативу.\n\
-Используйте, пожалуйста, для заметок в  разделе lesson Attachments функцию add text - инструкция.\n\
-Если будет нужна помощь, пожалуйста, напишите."
-		}
-	}
-	
-	document.getElementById('qa1').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "Спасибо за ожидание\n\
-Я все проверил и здесь не обойтись без помощи наших разработчиков. Извините, что не получается решить вопрос быстрее. Информацию по вашему обращению передал и они уже занимаются поиском решения. Спасибо, что написали об этом."
-		}
-	}
-	document.getElementById('qa2').onclick = function() {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			document.getElementById('inp').value = "````Также если можно предложить альтернативу: Пока ребята из разработки решают вопрос вы можете использовать эту функцию таким способом (описание как)/в мобильном браузере (описание как)/в мобильном браузере (опишите как найти его).\n\
-Понимаю, что это не то решение, которое вы ожидали, но это даст вам возможность... (описание для чего используется функционал)."
-		}
-	}
+	msgFromTable(butName)
+	if(butName == "Серверные")
+		if(document.getElementById('msg1').innerHTML != "Доработать")
+			sendComment(document.getElementById('inp').value)
 }
-bagggs()
+
 var bool = 0;	
-
-
 var table
 function getText() {
-   var app = `https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec`,
-      output = '',
+   var app = localStorage.getItem('scriptAdr'),
       xhr = new XMLHttpRequest();
    xhr.open('GET', app);
    xhr.onreadystatechange = function() {
@@ -931,17 +662,177 @@ function getText() {
         try {
             var r = JSON.parse(xhr.responseText),
                result = r["result"];
+			   
 			table = result;
 			console.log('Обновили шаблоны')
-        } catch(e) {}
-     } 
+			refreshTemplates()
+
+        } catch(e) {console.log(e)}
+     }
    
 
    }
    xhr.send()
    
 }
-getText()
+function refreshTemplates() {
+	while(document.getElementById('pages').children[0] != undefined)
+		document.getElementById('pages').children[0].remove()
+	for(i = 0; document.getElementById(i + 'page') != undefined; i++)
+		document.getElementById(i + 'page').remove()
+	while(document.getElementById('addTmp').children[0].children[0] != undefined)
+		document.getElementById('addTmp').children[0].children[0].remove()
+	countOfStr = 0
+	countOfPages = 0
+	pageName = ""
+	addTmpFlag = 0
+	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
+	console.log(table)
+	for(i = 0; i < table.length; i++) {
+		c = table[i]
+		switch(c[0]) {
+			case '': 
+				addTmpFlag = 0
+				countOfStr++
+				var newStr = document.createElement('div')
+				newStr.style.margin = "5px"
+				newStr.id = countOfPages + "page_" + countOfStr + "str"
+				b.lastElementChild.appendChild(newStr)
+				break
+			
+			case 'Additional templates': 
+				addTmpFlag = 1
+				break
+			case 'Страница':
+				var newPageBut = document.createElement('button')
+				newPageBut.innerText = c[1]
+				pageType = c[2]
+				newPageBut.style.marginRight = '4px'
+				newPageBut.setAttribute('onclick', 'pageClick(this.id)')
+				newPageBut.id = countOfPages + 'page_button'
+				b.childNodes[3].appendChild(newPageBut)
+				
+				var newPage = document.createElement('div')
+				newPage.id = countOfPages + 'page'
+				b.appendChild(newPage)
+				
+				countOfPages++
+				
+				countOfStr = 1
+				if(pageType == "Переводы") {
+					var newDiv = document.createElement('div')
+					newDiv.id = countOfPages + "page_" + countOfStr + "str"
+					newDiv.style.margin = "5px"
+					
+					var newInputPhone = document.createElement('input')
+					newInputPhone.id = 'phone_tr'
+					newInputPhone.placeholder = 'Телефон'
+					newInputPhone.autocomplete = 'off'
+					newInputPhone.type = 'text'
+					newInputPhone.style = 'text-align: center; width: 100px; color: black; margin-left: 10px'
+					
+					var newInputEmail = document.createElement('input')
+					newInputEmail.id = 'email_tr'
+					newInputEmail.placeholder = 'Почта'
+					newInputEmail.autocomplete = 'off'
+					newInputEmail.type = 'text'
+					newInputEmail.style = 'text-align: center; width: 100px; color: black; margin-left: 10px'
+					
+					newDiv.appendChild(newInputPhone)
+					newDiv.appendChild(newInputEmail)
+					
+					b.lastElementChild.appendChild(newDiv)
+					countOfStr++
+					
+					setInterval(function() {
+						if(document.getElementsByClassName('expert-user_details-list')[0] != undefined) {
+							if(document.getElementById('phone_tr') != undefined) {
+								phone = document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText
+								if(phone == "-") {
+									phone = ""
+									document.getElementById('phone_tr').placeholder = "Телефон" 
+								} else 
+									document.getElementById('phone_tr').placeholder = phone
+							}
+							if(document.getElementById('email_tr') != undefined) {
+								email = document.getElementsByClassName('expert-user_details-list')[0].childNodes[0].childNodes[1].innerText
+								if(email == "-") {
+									email = ""
+									document.getElementById('email_tr').placeholder	= "Почта"
+								}
+								document.getElementById('email_tr').placeholder	= email
+							}
+						} else {
+							if(document.getElementById('email_tr') != undefined) 
+								document.getElementById('email_tr').placeholder	= "Почта"
+							if(document.getElementById('phone_tr') != undefined)
+								document.getElementById('phone_tr').placeholder = "Телефон" 
+						}
+					}, 1000)
+				}
+				var newStr = document.createElement('div')
+				newStr.style.margin = "5px"
+				newStr.id = countOfPages + "page_" + countOfStr + "str"
+				b.lastElementChild.appendChild(newStr)
+				break
+			default:
+				switch(pageType) {
+					case 'Баги':
+						var newString = document.createElement('p')
+						newString.style.color = 'white'
+						newString.style.margin = '0 0 5px 0'
+						newString.innerText = c[0]
+						for(j = 0; j < c[1]; j++) {
+							var newBut = document.createElement('button')
+							newBut.style.width = '20px'
+							newBut.style.marginRight = '4px'
+							newBut.id = countOfStr + 'str' + (j + 1) 
+							newBut.innerText = (j + 1) 
+							newBut.setAttribute('onclick', 'bagPageButtons(this.id)')
+							newString.appendChild(newBut)
+						}
+						countOfStr++
+						b.lastElementChild.lastElementChild.appendChild(newString)
+						break
+					case 'Шаблоны':
+						var newBut = document.createElement('button')
+						newBut.innerText = c[0]
+						newBut.style.marginRight = '4px'
+						newBut.setAttribute('onclick', 'buttonsFromDoc(this.innerText)')
+						if(newBut.innerText == 'Урок NS')
+							newBut.id = "NS"
+						if(newBut.innerText == 'ус+брауз (У)')
+							newBut.innerText = "ус+брауз"
+						if(newBut.innerText == 'ус+брауз (П)')
+							continue
+						if(addTmpFlag == 0)
+							b.lastElementChild.lastElementChild.appendChild(newBut)
+						else {
+							newBut.style.marginTop = '4px'
+							document.getElementById('addTmp').children[0].appendChild(newBut)
+						}
+						break
+					case 'Переводы':
+						var newBut = document.createElement('button')
+						newBut.innerText = c[0]
+						newBut.style.marginRight = '4px'
+						newBut.setAttribute('onclick', 'transfPageButtons(this.innerText)')
+						b.lastElementChild.lastElementChild.appendChild(newBut)
+						break
+					default:
+						break
+				}
+				break
+		}
+	}	
+	document.getElementById('0page').ondblclick = function () {
+	if(document.getElementById('addTmp').style.display == 'none')
+		document.getElementById('addTmp').style.display = '';
+	else
+		document.getElementById('addTmp').style.display = 'none';
+	}
+	document.getElementById('0page_button').click()
+}
 
 function msgFromTable(btnName) {
 	for(l = 0; l < table.length; l++) {
@@ -1000,7 +891,7 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
   },
   "referrer": adr,
   "referrerPolicy": "no-referrer-when-downgrade",
-  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646]}",
+  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646,121303,121343,121388,121162,121158,121346,121151,121341,121152,121342,121156,121347,121079,121163,121155,121344,121157,121345,121304,121340]}",
   "method": "POST",
   "mode": "cors",
   "credentials": "include"
@@ -1012,7 +903,8 @@ serviceId = b.serviceId
 queryId = b.queryId
 AFsessionId = b.sessionId
 tmpText = b.text
-tmpText = tmpText.split("\n").join("\\n")
+tmpText = tmpText.split("<br>↵").join('\n')
+tmpText = tmpText.split("&nbsp;").join(' ')
 tmpText = tmpText.split("<br />").join('\n')
 tmpText = tmpText.split('<a').join('TMPaTMP').split('</a').join('TMPENDaTMEPEND')
 tmpText = tmpText.replace(/<\/?[^>]+>/g,'')
@@ -1105,6 +997,8 @@ async function getInfo(flag1 = 1) {
 		adr1 = document.location.pathname
 		adr1 = adr1.split('/')
 		adr1 = adr1[3]
+		if(adr1 == undefined)
+			adr1 = ""
 		sessionId = ""
 		if(document.getElementById('msg1').innerHTML != "Доработать" || flag1 == 0) {
 			a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
@@ -1342,21 +1236,25 @@ function startTimer() {
 				}
 		}
 		addInfoUser.innerHTML = vertical + " + " + user 
-		if(vertical == "Math") {
-			//document.getElementById('math').style.backgroundColor = "green"
-			document.getElementById('NS').style.backgroundColor = "#768d87"
-		} else {
-			document.getElementById('NS').style.backgroundColor = "green"
-			//document.getElementById('math').style.backgroundColor = "#768d87"
+		if(document.getElementById('NS') != undefined) {
+			if(vertical == "Math" || "math_flow") {
+				//document.getElementById('math').style.backgroundColor = "green"
+				document.getElementById('NS').style.backgroundColor = "#768d87"
+			} else {
+				document.getElementById('NS').style.backgroundColor = "green"
+				//document.getElementById('math').style.backgroundColor = "#768d87"
+			}
 		}
 		
 		
-		if(user == "student") {
-			//document.getElementById('math').style.display = 
-			document.getElementById('NS').style.display = "none"
-		} else {
-			//document.getElementById('math').style.display = 
-			document.getElementById('NS').style.display = ""
+		if(document.getElementById('NS') != undefined) {
+			if(user == "student") {
+				//document.getElementById('math').style.display = 
+				document.getElementById('NS').style.display = "none"
+			} else {
+				//document.getElementById('math').style.display = 
+				document.getElementById('NS').style.display = ""
+			}
 		}
 		if(user == "teacher") {
 			for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
@@ -1391,24 +1289,6 @@ function startTimer() {
 	}
 
 	
-	if(document.getElementsByClassName('expert-user_details-list')[0] != undefined) {
-		phone = document.getElementsByClassName('expert-user_details-list')[0].childNodes[1].childNodes[1].innerText
-		if(phone == "—") {
-			phone = ""
-			document.getElementById('phone_tr').placeholder = "Телефон" 
-		} else 
-			document.getElementById('phone_tr').placeholder = phone
-		
-		email = document.getElementsByClassName('expert-user_details-list')[0].childNodes[0].childNodes[1].innerText
-		if(email == "—") {
-			email = ""
-			document.getElementById('email_tr').placeholder	= "Почта"
-		}
-		document.getElementById('email_tr').placeholder	= email
-	} else {
-		document.getElementById('email_tr').placeholder	= "Почта"
-		document.getElementById('phone_tr').placeholder = "Телефон" 
-	}
 }
 setInterval(startTimer, 1000)
 
