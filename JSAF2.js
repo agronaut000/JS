@@ -170,7 +170,6 @@ let hashBut = document.createElement('div')
 hashBut.id = "hashBut"
 hashBut.innerHTML = "Хэш"
 hashBut.style.marginRight = "15px";
-btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 
 
 let maskBack = document.createElement('div')
@@ -179,6 +178,7 @@ maskBack.innerHTML = "Вернуть"
 maskBack.style.marginRight = "15px";
 maskBack.style.display = "none";
 setTimeout(function() {
+btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
 btnAdd1.insertBefore(maskBack, btnAdd1.children[0])
 }, 2000)
@@ -258,7 +258,10 @@ hashBut.onclick = function () {
 			setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
 		}
 	} else {
-		copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1)
+		if(localStorage.getItem('scriptAdr') == TS_addr)
+			copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-18/'+adr1)
+		else
+			copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1)
 		document.getElementById('hashBut').innerHTML = "Скопировано"
 		setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
 	}
@@ -271,7 +274,9 @@ wintAF.style = 'min-height: 25px; min-width: 65px; background: #464451; top: ' +
 wintAF.setAttribute('id' ,'AF_helper');
 wintAF.innerHTML = win_AFhelper; 
 
-
+TS_addr = 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec'
+KC_addr = 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec'
+TP_addr = 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec'
 	
 function move_again_AF() {
     if(window.location.href.indexOf('autofaq') === -1) {
@@ -308,20 +313,35 @@ function move_again_AF() {
 		document.getElementById('msg1').style.display = 'none'
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
+		document.getElementById('testUsers').style.display = 'none'
 		getText()
 	}
     document.getElementById('type_TP').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec')
 		document.getElementById('msg1').style.display = ''
 		document.getElementById('snd').style.marginLeft = '16px'
+		document.getElementById('testUsers').style.display = ''
 		getText()
 	}
     document.getElementById('type_TS').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec')
-		document.getElementById('msg1').style.display = ''
-		document.getElementById('snd').style.marginLeft = '16px'
+		document.getElementById('msg1').style.display = 'none'
+		document.getElementById('snd').style.marginLeft = '120px'
+		document.getElementById('msg1').innerHTML = 'Доработать'
+		document.getElementById('testUsers').style.display = 'none'
 		getText()
 	}
+	if(localStorage.getItem('scriptAdr') != 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec') {
+		document.getElementById('msg1').style.display = 'none'
+		document.getElementById('snd').style.marginLeft = '120px'
+		document.getElementById('msg1').innerHTML = 'Доработать'
+		document.getElementById('testUsers').style.display = 'none'
+	} else {
+		document.getElementById('msg1').style.display = ''
+		document.getElementById('snd').style.marginLeft = '16px'
+		document.getElementById('testUsers').style.display = ''
+	}
+	
     document.getElementById('hideMenu').onclick = function () {
 		document.getElementById('AF_helper').style.display = 'none'
 		document.getElementById('scriptBut').style.display = ''
@@ -891,7 +911,7 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
   },
   "referrer": adr,
   "referrerPolicy": "no-referrer-when-downgrade",
-  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646,121303,121343,121388,121162,121158,121346,121151,121341,121152,121342,121156,121347,121079,121163,121155,121344,121157,121345,121304,121340]}",
+  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646,121303,121343,121388,121162,121158,121346,121151,121341,121152,121342,121156,121347,121079,121163,121155,121344,121157,121345,121304,121340,121384]}",
   "method": "POST",
   "mode": "cors",
   "credentials": "include"
@@ -1313,7 +1333,29 @@ const copyToClipboard1 = str => {
     document.body.removeChild(el);
 };
 
-async function sendAnswerTemplate2(txt, flag = 0) {
+async function sendAnswerTemplate2(word, flag = 0) {
+	txt = ""
+	adr = `https://skyeng.autofaq.ai/tickets/assigned/`
+	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
+  "headers": {
+    "accept": "*/*", 
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "max-age=0",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": adr,
+  "referrerPolicy": "no-referrer-when-downgrade",
+  "body": "{\"query\":\"" + word + "\",\"answersLimit\":25,\"autoFaqServiceIds\":[121388, 121384]}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}).then(a => b = a.json()).then(result => result.forEach(k => {
+	if(k.title == word)
+		txt = k.text
+}))
 	if(document.getElementById('msg1').innerHTML == "Доработать" && flag == 0) {
 		document.getElementById('inp').value = txt
 		template_flag = 1
