@@ -1356,18 +1356,18 @@ async function sendAnswerTemplate2(word, flag = 0) {
 	if(k.title == word)
 		txt = k.text
 }))
+	txt = txt.split("<br>↵").join('\n')
+	txt = txt.split("&nbsp;").join(' ')
+	txt = txt.split("<br />").join('\n')
+	txt = txt.split('<a').join('TMPaTMP').split('</a').join('TMPENDaTMEPEND')
+	txt = txt.replace(/<\/?[^>]+>/g,'')
+	txt = txt.split('TMPaTMP').join('<a').split('TMPENDaTMEPEND').join('</a')
+	
 	if(document.getElementById('msg1').innerHTML == "Доработать" && flag == 0) {
 		document.getElementById('inp').value = txt
 		template_flag = 1
 		template_flag2 = 1
 	} else {
-		txt = txt.split("<br>↵").join('\n')
-		txt = txt.split("&nbsp;").join(' ')
-		txt = txt.split("<br />").join('\n')
-		txt = txt.split('<a').join('TMPaTMP').split('</a').join('TMPENDaTMEPEND')
-		txt = txt.replace(/<\/?[^>]+>/g,'')
-		txt = txt.split('TMPaTMP').join('<a').split('TMPENDaTMEPEND').join('</a')
-		
 		txt = txt.split("\"").join("\\\"")
 		txt2 = txt.split('\n')
 		txt3 = ""
