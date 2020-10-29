@@ -115,6 +115,10 @@ if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winLeftAF', '295');
 }
 
+if (localStorage.getItem('scriptAdr') == null) {
+    localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec');
+}
+
 let button2 = document.createElement('div');
 button2.id = 'userIdScript';
 button2.innerHTML = "Info";
@@ -304,20 +308,35 @@ function move_again_AF() {
 		document.getElementById('msg1').style.display = 'none'
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
+		document.getElementById('testUsers').style.display = 'none'
 		getText()
 	}
     document.getElementById('type_TP').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec')
 		document.getElementById('msg1').style.display = ''
 		document.getElementById('snd').style.marginLeft = '16px'
+		document.getElementById('testUsers').style.display = ''
 		getText()
 	}
     document.getElementById('type_TS').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec')
-		document.getElementById('msg1').style.display = ''
-		document.getElementById('snd').style.marginLeft = '16px'
+		document.getElementById('msg1').style.display = 'none'
+		document.getElementById('snd').style.marginLeft = '120px'
+		document.getElementById('msg1').innerHTML = 'Доработать'
+		document.getElementById('testUsers').style.display = 'none'
 		getText()
 	}
+	if(localStorage.getItem('scriptAdr') != 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec') {
+		document.getElementById('msg1').style.display = 'none'
+		document.getElementById('snd').style.marginLeft = '120px'
+		document.getElementById('msg1').innerHTML = 'Доработать'
+		document.getElementById('testUsers').style.display = 'none'
+	} else {
+		document.getElementById('msg1').style.display = ''
+		document.getElementById('snd').style.marginLeft = '16px'
+		document.getElementById('testUsers').style.display = ''
+	}
+	
     document.getElementById('hideMenu').onclick = function () {
 		document.getElementById('AF_helper').style.display = 'none'
 		document.getElementById('scriptBut').style.display = ''
@@ -436,8 +455,11 @@ function move_again_AF() {
 		else 
 			sendComment(document.getElementById('inp').value)
 		document.getElementById('inp').value = ""
-		document.getElementById('phone_tr').value = ""
-		document.getElementById('email_tr').value = ""
+		
+		if(document.getElementById('phone_tr') != undefined)
+			document.getElementById('phone_tr').value = ""
+		if(document.getElementById('email_tr') != undefined)
+			document.getElementById('email_tr').value = ""
 	}	
 
 	window.onkeydown = function(e) {
@@ -673,6 +695,8 @@ function refreshTemplates() {
 		document.getElementById('pages').children[0].remove()
 	for(i = 0; document.getElementById(i + 'page') != undefined; i++)
 		document.getElementById(i + 'page').remove()
+	while(document.getElementById('addTmp').children[0].children[0] != undefined)
+		document.getElementById('addTmp').children[0].children[0].remove()
 	countOfStr = 0
 	countOfPages = 0
 	pageName = ""
@@ -882,7 +906,7 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
   },
   "referrer": adr,
   "referrerPolicy": "no-referrer-when-downgrade",
-  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646,121303,121343,121388,121162,121158,121346,121151,121341,121152,121342,121156,121347,121079,121163,121155,121344,121157,121345,121304,121340]}",
+  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646,121303,121343,121388,121162,121158,121346,121151,121341,121152,121342,121156,121347,121079,121163,121155,121344,121157,121345,121304,121340, 121384]}",
   "method": "POST",
   "mode": "cors",
   "credentials": "include"
@@ -1304,7 +1328,28 @@ const copyToClipboard1 = str => {
     document.body.removeChild(el);
 };
 
-async function sendAnswerTemplate2(txt, flag = 0) {
+async function sendAnswerTemplate2(word, flag = 0) {
+	txt = ""
+	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
+  "headers": {
+    "accept": "*/*", 
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "max-age=0",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": adr,
+  "referrerPolicy": "no-referrer-when-downgrade",
+  "body": "{\"query\":\"" + word + "\",\"answersLimit\":25,\"autoFaqServiceIds\":[121388, 121384]}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}).then(a => b = a.json()).then(result => result.forEach(k => {
+	if(k.title == word)
+		txt = k.text
+}))
 	if(document.getElementById('msg1').innerHTML == "Доработать" && flag == 0) {
 		document.getElementById('inp').value = txt
 		template_flag = 1
