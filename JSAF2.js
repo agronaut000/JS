@@ -78,7 +78,7 @@ var win_AFhelper =
 				<button id="tmplt3_snd">send</button>
 			</div>
 			<div style="margin: 5px;" id="7str">
-				<textarea style="width: 291px; height: 125px; resize: none" id="inp"></textarea>
+				<textarea style="width: 291px; height: 125px;" id="inp"></textarea>
 				<button id="msg1" style="width:100px;">Отправить</button>
 				<button id="snd" style="width:50px; margin-left:16px">send</button>
 				<button id="msg" style="width:100px; margin-left:16px">Заметки</button>
