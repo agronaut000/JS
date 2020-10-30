@@ -1334,48 +1334,51 @@ const copyToClipboard1 = str => {
 };
 
 async function sendAnswerTemplate2(word, flag = 0) {
-	txt = ""
+	tmpTxt = ""
 	adr = `https://skyeng.autofaq.ai/tickets/assigned/`
-	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
-  "headers": {
-	"accept": "*/*", 
-	"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-	"cache-control": "max-age=0",
-	"content-type": "application/json",
-	"sec-fetch-dest": "empty",
-	"sec-fetch-mode": "cors",
-	"sec-fetch-site": "same-origin"
-  },
-  "referrer": adr,
-  "referrerPolicy": "no-referrer-when-downgrade",
-  "body": "{\"query\":\"" + word + "\",\"answersLimit\":25,\"autoFaqServiceIds\":[121388, 121384]}",
-  "method": "POST",
-  "mode": "cors",
-  "credentials": "include"
-}).then(a => b = a.json()).then(result => result.forEach(k => {
-	if(k.title == word)
-		txt = k.text
-}))
-	txt = txt.split("<br>↵").join('\n')
-	txt = txt.split("&nbsp;").join(' ')
-	txt = txt.split("<br />").join('\n')
-	txt = txt.split('<a').join('TMPaTMP').split('</a').join('TMPENDaTMEPEND')
-	txt = txt.replace(/<\/?[^>]+>/g,'')
-	txt = txt.split('TMPaTMP').join('<a').split('TMPENDaTMEPEND').join('</a')
-	if(txt == "")
-		txt = word
+    if(word.length < 50)
+        try {
+            a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
+          "headers": {
+            "accept": "*/*", 
+            "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+            "cache-control": "max-age=0",
+            "content-type": "application/json",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "same-origin"
+          },
+          "referrer": adr,
+          "referrerPolicy": "no-referrer-when-downgrade",
+          "body": "{\"query\":\"" + word + "\",\"answersLimit\":25,\"autoFaqServiceIds\":[121388, 121384]}",
+          "method": "POST",
+          "mode": "cors",
+          "credentials": "include"
+        }).then(a => b = a.json()).then(result => result.forEach(k => {
+            if(k.title == word)
+                tmpTxt = k.text
+        }))
+        tmpTxt = tmpTxt.split("<br>↵").join('\n')
+        tmpTxt = tmpTxt.split("&nbsp;").join(' ')
+        tmpTxt = tmpTxt.split("<br />").join('\n')
+        tmpTxt = tmpTxt.split('<a').join('TMPaTMP').split('</a').join('TMPENDaTMEPEND')
+        tmpTxt = tmpTxt.replace(/<\/?[^>]+>/g,'')
+        tmpTxt = tmpTxt.split('TMPaTMP').join('<a').split('TMPENDaTMEPEND').join('</a')
+        } catch (e) {}
+	if(tmpTxt == "")
+		tmpTxt = word
 	if(document.getElementById('msg1').innerHTML == "Доработать" && flag == 0) {
-		document.getElementById('inp').value = txt
+		document.getElementById('inp').value = tmpTxt
 		template_flag = 1
 		template_flag2 = 1
 	} else {
-		txt = txt.split("\"").join("\\\"")
-		txt2 = txt.split('\n')
-		txt3 = ""
-		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
-		txt = txt3
-		txt = txt.split('<p></p>').join("<p><br></p>")
-		txt = txt.substr(0, txt.length - 2)
+		tmpTxt = tmpTxt.split("\"").join("\\\"")
+		tmpTxt2 = tmpTxt.split('\n')
+		tmpTxt3 = ""
+		tmpTxt2.forEach(el => tmpTxt3 += "<p>" + el + "</p>\\n")
+		tmpTxt = tmpTxt3
+		tmpTxt = tmpTxt.split('<p></p>').join("<p><br></p>")
+		tmpTxt = tmpTxt.substr(0, tmpTxt.length - 2)
 		var values = await getInfo(0)
 		refCurTimer("10:00")
 		adr = values[0]; adr1 = values[1]; uid = values[2]
@@ -1391,7 +1394,7 @@ async function sendAnswerTemplate2(word, flag = 0) {
 			  },
 			  "referrer": adr,
 			  "referrerPolicy": "no-referrer-when-downgrade",
-			  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt + "\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
+			  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + tmpTxt + "\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
 			  "method": "POST",
 			  "mode": "cors",
 			  "credentials": "include"
