@@ -659,7 +659,7 @@ async function buttonsFromDoc(butName) {
 		if(txt == "I will help you now, please wait.")
 			sendAnswer(txt)
 		else
-			sendAnswerTemplate2(txt, 0, 1)
+			sendAnswerTemplate2(txt)
 		return
 	}		
 	
@@ -1333,8 +1333,8 @@ const copyToClipboard1 = str => {
     document.body.removeChild(el);
 };
 
-async function sendAnswerTemplate2(word, flag = 0, flag1 = 0) {
-	if(flag1 == 0) {
+async function sendAnswerTemplate2(word, flag = 0) {
+	if(word.indexOf("Здравствуйте") == -1) {
 		txt = ""
 		adr = `https://skyeng.autofaq.ai/tickets/assigned/`
 		a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
