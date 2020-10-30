@@ -632,9 +632,9 @@ async function buttonsFromDoc(butName) {
 			count = await checkHistory(uid.split(',')[0])
 			if(count > 1 && flagggg == 0) {
 				if(document.getElementById('languageAF').innerHTML == "Русский")
-					txt = "Сейчас я вам помогу, подождите, пожалуйста."
+					txt = "Подождите ТП"
 				else
-					txt = "I will help you now, please wait."
+					txt = "Подождите (англ)"
 				flagggg = 1
 			} else {
 				flagggg = 0
@@ -1334,38 +1334,36 @@ const copyToClipboard1 = str => {
 };
 
 async function sendAnswerTemplate2(word, flag = 0) {
-	if(word.indexOf("Здравствуйте") == -1) {
-		txt = ""
-		adr = `https://skyeng.autofaq.ai/tickets/assigned/`
-		a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
-	  "headers": {
-		"accept": "*/*", 
-		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-		"cache-control": "max-age=0",
-		"content-type": "application/json",
-		"sec-fetch-dest": "empty",
-		"sec-fetch-mode": "cors",
-		"sec-fetch-site": "same-origin"
-	  },
-	  "referrer": adr,
-	  "referrerPolicy": "no-referrer-when-downgrade",
-	  "body": "{\"query\":\"" + word + "\",\"answersLimit\":25,\"autoFaqServiceIds\":[121388, 121384]}",
-	  "method": "POST",
-	  "mode": "cors",
-	  "credentials": "include"
-	}).then(a => b = a.json()).then(result => result.forEach(k => {
-		if(k.title == word)
-			txt = k.text
-	}))
-		txt = txt.split("<br>↵").join('\n')
-		txt = txt.split("&nbsp;").join(' ')
-		txt = txt.split("<br />").join('\n')
-		txt = txt.split('<a').join('TMPaTMP').split('</a').join('TMPENDaTMEPEND')
-		txt = txt.replace(/<\/?[^>]+>/g,'')
-		txt = txt.split('TMPaTMP').join('<a').split('TMPENDaTMEPEND').join('</a')
-	} else {
+	txt = ""
+	adr = `https://skyeng.autofaq.ai/tickets/assigned/`
+	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
+  "headers": {
+	"accept": "*/*", 
+	"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+	"cache-control": "max-age=0",
+	"content-type": "application/json",
+	"sec-fetch-dest": "empty",
+	"sec-fetch-mode": "cors",
+	"sec-fetch-site": "same-origin"
+  },
+  "referrer": adr,
+  "referrerPolicy": "no-referrer-when-downgrade",
+  "body": "{\"query\":\"" + word + "\",\"answersLimit\":25,\"autoFaqServiceIds\":[121388, 121384]}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}).then(a => b = a.json()).then(result => result.forEach(k => {
+	if(k.title == word)
+		txt = k.text
+}))
+	txt = txt.split("<br>↵").join('\n')
+	txt = txt.split("&nbsp;").join(' ')
+	txt = txt.split("<br />").join('\n')
+	txt = txt.split('<a').join('TMPaTMP').split('</a').join('TMPENDaTMEPEND')
+	txt = txt.replace(/<\/?[^>]+>/g,'')
+	txt = txt.split('TMPaTMP').join('<a').split('TMPENDaTMEPEND').join('</a')
+	if(txt == "")
 		txt = word
-	}
 	if(document.getElementById('msg1').innerHTML == "Доработать" && flag == 0) {
 		document.getElementById('inp').value = txt
 		template_flag = 1
