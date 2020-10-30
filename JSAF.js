@@ -631,10 +631,18 @@ async function buttonsFromDoc(butName) {
 
 			count = await checkHistory(uid.split(',')[0])
 			if(count > 1 && flagggg == 0) {
-				if(document.getElementById('languageAF').innerHTML == "Русский")
-					txt = "Подождите ТП"
-				else
-					txt = "Подождите (англ)"
+				if(document.getElementById('languageAF').innerHTML == "Русский") {
+					if(localStorage.getItem('scriptAdr') == TS_addr)
+						txt = 'Помогите мне'
+					if(localStorage.getItem('scriptAdr') == TP_addr)
+						txt = "Подождите ТП"
+				}
+				else {
+					if(localStorage.getItem('scriptAdr') == TS_addr)
+						txt = "I’m going to help you now."
+					if(localStorage.getItem('scriptAdr') == TP_addr)
+						txt = "Подождите (англ)"
+				}
 				flagggg = 1
 			} else {
 				flagggg = 0
@@ -656,7 +664,7 @@ async function buttonsFromDoc(butName) {
 			else
 				txt = "Hello!"
 		}
-		if(txt == "I will help you now, please wait.")
+		if(txt == "I’m going to help you now.")
 			sendAnswer(txt)
 		else
 			sendAnswerTemplate2(txt)
