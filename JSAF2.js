@@ -1334,7 +1334,7 @@ const copyToClipboard1 = str => {
 };
 
 async function sendAnswerTemplate2(word, flag = 0, flag1 = 0) {
-	if(flag == 0) {
+	if(flag1 == 0) {
 		txt = ""
 		adr = `https://skyeng.autofaq.ai/tickets/assigned/`
 		a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
