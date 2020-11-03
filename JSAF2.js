@@ -1452,8 +1452,7 @@ async function getNewChat(){
   "credentials": "include"
 	}).then(a => b = a.json()).then(b => {for(iter = 0; iter < b.items.length; iter++) {
 		if(b.items[iter].stats.usedStatuses.indexOf('') != -1)
-			if(b.items[iter].stats.usedAutoFaqDocuments.indexOf('Уроки V2 / -') != -1)
-				chats.add(b.items[iter].conversationId)
+			chats.add(b.items[iter].conversationId)
 		}
 	}).then(b => {
 		if(chats.size > 0) {
