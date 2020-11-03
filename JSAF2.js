@@ -100,6 +100,9 @@ var win_AFhelper =
 				<button id="type_TS">TS</button>
 				</p>
 			</div>
+			<div style="margin: 5px; width: 300px">
+				<button id="takeNewChat">Взять чат</button>
+			</div>
 		</div>
 	</span>
     </div>`;
@@ -314,6 +317,7 @@ function move_again_AF() {
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		document.getElementById('testUsers').style.display = 'none'
+		document.getElementById('takeNewChat').style.display = 'none'
 		getText()
 	}
     document.getElementById('type_TP').onclick = function () {
@@ -321,6 +325,8 @@ function move_again_AF() {
 		document.getElementById('msg1').style.display = ''
 		document.getElementById('snd').style.marginLeft = '16px'
 		document.getElementById('testUsers').style.display = ''
+		document.getElementById('takeNewChat').style.display = ''
+		whoAmI()
 		getText()
 	}
     document.getElementById('type_TS').onclick = function () {
@@ -329,6 +335,7 @@ function move_again_AF() {
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		document.getElementById('testUsers').style.display = 'none'
+		document.getElementById('takeNewChat').style.display = 'none'
 		getText()
 	}
 	if(localStorage.getItem('scriptAdr') != 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec') {
@@ -336,15 +343,21 @@ function move_again_AF() {
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		document.getElementById('testUsers').style.display = 'none'
+		document.getElementById('takeNewChat').style.display = 'none'
 	} else {
 		document.getElementById('msg1').style.display = ''
 		document.getElementById('snd').style.marginLeft = '16px'
 		document.getElementById('testUsers').style.display = ''
+		document.getElementById('takeNewChat').style.display = ''
+		whoAmI()
 	}
 	
     document.getElementById('hideMenu').onclick = function () {
 		document.getElementById('AF_helper').style.display = 'none'
 		document.getElementById('scriptBut').style.display = ''
+	}
+    document.getElementById('takeNewChat').onclick = function () {
+		getNewChat()
 	}
 	
     document.getElementById('setting').onclick = function () {
@@ -550,7 +563,7 @@ function move_again_AF() {
 	getText()
 }
 
-setTimeout(move_again_AF(), 1000)
+setTimeout(move_again_AF(), 2000)
 function pageClick(pageId) {
 	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 	for(i = 0; i < b.childElementCount; i++) {
@@ -631,10 +644,22 @@ async function buttonsFromDoc(butName) {
 
 			count = await checkHistory(uid.split(',')[0])
 			if(count > 1 && flagggg == 0) {
-				if(document.getElementById('languageAF').innerHTML == "Русский")
-					txt = "Подождите ТП"
-				else
-					txt = "Подождите (англ)"
+				if(document.getElementById('languageAF').innerHTML == "Русский") {
+					if(localStorage.getItem('scriptAdr') == TS_addr)
+						txt = 'Помогите мне'
+					if(localStorage.getItem('scriptAdr') == TP_addr)
+						txt = "Подождите ТП"
+					if(localStorage.getItem('scriptAdr') == KC_addr)
+						txt = "Сейчас я вам помогу"
+				}
+				else {
+					if(localStorage.getItem('scriptAdr') == TS_addr)
+						txt = "I’m going to help you now."
+					if(localStorage.getItem('scriptAdr') == TP_addr)
+						txt = "Подождите (англ)"
+					if(localStorage.getItem('scriptAdr') == KC_addr)
+						txt = "Подождите (англ)"
+				}
 				flagggg = 1
 			} else {
 				flagggg = 0
@@ -656,7 +681,7 @@ async function buttonsFromDoc(butName) {
 			else
 				txt = "Hello!"
 		}
-		if(txt == "I will help you now, please wait.")
+		if(txt == "I’m going to help you now.")
 			sendAnswer(txt)
 		else
 			sendAnswerTemplate2(txt)
@@ -1332,6 +1357,116 @@ const copyToClipboard1 = str => {
     document.execCommand('copy');
     document.body.removeChild(el);
 };
+var operatorId = ""
+async function whoAmI(){
+	a = await fetch("https://skyeng.autofaq.ai/api/operators/statistic/currentState", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://skyeng.autofaq.ai/tickets/assigned",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}).then(a => b = a.json()).then(b => {
+let me = document.querySelector('.user_menu-dropdown-user_name');
+b.rows.forEach(s => {
+	if (me && s.operator.fullName === me.innerText) {
+		operatorId = s.operator.id
+		console.log(operatorId)
+		}
+})})}
+}
+async function getNewChat(){
+	operatorId = '2dd23f6e-12fc-4eb9-997e-c22ec9787c8a'
+	serviceId = localStorage.getItem('serviceIdGlob')
+	var date = new Date()
+	var date2 = new Date()
+	date2.setTime(date - 200 * 60 * 1000)
+	day = month = ""
+	if(date.getMonth() < 9)
+		month = "0" + (date.getMonth() + 1)
+	else 
+		month = (date.getMonth() + 1)
+	if(date.getDate() < 10)
+		day = "0" + date.getDate()
+	else
+		day = date.getDate()
+	if(date.getHours() < 10)
+		hours = '0' + date.getHours()
+	else
+		hours = date.getHours()
+	if(date.getMinutes() < 10)
+		minutes = '0' + date.getMinutes()
+	else
+		minutes = date.getMinutes()
+	if(date.getSeconds() < 10)
+		seconds = '0' + date.getSeconds()
+	else
+		seconds = date.getSeconds()
+	secondDate1 = date.getFullYear() + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":" + seconds + ".000z"
+	if(date2.getMonth() < 9)
+		month2 = "0" + (date2.getMonth() + 1)
+	else 
+		month2 = (date2.getMonth() + 1)
+	if(date2.getDate() < 10)
+		day2 = "0" + date2.getDate()
+	else
+		day2 = date2.getDate()
+	if(date2.getHours() < 10)
+		hours2 = '0' + date2.getHours()
+	else
+		hours2 = date2.getHours()
+	if(date2.getMinutes() < 10)
+		minutes2 = '0' + date2.getMinutes()
+	else
+		minutes2 = date2.getMinutes()
+	if(date2.getSeconds() < 10)
+		seconds2 = '0' + date2.getSeconds()
+	else
+		seconds2 = date2.getSeconds()
+	var chats = new Set()
+	firstDate1 = date2.getFullYear() + "-" + month2 + "-" + day2 + "T" + hours2 + ":" + minutes2 + ":" + seconds2 + ".000z"
+	var tmp
+	a = fetch("https://skyeng.autofaq.ai/api/conversations/history", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "max-age=0",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://skyeng.autofaq.ai/logs",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"serviceId\":\"" + serviceId + "\",\"mode\":\"Json\",\"tsFrom\":\"" + firstDate1 + "\",\"tsTo\":\"" + secondDate1 + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":100}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+	}).then(a => b = a.json()).then(b => {for(iter = 0; iter < b.items.length; iter++) {
+		if(b.items[iter].stats.usedStatuses.indexOf('OnOperator') != -1)
+			chats.add(b.items[iter].conversationId)
+		}
+	}).then(b => {
+		if(chats.size > 0) {
+			chatId = chats.values().next().value
+			fetch("https://skyeng.autofaq.ai/api/conversation/assign", {
+			  "headers": {
+				"content-type": "application/json",
+			  },
+			  "body": "{\"command\":\"DO_ASSIGN_CONVERSATION\",\"conversationId\":\""+chatId+"\",\"assignToOperatorId\":\""+operatorId+"\"}",
+			  "method": "POST",
+			});
+		}
+    })
+}
 
 async function sendAnswerTemplate2(word, flag = 0) {
 	tmpTxt = ""
