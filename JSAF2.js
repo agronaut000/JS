@@ -1386,8 +1386,9 @@ b.rows.forEach(s => {
 async function getNewChat(){
 	serviceId = localStorage.getItem('serviceIdGlob')
 	var date = new Date()
+	date.setTime(date - 181 * 60 * 1000)
 	var date2 = new Date()
-	date2.setTime(date - 200 * 60 * 1000)
+	date2.setTime(date - 19 * 60 * 1000)
 	day = month = ""
 	if(date.getMonth() < 9)
 		month = "0" + (date.getMonth() + 1)
