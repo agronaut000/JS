@@ -1384,7 +1384,6 @@ b.rows.forEach(s => {
 })})
 }
 async function getNewChat(){
-	operatorId = '2dd23f6e-12fc-4eb9-997e-c22ec9787c8a'
 	serviceId = localStorage.getItem('serviceIdGlob')
 	var date = new Date()
 	var date2 = new Date()
