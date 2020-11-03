@@ -1451,7 +1451,7 @@ async function getNewChat(){
   "mode": "cors",
   "credentials": "include"
 	}).then(a => b = a.json()).then(b => {for(iter = 0; iter < b.items.length; iter++) {
-		if(b.items[iter].stats.usedStatuses.indexOf('') != -1)
+		if(b.items[iter].stats.usedStatuses.indexOf('OnOperator') != -1)
 			chats.add(b.items[iter].conversationId)
 		}
 	}).then(b => {
