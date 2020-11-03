@@ -1381,7 +1381,7 @@ b.rows.forEach(s => {
 		operatorId = s.operator.id
 		console.log(operatorId)
 		}
-})})}
+})})
 }
 async function getNewChat(){
 	operatorId = '2dd23f6e-12fc-4eb9-997e-c22ec9787c8a'
