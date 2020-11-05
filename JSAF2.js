@@ -102,6 +102,7 @@ var win_AFhelper =
 			</div>
 			<div style="margin: 5px; width: 300px">
 				<button id="takeNewChat">Взять чат</button>
+				<p style="color:white; margin:0 0 5px 0;" id="howManyChats"></p>
 			</div>
 		</div>
 	</span>
@@ -277,9 +278,9 @@ wintAF.style = 'min-height: 25px; min-width: 65px; background: #464451; top: ' +
 wintAF.setAttribute('id' ,'AF_helper');
 wintAF.innerHTML = win_AFhelper; 
 
-TS_addr = 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec'
-KC_addr = 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec'
-TP_addr = 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec'
+var TS_addr = 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec'
+var KC_addr = 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec'
+var TP_addr = 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec'
 	
 function move_again_AF() {
     if(window.location.href.indexOf('autofaq') === -1) {
@@ -318,6 +319,7 @@ function move_again_AF() {
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		document.getElementById('testUsers').style.display = 'none'
 		document.getElementById('takeNewChat').style.display = 'none'
+		document.getElementById('howManyChats').style.display = 'none'
 		getText()
 	}
     document.getElementById('type_TP').onclick = function () {
@@ -326,6 +328,7 @@ function move_again_AF() {
 		document.getElementById('snd').style.marginLeft = '16px'
 		document.getElementById('testUsers').style.display = ''
 		document.getElementById('takeNewChat').style.display = ''
+		document.getElementById('howManyChats').style.display = ''
 		whoAmI()
 		getText()
 	}
@@ -336,19 +339,22 @@ function move_again_AF() {
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		document.getElementById('testUsers').style.display = 'none'
 		document.getElementById('takeNewChat').style.display = 'none'
+		document.getElementById('howManyChats').style.display = 'none'
 		getText()
 	}
-	if(localStorage.getItem('scriptAdr') != 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec') {
+	if(localStorage.getItem('scriptAdr') != TP_addr) {
 		document.getElementById('msg1').style.display = 'none'
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		document.getElementById('testUsers').style.display = 'none'
 		document.getElementById('takeNewChat').style.display = 'none'
+		document.getElementById('howManyChats').style.display = 'none'
 	} else {
 		document.getElementById('msg1').style.display = ''
 		document.getElementById('snd').style.marginLeft = '16px'
 		document.getElementById('testUsers').style.display = ''
 		document.getElementById('takeNewChat').style.display = ''
+		document.getElementById('howManyChats').style.display = ''
 		whoAmI()
 	}
 	
@@ -460,6 +466,8 @@ function move_again_AF() {
         }
 	}
     document.getElementById('snd').onclick = function () {
+		document.getElementById('snd').setAttribute('disabled', 'disabled')
+		setTimeout(function() {document.getElementById('snd').removeAttribute('disabled')}, 2000)
 		if(document.getElementById('msg').innerHTML == "Чат") {
 			if(template_flag == 1) {
 				if(template_flag2 == 1)
@@ -1383,12 +1391,12 @@ b.rows.forEach(s => {
 		}
 })})
 }
-async function getNewChat(){
+async function getNewChat(flagChats = 0){
 	serviceId = localStorage.getItem('serviceIdGlob')
 	var date = new Date()
 	date.setTime(date - 181 * 60 * 1000)
 	var date2 = new Date()
-	date2.setTime(date - 19 * 60 * 1000)
+	date2.setTime(date - 30 * 60 * 1000)
 	day = month = ""
 	if(date.getMonth() < 9)
 		month = "0" + (date.getMonth() + 1)
@@ -1446,27 +1454,34 @@ async function getNewChat(){
   },
   "referrer": "https://skyeng.autofaq.ai/logs",
   "referrerPolicy": "strict-origin-when-cross-origin",
-  "body": "{\"serviceId\":\"" + serviceId + "\",\"mode\":\"Json\",\"tsFrom\":\"" + firstDate1 + "\",\"tsTo\":\"" + secondDate1 + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":100}",
+  "body": "{\"serviceId\":\"" + serviceId + "\",\"mode\":\"Json\",\"tsFrom\":\"" + firstDate1 + "\",\"tsTo\":\"" + secondDate1 + "\",\"usedStatuses\":[\"OnOperator\"],\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":100}",
   "method": "POST",
   "mode": "cors",
   "credentials": "include"
 	}).then(a => b = a.json()).then(b => {for(iter = 0; iter < b.items.length; iter++) {
-		if(b.items[iter].stats.usedStatuses.indexOf('OnOperator') != -1)
 			chats.add(b.items[iter].conversationId)
 		}
 	}).then(b => {
-		if(chats.size > 0) {
-			chatId = chats.values().next().value
-			fetch("https://skyeng.autofaq.ai/api/conversation/assign", {
-			  "headers": {
-				"content-type": "application/json",
-			  },
-			  "body": "{\"command\":\"DO_ASSIGN_CONVERSATION\",\"conversationId\":\""+chatId+"\",\"assignToOperatorId\":\""+operatorId+"\"}",
-			  "method": "POST",
-			});
+		if(flagChats == 0) {
+			if(chats.size > 0) {
+				chatId = chats.values().next().value
+				fetch("https://skyeng.autofaq.ai/api/conversation/assign", {
+				  "headers": {
+					"content-type": "application/json",
+				  },
+				  "body": "{\"command\":\"DO_ASSIGN_CONVERSATION\",\"conversationId\":\""+chatId+"\",\"assignToOperatorId\":\""+operatorId+"\"}",
+				  "method": "POST",
+				});
+			}
 		}
+		document.getElementById('howManyChats').innerHTML = "Чатов в очереди: " + chats.size
     })
 }
+setTimeout(function(){
+	if(document.getElementById('howManyChats').style.display == "")
+		if(document.getElementsByClassName('user_menu-status-name')[0].innerText == "Занят")
+			getNewChat(1)
+}, 10000)
 
 async function sendAnswerTemplate2(word, flag = 0) {
 	tmpTxt = ""
