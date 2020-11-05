@@ -1477,7 +1477,7 @@ async function getNewChat(flagChats = 0){
 		document.getElementById('howManyChats').innerHTML = "Чатов в очереди: " + chats.size
     })
 }
-setTimeout(function(){
+setInterval(function(){
 	if(document.getElementById('howManyChats').style.display == "")
 		if(document.getElementsByClassName('user_menu-status-name')[0].innerText == "Занят")
 			getNewChat(1)
