@@ -1481,6 +1481,8 @@ setTimeout(function(){
 	if(document.getElementById('howManyChats').style.display == "")
 		if(document.getElementsByClassName('user_menu-status-name')[0].innerText == "Занят")
 			getNewChat(1)
+		else
+			document.getElementById('howManyChats').innerHTML = ""
 }, 10000)
 
 async function sendAnswerTemplate2(word, flag = 0) {
