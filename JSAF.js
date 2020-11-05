@@ -447,6 +447,8 @@ function move_again_AF() {
         }
 	}
     document.getElementById('snd').onclick = function () {
+		document.getElementById('snd').setAttribute('disabled', 'disabled')
+		setTimeout(function() {testB.removeAttribute('disabled')}, 2000)
 		if(document.getElementById('msg').innerHTML == "Чат") {
 			if(template_flag == 1) {
 				if(template_flag2 == 1)
