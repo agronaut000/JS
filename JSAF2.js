@@ -1736,15 +1736,12 @@ async function getNotGoods(stringDate) {
 	goNotgood(list, list2, firstDate, secondDate)
 }
 
+setTimeout(function() {
 if(localStorage.getItem('inspector') == 'yes') {
 	var but = document.createElement('button')
+	but.style.marginLeft = '5px'
 	but.textContent = "Нотгуды"
-	but.onclick = function () {
-		if(document.getElementById('inputForNotgoods').textContent != "")
-			getNotGoods(document.getElementById('inputForNotgoods').textContent)
-		else
-			document.getElementById('inputForNotgoods').placeholder
-	}
+	but.id = 'buttonForNotgoods'
 	var newinput = document.createElement('input')	
 	newinput.style.marginLeft = '5px'
 	newinput.style.textAlign = "center"
@@ -1752,8 +1749,14 @@ if(localStorage.getItem('inspector') == 'yes') {
 	var curDate = new Date()
 	curDate.setTime(curDate - 24 * 60 * 60 * 1000)
 	newinput.placeholder = curDate.getDate() + "." + (curDate.getMonth() + 1) + "." + curDate.getFullYear()
-	c.lastElementChild.lastElementChild.lastElementChild.appendChild(newinput)
-	c.lastElementChild.lastElementChild.lastElementChild.appendChild(but)
+	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(newinput)
+	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(but)
+	
+	document.getElementById('buttonForNotgoods').onclick = function () {
+		if(document.getElementById('inputForNotgoods').textContent != "")
+			getNotGoods(document.getElementById('inputForNotgoods').textContent)
+		else
+			document.getElementById('inputForNotgoods').placeholder
+	}
 }
-	
-	
+}, 2000)
