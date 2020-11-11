@@ -1636,3 +1636,124 @@ async function checkHistory(id) {
 	}).then(a => b = a.json()).then(b => {count = b.items.length})
 	return count
 }
+
+async function getNotGoods(stringDate) {
+
+	async function goNotgood(list, list2, date1, date2) {
+		text = ""
+		text2 = "Дата: " + stringDate2 + "\n"
+		for(m = -1; m < list.length; m++) {
+			a = await fetch("https://skyeng.autofaq.ai/api/conversations/history", {
+			  "headers": {
+				"accept": "*/*",
+				"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+				"cache-control": "max-age=0",
+				"content-type": "application/json",
+				"sec-fetch-dest": "empty",
+				"sec-fetch-mode": "cors",
+				"sec-fetch-site": "same-origin"
+			  },
+			  "referrer": "https://skyeng.autofaq.ai/logs",
+			  "referrerPolicy": "strict-origin-when-cross-origin",
+			  "body": "{\"serviceId\":\"361c681b-340a-4e47-9342-c7309e27e7b5\",\"mode\":\"Json\",\"participatingOperatorsIds\":[\""+list[m]+"\"],\"tsFrom\":\"" + date1 + "\",\"tsTo\":\"" + date2 + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":150}",
+			  "method": "POST",
+			  "mode": "cors",
+			  "credentials": "include"
+			}).then(a => b = a.json().then(array => {array1 = array
+			n = 1
+			array1.items.forEach(a => { if(a.stats.rate != undefined) 
+			if(a.stats.rate.rate != undefined) {
+			if(a.stats.rate.rate < 4) {
+			text += stringDate2 + "	" + list2[m] + "	https://hdi.skyeng.ru/autofaq/conversation/-11/" + a.conversationId + "	" + a.stats.rate.rate + "\n"
+			if(n == 1)
+				text2 += "\nАгент: `" + list2[m] + "` C	S	A		T =\n "
+			text2 += "=HYPERLINK(\"https://hdi.skyeng.ru/autofaq/conversation/-11/" + a.conversationId + "\"; \"Нотгуд №" + n + "\" 	 (	оценка " + a.stats.rate.rate + ") - \n"
+			n++
+			}
+			}})
+			}))
+		}	
+		console.log(text)
+		console.log(text2)
+	}
+
+	var operatorId = []
+	var operatorNames = []
+	await fetch("https://skyeng.autofaq.ai/api/operators/statistic/currentState", {
+	  "headers": {
+		"accept": "*/*",
+		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+		"content-type": "application/json",
+		"sec-fetch-dest": "empty",
+		"sec-fetch-mode": "cors",
+		"sec-fetch-site": "same-origin"
+	  },
+	  "referrer": "https://skyeng.autofaq.ai/logs/c6fe512d-6f79-4dec-b272-baba807d7387",
+	  "referrerPolicy": "strict-origin-when-cross-origin",
+	  "body": null,
+	  "method": "GET",
+	  "mode": "cors",
+	  "credentials": "include"
+	}).then(result => b = result.json()).then(b => b.rows.forEach(k => {
+		if(k.operator.kbs.indexOf(120181) != -1 && k.operator.fullName.split('-')[0] == "ТП") {
+			operatorId.push(k.operator.id)
+			operatorNames.push(k.operator.fullName.split('-')[1])
+		}
+	}))
+
+	list = operatorId
+	list2 = operatorNames
+
+	stringDate2 = stringDate
+	stringDate = stringDate.split(".")
+	stringDate[1]--
+	var date = new Date(stringDate[2], stringDate[1], stringDate[0])
+	day = month = ""
+	if(date.getMonth() < 9)
+	month = "0" + (date.getMonth() + 1)
+	else 
+	month = (date.getMonth() + 1)
+	if(date.getDate() < 10)
+	day = "0" + date.getDate()
+	else
+	day = date.getDate()
+
+	secondDate = date.getFullYear() + "-" + month + "-" + day + "T20:59:59.059z"
+	date = date - 24 * 60 * 60 * 1000
+	var date2 = new Date()
+	date2.setTime(date)
+
+	if(date2.getMonth() < 9)
+	month2 = "0" + (date2.getMonth() + 1)
+	else 
+	month2 = (date2.getMonth() + 1)
+	if(date2.getDate() < 10)
+	day2 = "0" + date2.getDate()
+	else
+	day2 = date2.getDate()
+
+	firstDate = date2.getFullYear() + "-" + month2 + "-" + day2 + "T21:00:00.000z"
+	goNotgood(list, list2, firstDate, secondDate)
+}
+
+if(localStorage.getItem('inspector') == 'yes') {
+	var but = document.createElement('button')
+	but.textContent = "Нотгуды"
+	but.onclick = function () {
+		if(document.getElementById('inputForNotgoods').textContent != "")
+			getNotGoods(document.getElementById('inputForNotgoods').textContent)
+		else
+			document.getElementById('inputForNotgoods').placeholder
+	}
+	var newinput = document.createElement('input')	
+	newinput.style.marginLeft = '5px'
+	newinput.style.textAlign = "center"
+	newinput.id = 'inputForNotgoods'
+	var curDate = new Date()
+	curDate.setTime(curDate - 24 * 60 * 60 * 1000)
+	newinput.placeholder = curDate.getDate() + "." + (curDate.getMonth() + 1) + "." + curDate.getFullYear()
+	c.lastElementChild.lastElementChild.lastElementChild.appendChild(newinput)
+	c.lastElementChild.lastElementChild.lastElementChild.appendChild(but)
+}
+	
+	
