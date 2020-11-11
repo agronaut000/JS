@@ -1753,10 +1753,10 @@ if(localStorage.getItem('inspector') == 'yes') {
 	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(but)
 	
 	document.getElementById('buttonForNotgoods').onclick = function () {
-		if(document.getElementById('inputForNotgoods').textContent != "")
-			getNotGoods(document.getElementById('inputForNotgoods').textContent)
+		if(document.getElementById('inputForNotgoods').value != "")
+			getNotGoods(document.getElementById('inputForNotgoods').value)
 		else
-			document.getElementById('inputForNotgoods').placeholder
+			getNotGoods(document.getElementById('inputForNotgoods').placeholder)
 	}
 }
 }, 2000)
