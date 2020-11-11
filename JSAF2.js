@@ -134,11 +134,11 @@ button3.innerHTML = "Info";
 let button4 = document.createElement('div');
 button4.id = 'nextTeacherIdScript';
 button4.innerHTML = "Info";
-template_flag = 0
-template_flag2 = 0
-word_text = ""
-template_text = ""
-flagggg = 0
+let template_flag = 0
+let template_flag2 = 0
+let word_text = ""
+let template_text = ""
+let flagggg = 0
 
 button2.onclick = function() {
 	if(document.getElementById('btn_hide').style.display != 'none')
