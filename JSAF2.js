@@ -1490,7 +1490,7 @@ setInterval(function(){
 
 async function sendAnswerTemplate2(word, flag = 0) {
 	var tmpTxt = ""
-	adr = `https://skyeng.autofaq.ai/tickets/assigned/`
+	var adr = `https://skyeng.autofaq.ai/tickets/assigned/`
     if(word.length < 50)
         try {
             a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
@@ -1536,7 +1536,7 @@ async function sendAnswerTemplate2(word, flag = 0) {
 		tmpTxt = tmpTxt.substr(0, tmpTxt.length - 2)
 		var values = await getInfo(0)
 		refCurTimer("10:00")
-		adr = values[0]; adr1 = values[1]; uid = values[2]
+		var adr = values[0]; var adr1 = values[1]; var uid = values[2]
 		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 			  "headers": {
 				"accept": "*/*",
