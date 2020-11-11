@@ -930,8 +930,9 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 		template = template_text
 		word = word_text
 	}
+	var tmpText = ""
 	var values = await getInfo(0)
-	adr = values[0]; adr1 = values[1]; uid = values[2]
+	var adr = values[0]; var adr1 = values[1]; var uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
   "headers": {
     "accept": "*/*", 
@@ -1011,9 +1012,9 @@ accuracy = b.accuracy
 async function sendAnswer(txt, flag = 1, time = "10:00") {
 		//addTimer()
 		var values = await getInfo(flag)
-		adr = values[0]; adr1 = values[1]; uid = values[2]
-		txt2 = txt.split('\n')
-		txt3 = ""
+		var adr = values[0]; var adr1 = values[1]; var uid = values[2]
+		var txt2 = txt.split('\n')
+		var txt3 = ""
 		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
 		txt3 = txt3.split("\"").join("\\\"")
 		txt3 = txt3.split('<p></p>').join("<p><br></p>")
@@ -1076,8 +1077,8 @@ async function getInfo(flag1 = 1) {
 async function sendComment(txt){ 
 		var values = await getInfo(0)
 		adr = values[0]; adr1 = values[1]; uid = values[2]
-		txt2 = txt.split('\n').join('\\n')
-		txt2 = txt2.split("\"").join("\\\"")
+		var txt2 = txt.split('\n').join('\\n')
+		var txt2 = txt2.split("\"").join("\\\"")
 		resetFlags()
 	fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 	  "headers": {
@@ -1387,11 +1388,13 @@ let me = document.querySelector('.user_menu-dropdown-user_name');
 b.rows.forEach(s => {
 	if (me && s.operator.fullName === me.innerText) {
 		operatorId = s.operator.id
-		console.log(operatorId)
+		console.log("Мой ID: " + operatorId)
 		}
 })})
 }
 async function getNewChat(flagChats = 0){
+	if(operatorId == "")
+		await whoAmI()
 	serviceId = localStorage.getItem('serviceIdGlob')
 	var date = new Date()
 	date.setTime(date - 181 * 60 * 1000)
@@ -1486,7 +1489,7 @@ setInterval(function(){
 }, 10000)
 
 async function sendAnswerTemplate2(word, flag = 0) {
-	tmpTxt = ""
+	var tmpTxt = ""
 	adr = `https://skyeng.autofaq.ai/tickets/assigned/`
     if(word.length < 50)
         try {
