@@ -467,7 +467,7 @@ function move_again_AF() {
 	}
     document.getElementById('snd').onclick = function () {
 		document.getElementById('snd').setAttribute('disabled', 'disabled')
-		setTimeout(function() {document.getElementById('snd').removeAttribute('disabled')}, 1000)
+		setTimeout(function() {document.getElementById('snd').removeAttribute('disabled')}, 500)
 		if(document.getElementById('msg').innerHTML == "Чат") {
 			if(template_flag == 1) {
 				if(template_flag2 == 1)
