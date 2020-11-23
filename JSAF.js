@@ -572,10 +572,37 @@ function move_again_AF() {
 	
 	if(localStorage.getItem('includeTestDiv') != null) {
 		document.getElementById('testDiv').style.display = ''
+		
+		setInterval(function(){
+			if(document.getElementById('howManyChats').style.display == "")
+				if(document.getElementsByClassName('user_menu-status-name')[0].innerText == "Занят")
+					getNewChat(1)
+				else
+					document.getElementById('howManyChats').innerHTML = ""
+		}, 10000)
 	} else {
 		document.getElementById('testDiv').style.display = 'none'
 	}
 	
+	function addCrm2Button() {
+		var a = document.getElementById('info_block')
+		for(i = 0; a.children[i] != null; i++) {
+			if(a.children[i].hasAttribute('user_id') && a.children[i].lastElementChild.children[2].textContent == 'Teacher:') {
+				var b = document.createElement('button')
+				b.textContent = 'CRM2'
+				b.style = 'float: left'
+				b.classList.add('win_btn')
+				b.setAttribute('user_id', a.children[i].getAttribute('user_id'))
+				b.onclick = function() {
+				 var id = this.getAttribute('user_id')
+				 window.open('https://crm2.skyeng.ru/persons/' + id, '_blank');
+				}
+				a.children[i].lastElementChild.insertBefore(b, a.children[i].lastElementChild.children[2])
+			}
+		}
+	}
+	setInterval(addCrm2Button, 500)
+
 	getText()
 }
 
@@ -1488,13 +1515,7 @@ async function getNewChat(flagChats = 0){
 		document.getElementById('howManyChats').innerHTML = "Чатов в очереди: " + chats.size
     })
 }
-setInterval(function(){
-	if(document.getElementById('howManyChats').style.display == "")
-		if(document.getElementsByClassName('user_menu-status-name')[0].innerText == "Занят")
-			getNewChat(1)
-		else
-			document.getElementById('howManyChats').innerHTML = ""
-}, 10000)
+
 
 async function sendAnswerTemplate2(word, flag = 0) {
 	var tmpTxt = ""
