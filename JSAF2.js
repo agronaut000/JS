@@ -576,6 +576,27 @@ function move_again_AF() {
 		document.getElementById('testDiv').style.display = 'none'
 	}
 	
+	function addCrm2Button() {
+		a = document.getElementById('info_block')
+		for(i = 0; a.children[i] != null; i++) {
+			if(a.children[i].hasAttribute('user_id')) {
+				b = document.createElement('button')
+				b.textContent = 'CRM2'
+				b.style = 'float: left'
+				b.classList.add('win_btn')
+				b.onclick = function() {
+				 var id = a.children[0].getAttribute('user_id')
+				 window.open('https://crm2.skyeng.ru/persons/' + id, '_blank');
+				}
+				if(a.children[i].lastElementChild.children[2].textContent == 'Teacher:')
+					a.children[i].lastElementChild.insertBefore(b, a.children[i].lastElementChild.children[2])
+			}
+		}
+	}
+	document.getElementById('btn1_student').onclick = function() {
+		setTimeout(addCrm2Button, 1500)
+	}
+
 	getText()
 }
 
