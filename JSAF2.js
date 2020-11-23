@@ -572,6 +572,14 @@ function move_again_AF() {
 	
 	if(localStorage.getItem('includeTestDiv') != null) {
 		document.getElementById('testDiv').style.display = ''
+		
+		setInterval(function(){
+			if(document.getElementById('howManyChats').style.display == "")
+				if(document.getElementsByClassName('user_menu-status-name')[0].innerText == "Занят")
+					getNewChat(1)
+				else
+					document.getElementById('howManyChats').innerHTML = ""
+		}, 10000)
 	} else {
 		document.getElementById('testDiv').style.display = 'none'
 	}
@@ -1510,13 +1518,7 @@ async function getNewChat(flagChats = 0){
 		document.getElementById('howManyChats').innerHTML = "Чатов в очереди: " + chats.size
     })
 }
-setInterval(function(){
-	if(document.getElementById('howManyChats').style.display == "")
-		if(document.getElementsByClassName('user_menu-status-name')[0].innerText == "Занят")
-			getNewChat(1)
-		else
-			document.getElementById('howManyChats').innerHTML = ""
-}, 10000)
+
 
 async function sendAnswerTemplate2(word, flag = 0) {
 	var tmpTxt = ""
