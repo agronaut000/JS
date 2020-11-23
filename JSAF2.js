@@ -578,8 +578,9 @@ function move_again_AF() {
 	
 	function addCrm2Button() {
 		var a = document.getElementById('info_block')
+		var count = 0
 		for(i = 0; a.children[i] != null; i++) {
-			if(a.children[i].hasAttribute('user_id')) {
+			if(a.children[i].hasAttribute('user_id') && a.children[i].lastElementChild.children[2].textContent == 'Teacher:') {
 				var b = document.createElement('button')
 				b.textContent = 'CRM2'
 				b.style = 'float: left'
@@ -589,14 +590,13 @@ function move_again_AF() {
 				 var id = this.getAttribute('user_id')
 				 window.open('https://crm2.skyeng.ru/persons/' + id, '_blank');
 				}
-				if(a.children[i].lastElementChild.children[2].textContent == 'Teacher:')
-					a.children[i].lastElementChild.insertBefore(b, a.children[i].lastElementChild.children[2])
+				a.children[i].lastElementChild.insertBefore(b, a.children[i].lastElementChild.children[2])
+				count++
 			}
 		}
+		if(count == 0)
 	}
-	document.getElementById('btn1_student').onclick = function() {
-		setTimeout(addCrm2Button, 1500)
-	}
+	setInterval(addCrm2Button, 1500)
 
 	getText()
 }
