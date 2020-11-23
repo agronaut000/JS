@@ -100,7 +100,7 @@ var win_AFhelper =
 				<button id="type_TS">TS</button>
 				</p>
 			</div>
-			<div style="margin: 5px; width: 300px">
+			<div style="margin: 5px; width: 300px" id="testDiv">
 				<button id="takeNewChat">Взять чат</button>
 				<p style="color:white; margin:0 0 5px 0;" id="howManyChats"></p>
 			</div>
@@ -109,6 +109,12 @@ var win_AFhelper =
     </div>`;
 	
 let audio
+if(localStorage.getItem('includeTestDiv') != null) {
+	document.getElementById('testDiv').style.display = ''
+} else {
+	document.getElementById('testDiv').style.display = 'none'
+}
+
 if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winTopAF', '120');
     localStorage.setItem('winLeftAF', '295');
@@ -1179,7 +1185,7 @@ function refreshTimer() {
 				var cT = new Date();
 				var curT1 = tmrs[i][3]
 				var curT2 = Number(cT);
-				var curT3 = (13.5 * 60) - Math.floor((curT2 - curT1) / 1000);
+				var curT3 = (8.5 * 60) - Math.floor((curT2 - curT1) / 1000);
 				if(curT3 < 0)
 					btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#FF47CA"
 			}
