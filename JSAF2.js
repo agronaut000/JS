@@ -109,11 +109,7 @@ var win_AFhelper =
     </div>`;
 	
 let audio
-if(localStorage.getItem('includeTestDiv') != null) {
-	document.getElementById('testDiv').style.display = ''
-} else {
-	document.getElementById('testDiv').style.display = 'none'
-}
+
 
 if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winTopAF', '120');
@@ -572,6 +568,12 @@ function move_again_AF() {
 	}
 	if(localStorage.getItem('msg1') != null) {
 		document.getElementById('msg1').innerHTML = localStorage.getItem('msg1') 
+	}
+	
+	if(localStorage.getItem('includeTestDiv') != null) {
+		document.getElementById('testDiv').style.display = ''
+	} else {
+		document.getElementById('testDiv').style.display = 'none'
 	}
 	
 	getText()
