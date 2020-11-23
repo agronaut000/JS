@@ -577,15 +577,16 @@ function move_again_AF() {
 	}
 	
 	function addCrm2Button() {
-		a = document.getElementById('info_block')
+		var a = document.getElementById('info_block')
 		for(i = 0; a.children[i] != null; i++) {
 			if(a.children[i].hasAttribute('user_id')) {
-				b = document.createElement('button')
+				var b = document.createElement('button')
 				b.textContent = 'CRM2'
 				b.style = 'float: left'
 				b.classList.add('win_btn')
+				b.setAttribute('user_id', a.children[i].getAttribute('user_id'))
 				b.onclick = function() {
-				 var id = a.children[0].getAttribute('user_id')
+				 var id = this.getAttribute('user_id')
 				 window.open('https://crm2.skyeng.ru/persons/' + id, '_blank');
 				}
 				if(a.children[i].lastElementChild.children[2].textContent == 'Teacher:')
