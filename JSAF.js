@@ -100,11 +100,17 @@ var win_AFhelper =
 				<button id="type_TS">TS</button>
 				</p>
 			</div>
+			<div style="margin: 5px; width: 300px" id="testDiv">
+				<button id="takeNewChat">Взять чат</button>
+				<p style="color:white; margin:0 0 5px 0;" id="howManyChats"></p>
+			</div>
 		</div>
 	</span>
     </div>`;
 	
 let audio
+
+
 if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winTopAF', '120');
     localStorage.setItem('winLeftAF', '295');
@@ -130,11 +136,11 @@ button3.innerHTML = "Info";
 let button4 = document.createElement('div');
 button4.id = 'nextTeacherIdScript';
 button4.innerHTML = "Info";
-template_flag = 0
-template_flag2 = 0
-word_text = ""
-template_text = ""
-flagggg = 0
+let template_flag = 0
+let template_flag2 = 0
+let word_text = ""
+let template_text = ""
+let flagggg = 0
 
 button2.onclick = function() {
 	if(document.getElementById('btn_hide').style.display != 'none')
@@ -274,9 +280,9 @@ wintAF.style = 'min-height: 25px; min-width: 65px; background: #464451; top: ' +
 wintAF.setAttribute('id' ,'AF_helper');
 wintAF.innerHTML = win_AFhelper; 
 
-TS_addr = 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec'
-KC_addr = 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec'
-TP_addr = 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec'
+var TS_addr = 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec'
+var KC_addr = 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec'
+var TP_addr = 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec'
 	
 function move_again_AF() {
     if(window.location.href.indexOf('autofaq') === -1) {
@@ -314,6 +320,8 @@ function move_again_AF() {
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		document.getElementById('testUsers').style.display = 'none'
+		document.getElementById('takeNewChat').style.display = 'none'
+		document.getElementById('howManyChats').style.display = 'none'
 		getText()
 	}
     document.getElementById('type_TP').onclick = function () {
@@ -321,6 +329,9 @@ function move_again_AF() {
 		document.getElementById('msg1').style.display = ''
 		document.getElementById('snd').style.marginLeft = '16px'
 		document.getElementById('testUsers').style.display = ''
+		document.getElementById('takeNewChat').style.display = ''
+		document.getElementById('howManyChats').style.display = ''
+		whoAmI()
 		getText()
 	}
     document.getElementById('type_TS').onclick = function () {
@@ -329,22 +340,32 @@ function move_again_AF() {
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		document.getElementById('testUsers').style.display = 'none'
+		document.getElementById('takeNewChat').style.display = 'none'
+		document.getElementById('howManyChats').style.display = 'none'
 		getText()
 	}
-	if(localStorage.getItem('scriptAdr') != 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec') {
+	if(localStorage.getItem('scriptAdr') != TP_addr) {
 		document.getElementById('msg1').style.display = 'none'
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		document.getElementById('testUsers').style.display = 'none'
+		document.getElementById('takeNewChat').style.display = 'none'
+		document.getElementById('howManyChats').style.display = 'none'
 	} else {
 		document.getElementById('msg1').style.display = ''
 		document.getElementById('snd').style.marginLeft = '16px'
 		document.getElementById('testUsers').style.display = ''
+		document.getElementById('takeNewChat').style.display = ''
+		document.getElementById('howManyChats').style.display = ''
+		whoAmI()
 	}
 	
     document.getElementById('hideMenu').onclick = function () {
 		document.getElementById('AF_helper').style.display = 'none'
 		document.getElementById('scriptBut').style.display = ''
+	}
+    document.getElementById('takeNewChat').onclick = function () {
+		getNewChat()
 	}
 	
     document.getElementById('setting').onclick = function () {
@@ -448,7 +469,7 @@ function move_again_AF() {
 	}
     document.getElementById('snd').onclick = function () {
 		document.getElementById('snd').setAttribute('disabled', 'disabled')
-		setTimeout(function() {document.getElementById('snd').removeAttribute('disabled')}, 2000)
+		setTimeout(function() {document.getElementById('snd').removeAttribute('disabled')}, 500)
 		if(document.getElementById('msg').innerHTML == "Чат") {
 			if(template_flag == 1) {
 				if(template_flag2 == 1)
@@ -549,10 +570,16 @@ function move_again_AF() {
 		document.getElementById('msg1').innerHTML = localStorage.getItem('msg1') 
 	}
 	
+	if(localStorage.getItem('includeTestDiv') != null) {
+		document.getElementById('testDiv').style.display = ''
+	} else {
+		document.getElementById('testDiv').style.display = 'none'
+	}
+	
 	getText()
 }
 
-setTimeout(move_again_AF(), 1000)
+setTimeout(move_again_AF(), 2000)
 function pageClick(pageId) {
 	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 	for(i = 0; i < b.childElementCount; i++) {
@@ -638,11 +665,15 @@ async function buttonsFromDoc(butName) {
 						txt = 'Помогите мне'
 					if(localStorage.getItem('scriptAdr') == TP_addr)
 						txt = "Подождите ТП"
+					if(localStorage.getItem('scriptAdr') == KC_addr)
+						txt = "Сейчас я вам помогу"
 				}
 				else {
 					if(localStorage.getItem('scriptAdr') == TS_addr)
 						txt = "I’m going to help you now."
 					if(localStorage.getItem('scriptAdr') == TP_addr)
+						txt = "Подождите (англ)"
+					if(localStorage.getItem('scriptAdr') == KC_addr)
 						txt = "Подождите (англ)"
 				}
 				flagggg = 1
@@ -907,8 +938,9 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 		template = template_text
 		word = word_text
 	}
+	var tmpText = ""
 	var values = await getInfo(0)
-	adr = values[0]; adr1 = values[1]; uid = values[2]
+	var adr = values[0]; var adr1 = values[1]; var uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
   "headers": {
     "accept": "*/*", 
@@ -988,9 +1020,9 @@ accuracy = b.accuracy
 async function sendAnswer(txt, flag = 1, time = "10:00") {
 		//addTimer()
 		var values = await getInfo(flag)
-		adr = values[0]; adr1 = values[1]; uid = values[2]
-		txt2 = txt.split('\n')
-		txt3 = ""
+		var adr = values[0]; var adr1 = values[1]; var uid = values[2]
+		var txt2 = txt.split('\n')
+		var txt3 = ""
 		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
 		txt3 = txt3.split("\"").join("\\\"")
 		txt3 = txt3.split('<p></p>').join("<p><br></p>")
@@ -1053,8 +1085,8 @@ async function getInfo(flag1 = 1) {
 async function sendComment(txt){ 
 		var values = await getInfo(0)
 		adr = values[0]; adr1 = values[1]; uid = values[2]
-		txt2 = txt.split('\n').join('\\n')
-		txt2 = txt2.split("\"").join("\\\"")
+		var txt2 = txt.split('\n').join('\\n')
+		var txt2 = txt2.split("\"").join("\\\"")
 		resetFlags()
 	fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 	  "headers": {
@@ -1155,7 +1187,7 @@ function refreshTimer() {
 				var cT = new Date();
 				var curT1 = tmrs[i][3]
 				var curT2 = Number(cT);
-				var curT3 = (13.5 * 60) - Math.floor((curT2 - curT1) / 1000);
+				var curT3 = (8.5 * 60) - Math.floor((curT2 - curT1) / 1000);
 				if(curT3 < 0)
 					btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#FF47CA"
 			}
@@ -1342,10 +1374,131 @@ const copyToClipboard1 = str => {
     document.execCommand('copy');
     document.body.removeChild(el);
 };
+var operatorId = ""
+async function whoAmI(){
+	a = await fetch("https://skyeng.autofaq.ai/api/operators/statistic/currentState", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://skyeng.autofaq.ai/tickets/assigned",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}).then(a => b = a.json()).then(b => {
+let me = document.querySelector('.user_menu-dropdown-user_name');
+b.rows.forEach(s => {
+	if (me && s.operator.fullName === me.innerText) {
+		operatorId = s.operator.id
+		console.log("Мой ID: " + operatorId)
+		}
+})})
+}
+async function getNewChat(flagChats = 0){
+	if(operatorId == "")
+		await whoAmI()
+	serviceId = localStorage.getItem('serviceIdGlob')
+	var date = new Date()
+	date.setTime(date - 181 * 60 * 1000)
+	var date2 = new Date()
+	date2.setTime(date - 30 * 60 * 1000)
+	day = month = ""
+	if(date.getMonth() < 9)
+		month = "0" + (date.getMonth() + 1)
+	else 
+		month = (date.getMonth() + 1)
+	if(date.getDate() < 10)
+		day = "0" + date.getDate()
+	else
+		day = date.getDate()
+	if(date.getHours() < 10)
+		hours = '0' + date.getHours()
+	else
+		hours = date.getHours()
+	if(date.getMinutes() < 10)
+		minutes = '0' + date.getMinutes()
+	else
+		minutes = date.getMinutes()
+	if(date.getSeconds() < 10)
+		seconds = '0' + date.getSeconds()
+	else
+		seconds = date.getSeconds()
+	secondDate1 = date.getFullYear() + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":" + seconds + ".000z"
+	if(date2.getMonth() < 9)
+		month2 = "0" + (date2.getMonth() + 1)
+	else 
+		month2 = (date2.getMonth() + 1)
+	if(date2.getDate() < 10)
+		day2 = "0" + date2.getDate()
+	else
+		day2 = date2.getDate()
+	if(date2.getHours() < 10)
+		hours2 = '0' + date2.getHours()
+	else
+		hours2 = date2.getHours()
+	if(date2.getMinutes() < 10)
+		minutes2 = '0' + date2.getMinutes()
+	else
+		minutes2 = date2.getMinutes()
+	if(date2.getSeconds() < 10)
+		seconds2 = '0' + date2.getSeconds()
+	else
+		seconds2 = date2.getSeconds()
+	var chats = new Set()
+	firstDate1 = date2.getFullYear() + "-" + month2 + "-" + day2 + "T" + hours2 + ":" + minutes2 + ":" + seconds2 + ".000z"
+	var tmp
+	a = fetch("https://skyeng.autofaq.ai/api/conversations/history", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "max-age=0",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://skyeng.autofaq.ai/logs",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"serviceId\":\"" + serviceId + "\",\"mode\":\"Json\",\"tsFrom\":\"" + firstDate1 + "\",\"tsTo\":\"" + secondDate1 + "\",\"usedStatuses\":[\"OnOperator\"],\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":100}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+	}).then(a => b = a.json()).then(b => {for(iter = 0; iter < b.items.length; iter++) {
+			chats.add(b.items[iter].conversationId)
+		}
+	}).then(b => {
+		if(flagChats == 0) {
+			if(chats.size > 0) {
+				chatId = chats.values().next().value
+				fetch("https://skyeng.autofaq.ai/api/conversation/assign", {
+				  "headers": {
+					"content-type": "application/json",
+				  },
+				  "body": "{\"command\":\"DO_ASSIGN_CONVERSATION\",\"conversationId\":\""+chatId+"\",\"assignToOperatorId\":\""+operatorId+"\"}",
+				  "method": "POST",
+				});
+			}
+		}
+		document.getElementById('howManyChats').innerHTML = "Чатов в очереди: " + chats.size
+    })
+}
+setInterval(function(){
+	if(document.getElementById('howManyChats').style.display == "")
+		if(document.getElementsByClassName('user_menu-status-name')[0].innerText == "Занят")
+			getNewChat(1)
+		else
+			document.getElementById('howManyChats').innerHTML = ""
+}, 10000)
 
 async function sendAnswerTemplate2(word, flag = 0) {
-	tmpTxt = ""
-	adr = `https://skyeng.autofaq.ai/tickets/assigned/`
+	var tmpTxt = ""
+	var adr = `https://skyeng.autofaq.ai/tickets/assigned/`
     if(word.length < 50)
         try {
             a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
@@ -1391,7 +1544,7 @@ async function sendAnswerTemplate2(word, flag = 0) {
 		tmpTxt = tmpTxt.substr(0, tmpTxt.length - 2)
 		var values = await getInfo(0)
 		refCurTimer("10:00")
-		adr = values[0]; adr1 = values[1]; uid = values[2]
+		var adr = values[0]; var adr1 = values[1]; var uid = values[2]
 		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 			  "headers": {
 				"accept": "*/*",
@@ -1491,3 +1644,127 @@ async function checkHistory(id) {
 	}).then(a => b = a.json()).then(b => {count = b.items.length})
 	return count
 }
+
+async function getNotGoods(stringDate) {
+
+	async function goNotgood(list, list2, date1, date2) {
+		text = ""
+		text2 = "Дата: " + stringDate2 + "\n"
+		for(m = -1; m < list.length; m++) {
+			a = await fetch("https://skyeng.autofaq.ai/api/conversations/history", {
+			  "headers": {
+				"accept": "*/*",
+				"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+				"cache-control": "max-age=0",
+				"content-type": "application/json",
+				"sec-fetch-dest": "empty",
+				"sec-fetch-mode": "cors",
+				"sec-fetch-site": "same-origin"
+			  },
+			  "referrer": "https://skyeng.autofaq.ai/logs",
+			  "referrerPolicy": "strict-origin-when-cross-origin",
+			  "body": "{\"serviceId\":\"361c681b-340a-4e47-9342-c7309e27e7b5\",\"mode\":\"Json\",\"participatingOperatorsIds\":[\""+list[m]+"\"],\"tsFrom\":\"" + date1 + "\",\"tsTo\":\"" + date2 + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":150}",
+			  "method": "POST",
+			  "mode": "cors",
+			  "credentials": "include"
+			}).then(a => b = a.json().then(array => {array1 = array
+			n = 1
+			array1.items.forEach(a => { if(a.stats.rate != undefined) 
+			if(a.stats.rate.rate != undefined) {
+			if(a.stats.rate.rate < 4) {
+			text += stringDate2 + "	" + list2[m] + "	https://hdi.skyeng.ru/autofaq/conversation/-11/" + a.conversationId + "	" + a.stats.rate.rate + "\n"
+			if(n == 1)
+				text2 += "\nАгент: `" + list2[m] + "` C	S	A		T =\n "
+			text2 += "=HYPERLINK(\"https://hdi.skyeng.ru/autofaq/conversation/-11/" + a.conversationId + "\"; \"Нотгуд №" + n + "\" 	 (	оценка " + a.stats.rate.rate + ") - \n"
+			n++
+			}
+			}})
+			}))
+		}	
+		console.log(text)
+		console.log(text2)
+	}
+
+	var operatorId = []
+	var operatorNames = []
+	await fetch("https://skyeng.autofaq.ai/api/operators/statistic/currentState", {
+	  "headers": {
+		"accept": "*/*",
+		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+		"content-type": "application/json",
+		"sec-fetch-dest": "empty",
+		"sec-fetch-mode": "cors",
+		"sec-fetch-site": "same-origin"
+	  },
+	  "referrer": "https://skyeng.autofaq.ai/logs/c6fe512d-6f79-4dec-b272-baba807d7387",
+	  "referrerPolicy": "strict-origin-when-cross-origin",
+	  "body": null,
+	  "method": "GET",
+	  "mode": "cors",
+	  "credentials": "include"
+	}).then(result => b = result.json()).then(b => b.rows.forEach(k => {
+		if(k.operator.kbs.indexOf(120181) != -1 && k.operator.fullName.split('-')[0] == "ТП") {
+			operatorId.push(k.operator.id)
+			operatorNames.push(k.operator.fullName.split('-')[1])
+		}
+	}))
+
+	list = operatorId
+	list2 = operatorNames
+
+	stringDate2 = stringDate
+	stringDate = stringDate.split(".")
+	stringDate[1]--
+	var date = new Date(stringDate[2], stringDate[1], stringDate[0])
+	day = month = ""
+	if(date.getMonth() < 9)
+	month = "0" + (date.getMonth() + 1)
+	else 
+	month = (date.getMonth() + 1)
+	if(date.getDate() < 10)
+	day = "0" + date.getDate()
+	else
+	day = date.getDate()
+
+	secondDate = date.getFullYear() + "-" + month + "-" + day + "T20:59:59.059z"
+	date = date - 24 * 60 * 60 * 1000
+	var date2 = new Date()
+	date2.setTime(date)
+
+	if(date2.getMonth() < 9)
+	month2 = "0" + (date2.getMonth() + 1)
+	else 
+	month2 = (date2.getMonth() + 1)
+	if(date2.getDate() < 10)
+	day2 = "0" + date2.getDate()
+	else
+	day2 = date2.getDate()
+
+	firstDate = date2.getFullYear() + "-" + month2 + "-" + day2 + "T21:00:00.000z"
+	goNotgood(list, list2, firstDate, secondDate)
+}
+
+setTimeout(function() {
+if(localStorage.getItem('inspector') == 'yes') {
+	var but = document.createElement('button')
+	but.style.marginLeft = '5px'
+	but.textContent = "Нотгуды"
+	but.id = 'buttonForNotgoods'
+	var newinput = document.createElement('input')	
+	newinput.style.marginLeft = '5px'
+	newinput.style.textAlign = "center"
+	newinput.id = 'inputForNotgoods'
+	var curDate = new Date()
+	curDate.setTime(curDate - 24 * 60 * 60 * 1000)
+	newinput.placeholder = curDate.getDate() + "." + (curDate.getMonth() + 1) + "." + curDate.getFullYear()
+	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(newinput)
+	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(but)
+	
+	document.getElementById('buttonForNotgoods').onclick = function () {
+		if(document.getElementById('inputForNotgoods').value != "")
+			getNotGoods(document.getElementById('inputForNotgoods').value)
+		else
+			getNotGoods(document.getElementById('inputForNotgoods').placeholder)
+	}
+}
+}, 2000)
