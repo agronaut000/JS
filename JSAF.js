@@ -585,6 +585,8 @@ function move_again_AF() {
 	}
 	
 	function addCrm2Button() {
+		if(localStorage.getItem('scriptAdr') != TP_addr)
+			return
 		var a = document.getElementById('info_block')
 		for(i = 0; a.children[i] != null; i++) {
 			if(a.children[i].hasAttribute('user_id') && a.children[i].lastElementChild.children[2].textContent == 'Teacher:') {
