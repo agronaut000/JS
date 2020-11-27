@@ -1671,9 +1671,9 @@ async function checkHistory(id) {
 async function getNotGoods(stringDate) {
 
 	async function goNotgood(list, list2, date1, date2) {
-		text = ""
-		text2 = "Дата: " + stringDate2 + "\n"
-		page = 1
+		var text = ""
+		var text2 = "Дата: " + stringDate2 + "\n"
+		var page = 1
 		for(m = -1; m < list.length; m++) {
 			if(page == 2)
 				m--
