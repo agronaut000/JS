@@ -1673,7 +1673,10 @@ async function getNotGoods(stringDate) {
 	async function goNotgood(list, list2, date1, date2) {
 		text = ""
 		text2 = "Дата: " + stringDate2 + "\n"
+		page = 1
 		for(m = -1; m < list.length; m++) {
+			if(page == 2)
+				m--
 			a = await fetch("https://skyeng.autofaq.ai/api/conversations/history", {
 			  "headers": {
 				"accept": "*/*",
@@ -1686,7 +1689,7 @@ async function getNotGoods(stringDate) {
 			  },
 			  "referrer": "https://skyeng.autofaq.ai/logs",
 			  "referrerPolicy": "strict-origin-when-cross-origin",
-			  "body": "{\"serviceId\":\"361c681b-340a-4e47-9342-c7309e27e7b5\",\"mode\":\"Json\",\"participatingOperatorsIds\":[\""+list[m]+"\"],\"tsFrom\":\"" + date1 + "\",\"tsTo\":\"" + date2 + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":150}",
+			  "body": "{\"serviceId\":\"361c681b-340a-4e47-9342-c7309e27e7b5\",\"mode\":\"Json\",\"participatingOperatorsIds\":[\""+list[m]+"\"],\"tsFrom\":\"" + date1 + "\",\"tsTo\":\"" + date2 + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":" + page + ",\"limit\":100}",
 			  "method": "POST",
 			  "mode": "cors",
 			  "credentials": "include"
@@ -1702,6 +1705,11 @@ async function getNotGoods(stringDate) {
 			n++
 			}
 			}})
+			if(array1.total > 100)
+				if(page == 2)
+					page = 1
+				else
+					page = 2
 			}))
 		}	
 		console.log(text)
