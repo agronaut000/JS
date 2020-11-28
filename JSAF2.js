@@ -1942,7 +1942,8 @@ function customTemplates(language = '') {
 		}
 		
 		var buttonSortDown = document.createElement('button')
-		buttonSortDown.innerHTML = '↑'
+		buttonSortDown.innerHTML = '↓'
+		buttonSortDown.style.marginRight = '5px'
 		buttonSortDown.onclick = function() {
 			var index = this.parentElement.getAttribute('index')
 			if(index == countOfTemplates)
