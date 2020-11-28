@@ -1915,6 +1915,57 @@ function customTemplates(language = '') {
 			customTemplates()
 		}
 		
+		
+		var buttonSortUp = document.createElement('button')
+		buttonSortUp.innerHTML = '↑'
+		buttonSortUp.onclick = function() {
+			var index = this.parentElement.getAttribute('index')
+			if(index == 1)
+				return
+			var index2 = Number(index) - 1
+			
+			var tmp1 = localStorage.getItem('template_' + language + index)
+			localStorage.setItem('template_' + language + index, localStorage.getItem('template_' + language + index2))
+			localStorage.setItem('template_' + language + index2, tmp1)
+			
+			tmp1 = localStorage.getItem('checkbox_' + language + index)
+			localStorage.setItem('checkbox_' + language + index, localStorage.getItem('checkbox_' + language + index2))
+			localStorage.setItem('checkbox_' + language + index2, tmp1)
+			
+			tmp1 = localStorage.getItem('tmp_name_' + language + index)
+			localStorage.setItem('tmp_name_' + language + index, localStorage.getItem('tmp_name_' + language + index2))
+			localStorage.setItem('tmp_name_' + language + index2, tmp1)
+			if(document.getElementById('languageAF').innerHTML == "Русский")
+				customTemplates()
+			else
+				customTemplates('en_')
+		}
+		
+		var buttonSortDown = document.createElement('button')
+		buttonSortDown.innerHTML = '↑'
+		buttonSortDown.onclick = function() {
+			var index = this.parentElement.getAttribute('index')
+			if(index == countOfTemplates)
+				return
+			var index2 = Number(index) + 1
+			
+			var tmp1 = localStorage.getItem('template_' + language + index)
+			localStorage.setItem('template_' + language + index, localStorage.getItem('template_' + language + index2))
+			localStorage.setItem('template_' + language + index2, tmp1)
+			
+			tmp1 = localStorage.getItem('checkbox_' + language + index)
+			localStorage.setItem('checkbox_' + language + index, localStorage.getItem('checkbox_' + language + index2))
+			localStorage.setItem('checkbox_' + language + index2, tmp1)
+			
+			tmp1 = localStorage.getItem('tmp_name_' + language + index)
+			localStorage.setItem('tmp_name_' + language + index, localStorage.getItem('tmp_name_' + language + index2))
+			localStorage.setItem('tmp_name_' + language + index2, tmp1)
+			if(document.getElementById('languageAF').innerHTML == "Русский")
+				customTemplates()
+			else
+				customTemplates('en_')
+		}
+		
 		var newcheckbox = document.createElement('input')
 		newcheckbox.type = 'checkbox'
 		newcheckbox.style.marginRight = '5px'
@@ -1925,6 +1976,8 @@ function customTemplates(language = '') {
 		
 		newDiv.append(newcheckbox)
 		newDiv.append(newInputTmpName)
+		newDiv.append(buttonSortUp)
+		newDiv.append(buttonSortDown)
 		newDiv.append(newButton3)
 		newDiv.append(newButton)
 		newDiv.append(newInput)
