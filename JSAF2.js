@@ -2010,10 +2010,10 @@ function customTemplates(language = '') {
 		}
 	}
 	
-	but = document.createElement('button')
+	var but = document.createElement('button')
 	but.innerHTML = 'hide'
 	but.onclick = function() {
-	this.parentElement.parentElement.style.display = 'none'
+		this.parentElement.parentElement.style.display = 'none'
 	}
 	but.style.float = 'right'
 	
@@ -2021,9 +2021,6 @@ function customTemplates(language = '') {
 	newDiv.append(addTmpl)
 	newDiv.append(but)
 	cstmTmp.append(newDiv)
-
-	document.getElementById('cstmTmplates').lastElementChild.appendChild(but)
-	
 	
 	if(countOfTemplates > 0)
 		for(i = 1; i <= countOfTemplates; i++)
