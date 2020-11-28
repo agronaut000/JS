@@ -2009,9 +2009,20 @@ function customTemplates(language = '') {
 			refreshHotTmps()
 		}
 	}
+	
+	but = document.createElement('button')
+	but.innerHTML = 'hide'
+	but.onclick = function() {
+	this.parentElement.parentElement.style.display = 'none'
+	}
+	but.style.float = 'right'
+	
 	newDiv.append(saveAllTmp)
 	newDiv.append(addTmpl)
+	newDiv.append(but)
 	cstmTmp.append(newDiv)
+
+	document.getElementById('cstmTmplates').lastElementChild.appendChild(but)
 	
 	
 	if(countOfTemplates > 0)
