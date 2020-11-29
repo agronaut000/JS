@@ -2046,6 +2046,9 @@ function customTemplates(language = '') {
 	addTmpl.onclick = function() {
 		countOfTemplates++
 		localStorage.setItem('cntTmplts' + language, countOfTemplates)
+		localStorage.setItem('template_' + language + countOfTemplates, "")
+		localStorage.setItem('checkbox_' + language + countOfTemplates, false)
+		localStorage.setItem('tmp_name_' + language + countOfTemplates, "")
 		addNewString(countOfTemplates)
 	}
 	var saveAllTmp = document.createElement('button')
