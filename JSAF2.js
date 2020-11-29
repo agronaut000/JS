@@ -715,7 +715,7 @@ async function buttonsFromDoc(butName) {
 	msgFromTable(butName)
 	if(butName == "Серверные")
 		if(document.getElementById('msg1').innerHTML != "Доработать")
-			sendComment(document.getElementById('inp').value)
+			sendComment(document.getElementById('serversInp').value)
 }
 
 var bool = 0;	
@@ -877,9 +877,11 @@ function refreshTemplates() {
 						if(newBut.innerText == 'Серверные') {
 							var newInput = document.createElement('input')
 							newInput.placeholder = 'Ссылка'
+							newBut.id = 'serversInp'
 							newInput.style.marginRight = '5px'
 							var newDiv = document.createElement('div')
 							newDiv.style.margin = '5px'
+							newBut.id = 'serversBut'
 							newDiv.append(newInput)
 							newDiv.append(newBut)
 							document.getElementById('addTmp').children[0].appendChild(newDiv)
