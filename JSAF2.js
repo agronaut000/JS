@@ -882,7 +882,7 @@ function refreshTemplates() {
 							newDiv.style.margin = '5px'
 							newDiv.append(newInput)
 							newDiv.append(newBut)
-							b.lastElementChild.lastElementChild.appendChild(newDiv)
+							document.getElementById('addTmp').children[0].appendChild(newDiv)
 							continue
 						}
 						if(addTmpFlag == 0)
