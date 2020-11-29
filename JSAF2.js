@@ -1941,7 +1941,7 @@ function customTemplates(language = '') {
 		newButton2.style.marginRight = '5px'
 		newButton2.textContent = 'send'
 		newButton2.onclick = function() {
-			document.getElementById('inp').value = document.getElementById(this.parentElement.getAttribute('inp')).value
+			document.getElementById('inp').value = document.getElementById(this.parentElement.getAttribute('inp')).value.split('\\n').join('\n')
 			this.parentElement.parentElement.style.display = 'none'
 		}
 		
