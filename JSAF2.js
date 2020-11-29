@@ -125,17 +125,26 @@ if (localStorage.getItem('scriptAdr') == null) {
     localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec');
 }
 
-let button2 = document.createElement('div');
+let button2 = document.createElement('p');
 button2.id = 'userIdScript';
 button2.innerHTML = "Info";
+let button22 = document.createElement('p');
+button22.id = 'userShowcaseScript';
+button22.innerHTML = "Showcase";
 
-let button3 = document.createElement('div');
+let button3 = document.createElement('p');
 button3.id = 'nextStudentIdScript';
 button3.innerHTML = "Info";
+let button33 = document.createElement('p');
+button33.id = 'nextStudentShowcaseScript';
+button33.innerHTML = "Showcase";
 
-let button4 = document.createElement('div');
+let button4 = document.createElement('p');
 button4.id = 'nextTeacherIdScript';
 button4.innerHTML = "Info";
+let button44 = document.createElement('p');
+button44.id = 'nextTeacherShowcaseScript';
+button44.innerHTML = "Showcase";
 let template_flag = 0
 let template_flag2 = 0
 let word_text = ""
@@ -151,6 +160,12 @@ button2.onclick = function() {
 	}
 	btn1_student.click()
 }
+button22.onclick = function() {
+	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id")
+			copyToClipboard1('https://profile.skyeng.ru/profile/' + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText.split(' ')[0] + '/showcase'
+
+}
 button3.onclick = function() {
 	if(document.getElementById('btn_hide').style.display != 'none')
 		btn_hide.click()
@@ -160,6 +175,11 @@ button3.onclick = function() {
 	}
 	btn1_student.click()
 }
+button33.onclick = function() {
+	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-studentId")
+			copyToClipboard1('https://profile.skyeng.ru/profile/' + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText + '/showcase'
+}
 button4.onclick = function() {
 	if(document.getElementById('btn_hide').style.display != 'none')
 		btn_hide.click()
@@ -168,6 +188,11 @@ button4.onclick = function() {
 			document.getElementById('id_type_for_chat').value = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
 	}
 	btn1_student.click()
+}
+button44.onclick = function() {
+	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-teacherId")
+			copyToClipboard1('https://profile.skyeng.ru/profile/' + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText + '/showcase'
 }
 
 let addInfoUser = document.createElement('div')
@@ -1360,14 +1385,17 @@ function startTimer() {
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button2)
+				btn.appendChild(button22)
 			}
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-studentId") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button3)
+				btn.appendChild(button33)
 			}
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-teacherId") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button4)
+				btn.appendChild(button44)
 			}
 		}
 	}
