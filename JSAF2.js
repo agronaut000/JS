@@ -874,6 +874,17 @@ function refreshTemplates() {
 							newBut.innerText = "ус+брауз"
 						if(newBut.innerText == 'ус+брауз (П)')
 							continue
+						if(newBut.innerText == 'Серверные') {
+							var newInput = document.createElement('input')
+							newInput.placeholder = 'Ссылка'
+							newInput.style.marginRight = '5px'
+							var newDiv = document.createElement('div')
+							newDiv.style.margin = '5px'
+							newDiv.append(newInput)
+							newDiv.append(newBut)
+							b.lastElementChild.lastElementChild.appendChild(newDiv)
+							continue
+						}
 						if(addTmpFlag == 0)
 							b.lastElementChild.lastElementChild.appendChild(newBut)
 						else {
@@ -904,7 +915,7 @@ function refreshTemplates() {
 }
 
 function msgFromTable(btnName) {
-	for(l = 0; l < table.length; l++) {
+	for(var l = 0; l < table.length; l++) {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			if(btnName == table[l][0]) {
 				if(table[l][1] == "Быстрый шаблон") {
