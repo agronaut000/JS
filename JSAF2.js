@@ -1893,6 +1893,7 @@ function customTemplates(language = '') {
 		newButton2.textContent = 'send'
 		newButton2.onclick = function() {
 			document.getElementById('inp').value = document.getElementById(this.parentElement.getAttribute('inp')).value
+			this.parentElement.parentElement.style.display = 'none'
 		}
 		
 		var newButton3 = document.createElement('button')
