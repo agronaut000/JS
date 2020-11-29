@@ -877,7 +877,7 @@ function refreshTemplates() {
 						if(newBut.innerText == 'Серверные') {
 							var newInput = document.createElement('input')
 							newInput.placeholder = 'Ссылка'
-							newBut.id = 'serversInp'
+							newInput.id = 'serversInp'
 							newInput.style.marginRight = '5px'
 							var newDiv = document.createElement('div')
 							newDiv.style.margin = '5px'
