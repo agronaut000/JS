@@ -1901,7 +1901,7 @@ function customTemplates(language = '') {
 				newBut.innerHTML = localStorage.getItem('tmp_name_' + language + i)
 				a.appendChild(newBut)
 				newBut.onclick = function() {
-					var text = localStorage.getItem(this.getAttribute('template'))
+					var text = localStorage.getItem(this.getAttribute('template')).split('\\n').join('\n')
 					sendAnswer(text)
 				}
 			}
