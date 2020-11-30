@@ -125,17 +125,26 @@ if (localStorage.getItem('scriptAdr') == null) {
     localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec');
 }
 
-let button2 = document.createElement('div');
+let button2 = document.createElement('p');
 button2.id = 'userIdScript';
 button2.innerHTML = "Info";
+let button22 = document.createElement('p');
+button22.id = 'userShowcaseScript';
+button22.innerHTML = "Showcase";
 
-let button3 = document.createElement('div');
+let button3 = document.createElement('p');
 button3.id = 'nextStudentIdScript';
 button3.innerHTML = "Info";
+let button33 = document.createElement('p');
+button33.id = 'nextStudentShowcaseScript';
+button33.innerHTML = "Showcase";
 
-let button4 = document.createElement('div');
+let button4 = document.createElement('p');
 button4.id = 'nextTeacherIdScript';
 button4.innerHTML = "Info";
+let button44 = document.createElement('p');
+button44.id = 'nextTeacherShowcaseScript';
+button44.innerHTML = "Showcase";
 let template_flag = 0
 let template_flag2 = 0
 let word_text = ""
@@ -151,6 +160,13 @@ button2.onclick = function() {
 	}
 	btn1_student.click()
 }
+button22.onclick = function() {
+	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id")
+			copyToClipboard1('https://profile.skyeng.ru/profile/' + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText.split(' ')[0] + '/showcase')
+	}
+}
+
 button3.onclick = function() {
 	if(document.getElementById('btn_hide').style.display != 'none')
 		btn_hide.click()
@@ -160,6 +176,12 @@ button3.onclick = function() {
 	}
 	btn1_student.click()
 }
+button33.onclick = function() {
+	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-studentId")
+			copyToClipboard1('https://profile.skyeng.ru/profile/' + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText + '/showcase')
+	}
+}
 button4.onclick = function() {
 	if(document.getElementById('btn_hide').style.display != 'none')
 		btn_hide.click()
@@ -168,6 +190,12 @@ button4.onclick = function() {
 			document.getElementById('id_type_for_chat').value = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
 	}
 	btn1_student.click()
+}
+button44.onclick = function() {
+	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-teacherId")
+			copyToClipboard1('https://profile.skyeng.ru/profile/' + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText + '/showcase')
+	}
 }
 
 let addInfoUser = document.createElement('div')
@@ -332,6 +360,7 @@ function move_again_AF() {
 		document.getElementById('takeNewChat').style.display = ''
 		document.getElementById('howManyChats').style.display = ''
 		whoAmI()
+		customTemplates()
 		getText()
 	}
     document.getElementById('type_TS').onclick = function () {
@@ -357,6 +386,7 @@ function move_again_AF() {
 		document.getElementById('testUsers').style.display = ''
 		document.getElementById('takeNewChat').style.display = ''
 		document.getElementById('howManyChats').style.display = ''
+		customTemplates()
 		whoAmI()
 	}
 	
@@ -395,67 +425,75 @@ function move_again_AF() {
 	}
 	
 	
-    document.getElementById('tmplt1_save').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt1_ru', txt)
-		} else {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt1_en', txt)
+	if(document.getElementById('tmplt1_save') != undefined)
+		document.getElementById('tmplt1_save').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt1_ru', txt)
+			} else {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt1_en', txt)
+			}
 		}
-	}
-    document.getElementById('tmplt2_save').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt2_ru', txt)
-		} else {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt2_en', txt)
+		
+	if(document.getElementById('tmplt2_save') != undefined)
+		document.getElementById('tmplt2_save').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt2_ru', txt)
+			} else {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt2_en', txt)
+			}
 		}
-	}
-    document.getElementById('tmplt3_save').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt3_ru', txt)
-		} else {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt3_en', txt)
+		
+	if(document.getElementById('tmplt3_save') != undefined)
+		document.getElementById('tmplt3_save').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt3_ru', txt)
+			} else {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt3_en', txt)
+			}
 		}
-	}
 	
-    document.getElementById('tmplt1_snd').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = localStorage.getItem('tmplt1_ru')
-		} else {
-			txt = localStorage.getItem('tmplt1_en')
+	if(document.getElementById('tmplt1_snd') != undefined)
+		document.getElementById('tmplt1_snd').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = localStorage.getItem('tmplt1_ru')
+			} else {
+				txt = localStorage.getItem('tmplt1_en')
+			}
+			if(txt == null || txt == "")
+				document.getElementById('inp').value = "Не введен текст 1 шаблона"
+			else 
+				sendAnswer(txt)
 		}
-		if(txt == null || txt == "")
-			document.getElementById('inp').value = "Не введен текст 1 шаблона"
-		else 
-			sendAnswer(txt)
-	}
-    document.getElementById('tmplt2_snd').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = localStorage.getItem('tmplt2_ru')
-		} else {
-			txt = localStorage.getItem('tmplt2_en')
+	if(document.getElementById('tmplt2_snd') != undefined)
+		document.getElementById('tmplt2_snd').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = localStorage.getItem('tmplt2_ru')
+			} else {
+				txt = localStorage.getItem('tmplt2_en')
+			}
+			if(txt == null || txt == "")
+				document.getElementById('inp').value = "Не введен текст 2 шаблона"
+			else 
+				sendAnswer(txt)
 		}
-		if(txt == null || txt == "")
-			document.getElementById('inp').value = "Не введен текст 2 шаблона"
-		else 
-			sendAnswer(txt)
-	}
-    document.getElementById('tmplt3_snd').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = localStorage.getItem('tmplt3_ru')
-		} else {
-			txt = localStorage.getItem('tmplt3_en')
+	if(document.getElementById('tmplt3_snd') != undefined)
+		document.getElementById('tmplt3_snd').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = localStorage.getItem('tmplt3_ru')
+			} else {
+				txt = localStorage.getItem('tmplt3_en')
+			}
+			if(txt == null || txt == "")
+				document.getElementById('inp').value = "Не введен текст 3 шаблона"
+			else 
+				sendAnswer(txt)
 		}
-		if(txt == null || txt == "")
-			document.getElementById('inp').value = "Не введен текст 3 шаблона"
-		else 
-			sendAnswer(txt)
-	}
 	
 	
     document.getElementById('msg1').onclick = function () {
@@ -583,27 +621,6 @@ function move_again_AF() {
 	} else {
 		document.getElementById('testDiv').style.display = 'none'
 	}
-	
-	function addCrm2Button() {
-		if(localStorage.getItem('scriptAdr') != TP_addr)
-			return
-		var a = document.getElementById('info_block')
-		for(i = 0; a.children[i] != null; i++) {
-			if(a.children[i].hasAttribute('user_id') && a.children[i].lastElementChild.children[2].textContent == 'Teacher:') {
-				var b = document.createElement('button')
-				b.textContent = 'CRM2'
-				b.style = 'float: left'
-				b.classList.add('win_btn')
-				b.setAttribute('user_id', a.children[i].getAttribute('user_id'))
-				b.onclick = function() {
-				 var id = this.getAttribute('user_id')
-				 window.open('https://crm2.skyeng.ru/persons/' + id, '_blank');
-				}
-				a.children[i].lastElementChild.insertBefore(b, a.children[i].lastElementChild.children[2])
-			}
-		}
-	}
-	setInterval(addCrm2Button, 500)
 
 	getText()
 }
@@ -736,7 +753,7 @@ async function buttonsFromDoc(butName) {
 	msgFromTable(butName)
 	if(butName == "Серверные")
 		if(document.getElementById('msg1').innerHTML != "Доработать")
-			sendComment(document.getElementById('inp').value)
+			sendComment(document.getElementById('serversInp').value)
 }
 
 var bool = 0;	
@@ -895,6 +912,19 @@ function refreshTemplates() {
 							newBut.innerText = "ус+брауз"
 						if(newBut.innerText == 'ус+брауз (П)')
 							continue
+						if(newBut.innerText == 'Серверные') {
+							var newInput = document.createElement('input')
+							newInput.placeholder = 'Ссылка'
+							newInput.id = 'serversInp'
+							newInput.style.marginRight = '5px'
+							var newDiv = document.createElement('div')
+							newDiv.style.margin = '5px'
+							newBut.id = 'serversBut'
+							newDiv.append(newInput)
+							newDiv.append(newBut)
+							document.getElementById('addTmp').children[0].appendChild(newDiv)
+							continue
+						}
 						if(addTmpFlag == 0)
 							b.lastElementChild.lastElementChild.appendChild(newBut)
 						else {
@@ -925,7 +955,7 @@ function refreshTemplates() {
 }
 
 function msgFromTable(btnName) {
-	for(l = 0; l < table.length; l++) {
+	for(var l = 0; l < table.length; l++) {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			if(btnName == table[l][0]) {
 				if(table[l][1] == "Быстрый шаблон") {
@@ -936,6 +966,11 @@ function msgFromTable(btnName) {
 				}
 				if(table[l][1] == "Шаблон") {
 					sendAnswerTemplate(table[l][2], table[l][3])
+				}
+				if(table[l][1].indexOf("Рандом") != -1) {
+					var count = table[l][1][7]
+					var newL = Math.floor(Math.random() * (count)) + l
+					sendAnswer(table[newL][2])
 				}
 				break
 			}
@@ -1363,14 +1398,20 @@ function startTimer() {
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button2)
+				if(localStorage.getItem('scriptAdr') == TP_addr)
+					btn.appendChild(button22)
 			}
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-studentId") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button3)
+				if(localStorage.getItem('scriptAdr') == TP_addr)
+					btn.appendChild(button33)
 			}
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-teacherId") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button4)
+				if(localStorage.getItem('scriptAdr') == TP_addr)
+					btn.appendChild(button44)
 			}
 		}
 	}
@@ -1671,9 +1712,12 @@ async function checkHistory(id) {
 async function getNotGoods(stringDate) {
 
 	async function goNotgood(list, list2, date1, date2) {
-		text = ""
-		text2 = "Дата: " + stringDate2 + "\n"
+		var text = ""
+		var text2 = "Дата: " + stringDate2 + "\n"
+		var page = 1
 		for(m = -1; m < list.length; m++) {
+			if(page == 2)
+				m--
 			a = await fetch("https://skyeng.autofaq.ai/api/conversations/history", {
 			  "headers": {
 				"accept": "*/*",
@@ -1686,7 +1730,7 @@ async function getNotGoods(stringDate) {
 			  },
 			  "referrer": "https://skyeng.autofaq.ai/logs",
 			  "referrerPolicy": "strict-origin-when-cross-origin",
-			  "body": "{\"serviceId\":\"361c681b-340a-4e47-9342-c7309e27e7b5\",\"mode\":\"Json\",\"participatingOperatorsIds\":[\""+list[m]+"\"],\"tsFrom\":\"" + date1 + "\",\"tsTo\":\"" + date2 + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":150}",
+			  "body": "{\"serviceId\":\"361c681b-340a-4e47-9342-c7309e27e7b5\",\"mode\":\"Json\",\"participatingOperatorsIds\":[\""+list[m]+"\"],\"tsFrom\":\"" + date1 + "\",\"tsTo\":\"" + date2 + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":" + page + ",\"limit\":100}",
 			  "method": "POST",
 			  "mode": "cors",
 			  "credentials": "include"
@@ -1702,6 +1746,11 @@ async function getNotGoods(stringDate) {
 			n++
 			}
 			}})
+			if(array1.total > 100)
+				if(page == 2)
+					page = 1
+				else
+					page = 2
 			}))
 		}	
 		console.log(text)
@@ -1766,6 +1815,311 @@ async function getNotGoods(stringDate) {
 	firstDate = date2.getFullYear() + "-" + month2 + "-" + day2 + "T21:00:00.000z"
 	goNotgood(list, list2, firstDate, secondDate)
 }
+
+function customTemplates(language = '') {
+	if (localStorage.getItem('winCstmTmpsTop') == null) {
+		localStorage.setItem('winCstmTmpsTop', '120');
+		localStorage.setItem('winCstmTmpsLeft', '295');
+	}
+	if(localStorage.getItem('cntTmplts' + language) == null)
+		localStorage.setItem('cntTmplts', 0)
+	if(document.getElementById('cstmTmplates') == undefined) {
+		var cstmTmp = document.createElement('div')
+		cstmTmp.style = 'min-height: 25px; min-width: 65px; background: #464451; top: ' + localStorage.getItem('winCstmTmpsTop') + 'px; left: ' + localStorage.getItem('winCstmTmpsLeft') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black; border-radius:5px; border:1px solid #768d87; ';
+		cstmTmp.id = 'cstmTmplates'
+		cstmTmp.style.display = 'none'
+		document.body.append(cstmTmp);
+	} else {
+		cstmTmp = document.getElementById('cstmTmplates')
+		while(document.getElementById('cstmTmplates').children[0] != undefined)
+			document.getElementById('cstmTmplates').children[0].remove()
+	}
+	countOfTemplates = localStorage.getItem('cntTmplts' + language)
+	
+	
+	var buttonOpenTmpWindow = document.createElement('button')
+	buttonOpenTmpWindow.innerHTML = 'tmps'
+	buttonOpenTmpWindow.style.marginLeft = '7px'
+	buttonOpenTmpWindow.onclick = function() {
+		var a = document.getElementById('cstmTmplates')
+		if(a.style.display == '')
+			a.style.display = 'none'
+		else
+			a.style.display = ''
+	}
+	var tmpA = document.getElementById('AF_helper').children[0].children[0].children[0].children[0]
+	tmpA.children[2].style.marginLeft = '7px'
+	if(tmpA.children[1].innerHTML != 'tmps')
+		tmpA.insertBefore(buttonOpenTmpWindow, tmpA.children[1])
+	
+	if (language == "") {
+		if(localStorage.getItem('tmplt1_ru') != null) {
+			countOfTemplates++
+			localStorage.setItem('template_' + countOfTemplates, localStorage.getItem('tmplt1_ru'))
+			localStorage.setItem('checkbox_' + countOfTemplates, false)
+			localStorage.removeItem('tmplt1_ru')
+			localStorage.setItem('cntTmplts', countOfTemplates)
+		}
+		if(localStorage.getItem('tmplt2_ru') != null) {
+			countOfTemplates++
+			localStorage.setItem('template_' + countOfTemplates, localStorage.getItem('tmplt2_ru'))
+			localStorage.setItem('checkbox_' + countOfTemplates, false)
+			localStorage.removeItem('tmplt2_ru')
+			localStorage.setItem('cntTmplts', countOfTemplates)
+		}
+		if(localStorage.getItem('tmplt3_ru') != null) {
+			countOfTemplates++
+			localStorage.setItem('template_' + countOfTemplates, localStorage.getItem('tmplt3_ru'))
+			localStorage.setItem('checkbox_' + countOfTemplates, false)
+			localStorage.removeItem('tmplt3_ru')
+			localStorage.setItem('cntTmplts', countOfTemplates)
+		}
+	} else {
+		if(localStorage.getItem('tmplt1_en') != null) {
+			countOfTemplates++
+			localStorage.setItem('template_' + countOfTemplates, localStorage.getItem('tmplt1_en'))
+			localStorage.setItem('checkbox_' + countOfTemplates, false)
+			localStorage.removeItem('tmplt1_en')
+			localStorage.setItem('cntTmplts', countOfTemplates)
+		}
+		if(localStorage.getItem('tmplt2_en') != null) {
+			countOfTemplates++
+			localStorage.setItem('template_' + countOfTemplates, localStorage.getItem('tmplt2_en'))
+			localStorage.setItem('checkbox_' + countOfTemplates, false)
+			localStorage.removeItem('tmplt2_en')
+			localStorage.setItem('cntTmplts', countOfTemplates)
+		}
+		if(localStorage.getItem('tmplt3_en') != null) {
+			countOfTemplates++
+			localStorage.setItem('template_' + countOfTemplates, localStorage.getItem('tmplt3_en'))
+			localStorage.setItem('checkbox_' + countOfTemplates, false)
+			localStorage.removeItem('tmplt3_en')
+			localStorage.setItem('cntTmplts', countOfTemplates)
+		}
+	}
+	
+	function refreshHotTmps() {
+		while(document.getElementById('6str').children[0] != undefined)
+			document.getElementById('6str').children[0].remove()
+		countOfTemplates = localStorage.getItem('cntTmplts' + language)
+		for(var i = 1; i <= countOfTemplates; i++) {
+			var j = Number(i) - 1
+			if(document.getElementById('cstmTmplates').children[j].children[0].checked) {
+				if(localStorage.getItem('tmp_name_' + language + i) == null || localStorage.getItem('tmp_name_' + language + i) == "")
+					continue
+				var a = document.getElementById('6str')
+				var newBut = document.createElement('button')
+				newBut.setAttribute('template', 'template_' + language + i)
+				newBut.style.marginRight = '5px'
+				newBut.innerHTML = localStorage.getItem('tmp_name_' + language + i)
+				a.appendChild(newBut)
+				newBut.onclick = function() {
+					var text = localStorage.getItem(this.getAttribute('template')).split('\\n').join('\n')
+					sendAnswer(text)
+				}
+			}
+		}
+	}
+	
+	function addNewString(index) {
+		
+		var newDiv  = document.createElement('div')
+		newDiv.style.margin = '5px'
+		newDiv.setAttribute('inp', 'cstmTmpInp' + language + index)
+		newDiv.setAttribute('tmp', 'template_' + language + index)
+		newDiv.setAttribute('index', index)
+		
+		var template = localStorage.getItem('template_' + language + index)
+		var newInput = document.createElement('input')
+		newInput.id = 'cstmTmpInp' + language + index
+		newInput.value = template == undefined ? "" : template
+		newInput.style.marginRight = '5px'
+		newInput.style.width = '500px'
+		
+		var template = localStorage.getItem('tmp_name_' + language + index)
+		var newInputTmpName = document.createElement('input')
+		newInputTmpName.value = template == undefined ? "" : template
+		newInputTmpName.style.marginRight = '5px'
+		newInputTmpName.style.width = '50px'
+		
+		var newButton = document.createElement('button')
+		newButton.style.marginRight = '5px'
+		newButton.textContent = 'save'
+		newButton.onclick = function() {
+			localStorage.setItem(this.parentElement.getAttribute('tmp'), document.getElementById(this.parentElement.getAttribute('inp')).value)
+			localStorage.setItem('tmp_name_' + language + index, this.parentElement.children[1].value)
+			refreshHotTmps()
+		}
+		var newButton2 = document.createElement('button')
+		newButton2.style.marginRight = '5px'
+		newButton2.textContent = 'send'
+		newButton2.onclick = function() {
+			document.getElementById('inp').value = document.getElementById(this.parentElement.getAttribute('inp')).value.split('\\n').join('\n')
+			this.parentElement.parentElement.style.display = 'none'
+		}
+		
+		var newButton3 = document.createElement('button')
+		newButton3.style.marginRight = '5px'
+		newButton3.textContent = 'delete'
+		newButton3.onclick = function() {
+			for(var i = this.parentElement.getAttribute('index'); i < countOfTemplates; i++) {
+				var n = Number(i) + 1
+				localStorage.setItem('template_' + language + i, localStorage.getItem('template_' + language + n))
+				localStorage.setItem('checkbox_' + language + i, localStorage.getItem('checkbox_' + language + n))
+				localStorage.setItem('tmp_name_' + language + i, localStorage.getItem('tmp_name_' + language + n))
+			}
+			localStorage.removeItem('template_' + language + countOfTemplates)
+			localStorage.removeItem('checkbox_' + language + countOfTemplates)
+			localStorage.removeItem('tmp_name_' + language + countOfTemplates)
+			countOfTemplates--;
+			localStorage.setItem('cntTmplts' + language, countOfTemplates)
+			while(document.getElementById('cstmTmplates').children[0] != undefined)
+				document.getElementById('cstmTmplates').children[0].remove()
+			customTemplates()
+		}
+		
+		
+		var buttonSortUp = document.createElement('button')
+		buttonSortUp.innerHTML = '↑'
+		buttonSortUp.onclick = function() {
+			var index = this.parentElement.getAttribute('index')
+			if(index == 1)
+				return
+			var index2 = Number(index) - 1
+			
+			var tmp1 = localStorage.getItem('template_' + language + index)
+			localStorage.setItem('template_' + language + index, localStorage.getItem('template_' + language + index2))
+			localStorage.setItem('template_' + language + index2, tmp1)
+			
+			tmp1 = localStorage.getItem('checkbox_' + language + index)
+			localStorage.setItem('checkbox_' + language + index, localStorage.getItem('checkbox_' + language + index2))
+			localStorage.setItem('checkbox_' + language + index2, tmp1)
+			
+			tmp1 = localStorage.getItem('tmp_name_' + language + index)
+			localStorage.setItem('tmp_name_' + language + index, localStorage.getItem('tmp_name_' + language + index2))
+			localStorage.setItem('tmp_name_' + language + index2, tmp1)
+			if(document.getElementById('languageAF').innerHTML == "Русский")
+				customTemplates()
+			else
+				customTemplates('en_')
+		}
+		
+		var buttonSortDown = document.createElement('button')
+		buttonSortDown.innerHTML = '↓'
+		buttonSortDown.style.marginRight = '5px'
+		buttonSortDown.onclick = function() {
+			var index = this.parentElement.getAttribute('index')
+			if(index == countOfTemplates)
+				return
+			var index2 = Number(index) + 1
+			
+			var tmp1 = localStorage.getItem('template_' + language + index)
+			localStorage.setItem('template_' + language + index, localStorage.getItem('template_' + language + index2))
+			localStorage.setItem('template_' + language + index2, tmp1)
+			
+			tmp1 = localStorage.getItem('checkbox_' + language + index)
+			localStorage.setItem('checkbox_' + language + index, localStorage.getItem('checkbox_' + language + index2))
+			localStorage.setItem('checkbox_' + language + index2, tmp1)
+			
+			tmp1 = localStorage.getItem('tmp_name_' + language + index)
+			localStorage.setItem('tmp_name_' + language + index, localStorage.getItem('tmp_name_' + language + index2))
+			localStorage.setItem('tmp_name_' + language + index2, tmp1)
+			if(document.getElementById('languageAF').innerHTML == "Русский")
+				customTemplates()
+			else
+				customTemplates('en_')
+		}
+		
+		var newcheckbox = document.createElement('input')
+		newcheckbox.type = 'checkbox'
+		newcheckbox.style.marginRight = '5px'
+		newcheckbox.checked = localStorage.getItem('checkbox_' + language + index) == 'true' ? 1 : 0
+		newcheckbox.onclick = function() { 
+			localStorage.setItem('checkbox_' + language + index, this.checked)
+		}
+		
+		newDiv.append(newcheckbox)
+		newDiv.append(newInputTmpName)
+		newDiv.append(buttonSortUp)
+		newDiv.append(buttonSortDown)
+		newDiv.append(newButton3)
+		newDiv.append(newButton)
+		newDiv.append(newInput)
+		newDiv.append(newButton2)
+		cstmTmp.insertBefore(newDiv, cstmTmp.lastElementChild)
+	}
+	
+	var newDiv  = document.createElement('div')
+	newDiv.style = 'cursor: -webkit-grab;'
+	newDiv.style.margin = '5px'
+	newDiv.style.textAlign = 'center'
+	var addTmpl = document.createElement('button')
+	addTmpl.textContent = 'Добавить шаблон'
+	addTmpl.style.marginRight = '5px'
+	addTmpl.onclick = function() {
+		countOfTemplates++
+		localStorage.setItem('cntTmplts' + language, countOfTemplates)
+		localStorage.setItem('template_' + language + countOfTemplates, "")
+		localStorage.setItem('checkbox_' + language + countOfTemplates, false)
+		localStorage.setItem('tmp_name_' + language + countOfTemplates, "")
+		addNewString(countOfTemplates)
+	}
+	var saveAllTmp = document.createElement('button')
+	saveAllTmp.textContent = 'Сохранить всё'
+	saveAllTmp.style.marginRight = '5px'
+	saveAllTmp.onclick = function() {
+		for(var i = 1; i <= countOfTemplates; i++) {
+			localStorage.setItem('template_' + language + i, document.getElementById('cstmTmpInp' + language + i).value)
+			localStorage.setItem('checkbox_' + language + i, document.getElementById('cstmTmpInp' + language + i).parentElement.children[0].checked)
+			localStorage.setItem('tmp_name_' + language + i, document.getElementById('cstmTmpInp' + language + i).parentElement.children[1].value)
+			refreshHotTmps()
+		}
+	}
+	
+	var but = document.createElement('button')
+	but.innerHTML = 'hide'
+	but.onclick = function() {
+		this.parentElement.parentElement.style.display = 'none'
+	}
+	but.style.float = 'right'
+	
+	newDiv.append(saveAllTmp)
+	newDiv.append(addTmpl)
+	newDiv.append(but)
+	cstmTmp.append(newDiv)
+	
+	if(countOfTemplates > 0)
+		for(i = 1; i <= countOfTemplates; i++)
+			addNewString(i)
+	refreshHotTmps()
+	
+	var listener3 = function(e , a) {
+        cstmTmp.style.left = Number(e.clientX - myX3) + "px";
+        cstmTmp.style.top = Number(e.clientY - myY3) + "px";
+        localStorage.setItem('winCstmTmpsTop', String(Number(e.clientY - myY3)));
+        localStorage.setItem('winCstmTmpsLeft', String(Number(e.clientX - myX3)));
+    };
+
+    cstmTmp.lastElementChild.onmousedown = function (a) {
+        window.myX3 = a.layerX; 
+        window.myY3 = a.layerY; 
+        document.addEventListener('mousemove', listener3);
+    }
+    cstmTmp.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
+	
+	document.getElementById('languageAF').onclick = function () {
+        if(this.innerHTML == "Русский") {
+            this.innerHTML = "Английский";
+			document.getElementById('AF_helper').style.background = "#EBC7DF"
+			customTemplates('en_')
+        } else {
+            this.innerHTML = "Русский";
+			document.getElementById('AF_helper').style.background = "#464451"
+			customTemplates()
+        }
+	}
+}
+
 
 setTimeout(function() {
 if(localStorage.getItem('inspector') == 'yes') {
