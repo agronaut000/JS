@@ -425,67 +425,75 @@ function move_again_AF() {
 	}
 	
 	
-    document.getElementById('tmplt1_save').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt1_ru', txt)
-		} else {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt1_en', txt)
+	if(document.getElementById('tmplt1_save') != undefined)
+		document.getElementById('tmplt1_save').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt1_ru', txt)
+			} else {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt1_en', txt)
+			}
 		}
-	}
-    document.getElementById('tmplt2_save').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt2_ru', txt)
-		} else {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt2_en', txt)
+		
+	if(document.getElementById('tmplt2_save') != undefined)
+		document.getElementById('tmplt2_save').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt2_ru', txt)
+			} else {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt2_en', txt)
+			}
 		}
-	}
-    document.getElementById('tmplt3_save').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt3_ru', txt)
-		} else {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt3_en', txt)
+		
+	if(document.getElementById('tmplt3_save') != undefined)
+		document.getElementById('tmplt3_save').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt3_ru', txt)
+			} else {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt3_en', txt)
+			}
 		}
-	}
 	
-    document.getElementById('tmplt1_snd').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = localStorage.getItem('tmplt1_ru')
-		} else {
-			txt = localStorage.getItem('tmplt1_en')
+	if(document.getElementById('tmplt1_snd') != undefined)
+		document.getElementById('tmplt1_snd').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = localStorage.getItem('tmplt1_ru')
+			} else {
+				txt = localStorage.getItem('tmplt1_en')
+			}
+			if(txt == null || txt == "")
+				document.getElementById('inp').value = "Не введен текст 1 шаблона"
+			else 
+				sendAnswer(txt)
 		}
-		if(txt == null || txt == "")
-			document.getElementById('inp').value = "Не введен текст 1 шаблона"
-		else 
-			sendAnswer(txt)
-	}
-    document.getElementById('tmplt2_snd').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = localStorage.getItem('tmplt2_ru')
-		} else {
-			txt = localStorage.getItem('tmplt2_en')
+	if(document.getElementById('tmplt2_snd') != undefined)
+		document.getElementById('tmplt2_snd').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = localStorage.getItem('tmplt2_ru')
+			} else {
+				txt = localStorage.getItem('tmplt2_en')
+			}
+			if(txt == null || txt == "")
+				document.getElementById('inp').value = "Не введен текст 2 шаблона"
+			else 
+				sendAnswer(txt)
 		}
-		if(txt == null || txt == "")
-			document.getElementById('inp').value = "Не введен текст 2 шаблона"
-		else 
-			sendAnswer(txt)
-	}
-    document.getElementById('tmplt3_snd').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = localStorage.getItem('tmplt3_ru')
-		} else {
-			txt = localStorage.getItem('tmplt3_en')
+	if(document.getElementById('tmplt3_snd') != undefined)
+		document.getElementById('tmplt3_snd').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = localStorage.getItem('tmplt3_ru')
+			} else {
+				txt = localStorage.getItem('tmplt3_en')
+			}
+			if(txt == null || txt == "")
+				document.getElementById('inp').value = "Не введен текст 3 шаблона"
+			else 
+				sendAnswer(txt)
 		}
-		if(txt == null || txt == "")
-			document.getElementById('inp').value = "Не введен текст 3 шаблона"
-		else 
-			sendAnswer(txt)
-	}
 	
 	
     document.getElementById('msg1').onclick = function () {
