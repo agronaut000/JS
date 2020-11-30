@@ -360,6 +360,7 @@ function move_again_AF() {
 		document.getElementById('takeNewChat').style.display = ''
 		document.getElementById('howManyChats').style.display = ''
 		whoAmI()
+		customTemplates()
 		getText()
 	}
     document.getElementById('type_TS').onclick = function () {
@@ -385,6 +386,7 @@ function move_again_AF() {
 		document.getElementById('testUsers').style.display = ''
 		document.getElementById('takeNewChat').style.display = ''
 		document.getElementById('howManyChats').style.display = ''
+		customTemplates()
 		whoAmI()
 	}
 	
@@ -2106,7 +2108,7 @@ function customTemplates(language = '') {
         }
 	}
 }
-customTemplates()
+
 
 setTimeout(function() {
 if(localStorage.getItem('inspector') == 'yes') {
