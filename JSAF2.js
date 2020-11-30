@@ -1398,17 +1398,20 @@ function startTimer() {
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button2)
-				btn.appendChild(button22)
+				if(localStorage.getItem('scriptAdr') == TP_addr)
+					btn.appendChild(button22)
 			}
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-studentId") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button3)
-				btn.appendChild(button33)
+				if(localStorage.getItem('scriptAdr') == TP_addr)
+					btn.appendChild(button33)
 			}
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-teacherId") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button4)
-				btn.appendChild(button44)
+				if(localStorage.getItem('scriptAdr') == TP_addr)
+					btn.appendChild(button44)
 			}
 		}
 	}
