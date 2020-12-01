@@ -628,7 +628,7 @@ function move_again_AF() {
 	getText()
 }
 
-setTimeout(move_again_AF(), 5000)
+setTimeout(move_again_AF, 3500)
 function pageClick(pageId) {
 	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 	for(i = 0; i < b.childElementCount; i++) {
