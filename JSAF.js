@@ -628,7 +628,7 @@ function move_again_AF() {
 	getText()
 }
 
-setTimeout(move_again_AF(), 2000)
+setTimeout(move_again_AF(), 5000)
 function pageClick(pageId) {
 	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 	for(i = 0; i < b.childElementCount; i++) {
@@ -1914,6 +1914,7 @@ function customTemplates(language = '') {
 				var newBut = document.createElement('button')
 				newBut.setAttribute('template', 'template_' + language + i)
 				newBut.style.marginRight = '5px'
+				newBut.style.marginTop = '5px'
 				newBut.innerHTML = localStorage.getItem('tmp_name_' + language + i)
 				a.appendChild(newBut)
 				newBut.onclick = function() {
