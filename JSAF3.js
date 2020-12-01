@@ -2192,13 +2192,15 @@ function decToHex(dec)
 	hex = '' + hexStr.charAt(high) + hexStr.charAt(low);
 	return hex;
 }
+
 document.getElementById('setting2').onclick = function () {
-	string = 'тестовый текст, кнопка'
+	string = 'тестовый текст №2, кнопка"
 	string = toUTF8Array(string)
 	string2 = ""
 	for(i = 0; i < string.length; i++) {
 		string2 += "%" + decToHex(string[i])
 	}
-	chrome.runtime.sendMessage({name: "ChM", question: 'sendResponse', string: string2}, function(response) {
-	});
+	
+	document.getElementById('testid2').value = string2
+	document.getElementById('idlogin2').click()
 }
