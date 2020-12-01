@@ -2194,7 +2194,7 @@ function decToHex(dec)
 }
 
 document.getElementById('setting2').onclick = function () {
-	string = 'тестовый текст №2, кнопка"
+	string = 'тестовый текст №2, кнопка'
 	string = toUTF8Array(string)
 	string2 = ""
 	for(i = 0; i < string.length; i++) {
