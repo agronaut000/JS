@@ -1914,6 +1914,7 @@ function customTemplates(language = '') {
 				var newBut = document.createElement('button')
 				newBut.setAttribute('template', 'template_' + language + i)
 				newBut.style.marginRight = '5px'
+				newBut.style.marginTop = '5px'
 				newBut.innerHTML = localStorage.getItem('tmp_name_' + language + i)
 				a.appendChild(newBut)
 				newBut.onclick = function() {
