@@ -63,6 +63,7 @@ var win_AFhelper =
 					<button id="languageAF" style="width:100px">Русский</button>
 					<button id="hideMenu" style="margin-left: 50px">hide</button>
 					<button id="setting" style="margin-left: 80px">S</button>
+					<button id="setting2" style="margin-left: 80px">S2</button>
 				</div>
 				<div style="margin: 5px;" id="pages">
 				</div>
@@ -78,7 +79,7 @@ var win_AFhelper =
 				<button id="tmplt3_snd">send</button>
 			</div>
 			<div style="margin: 5px;" id="7str">
-				<textarea style="width: 291px; height: 125px; resize: none" id="inp"></textarea>
+				<textarea style="width: 291px; height: 125px;" id="inp"></textarea>
 				<button id="msg1" style="width:100px;">Отправить</button>
 				<button id="snd" style="width:50px; margin-left:16px">send</button>
 				<button id="msg" style="width:100px; margin-left:16px">Заметки</button>
@@ -100,11 +101,17 @@ var win_AFhelper =
 				<button id="type_TS">TS</button>
 				</p>
 			</div>
+			<div style="margin: 5px; width: 300px" id="testDiv">
+				<button id="takeNewChat">Взять чат</button>
+				<p style="color:white; margin:0 0 5px 0;" id="howManyChats"></p>
+			</div>
 		</div>
 	</span>
     </div>`;
 	
 let audio
+
+
 if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winTopAF', '120');
     localStorage.setItem('winLeftAF', '295');
@@ -119,22 +126,31 @@ if (localStorage.getItem('scriptAdr') == null) {
     localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec');
 }
 
-let button2 = document.createElement('div');
+let button2 = document.createElement('p');
 button2.id = 'userIdScript';
 button2.innerHTML = "Info";
+let button22 = document.createElement('p');
+button22.id = 'userShowcaseScript';
+button22.innerHTML = "Showcase";
 
-let button3 = document.createElement('div');
+let button3 = document.createElement('p');
 button3.id = 'nextStudentIdScript';
 button3.innerHTML = "Info";
+let button33 = document.createElement('p');
+button33.id = 'nextStudentShowcaseScript';
+button33.innerHTML = "Showcase";
 
-let button4 = document.createElement('div');
+let button4 = document.createElement('p');
 button4.id = 'nextTeacherIdScript';
 button4.innerHTML = "Info";
-template_flag = 0
-template_flag2 = 0
-word_text = ""
-template_text = ""
-flagggg = 0
+let button44 = document.createElement('p');
+button44.id = 'nextTeacherShowcaseScript';
+button44.innerHTML = "Showcase";
+let template_flag = 0
+let template_flag2 = 0
+let word_text = ""
+let template_text = ""
+let flagggg = 0
 
 button2.onclick = function() {
 	if(document.getElementById('btn_hide').style.display != 'none')
@@ -145,6 +161,13 @@ button2.onclick = function() {
 	}
 	btn1_student.click()
 }
+button22.onclick = function() {
+	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id")
+			copyToClipboard1('https://profile.skyeng.ru/profile/' + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText.split(' ')[0] + '/showcase')
+	}
+}
+
 button3.onclick = function() {
 	if(document.getElementById('btn_hide').style.display != 'none')
 		btn_hide.click()
@@ -153,6 +176,12 @@ button3.onclick = function() {
 			document.getElementById('id_type_for_chat').value = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
 	}
 	btn1_student.click()
+}
+button33.onclick = function() {
+	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-studentId")
+			copyToClipboard1('https://profile.skyeng.ru/profile/' + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText + '/showcase')
+	}
 }
 button4.onclick = function() {
 	if(document.getElementById('btn_hide').style.display != 'none')
@@ -163,6 +192,12 @@ button4.onclick = function() {
 	}
 	btn1_student.click()
 }
+button44.onclick = function() {
+	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-teacherId")
+			copyToClipboard1('https://profile.skyeng.ru/profile/' + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText + '/showcase')
+	}
+}
 
 let addInfoUser = document.createElement('div')
 
@@ -170,7 +205,6 @@ let hashBut = document.createElement('div')
 hashBut.id = "hashBut"
 hashBut.innerHTML = "Хэш"
 hashBut.style.marginRight = "15px";
-btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 
 
 let maskBack = document.createElement('div')
@@ -179,6 +213,7 @@ maskBack.innerHTML = "Вернуть"
 maskBack.style.marginRight = "15px";
 maskBack.style.display = "none";
 setTimeout(function() {
+btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
 btnAdd1.insertBefore(maskBack, btnAdd1.children[0])
 }, 2000)
@@ -258,7 +293,10 @@ hashBut.onclick = function () {
 			setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
 		}
 	} else {
-		copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1)
+		if(localStorage.getItem('scriptAdr') == TS_addr)
+			copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-18/'+adr1)
+		else
+			copyToClipboard1('https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1)
 		document.getElementById('hashBut').innerHTML = "Скопировано"
 		setTimeout(function() {document.getElementById('hashBut').innerHTML = "Хэш"}, 3000)
 	}
@@ -271,8 +309,10 @@ wintAF.style = 'min-height: 25px; min-width: 65px; background: #464451; top: ' +
 wintAF.setAttribute('id' ,'AF_helper');
 wintAF.innerHTML = win_AFhelper; 
 
-
-	
+var TS_addr = 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec'
+var KC_addr = 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec'
+var TP_addr = 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec'
+var flagLangBut = 0
 function move_again_AF() {
     if(window.location.href.indexOf('autofaq') === -1) {
 		document.getElementById('AF_helper').style.display = 'none';
@@ -309,13 +349,20 @@ function move_again_AF() {
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		document.getElementById('testUsers').style.display = 'none'
+		document.getElementById('takeNewChat').style.display = 'none'
+		document.getElementById('howManyChats').style.display = 'none'
 		getText()
 	}
     document.getElementById('type_TP').onclick = function () {
+		flagLangBut = 1
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec')
 		document.getElementById('msg1').style.display = ''
 		document.getElementById('snd').style.marginLeft = '16px'
 		document.getElementById('testUsers').style.display = ''
+		document.getElementById('takeNewChat').style.display = ''
+		document.getElementById('howManyChats').style.display = ''
+		whoAmI()
+		customTemplates()
 		getText()
 	}
     document.getElementById('type_TS').onclick = function () {
@@ -324,22 +371,34 @@ function move_again_AF() {
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		document.getElementById('testUsers').style.display = 'none'
+		document.getElementById('takeNewChat').style.display = 'none'
+		document.getElementById('howManyChats').style.display = 'none'
 		getText()
 	}
-	if(localStorage.getItem('scriptAdr') != 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec') {
+	if(localStorage.getItem('scriptAdr') != TP_addr) {
 		document.getElementById('msg1').style.display = 'none'
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
 		document.getElementById('testUsers').style.display = 'none'
+		document.getElementById('takeNewChat').style.display = 'none'
+		document.getElementById('howManyChats').style.display = 'none'
 	} else {
 		document.getElementById('msg1').style.display = ''
 		document.getElementById('snd').style.marginLeft = '16px'
 		document.getElementById('testUsers').style.display = ''
+		document.getElementById('takeNewChat').style.display = ''
+		document.getElementById('howManyChats').style.display = ''
+		flagLangBut = 1
+		customTemplates()
+		whoAmI()
 	}
 	
     document.getElementById('hideMenu').onclick = function () {
 		document.getElementById('AF_helper').style.display = 'none'
 		document.getElementById('scriptBut').style.display = ''
+	}
+    document.getElementById('takeNewChat').onclick = function () {
+		getNewChat()
 	}
 	
     document.getElementById('setting').onclick = function () {
@@ -357,79 +416,88 @@ function move_again_AF() {
 		document.getElementById('sound_adr').value = "";
 	}
 	
-			
-    document.getElementById('languageAF').onclick = function () {
-        if(this.innerHTML == "Русский") {
-            this.innerHTML = "Английский";
-			document.getElementById('AF_helper').style.background = "#EBC7DF"
-        } else {
-            this.innerHTML = "Русский";
-			document.getElementById('AF_helper').style.background = "#464451"
-        }
-	}
-	
-	
-    document.getElementById('tmplt1_save').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt1_ru', txt)
-		} else {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt1_en', txt)
-		}
-	}
-    document.getElementById('tmplt2_save').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt2_ru', txt)
-		} else {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt2_en', txt)
-		}
-	}
-    document.getElementById('tmplt3_save').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt3_ru', txt)
-		} else {
-			txt = document.getElementById('inp').value
-			localStorage.setItem('tmplt3_en', txt)
+	if(flagLangBut == 0) {
+		document.getElementById('languageAF').onclick = function () {
+			if(this.innerHTML == "Русский") {
+				this.innerHTML = "Английский";
+				document.getElementById('AF_helper').style.background = "#EBC7DF"
+			} else {
+				this.innerHTML = "Русский";
+				document.getElementById('AF_helper').style.background = "#464451"
+			}
 		}
 	}
 	
-    document.getElementById('tmplt1_snd').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = localStorage.getItem('tmplt1_ru')
-		} else {
-			txt = localStorage.getItem('tmplt1_en')
+	
+	if(document.getElementById('tmplt1_save') != undefined)
+		document.getElementById('tmplt1_save').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt1_ru', txt)
+			} else {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt1_en', txt)
+			}
 		}
-		if(txt == null || txt == "")
-			document.getElementById('inp').value = "Не введен текст 1 шаблона"
-		else 
-			sendAnswer(txt)
-	}
-    document.getElementById('tmplt2_snd').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = localStorage.getItem('tmplt2_ru')
-		} else {
-			txt = localStorage.getItem('tmplt2_en')
+		
+	if(document.getElementById('tmplt2_save') != undefined)
+		document.getElementById('tmplt2_save').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt2_ru', txt)
+			} else {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt2_en', txt)
+			}
 		}
-		if(txt == null || txt == "")
-			document.getElementById('inp').value = "Не введен текст 2 шаблона"
-		else 
-			sendAnswer(txt)
-	}
-    document.getElementById('tmplt3_snd').onclick = function () {
-		if(document.getElementById('languageAF').innerHTML == "Русский") {
-			txt = localStorage.getItem('tmplt3_ru')
-		} else {
-			txt = localStorage.getItem('tmplt3_en')
+		
+	if(document.getElementById('tmplt3_save') != undefined)
+		document.getElementById('tmplt3_save').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt3_ru', txt)
+			} else {
+				txt = document.getElementById('inp').value
+				localStorage.setItem('tmplt3_en', txt)
+			}
 		}
-		if(txt == null || txt == "")
-			document.getElementById('inp').value = "Не введен текст 3 шаблона"
-		else 
-			sendAnswer(txt)
-	}
+	
+	if(document.getElementById('tmplt1_snd') != undefined)
+		document.getElementById('tmplt1_snd').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = localStorage.getItem('tmplt1_ru')
+			} else {
+				txt = localStorage.getItem('tmplt1_en')
+			}
+			if(txt == null || txt == "")
+				document.getElementById('inp').value = "Не введен текст 1 шаблона"
+			else 
+				sendAnswer(txt)
+		}
+	if(document.getElementById('tmplt2_snd') != undefined)
+		document.getElementById('tmplt2_snd').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = localStorage.getItem('tmplt2_ru')
+			} else {
+				txt = localStorage.getItem('tmplt2_en')
+			}
+			if(txt == null || txt == "")
+				document.getElementById('inp').value = "Не введен текст 2 шаблона"
+			else 
+				sendAnswer(txt)
+		}
+	if(document.getElementById('tmplt3_snd') != undefined)
+		document.getElementById('tmplt3_snd').onclick = function () {
+			if(document.getElementById('languageAF').innerHTML == "Русский") {
+				txt = localStorage.getItem('tmplt3_ru')
+			} else {
+				txt = localStorage.getItem('tmplt3_en')
+			}
+			if(txt == null || txt == "")
+				document.getElementById('inp').value = "Не введен текст 3 шаблона"
+			else 
+				sendAnswer(txt)
+		}
 	
 	
     document.getElementById('msg1').onclick = function () {
@@ -442,6 +510,8 @@ function move_again_AF() {
         }
 	}
     document.getElementById('snd').onclick = function () {
+		document.getElementById('snd').setAttribute('disabled', 'disabled')
+		setTimeout(function() {document.getElementById('snd').removeAttribute('disabled')}, 500)
 		if(document.getElementById('msg').innerHTML == "Чат") {
 			if(template_flag == 1) {
 				if(template_flag2 == 1)
@@ -542,10 +612,24 @@ function move_again_AF() {
 		document.getElementById('msg1').innerHTML = localStorage.getItem('msg1') 
 	}
 	
+	if(localStorage.getItem('includeTestDiv') != null) {
+		document.getElementById('testDiv').style.display = ''
+		
+		setInterval(function(){
+			if(document.getElementById('howManyChats').style.display == "")
+				if(document.getElementsByClassName('user_menu-status-name')[0].innerText == "Занят")
+					getNewChat(1)
+				else
+					document.getElementById('howManyChats').innerHTML = ""
+		}, 10000)
+	} else {
+		document.getElementById('testDiv').style.display = 'none'
+	}
+
 	getText()
 }
 
-setTimeout(move_again_AF(), 1000)
+setTimeout(move_again_AF, 3500)
 function pageClick(pageId) {
 	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 	for(i = 0; i < b.childElementCount; i++) {
@@ -626,10 +710,22 @@ async function buttonsFromDoc(butName) {
 
 			count = await checkHistory(uid.split(',')[0])
 			if(count > 1 && flagggg == 0) {
-				if(document.getElementById('languageAF').innerHTML == "Русский")
-					txt = "Сейчас я вам помогу, подождите, пожалуйста."
-				else
-					txt = "I will help you now, please wait."
+				if(document.getElementById('languageAF').innerHTML == "Русский") {
+					if(localStorage.getItem('scriptAdr') == TS_addr)
+						txt = 'Помогите мне'
+					if(localStorage.getItem('scriptAdr') == TP_addr)
+						txt = "Подождите ТП"
+					if(localStorage.getItem('scriptAdr') == KC_addr)
+						txt = "Сейчас я вам помогу"
+				}
+				else {
+					if(localStorage.getItem('scriptAdr') == TS_addr)
+						txt = "I’m going to help you now."
+					if(localStorage.getItem('scriptAdr') == TP_addr)
+						txt = "Подождите (англ)"
+					if(localStorage.getItem('scriptAdr') == KC_addr)
+						txt = "Подождите (англ)"
+				}
 				flagggg = 1
 			} else {
 				flagggg = 0
@@ -651,7 +747,7 @@ async function buttonsFromDoc(butName) {
 			else
 				txt = "Hello!"
 		}
-		if(txt == "I will help you now, please wait.")
+		if(txt == "I’m going to help you now.")
 			sendAnswer(txt)
 		else
 			sendAnswerTemplate2(txt)
@@ -661,7 +757,7 @@ async function buttonsFromDoc(butName) {
 	msgFromTable(butName)
 	if(butName == "Серверные")
 		if(document.getElementById('msg1').innerHTML != "Доработать")
-			sendComment(document.getElementById('inp').value)
+			sendComment(document.getElementById('serversInp').value)
 }
 
 var bool = 0;	
@@ -820,6 +916,19 @@ function refreshTemplates() {
 							newBut.innerText = "ус+брауз"
 						if(newBut.innerText == 'ус+брауз (П)')
 							continue
+						if(newBut.innerText == 'Серверные') {
+							var newInput = document.createElement('input')
+							newInput.placeholder = 'Ссылка'
+							newInput.id = 'serversInp'
+							newInput.style.marginRight = '5px'
+							var newDiv = document.createElement('div')
+							newDiv.style.margin = '5px'
+							newBut.id = 'serversBut'
+							newDiv.append(newInput)
+							newDiv.append(newBut)
+							document.getElementById('addTmp').children[0].appendChild(newDiv)
+							continue
+						}
 						if(addTmpFlag == 0)
 							b.lastElementChild.lastElementChild.appendChild(newBut)
 						else {
@@ -850,7 +959,7 @@ function refreshTemplates() {
 }
 
 function msgFromTable(btnName) {
-	for(l = 0; l < table.length; l++) {
+	for(var l = 0; l < table.length; l++) {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
 			if(btnName == table[l][0]) {
 				if(table[l][1] == "Быстрый шаблон") {
@@ -861,6 +970,11 @@ function msgFromTable(btnName) {
 				}
 				if(table[l][1] == "Шаблон") {
 					sendAnswerTemplate(table[l][2], table[l][3])
+				}
+				if(table[l][1].indexOf("Рандом") != -1) {
+					var count = table[l][1][7]
+					var newL = Math.floor(Math.random() * (count)) + l
+					sendAnswer(table[newL][2])
 				}
 				break
 			}
@@ -892,8 +1006,9 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 		template = template_text
 		word = word_text
 	}
+	var tmpText = ""
 	var values = await getInfo(0)
-	adr = values[0]; adr1 = values[1]; uid = values[2]
+	var adr = values[0]; var adr1 = values[1]; var uid = values[2]
 	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
   "headers": {
     "accept": "*/*", 
@@ -906,7 +1021,7 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
   },
   "referrer": adr,
   "referrerPolicy": "no-referrer-when-downgrade",
-  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646,121303,121343,121388,121162,121158,121346,121151,121341,121152,121342,121156,121347,121079,121163,121155,121344,121157,121345,121304,121340, 121384]}",
+  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646,121303,121343,121388,121162,121158,121346,121151,121341,121152,121342,121156,121347,121079,121163,121155,121344,121157,121345,121304,121340,121384]}",
   "method": "POST",
   "mode": "cors",
   "credentials": "include"
@@ -973,9 +1088,9 @@ accuracy = b.accuracy
 async function sendAnswer(txt, flag = 1, time = "10:00") {
 		//addTimer()
 		var values = await getInfo(flag)
-		adr = values[0]; adr1 = values[1]; uid = values[2]
-		txt2 = txt.split('\n')
-		txt3 = ""
+		var adr = values[0]; var adr1 = values[1]; var uid = values[2]
+		var txt2 = txt.split('\n')
+		var txt3 = ""
 		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
 		txt3 = txt3.split("\"").join("\\\"")
 		txt3 = txt3.split('<p></p>').join("<p><br></p>")
@@ -1038,8 +1153,8 @@ async function getInfo(flag1 = 1) {
 async function sendComment(txt){ 
 		var values = await getInfo(0)
 		adr = values[0]; adr1 = values[1]; uid = values[2]
-		txt2 = txt.split('\n').join('\\n')
-		txt2 = txt2.split("\"").join("\\\"")
+		var txt2 = txt.split('\n').join('\\n')
+		var txt2 = txt2.split("\"").join("\\\"")
 		resetFlags()
 	fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 	  "headers": {
@@ -1140,7 +1255,7 @@ function refreshTimer() {
 				var cT = new Date();
 				var curT1 = tmrs[i][3]
 				var curT2 = Number(cT);
-				var curT3 = (13.5 * 60) - Math.floor((curT2 - curT1) / 1000);
+				var curT3 = (8.5 * 60) - Math.floor((curT2 - curT1) / 1000);
 				if(curT3 < 0)
 					btns.childNodes[0].childNodes[0].childNodes[0].childNodes[j].childNodes[0].childNodes[0].style.backgroundColor = "#FF47CA"
 			}
@@ -1287,14 +1402,20 @@ function startTimer() {
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button2)
+				if(localStorage.getItem('scriptAdr') == TP_addr)
+					btn.appendChild(button22)
 			}
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-studentId") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button3)
+				if(localStorage.getItem('scriptAdr') == TP_addr)
+					btn.appendChild(button33)
 			}
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-teacherId") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button4)
+				if(localStorage.getItem('scriptAdr') == TP_addr)
+					btn.appendChild(button44)
 			}
 		}
 	}
@@ -1327,12 +1448,88 @@ const copyToClipboard1 = str => {
     document.execCommand('copy');
     document.body.removeChild(el);
 };
-
-async function sendAnswerTemplate2(word, flag = 0) {
-	txt = ""
-	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
+var operatorId = ""
+async function whoAmI(){
+	a = await fetch("https://skyeng.autofaq.ai/api/operators/statistic/currentState", {
   "headers": {
-    "accept": "*/*", 
+    "accept": "*/*",
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": "https://skyeng.autofaq.ai/tickets/assigned",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+}).then(a => b = a.json()).then(b => {
+let me = document.querySelector('.user_menu-dropdown-user_name');
+b.rows.forEach(s => {
+	if (me && s.operator.fullName === me.innerText) {
+		operatorId = s.operator.id
+		console.log("Мой ID: " + operatorId)
+		}
+})})
+}
+async function getNewChat(flagChats = 0){
+	if(operatorId == "")
+		await whoAmI()
+	serviceId = localStorage.getItem('serviceIdGlob')
+	var date = new Date()
+	date.setTime(date - 181 * 60 * 1000)
+	var date2 = new Date()
+	date2.setTime(date - 30 * 60 * 1000)
+	day = month = ""
+	if(date.getMonth() < 9)
+		month = "0" + (date.getMonth() + 1)
+	else 
+		month = (date.getMonth() + 1)
+	if(date.getDate() < 10)
+		day = "0" + date.getDate()
+	else
+		day = date.getDate()
+	if(date.getHours() < 10)
+		hours = '0' + date.getHours()
+	else
+		hours = date.getHours()
+	if(date.getMinutes() < 10)
+		minutes = '0' + date.getMinutes()
+	else
+		minutes = date.getMinutes()
+	if(date.getSeconds() < 10)
+		seconds = '0' + date.getSeconds()
+	else
+		seconds = date.getSeconds()
+	secondDate1 = date.getFullYear() + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":" + seconds + ".000z"
+	if(date2.getMonth() < 9)
+		month2 = "0" + (date2.getMonth() + 1)
+	else 
+		month2 = (date2.getMonth() + 1)
+	if(date2.getDate() < 10)
+		day2 = "0" + date2.getDate()
+	else
+		day2 = date2.getDate()
+	if(date2.getHours() < 10)
+		hours2 = '0' + date2.getHours()
+	else
+		hours2 = date2.getHours()
+	if(date2.getMinutes() < 10)
+		minutes2 = '0' + date2.getMinutes()
+	else
+		minutes2 = date2.getMinutes()
+	if(date2.getSeconds() < 10)
+		seconds2 = '0' + date2.getSeconds()
+	else
+		seconds2 = date2.getSeconds()
+	var chats = new Set()
+	firstDate1 = date2.getFullYear() + "-" + month2 + "-" + day2 + "T" + hours2 + ":" + minutes2 + ":" + seconds2 + ".000z"
+	var tmp
+	a = fetch("https://skyeng.autofaq.ai/api/conversations/history", {
+  "headers": {
+    "accept": "*/*",
     "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
     "cache-control": "max-age=0",
     "content-type": "application/json",
@@ -1340,31 +1537,82 @@ async function sendAnswerTemplate2(word, flag = 0) {
     "sec-fetch-mode": "cors",
     "sec-fetch-site": "same-origin"
   },
-  "referrer": adr,
-  "referrerPolicy": "no-referrer-when-downgrade",
-  "body": "{\"query\":\"" + word + "\",\"answersLimit\":25,\"autoFaqServiceIds\":[121388, 121384]}",
+  "referrer": "https://skyeng.autofaq.ai/logs",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"serviceId\":\"" + serviceId + "\",\"mode\":\"Json\",\"tsFrom\":\"" + firstDate1 + "\",\"tsTo\":\"" + secondDate1 + "\",\"usedStatuses\":[\"OnOperator\"],\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":100}",
   "method": "POST",
   "mode": "cors",
   "credentials": "include"
-}).then(a => b = a.json()).then(result => result.forEach(k => {
-	if(k.title == word)
-		txt = k.text
-}))
+	}).then(a => b = a.json()).then(b => {for(iter = 0; iter < b.items.length; iter++) {
+			chats.add(b.items[iter].conversationId)
+		}
+	}).then(b => {
+		if(flagChats == 0) {
+			if(chats.size > 0) {
+				chatId = chats.values().next().value
+				fetch("https://skyeng.autofaq.ai/api/conversation/assign", {
+				  "headers": {
+					"content-type": "application/json",
+				  },
+				  "body": "{\"command\":\"DO_ASSIGN_CONVERSATION\",\"conversationId\":\""+chatId+"\",\"assignToOperatorId\":\""+operatorId+"\"}",
+				  "method": "POST",
+				});
+			}
+		}
+		document.getElementById('howManyChats').innerHTML = "Чатов в очереди: " + chats.size
+    })
+}
+
+
+async function sendAnswerTemplate2(word, flag = 0) {
+	var tmpTxt = ""
+	var adr = `https://skyeng.autofaq.ai/tickets/assigned/`
+    if(word.length < 50)
+        try {
+            a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
+          "headers": {
+            "accept": "*/*", 
+            "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+            "cache-control": "max-age=0",
+            "content-type": "application/json",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "same-origin"
+          },
+          "referrer": adr,
+          "referrerPolicy": "no-referrer-when-downgrade",
+          "body": "{\"query\":\"" + word + "\",\"answersLimit\":25,\"autoFaqServiceIds\":[121388, 121384]}",
+          "method": "POST",
+          "mode": "cors",
+          "credentials": "include"
+        }).then(a => b = a.json()).then(result => result.forEach(k => {
+            if(k.title == word)
+                tmpTxt = k.text
+        }))
+        tmpTxt = tmpTxt.split("<br>↵").join('\n')
+        tmpTxt = tmpTxt.split("&nbsp;").join(' ')
+        tmpTxt = tmpTxt.split("<br />").join('\n')
+        tmpTxt = tmpTxt.split('<a').join('TMPaTMP').split('</a').join('TMPENDaTMEPEND')
+        tmpTxt = tmpTxt.replace(/<\/?[^>]+>/g,'')
+        tmpTxt = tmpTxt.split('TMPaTMP').join('<a').split('TMPENDaTMEPEND').join('</a')
+        } catch (e) {}
+	if(tmpTxt == "")
+		tmpTxt = word
 	if(document.getElementById('msg1').innerHTML == "Доработать" && flag == 0) {
-		document.getElementById('inp').value = txt
+		document.getElementById('inp').value = tmpTxt
 		template_flag = 1
 		template_flag2 = 1
 	} else {
-		txt = txt.split("\"").join("\\\"")
-		txt2 = txt.split('\n')
-		txt3 = ""
-		txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
-		txt = txt3
-		txt = txt.split('<p></p>').join("<p><br></p>")
-		txt = txt.substr(0, txt.length - 2)
+		tmpTxt = tmpTxt.split("\"").join("\\\"")
+		tmpTxt2 = tmpTxt.split('\n')
+		tmpTxt3 = ""
+		tmpTxt2.forEach(el => tmpTxt3 += "<p>" + el + "</p>\\n")
+		tmpTxt = tmpTxt3
+		tmpTxt = tmpTxt.split('<p></p>').join("<p><br></p>")
+		tmpTxt = tmpTxt.substr(0, tmpTxt.length - 2)
 		var values = await getInfo(0)
 		refCurTimer("10:00")
-		adr = values[0]; adr1 = values[1]; uid = values[2]
+		var adr = values[0]; var adr1 = values[1]; var uid = values[2]
 		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 			  "headers": {
 				"accept": "*/*",
@@ -1377,7 +1625,7 @@ async function sendAnswerTemplate2(word, flag = 0) {
 			  },
 			  "referrer": adr,
 			  "referrerPolicy": "no-referrer-when-downgrade",
-			  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt + "\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
+			  "body": "------WebKitFormBoundarymasjvc4O46a190zh\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + tmpTxt + "\",\"suggestedAnswerDocId\":0}\r\n------WebKitFormBoundarymasjvc4O46a190zh--\r\n",
 			  "method": "POST",
 			  "mode": "cors",
 			  "credentials": "include"
@@ -1463,4 +1711,494 @@ async function checkHistory(id) {
 	  "credentials": "include"
 	}).then(a => b = a.json()).then(b => {count = b.items.length})
 	return count
+}
+
+async function getNotGoods(stringDate) {
+
+	async function goNotgood(list, list2, date1, date2) {
+		var text = ""
+		var text2 = "Дата: " + stringDate2 + "\n"
+		var page = 1
+		for(m = -1; m < list.length; m++) {
+			if(page == 2)
+				m--
+			a = await fetch("https://skyeng.autofaq.ai/api/conversations/history", {
+			  "headers": {
+				"accept": "*/*",
+				"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+				"cache-control": "max-age=0",
+				"content-type": "application/json",
+				"sec-fetch-dest": "empty",
+				"sec-fetch-mode": "cors",
+				"sec-fetch-site": "same-origin"
+			  },
+			  "referrer": "https://skyeng.autofaq.ai/logs",
+			  "referrerPolicy": "strict-origin-when-cross-origin",
+			  "body": "{\"serviceId\":\"361c681b-340a-4e47-9342-c7309e27e7b5\",\"mode\":\"Json\",\"participatingOperatorsIds\":[\""+list[m]+"\"],\"tsFrom\":\"" + date1 + "\",\"tsTo\":\"" + date2 + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":" + page + ",\"limit\":100}",
+			  "method": "POST",
+			  "mode": "cors",
+			  "credentials": "include"
+			}).then(a => b = a.json().then(array => {array1 = array
+			n = 1
+			array1.items.forEach(a => { if(a.stats.rate != undefined) 
+			if(a.stats.rate.rate != undefined) {
+			if(a.stats.rate.rate < 4) {
+			text += stringDate2 + "	" + list2[m] + "	https://hdi.skyeng.ru/autofaq/conversation/-11/" + a.conversationId + "	" + a.stats.rate.rate + "\n"
+			if(n == 1)
+				text2 += "\nАгент: `" + list2[m] + "` C	S	A		T =\n "
+			text2 += "=HYPERLINK(\"https://hdi.skyeng.ru/autofaq/conversation/-11/" + a.conversationId + "\"; \"Нотгуд №" + n + "\" 	 (	оценка " + a.stats.rate.rate + ") - \n"
+			n++
+			}
+			}})
+			if(array1.total > 100)
+				if(page == 2)
+					page = 1
+				else
+					page = 2
+			}))
+		}	
+		console.log(text)
+		console.log(text2)
+	}
+
+	var operatorId = []
+	var operatorNames = []
+	await fetch("https://skyeng.autofaq.ai/api/operators/statistic/currentState", {
+	  "headers": {
+		"accept": "*/*",
+		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+		"content-type": "application/json",
+		"sec-fetch-dest": "empty",
+		"sec-fetch-mode": "cors",
+		"sec-fetch-site": "same-origin"
+	  },
+	  "referrer": "https://skyeng.autofaq.ai/logs/c6fe512d-6f79-4dec-b272-baba807d7387",
+	  "referrerPolicy": "strict-origin-when-cross-origin",
+	  "body": null,
+	  "method": "GET",
+	  "mode": "cors",
+	  "credentials": "include"
+	}).then(result => b = result.json()).then(b => b.rows.forEach(k => {
+		if(k.operator.kbs.indexOf(120181) != -1 && k.operator.fullName.split('-')[0] == "ТП") {
+			operatorId.push(k.operator.id)
+			operatorNames.push(k.operator.fullName.split('-')[1])
+		}
+	}))
+
+	list = operatorId
+	list2 = operatorNames
+
+	stringDate2 = stringDate
+	stringDate = stringDate.split(".")
+	stringDate[1]--
+	var date = new Date(stringDate[2], stringDate[1], stringDate[0])
+	day = month = ""
+	if(date.getMonth() < 9)
+	month = "0" + (date.getMonth() + 1)
+	else 
+	month = (date.getMonth() + 1)
+	if(date.getDate() < 10)
+	day = "0" + date.getDate()
+	else
+	day = date.getDate()
+
+	secondDate = date.getFullYear() + "-" + month + "-" + day + "T20:59:59.059z"
+	date = date - 24 * 60 * 60 * 1000
+	var date2 = new Date()
+	date2.setTime(date)
+
+	if(date2.getMonth() < 9)
+	month2 = "0" + (date2.getMonth() + 1)
+	else 
+	month2 = (date2.getMonth() + 1)
+	if(date2.getDate() < 10)
+	day2 = "0" + date2.getDate()
+	else
+	day2 = date2.getDate()
+
+	firstDate = date2.getFullYear() + "-" + month2 + "-" + day2 + "T21:00:00.000z"
+	goNotgood(list, list2, firstDate, secondDate)
+}
+
+function customTemplates(language = '') {
+	if (localStorage.getItem('winCstmTmpsTop') == null) {
+		localStorage.setItem('winCstmTmpsTop', '120');
+		localStorage.setItem('winCstmTmpsLeft', '295');
+	}
+	if(localStorage.getItem('cntTmplts' + language) == null)
+		localStorage.setItem('cntTmplts' + language, 0)
+	if(document.getElementById('cstmTmplates') == undefined) {
+		var cstmTmp = document.createElement('div')
+		cstmTmp.style = 'min-height: 25px; min-width: 65px; background: #464451; top: ' + localStorage.getItem('winCstmTmpsTop') + 'px; left: ' + localStorage.getItem('winCstmTmpsLeft') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black; border-radius:5px; border:1px solid #768d87; ';
+		cstmTmp.id = 'cstmTmplates'
+		cstmTmp.style.display = 'none'
+		document.body.append(cstmTmp);
+	} else {
+		cstmTmp = document.getElementById('cstmTmplates')
+		while(document.getElementById('cstmTmplates').children[0] != undefined)
+			document.getElementById('cstmTmplates').children[0].remove()
+	}
+	countOfTemplates = localStorage.getItem('cntTmplts' + language)
+	
+	
+	var buttonOpenTmpWindow = document.createElement('button')
+	buttonOpenTmpWindow.innerHTML = 'tmps'
+	buttonOpenTmpWindow.style.marginLeft = '7px'
+	buttonOpenTmpWindow.onclick = function() {
+		var a = document.getElementById('cstmTmplates')
+		if(a.style.display == '')
+			a.style.display = 'none'
+		else
+			a.style.display = ''
+	}
+	var tmpA = document.getElementById('AF_helper').children[0].children[0].children[0].children[0]
+	if(tmpA.children[1].innerHTML != 'tmps')
+		tmpA.insertBefore(buttonOpenTmpWindow, tmpA.children[1])
+	
+	tmpA.children[2].style.marginLeft = '15px'
+	tmpA.children[3].style = 'float:right'
+	
+	if (language == "") {
+		if(localStorage.getItem('tmplt1_ru') != null) {
+			countOfTemplates++
+			localStorage.setItem('template_' + countOfTemplates, localStorage.getItem('tmplt1_ru'))
+			localStorage.setItem('checkbox_' + countOfTemplates, false)
+			localStorage.removeItem('tmplt1_ru')
+			localStorage.setItem('cntTmplts', countOfTemplates)
+		}
+		if(localStorage.getItem('tmplt2_ru') != null) {
+			countOfTemplates++
+			localStorage.setItem('template_' + countOfTemplates, localStorage.getItem('tmplt2_ru'))
+			localStorage.setItem('checkbox_' + countOfTemplates, false)
+			localStorage.removeItem('tmplt2_ru')
+			localStorage.setItem('cntTmplts', countOfTemplates)
+		}
+		if(localStorage.getItem('tmplt3_ru') != null) {
+			countOfTemplates++
+			localStorage.setItem('template_' + countOfTemplates, localStorage.getItem('tmplt3_ru'))
+			localStorage.setItem('checkbox_' + countOfTemplates, false)
+			localStorage.removeItem('tmplt3_ru')
+			localStorage.setItem('cntTmplts', countOfTemplates)
+		}
+	} else {
+		if(localStorage.getItem('tmplt1_en') != null) {
+			countOfTemplates++
+			localStorage.setItem('template_' + countOfTemplates, localStorage.getItem('tmplt1_en'))
+			localStorage.setItem('checkbox_' + countOfTemplates, false)
+			localStorage.removeItem('tmplt1_en')
+			localStorage.setItem('cntTmplts', countOfTemplates)
+		}
+		if(localStorage.getItem('tmplt2_en') != null) {
+			countOfTemplates++
+			localStorage.setItem('template_' + countOfTemplates, localStorage.getItem('tmplt2_en'))
+			localStorage.setItem('checkbox_' + countOfTemplates, false)
+			localStorage.removeItem('tmplt2_en')
+			localStorage.setItem('cntTmplts', countOfTemplates)
+		}
+		if(localStorage.getItem('tmplt3_en') != null) {
+			countOfTemplates++
+			localStorage.setItem('template_' + countOfTemplates, localStorage.getItem('tmplt3_en'))
+			localStorage.setItem('checkbox_' + countOfTemplates, false)
+			localStorage.removeItem('tmplt3_en')
+			localStorage.setItem('cntTmplts', countOfTemplates)
+		}
+	}
+	
+	function refreshHotTmps() {
+		while(document.getElementById('6str').children[0] != undefined)
+			document.getElementById('6str').children[0].remove()
+		countOfTemplates = localStorage.getItem('cntTmplts' + language)
+		for(var i = 1; i <= countOfTemplates; i++) {
+			var j = Number(i) - 1
+			if(document.getElementById('cstmTmplates').children[j].children[0].checked) {
+				if(localStorage.getItem('tmp_name_' + language + i) == null || localStorage.getItem('tmp_name_' + language + i) == "")
+					continue
+				var a = document.getElementById('6str')
+				var newBut = document.createElement('button')
+				newBut.setAttribute('template', 'template_' + language + i)
+				newBut.style.marginRight = '5px'
+				newBut.style.marginTop = '5px'
+				newBut.innerHTML = localStorage.getItem('tmp_name_' + language + i)
+				a.appendChild(newBut)
+				newBut.onclick = function() {
+					var text = localStorage.getItem(this.getAttribute('template')).split('\\n').join('\n')
+					sendAnswer(text)
+				}
+			}
+		}
+	}
+	
+	function addNewString(index) {
+		
+		var newDiv  = document.createElement('div')
+		newDiv.style.margin = '5px'
+		newDiv.setAttribute('inp', 'cstmTmpInp' + language + index)
+		newDiv.setAttribute('tmp', 'template_' + language + index)
+		newDiv.setAttribute('index', index)
+		
+		var template = localStorage.getItem('template_' + language + index)
+		var newInput = document.createElement('input')
+		newInput.id = 'cstmTmpInp' + language + index
+		newInput.value = template == undefined ? "" : template
+		newInput.style.marginRight = '5px'
+		newInput.style.width = '500px'
+		
+		var template = localStorage.getItem('tmp_name_' + language + index)
+		var newInputTmpName = document.createElement('input')
+		newInputTmpName.value = template == undefined ? "" : template
+		newInputTmpName.style.marginRight = '5px'
+		newInputTmpName.style.width = '50px'
+		
+		var newButton = document.createElement('button')
+		newButton.style.marginRight = '5px'
+		newButton.textContent = 'save'
+		newButton.onclick = function() {
+			localStorage.setItem(this.parentElement.getAttribute('tmp'), document.getElementById(this.parentElement.getAttribute('inp')).value)
+			localStorage.setItem('tmp_name_' + language + index, this.parentElement.children[1].value)
+			refreshHotTmps()
+		}
+		var newButton2 = document.createElement('button')
+		newButton2.style.marginRight = '5px'
+		newButton2.textContent = 'send'
+		newButton2.onclick = function() {
+			document.getElementById('inp').value = document.getElementById(this.parentElement.getAttribute('inp')).value.split('\\n').join('\n')
+			this.parentElement.parentElement.style.display = 'none'
+		}
+		
+		var newButton3 = document.createElement('button')
+		newButton3.style.marginRight = '5px'
+		newButton3.textContent = 'delete'
+		newButton3.onclick = function() {
+			for(var i = this.parentElement.getAttribute('index'); i < countOfTemplates; i++) {
+				var n = Number(i) + 1
+				localStorage.setItem('template_' + language + i, localStorage.getItem('template_' + language + n))
+				localStorage.setItem('checkbox_' + language + i, localStorage.getItem('checkbox_' + language + n))
+				localStorage.setItem('tmp_name_' + language + i, localStorage.getItem('tmp_name_' + language + n))
+			}
+			localStorage.removeItem('template_' + language + countOfTemplates)
+			localStorage.removeItem('checkbox_' + language + countOfTemplates)
+			localStorage.removeItem('tmp_name_' + language + countOfTemplates)
+			countOfTemplates--;
+			localStorage.setItem('cntTmplts' + language, countOfTemplates)
+			while(document.getElementById('cstmTmplates').children[0] != undefined)
+				document.getElementById('cstmTmplates').children[0].remove()
+			customTemplates(language)
+		}
+		
+		
+		var buttonSortUp = document.createElement('button')
+		buttonSortUp.innerHTML = '↑'
+		buttonSortUp.onclick = function() {
+			var index = this.parentElement.getAttribute('index')
+			if(index == 1)
+				return
+			var index2 = Number(index) - 1
+			
+			var tmp1 = localStorage.getItem('template_' + language + index)
+			localStorage.setItem('template_' + language + index, localStorage.getItem('template_' + language + index2))
+			localStorage.setItem('template_' + language + index2, tmp1)
+			
+			tmp1 = localStorage.getItem('checkbox_' + language + index)
+			localStorage.setItem('checkbox_' + language + index, localStorage.getItem('checkbox_' + language + index2))
+			localStorage.setItem('checkbox_' + language + index2, tmp1)
+			
+			tmp1 = localStorage.getItem('tmp_name_' + language + index)
+			localStorage.setItem('tmp_name_' + language + index, localStorage.getItem('tmp_name_' + language + index2))
+			localStorage.setItem('tmp_name_' + language + index2, tmp1)
+			if(document.getElementById('languageAF').innerHTML == "Русский")
+				customTemplates()
+			else
+				customTemplates('en_')
+		}
+		
+		var buttonSortDown = document.createElement('button')
+		buttonSortDown.innerHTML = '↓'
+		buttonSortDown.style.marginRight = '5px'
+		buttonSortDown.onclick = function() {
+			var index = this.parentElement.getAttribute('index')
+			if(index == countOfTemplates)
+				return
+			var index2 = Number(index) + 1
+			
+			var tmp1 = localStorage.getItem('template_' + language + index)
+			localStorage.setItem('template_' + language + index, localStorage.getItem('template_' + language + index2))
+			localStorage.setItem('template_' + language + index2, tmp1)
+			
+			tmp1 = localStorage.getItem('checkbox_' + language + index)
+			localStorage.setItem('checkbox_' + language + index, localStorage.getItem('checkbox_' + language + index2))
+			localStorage.setItem('checkbox_' + language + index2, tmp1)
+			
+			tmp1 = localStorage.getItem('tmp_name_' + language + index)
+			localStorage.setItem('tmp_name_' + language + index, localStorage.getItem('tmp_name_' + language + index2))
+			localStorage.setItem('tmp_name_' + language + index2, tmp1)
+			if(document.getElementById('languageAF').innerHTML == "Русский")
+				customTemplates()
+			else
+				customTemplates('en_')
+		}
+		
+		var newcheckbox = document.createElement('input')
+		newcheckbox.type = 'checkbox'
+		newcheckbox.style.marginRight = '5px'
+		newcheckbox.checked = localStorage.getItem('checkbox_' + language + index) == 'true' ? 1 : 0
+		newcheckbox.onclick = function() { 
+			localStorage.setItem('checkbox_' + language + index, this.checked)
+		}
+		
+		newDiv.append(newcheckbox)
+		newDiv.append(newInputTmpName)
+		newDiv.append(buttonSortUp)
+		newDiv.append(buttonSortDown)
+		newDiv.append(newButton3)
+		newDiv.append(newButton)
+		newDiv.append(newInput)
+		newDiv.append(newButton2)
+		cstmTmp.insertBefore(newDiv, cstmTmp.lastElementChild)
+	}
+	
+	var newDiv  = document.createElement('div')
+	newDiv.style = 'cursor: -webkit-grab;'
+	newDiv.style.margin = '5px'
+	newDiv.style.textAlign = 'center'
+	var addTmpl = document.createElement('button')
+	addTmpl.textContent = 'Добавить шаблон'
+	addTmpl.style.marginRight = '5px'
+	addTmpl.onclick = function() {
+		countOfTemplates++
+		localStorage.setItem('cntTmplts' + language, countOfTemplates)
+		localStorage.setItem('template_' + language + countOfTemplates, "")
+		localStorage.setItem('checkbox_' + language + countOfTemplates, false)
+		localStorage.setItem('tmp_name_' + language + countOfTemplates, "")
+		addNewString(countOfTemplates)
+	}
+	var saveAllTmp = document.createElement('button')
+	saveAllTmp.textContent = 'Сохранить всё'
+	saveAllTmp.style.marginRight = '5px'
+	saveAllTmp.onclick = function() {
+		for(var i = 1; i <= countOfTemplates; i++) {
+			localStorage.setItem('template_' + language + i, document.getElementById('cstmTmpInp' + language + i).value)
+			localStorage.setItem('checkbox_' + language + i, document.getElementById('cstmTmpInp' + language + i).parentElement.children[0].checked)
+			localStorage.setItem('tmp_name_' + language + i, document.getElementById('cstmTmpInp' + language + i).parentElement.children[1].value)
+			refreshHotTmps()
+		}
+	}
+	
+	var but = document.createElement('button')
+	but.innerHTML = 'hide'
+	but.onclick = function() {
+		this.parentElement.parentElement.style.display = 'none'
+	}
+	but.style.float = 'right'
+	
+	newDiv.append(saveAllTmp)
+	newDiv.append(addTmpl)
+	newDiv.append(but)
+	cstmTmp.append(newDiv)
+	
+	if(countOfTemplates > 0)
+		for(i = 1; i <= countOfTemplates; i++)
+			addNewString(i)
+	refreshHotTmps()
+	
+	var listener3 = function(e , a) {
+        cstmTmp.style.left = Number(e.clientX - myX3) + "px";
+        cstmTmp.style.top = Number(e.clientY - myY3) + "px";
+        localStorage.setItem('winCstmTmpsTop', String(Number(e.clientY - myY3)));
+        localStorage.setItem('winCstmTmpsLeft', String(Number(e.clientX - myX3)));
+    };
+
+    cstmTmp.lastElementChild.onmousedown = function (a) {
+        window.myX3 = a.layerX; 
+        window.myY3 = a.layerY; 
+        document.addEventListener('mousemove', listener3);
+    }
+    cstmTmp.onmouseup = function () {document.removeEventListener('mousemove', listener3);}
+	
+	document.getElementById('languageAF').onclick = function () {
+        if(this.innerHTML == "Русский") {
+            this.innerHTML = "Английский";
+			document.getElementById('AF_helper').style.background = "#EBC7DF"
+			customTemplates('en_')
+        } else {
+            this.innerHTML = "Русский";
+			document.getElementById('AF_helper').style.background = "#464451"
+			customTemplates()
+        }
+	}
+}
+
+
+setTimeout(function() {
+if(localStorage.getItem('inspector') == 'yes') {
+	var but = document.createElement('button')
+	but.style.marginLeft = '5px'
+	but.textContent = "Нотгуды"
+	but.id = 'buttonForNotgoods'
+	var newinput = document.createElement('input')	
+	newinput.style.marginLeft = '5px'
+	newinput.style.textAlign = "center"
+	newinput.id = 'inputForNotgoods'
+	var curDate = new Date()
+	curDate.setTime(curDate - 24 * 60 * 60 * 1000)
+	newinput.placeholder = curDate.getDate() + "." + (curDate.getMonth() + 1) + "." + curDate.getFullYear()
+	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(newinput)
+	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(but)
+	
+	document.getElementById('buttonForNotgoods').onclick = function () {
+		if(document.getElementById('inputForNotgoods').value != "")
+			getNotGoods(document.getElementById('inputForNotgoods').value)
+		else
+			getNotGoods(document.getElementById('inputForNotgoods').placeholder)
+	}
+}
+}, 2000)
+
+function toUTF8Array(str) {
+    var utf8 = [];
+    for (var i=0; i < str.length; i++) {
+        var charcode = str.charCodeAt(i);
+        if (charcode < 0x80) utf8.push(charcode);
+        else if (charcode < 0x800) {
+            utf8.push(0xc0 | (charcode >> 6), 
+                      0x80 | (charcode & 0x3f));
+        }
+        else if (charcode < 0xd800 || charcode >= 0xe000) {
+            utf8.push(0xe0 | (charcode >> 12), 
+                      0x80 | ((charcode>>6) & 0x3f), 
+                      0x80 | (charcode & 0x3f));
+        }
+        // surrogate pair
+        else {
+            i++;
+            // UTF-16 encodes 0x10000-0x10FFFF by
+            // subtracting 0x10000 and splitting the
+            // 20 bits of 0x0-0xFFFFF into two halves
+            charcode = 0x10000 + (((charcode & 0x3ff)<<10)
+                      | (str.charCodeAt(i) & 0x3ff))
+            utf8.push(0xf0 | (charcode >>18), 
+                      0x80 | ((charcode>>12) & 0x3f), 
+                      0x80 | ((charcode>>6) & 0x3f), 
+                      0x80 | (charcode & 0x3f));
+        }
+    }
+    return utf8;
+}
+
+function decToHex(dec)
+{
+	var hexStr = '0123456789ABCDEF';
+	var low = dec % 16;
+	var high = (dec - low)/16;
+	hex = '' + hexStr.charAt(high) + hexStr.charAt(low);
+	return hex;
+}
+document.getElementById('setting2').onclick = function () {
+	string = 'тестовый текст, кнопка'
+	string = toUTF8Array(string)
+	string2 = ""
+	for(i = 0; i < string.length; i++) {
+		string2 += "%" + decToHex(string[i])
+	}
+	chrome.runtime.sendMessage({name: "ChM", question: 'sendResponse', string: string2}, function(response) {
+	});
 }
