@@ -1851,9 +1851,11 @@ function customTemplates(language = '') {
 			a.style.display = ''
 	}
 	var tmpA = document.getElementById('AF_helper').children[0].children[0].children[0].children[0]
-	tmpA.children[2].style.marginLeft = '7px'
 	if(tmpA.children[1].innerHTML != 'tmps')
 		tmpA.insertBefore(buttonOpenTmpWindow, tmpA.children[1])
+	
+	tmpA.children[2].style.marginLeft = '15px'
+	tmpA.children[3].style = 'float:right'
 	
 	if (language == "") {
 		if(localStorage.getItem('tmplt1_ru') != null) {
