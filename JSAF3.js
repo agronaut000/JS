@@ -2194,13 +2194,18 @@ function decToHex(dec)
 }
 
 document.getElementById('setting2').onclick = function () {
-	string = 'тестовый текст №2, кнопка'
-	string = toUTF8Array(string)
-	string2 = ""
-	for(i = 0; i < string.length; i++) {
-		string2 += "%" + decToHex(string[i])
-	}
-	
-	document.getElementById('testid2').value = string2
-	document.getElementById('idlogin2').click()
+	var data = { type: "FROM_PAGE", text: "Hello from the webpage!" };
+	window.postMessage(data, "*");
 }
+
+
+
+window.addEventListener("message", function(event) {
+    // We only accept messages from ourselves
+    if (event.source != window)
+        return;
+
+    if (event.data.type && (event.data.type == "FROM_PAGE")) {
+        console.log("Content script received message: " + event.data.text);
+    }
+});
