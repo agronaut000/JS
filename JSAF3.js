@@ -2208,4 +2208,8 @@ window.addEventListener("message", function(event) {
     if (event.data.type && (event.data.type == "FROM_PAGE")) {
         console.log("Content script received message: " + event.data.text);
     }
+	var editorExtensionId = "ghjlieooejglfcpbpgmjdoobkbcegnij";
+	string = 'testmsg123'
+		chrome.runtime.sendMessage(editorExtensionId, {name: "ChM", question: 'sendResponse', string: string}, function(response) {
+	});
 });
