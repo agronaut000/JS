@@ -572,18 +572,6 @@ function move_again_AF() {
 			}
 	}
 	setInterval(screenshots, 5000)
-	if(document.getElementsByClassName('expert-chat-display-inner') != undefined)
-		for(i = 0; document.getElementsByClassName('expert-chat-display-inner')[0].children[i] != undefined; i++) {
-			if(document.getElementsByClassName('expert-chat-display-inner')[0].children[i].textContent.indexOf('vimbox-resource-chat-prod') != -1) {
-				var div = document.getElementsByClassName('expert-chat-display-inner')[0].children[i]
-				var img = document.createElement('img')
-				img.src = div.querySelector('a').href
-				img.setAttribute('onclick', "this.style.width='500px'")
-				img.setAttribute('onmouseout', "this.style.width='100px'")
-				img.style.width = '100px'
-				div.querySelector('a').replaceWith(img)
-			}
-		}
 	
     document.getElementById('switcher').onclick = function () {
         if(this.innerHTML == "ВКЛ") {
