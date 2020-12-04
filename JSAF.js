@@ -557,6 +557,22 @@ function move_again_AF() {
 	btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 	btnAdd.insertBefore(button1, btnAdd.children[0])
 	
+	function screenshots(){
+		if(document.getElementsByClassName('expert-chat-display-inner') != undefined)
+			for(i = 0; document.getElementsByClassName('expert-chat-display-inner')[0].children[i] != undefined; i++) {
+				if(document.getElementsByClassName('expert-chat-display-inner')[0].children[i].textContent.indexOf('vimbox-resource-chat-prod') != -1) {
+					var div = document.getElementsByClassName('expert-chat-display-inner')[0].children[i]
+					var img = document.createElement('img')
+					img.src = div.querySelector('a').href
+					img.setAttribute('onclick', "this.style.width='500px'")
+					img.setAttribute('onmouseout', "this.style.width='100px'")
+					img.style.width = '100px'
+					div.querySelector('a').replaceWith(img)
+				}
+			}
+	}
+	setInterval(screenshots, 5000)
+	
     document.getElementById('switcher').onclick = function () {
         if(this.innerHTML == "ВКЛ") {
             this.innerHTML = "ВЫКЛ";
