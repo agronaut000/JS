@@ -63,6 +63,7 @@ var win_AFhelper =
 					<button id="languageAF" style="width:100px">Русский</button>
 					<button id="hideMenu" style="margin-left: 50px">hide</button>
 					<button id="setting" style="margin-left: 80px">S</button>
+					<button id="setting2" style="margin-left: 80px">S2</button>
 				</div>
 				<div style="margin: 5px;" id="pages">
 				</div>
@@ -556,6 +557,27 @@ function move_again_AF() {
 	}
 	btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 	btnAdd.insertBefore(button1, btnAdd.children[0])
+	
+	
+	let buttonScr = document.createElement('div');
+	buttonScr.id = 'scriptScreensBut';
+	buttonScr.innerHTML = "Скриншоты";
+	buttonScr.style.marginRight = "15px";
+	buttonScr.onclick = function() {
+		if(document.getElementsByClassName('expert-chat-display-inner') != undefined)
+			for(i = 0; document.getElementsByClassName('expert-chat-display-inner')[0].children[i] != undefined; i++) {
+				if(document.getElementsByClassName('expert-chat-display-inner')[0].children[i].textContent.indexOf('vimbox-resource-chat-prod') != -1) {
+					var div = document.getElementsByClassName('expert-chat-display-inner')[0].children[i]
+					var img = document.createElement('img')
+					img.src = div.querySelector('a').href
+					img.setAttribute('onclick', "this.style.width='500px'")
+					img.setAttribute('onmouseout', "this.style.width='100px'")
+					img.style.width = '100px'
+					div.querySelector('a').replaceWith(img)
+				}
+			}
+	}
+	btnAdd.insertBefore(buttonScr, btnAdd.children[0])
 	
     document.getElementById('switcher').onclick = function () {
         if(this.innerHTML == "ВКЛ") {
@@ -2151,3 +2173,64 @@ if(localStorage.getItem('inspector') == 'yes') {
 	}
 }
 }, 2000)
+
+function toUTF8Array(str) {
+    var utf8 = [];
+    for (var i=0; i < str.length; i++) {
+        var charcode = str.charCodeAt(i);
+        if (charcode < 0x80) utf8.push(charcode);
+        else if (charcode < 0x800) {
+            utf8.push(0xc0 | (charcode >> 6), 
+                      0x80 | (charcode & 0x3f));
+        }
+        else if (charcode < 0xd800 || charcode >= 0xe000) {
+            utf8.push(0xe0 | (charcode >> 12), 
+                      0x80 | ((charcode>>6) & 0x3f), 
+                      0x80 | (charcode & 0x3f));
+        }
+        // surrogate pair
+        else {
+            i++;
+            // UTF-16 encodes 0x10000-0x10FFFF by
+            // subtracting 0x10000 and splitting the
+            // 20 bits of 0x0-0xFFFFF into two halves
+            charcode = 0x10000 + (((charcode & 0x3ff)<<10)
+                      | (str.charCodeAt(i) & 0x3ff))
+            utf8.push(0xf0 | (charcode >>18), 
+                      0x80 | ((charcode>>12) & 0x3f), 
+                      0x80 | ((charcode>>6) & 0x3f), 
+                      0x80 | (charcode & 0x3f));
+        }
+    }
+    return utf8;
+}
+
+function decToHex(dec)
+{
+	var hexStr = '0123456789ABCDEF';
+	var low = dec % 16;
+	var high = (dec - low)/16;
+	hex = '' + hexStr.charAt(high) + hexStr.charAt(low);
+	return hex;
+}
+
+document.getElementById('setting2').onclick = function () {
+	var data = { type: "FROM_PAGE", text: "Hello from the webpage!" };
+	window.postMessage(data, "*");
+}
+
+
+
+window.addEventListener("message", function(event) {
+    // We only accept messages from ourselves
+    if (event.source != window)
+        return;
+
+    if (event.data.type && (event.data.type == "FROM_PAGE")) {
+        console.log("Content script received message: " + event.data.text);
+    }
+	var editorExtensionId = "ghjlieooejglfcpbpgmjdoobkbcegnij";
+	string = 'testmsg123'
+		chrome.runtime.sendMessage(editorExtensionId, {name: "ChM", question: 'sendResponse', string: string}, function(response) {
+	});
+});
