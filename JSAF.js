@@ -558,7 +558,7 @@ function move_again_AF() {
 	btnAdd.insertBefore(button1, btnAdd.children[0])
 	
 	function screenshots(){
-		if(document.getElementsByClassName('expert-chat-display-inner') != undefined)
+		if(document.getElementsByClassName('expert-chat-display-inner')[0] != undefined)
 			for(i = 0; document.getElementsByClassName('expert-chat-display-inner')[0].children[i] != undefined; i++) {
 				if(document.getElementsByClassName('expert-chat-display-inner')[0].children[i].textContent.indexOf('vimbox-resource-chat-prod') != -1) {
 					var div = document.getElementsByClassName('expert-chat-display-inner')[0].children[i]
@@ -573,7 +573,7 @@ function move_again_AF() {
 	}
 	setInterval(screenshots, 5000)
 	function screenshots2(){
-	if(document.getElementsByClassName('chat-messages') != undefined)
+	if(document.getElementsByClassName('chat-messages')[0] != undefined)
 		for(i = 0; document.getElementsByClassName('chat-messages')[0].children[i] != undefined; i++) {
 			if(document.getElementsByClassName('chat-messages')[0].children[i].textContent.indexOf('vimbox-resource-chat-prod') != -1) {
 				var div = document.getElementsByClassName('chat-messages')[0].children[i]
