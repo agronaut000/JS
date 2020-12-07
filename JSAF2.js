@@ -353,16 +353,8 @@ function move_again_AF() {
 		getText()
 	}
     document.getElementById('type_TP').onclick = function () {
-		flagLangBut = 1
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec')
-		document.getElementById('msg1').style.display = ''
-		document.getElementById('snd').style.marginLeft = '16px'
-		document.getElementById('testUsers').style.display = ''
-		document.getElementById('takeNewChat').style.display = ''
-		document.getElementById('howManyChats').style.display = ''
-		whoAmI()
-		customTemplates()
-		getText()
+		prepTp()
 	}
     document.getElementById('type_TS').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec')
@@ -382,14 +374,7 @@ function move_again_AF() {
 		document.getElementById('takeNewChat').style.display = 'none'
 		document.getElementById('howManyChats').style.display = 'none'
 	} else {
-		document.getElementById('msg1').style.display = ''
-		document.getElementById('snd').style.marginLeft = '16px'
-		document.getElementById('testUsers').style.display = ''
-		document.getElementById('takeNewChat').style.display = ''
-		document.getElementById('howManyChats').style.display = ''
-		flagLangBut = 1
-		customTemplates()
-		whoAmI()
+		prepTp()
 	}
 	
     document.getElementById('hideMenu').onclick = function () {
@@ -554,23 +539,9 @@ function move_again_AF() {
 		document.getElementById('AF_helper').style.display = 'flex'
 		this.style.display = 'none'
 	}
-	btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+	var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 	btnAdd.insertBefore(button1, btnAdd.children[0])
 	
-	let buttonGetStat = document.createElement('div');
-	buttonGetStat.id = 'buttonGetStat';
-	buttonGetStat.innerHTML = "Статистика";
-	buttonGetStat.style.marginRight = "15px";
-	buttonGetStat.onclick = function() {
-		if(this.textContent == 'Скрыть стату') {
-			document.getElementById('tableStats').remove()
-			this.textContent = 'Статистика'
-		} else {
-			getStats()
-			this.textContent = 'Скрыть стату'
-		}
-	}
-	btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
 	
 	
 	function screenshots(){
@@ -2278,4 +2249,34 @@ async function getStats() {
 	table.append(trHead)
 	table.append(tbody)
 	document.getElementById('root').children[0].children[1].children[0].children[1].append(table)
+}
+
+function prepTp() {
+	document.getElementById('msg1').style.display = ''
+	document.getElementById('snd').style.marginLeft = '16px'
+	document.getElementById('testUsers').style.display = ''
+	document.getElementById('takeNewChat').style.display = ''
+	document.getElementById('howManyChats').style.display = ''
+	flagLangBut = 1
+	customTemplates()
+	whoAmI()
+		
+	let buttonGetStat = document.createElement('div');
+	buttonGetStat.id = 'buttonGetStat';
+	buttonGetStat.innerHTML = "Статистика";
+	buttonGetStat.style.marginRight = "15px";
+	buttonGetStat.onclick = function() {
+		if(this.textContent == 'Скрыть стату') {
+			document.getElementById('tableStats').remove()
+			this.textContent = 'Статистика'
+		} else {
+			getStats()
+			this.textContent = 'Скрыть стату'
+		}
+	}
+	var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+	btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
+	
+	
+	
 }
