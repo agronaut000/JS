@@ -3,7 +3,7 @@ let but1 = document.createElement('button')
 but1.onclick = getSlackToken()
 but1.id = 'testBut1'
 let but2 = document.createElement('button')
-but2.onclick = openSocket()
+but2.onclick = openSlackSocket()
 but2.id = 'testBut2'
 let but3 = document.createElement('button')
 but3.onclick = createSlackView()
@@ -16,14 +16,15 @@ function getSlackToken() {
 	document.getElementById('sendResponse').click()
 	function tokenToLocalStorage() {
 		var result = document.getElementById('responseTextarea1').value
-		localStorage.setItem('token', result.match(/"token":"(.*?)"/)[1])
 		if(result == '{}')
 			setTimeout(tokenToLocalStorage, 1000)
+		else
+			localStorage.setItem('token', result.match(/"token":"(.*?)"/)[1])
 	}
 	setTimeout(tokenToLocalStorage, 1000)
 }
 
-function openSocket() {
+function openSlackSocket() {
 	document.getElementById('responseTextarea1').value = '{}'
 	document.getElementById('responseTextarea2').value = 'https://slack.com/api/rtm.connect?token=' + localStorage.getItem('token')
 	document.getElementById('sendResponse').click()
@@ -35,7 +36,7 @@ function openSocket() {
 		else
 			openSocket(url)
 	}
-	setTimeout(getUrl, 1000)
+	setTimeout(getUrlAndOpenSocket, 1000)
 	
 	function openSocket(url) {
 		socket = new WebSocket(url)
