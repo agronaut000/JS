@@ -13,7 +13,7 @@ function getSlackToken() {
 	document.getElementById('responseTextarea1').value = '{}'
 	document.getElementById('responseTextarea2').value = 'https://app.slack.com/auth?app=client&return_to=%2Fclient%2FT03A3SUFB&teams=&iframe=1'
 
-	document.getElementById('sendResponse').click()​
+	document.getElementById('sendResponse').click()
 	function tokenToLocalStorage() {
 		var result = document.getElementById('responseTextarea1').value
 		localStorage.setItem('token', result.match(/"token":"(.*?)"/)[1])
