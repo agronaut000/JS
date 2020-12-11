@@ -63,7 +63,6 @@ var win_AFhelper =
 					<button id="languageAF" style="width:100px">Русский</button>
 					<button id="hideMenu" style="margin-left: 50px">hide</button>
 					<button id="setting" style="margin-left: 80px">S</button>
-					<button id="setting2" style="margin-left: 80px">S2</button>
 				</div>
 				<div style="margin: 5px;" id="pages">
 				</div>
@@ -354,16 +353,8 @@ function move_again_AF() {
 		getText()
 	}
     document.getElementById('type_TP').onclick = function () {
-		flagLangBut = 1
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec')
-		document.getElementById('msg1').style.display = ''
-		document.getElementById('snd').style.marginLeft = '16px'
-		document.getElementById('testUsers').style.display = ''
-		document.getElementById('takeNewChat').style.display = ''
-		document.getElementById('howManyChats').style.display = ''
-		whoAmI()
-		customTemplates()
-		getText()
+		prepTp()
 	}
     document.getElementById('type_TS').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec')
@@ -383,14 +374,7 @@ function move_again_AF() {
 		document.getElementById('takeNewChat').style.display = 'none'
 		document.getElementById('howManyChats').style.display = 'none'
 	} else {
-		document.getElementById('msg1').style.display = ''
-		document.getElementById('snd').style.marginLeft = '16px'
-		document.getElementById('testUsers').style.display = ''
-		document.getElementById('takeNewChat').style.display = ''
-		document.getElementById('howManyChats').style.display = ''
-		flagLangBut = 1
-		customTemplates()
-		whoAmI()
+		prepTp()
 	}
 	
     document.getElementById('hideMenu').onclick = function () {
@@ -555,8 +539,43 @@ function move_again_AF() {
 		document.getElementById('AF_helper').style.display = 'flex'
 		this.style.display = 'none'
 	}
-	btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+	var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 	btnAdd.insertBefore(button1, btnAdd.children[0])
+	
+	
+	
+	function screenshots(){
+		if(document.getElementsByClassName('expert-chat-display-inner')[0] != undefined)
+			for(i = 0; document.getElementsByClassName('expert-chat-display-inner')[0].children[i] != undefined; i++) {
+				if(document.getElementsByClassName('expert-chat-display-inner')[0].children[i].textContent.indexOf('vimbox-resource-chat-prod') != -1) {
+					var div = document.getElementsByClassName('expert-chat-display-inner')[0].children[i]
+					var img = document.createElement('img')
+					img.src = div.querySelector('a').href
+					img.setAttribute('onclick', "this.style.width='500px'")
+					img.setAttribute('onmouseout', "this.style.width='100px'")
+					img.style.width = '100px'
+					div.querySelector('a').replaceWith(img)
+				}
+			}
+	}
+	screenshots()
+	setInterval(screenshots, 5000)
+	function screenshots2(){
+	if(document.getElementsByClassName('chat-messages')[0] != undefined)
+		for(i = 0; document.getElementsByClassName('chat-messages')[0].children[i] != undefined; i++) {
+			if(document.getElementsByClassName('chat-messages')[0].children[i].textContent.indexOf('vimbox-resource-chat-prod') != -1) {
+				var div = document.getElementsByClassName('chat-messages')[0].children[i]
+				var img = document.createElement('img')
+				img.src = div.querySelector('a').href
+				img.setAttribute('onclick', "this.style.width='500px'")
+				img.setAttribute('onmouseout', "this.style.width='100px'")
+				img.style.width = '100px'
+				div.querySelector('a').replaceWith(img)
+			}
+		}
+	}
+	screenshots2()
+	setInterval(screenshots2, 5000)
 	
     document.getElementById('switcher').onclick = function () {
         if(this.innerHTML == "ВКЛ") {
@@ -2153,63 +2172,150 @@ if(localStorage.getItem('inspector') == 'yes') {
 }
 }, 2000)
 
-function toUTF8Array(str) {
-    var utf8 = [];
-    for (var i=0; i < str.length; i++) {
-        var charcode = str.charCodeAt(i);
-        if (charcode < 0x80) utf8.push(charcode);
-        else if (charcode < 0x800) {
-            utf8.push(0xc0 | (charcode >> 6), 
-                      0x80 | (charcode & 0x3f));
-        }
-        else if (charcode < 0xd800 || charcode >= 0xe000) {
-            utf8.push(0xe0 | (charcode >> 12), 
-                      0x80 | ((charcode>>6) & 0x3f), 
-                      0x80 | (charcode & 0x3f));
-        }
-        // surrogate pair
-        else {
-            i++;
-            // UTF-16 encodes 0x10000-0x10FFFF by
-            // subtracting 0x10000 and splitting the
-            // 20 bits of 0x0-0xFFFFF into two halves
-            charcode = 0x10000 + (((charcode & 0x3ff)<<10)
-                      | (str.charCodeAt(i) & 0x3ff))
-            utf8.push(0xf0 | (charcode >>18), 
-                      0x80 | ((charcode>>12) & 0x3f), 
-                      0x80 | ((charcode>>6) & 0x3f), 
-                      0x80 | (charcode & 0x3f));
-        }
-    }
-    return utf8;
-}
+async function getStats() {
+	let table = document.createElement('table')
+	table.style = 'table-layout: auto; width:45%; min-width: 550px'
+	table.style.textAlign = 'center'
+	table.id = 'tableStats'
+	let columnNames = ["Оператор", "Закрыл запросов", "Среднее время ожидания", "Среднее время работы"]
+	let trHead = document.createElement('tr')
+	for(let i = 0; i < columnNames.length; i++) {
+		var th = document.createElement('th')
+		trHead.append(th)
+		th.textContent = columnNames[i]
+	}
 
-function decToHex(dec)
-{
-	var hexStr = '0123456789ABCDEF';
-	var low = dec % 16;
-	var high = (dec - low)/16;
-	hex = '' + hexStr.charAt(high) + hexStr.charAt(low);
-	return hex;
-}
-
-document.getElementById('setting2').onclick = function () {
-	var data = { type: "FROM_PAGE", text: "Hello from the webpage!" };
-	window.postMessage(data, "*");
-}
-
-
-
-window.addEventListener("message", function(event) {
-    // We only accept messages from ourselves
-    if (event.source != window)
-        return;
-
-    if (event.data.type && (event.data.type == "FROM_PAGE")) {
-        console.log("Content script received message: " + event.data.text);
-    }
-	var editorExtensionId = "ghjlieooejglfcpbpgmjdoobkbcegnij";
-	string = 'testmsg123'
-		chrome.runtime.sendMessage(editorExtensionId, {name: "ChM", question: 'sendResponse', string: string}, function(response) {
+	var time = new Date()
+	var time2 = new Date()
+	time2.setTime(time - 24 * 60 * 60 * 1000)
+	var date1 = time.getDate() < 10 ? '0' + time.getDate() : time.getDate()
+	var date2 = time2.getDate() < 10 ? '0' + time2.getDate() : time2.getDate()
+	var month1 = Number(time.getMonth() + 1) < 10 ? '0' + Number(time.getMonth() + 1) : Number(time.getMonth() + 1)
+	var month2 = Number(time2.getMonth() + 1) < 10 ? '0' + Number(time2.getMonth() + 1) : Number(time2.getMonth() + 1)
+	var str1 = time.getFullYear() + "-" + month1 + "-" + date1 + "T21%3A00%3A00Z"
+	var str2 = time2.getFullYear() + "-" + month2 + "-" + date2 + "T21%3A00%3A00Z"
+	var array = []
+	await fetch("https://skyeng.autofaq.ai/api/reason8/reports/operatorActivityTable?dateFrom=" + str2 + "&dateTo=" + str1, {
+	  "headers": {
+		"accept": "*/*",
+		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+		"cache-control": "max-age=0",
+		"sec-fetch-dest": "empty",
+		"sec-fetch-mode": "cors",
+		"sec-fetch-site": "same-origin"
+	  },
+	  "referrer": "https://skyeng.autofaq.ai/reports/operator-activity",
+	  "referrerPolicy": "strict-origin-when-cross-origin",
+	  "body": null,
+	  "method": "GET",
+	  "mode": "cors",
+	  "credentials": "include"
+	}).then(response => b = response.json().then(b => b.rows.forEach(k => {
+		if(k.operator.indexOf('ТП') != -1) {
+			 array.push(k)
+		}
+	})))
+	array.sort(function (a, b) {
+		return b.conversationClosed - a.conversationClosed;
 	});
-});
+	let tbody = document.createElement('tbody')
+	for(let i = 0; i < array.length; i++) {
+		var tr = document.createElement('tr')
+		for(let j = 0; j < 4; j++) {
+			var td = document.createElement('td')
+			switch(j) {
+				case 0:
+					td.textContent = array[i].operator;
+					td.style = 'text-align: left; padding-left: 50px'
+					break;
+				case 1:
+					td.textContent = array[i].conversationClosed;
+					break;
+				case 2:
+					var averageAnswerTime = Math.floor(array[i].averageAnswerTime / 1000)
+					averageAnswerTime = averageAnswerTime < 60 ? '00:' + averageAnswerTime : Math.floor(averageAnswerTime / 60) + ':' + ((averageAnswerTime % 60) < 10 ? '0' + (averageAnswerTime % 60) : (averageAnswerTime % 60))
+					td.textContent = averageAnswerTime;
+					break;
+				case 3:
+					var averageHandlingTime = Math.floor(array[i].averageHandlingTime / 1000)
+					averageHandlingTime = averageHandlingTime < 60 ? averageHandlingTime : Math.floor(averageHandlingTime / 60) + ':' + ((averageHandlingTime % 60) < 10 ? '0' + (averageHandlingTime % 60) : (averageHandlingTime % 60))
+					td.textContent = averageHandlingTime;
+					break;
+			}
+			tr.append(td)
+		}
+		tbody.append(tr)
+	}
+	table.append(trHead)
+	table.append(tbody)
+	document.getElementById('root').children[0].children[1].children[0].children[1].append(table)
+}
+
+function prepTp() {
+	document.getElementById('msg1').style.display = ''
+	document.getElementById('snd').style.marginLeft = '16px'
+	document.getElementById('testUsers').style.display = ''
+	document.getElementById('takeNewChat').style.display = ''
+	document.getElementById('howManyChats').style.display = ''
+	flagLangBut = 1
+	customTemplates()
+	whoAmI()
+		
+	let buttonGetStat = document.createElement('div');
+	buttonGetStat.id = 'buttonGetStat';
+	buttonGetStat.innerHTML = "Статистика";
+	buttonGetStat.style.marginRight = "15px";
+	buttonGetStat.onclick = function() {
+		if(this.textContent == 'Скрыть стату') {
+			if(document.getElementById('tableStats') != undefined) {
+				document.getElementById('tableStats').remove()
+			}
+			this.textContent = 'Статистика'
+			
+			document.getElementById('buttonGetStat').setAttribute('disabled', 'disabled')
+			setTimeout(function() {document.getElementById('buttonGetStat').removeAttribute('disabled')}, 500)
+			
+			if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') != -1) {
+				document.getElementById('root').children[0].children[1].children[0].children[1].children[1].style.display = ""
+			}
+			if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/archive') != -1) {
+				document.getElementById('root').children[0].children[1].children[0].children[1].children[0].style.display = ""
+			}
+		} else {
+			if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') != -1) {
+				document.getElementById('root').children[0].children[1].children[0].children[1].children[1].style.display = "none"
+			} else if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/archive') != -1) {
+				document.getElementById('root').children[0].children[1].children[0].children[1].children[0].style.display = "none"
+			} else {
+				this.textContent = 'Неверная страница'
+				setTimeout(function() { document.getElementById('buttonGetStat').textContent = Статистика }, 2000)
+				return
+			}
+			getStats()
+			document.getElementById('buttonGetStat').setAttribute('disabled', 'disabled')
+			setTimeout(function() {document.getElementById('buttonGetStat').removeAttribute('disabled')}, 500)
+			this.textContent = 'Скрыть стату'
+		}
+	}
+	var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+	btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
+}
+let but = document.createElement('button')
+but.style.display = 'none'
+but.id = 'testButton'
+requestOptions = ''
+requestAddr = ''
+but.onclick = function() {
+	var myHeaders = new Headers();
+	myHeaders.append("Cookie", "b=56uoqclr1v928fmt2erz388bp");
+
+	var formdata = new FormData();
+	requestOptions = {
+	  method: 'POST',
+	  headers: myHeaders,
+	  body: formdata,
+	  redirect: 'follow'
+	};
+	requestAddr = 'test'
+}
+document.body.append(but);
