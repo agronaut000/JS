@@ -1,12 +1,12 @@
 var flag = 0
 let but1 = document.createElement('button')
-but1.onclick = getSlackToken()
+but1.onclick = 'getSlackToken()'
 but1.id = 'testBut1'
 let but2 = document.createElement('button')
-but2.onclick = openSlackSocket()
+but2.onclick = 'openSlackSocket()'
 but2.id = 'testBut2'
 let but3 = document.createElement('button')
-but3.onclick = createSlackView()
+but3.onclick = 'createSlackView()'
 but3.id = 'testBut3'
 
 function getSlackToken() {
@@ -29,7 +29,7 @@ function openSlackSocket() {
 	document.getElementById('responseTextarea2').value = 'https://slack.com/api/rtm.connect?token=' + localStorage.getItem('token')
 	document.getElementById('sendResponse').click()
 	function getUrlAndOpenSocket() {
-		var esult = JSON.parse(document.getElementById('responseTextarea1').value)
+		var result = JSON.parse(document.getElementById('responseTextarea1').value)
 		var url = result.url
 		if(result == '{}')
 			setTimeout(getUrl, 1000)
@@ -73,6 +73,16 @@ function createSlackView() {
 	flag = 1
 	document.getElementById('sendResponse').click()
 }
+
+	view.blocks[0].answer = 'тестовое описание'
+	view.blocks[1].answer = 'тестовый юрл'
+	view.blocks[2].answer = 0
+	view.blocks[3].answer = 3
+	view.blocks[4].answer = 'тестовые шаги'
+	view.blocks[5].answer = 'тестовый фр'
+	view.blocks[6].answer = 'тестовый ор'
+	view.blocks[7].answer = 'тестовая доп инфа'
+	view.blocks[8].answer = 'список пользователей'
 function submitSlackView(view) {
 	let client_token = Number(new Date())
 	let view_id = view.id
