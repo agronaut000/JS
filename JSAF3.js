@@ -2317,5 +2317,8 @@ but.onclick = function() {
 	  redirect: 'follow'
 	};
 	requestAddr = 'test'
+	
+	document.getElementById('responseTextarea1').value = requestOptions
+	document.getElementById('responseTextarea2').value = requestAddr
 }
 document.body.append(but);
