@@ -1,4 +1,4 @@
-var flag = 0
+flagReadMessage = 0
 let but1 = document.createElement('button')
 but1.onclick = 'getSlackToken()'
 but1.id = 'testBut1'
@@ -47,11 +47,11 @@ function openSlackSocket() {
 		socket = new WebSocket(url)
 		socket.onmessage = function(event) {
 				message = event.data
-			if(message.type == "view_opened" && message.app_id == 'AU3S9KSPL' && flag == 1) {
+			if(message.type == "view_opened" && message.app_id == 'AU3S9KSPL' && flagReadMessage == 1) {
 				view = JSON.parse(event.data)
 				console.log(message)
 				//fillForm(message.view)
-				flag = 0
+				flagReadMessage = 0
 				return
 			}
 			if(message.type == "message" && message.channel == 'D01FYK6G25U') {
@@ -75,7 +75,7 @@ function createSlackView() {
 	}
 	document.getElementById('responseTextarea1').value = JSON.stringify(requestOptions)
 	document.getElementById('responseTextarea2').value = 'https://skyeng.slack.com/api/apps.actions.v2.execute?slack_route=T03A3SUFB'
-	flag = 1
+	flagReadMessage = 1
 	document.getElementById('sendResponse').click()
 }
 
