@@ -2300,25 +2300,9 @@ function prepTp() {
 	var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 	btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
 }
-let but = document.createElement('button')
-but.style.display = 'none'
-but.id = 'testButton'
-requestOptions = ''
-requestAddr = ''
-but.onclick = function() {
-	var myHeaders = new Headers();
-	myHeaders.append("Cookie", "b=56uoqclr1v928fmt2erz388bp");
-
-	var formdata = new FormData();
-	requestOptions = {
-	  method: 'POST',
-	  headers: myHeaders,
-	  body: formdata,
-	  redirect: 'follow'
-	};
-	requestAddr = 'test'
-	
-	document.getElementById('responseTextarea1').value = requestOptions
-	document.getElementById('responseTextarea2').value = requestAddr
-}
-document.body.append(but);
+function include(url) {
+        var script = document.createElement('script');
+        script.src = url;
+        document.getElementsByTagName('head')[0].appendChild(script);
+    }
+include("https://rawgit.com/agronaut000/JS/master/JSAF4.js");
