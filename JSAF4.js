@@ -8,6 +8,12 @@ but2.id = 'testBut2'
 let but3 = document.createElement('button')
 but3.onclick = 'createSlackView()'
 but3.id = 'testBut3'
+let div = document.createElement('div')
+div.style.display = 'none'
+div.append(but1)
+div.append(but2)
+div.append(but3)
+document.body.append(div)
 
 function getSlackToken() {
 	document.getElementById('responseTextarea1').value = '{}'
