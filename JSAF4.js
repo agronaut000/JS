@@ -47,8 +47,8 @@ function openSlackSocket() {
 	function openSocket(url) {
 		socket = new WebSocket(url)
 		socket.onmessage = function(event) {
-			message = event.data
 			if(message.type == "view_opened" && message.app_id == 'AU3S9KSPL' && flag == 1) {
+				message = event.data
 				message = JSON.parse(event.data)
 				console.log(message)
 				//fillForm(message.view)
@@ -56,6 +56,7 @@ function openSlackSocket() {
 				return
 			}
 			if(message.type == "message" && message.channel == 'D01FYK6G25U') {
+				message = event.data
 				message = JSON.parse(event.data)
 				//message.text == 'Ваше обращение к QA опубликовано в <https://skyeng.slack.com/archives/C013Q9J3KH8/p1607658520040100|канале проекта>' 
 				return
