@@ -14,7 +14,6 @@ div.append(but1)
 div.append(but2)
 div.append(but3)
 document.body.append(div)
-
 function getSlackToken() {
 	document.getElementById('responseTextarea1').value = '{}'
 	document.getElementById('responseTextarea2').value = 'https://app.slack.com/auth?app=client&return_to=%2Fclient%2FT03A3SUFB&teams=&iframe=1'
@@ -47,17 +46,16 @@ function openSlackSocket() {
 	function openSocket(url) {
 		socket = new WebSocket(url)
 		socket.onmessage = function(event) {
-			if(message.type == "view_opened" && message.app_id == 'AU3S9KSPL' && flag == 1) {
 				message = event.data
-				message = JSON.parse(event.data)
+			if(message.type == "view_opened" && message.app_id == 'AU3S9KSPL' && flag == 1) {
+				view = JSON.parse(event.data)
 				console.log(message)
 				//fillForm(message.view)
 				flag = 0
 				return
 			}
 			if(message.type == "message" && message.channel == 'D01FYK6G25U') {
-				message = event.data
-				message = JSON.parse(event.data)
+				slackLink = JSON.parse(event.data).text
 				//message.text == 'Ваше обращение к QA опубликовано в <https://skyeng.slack.com/archives/C013Q9J3KH8/p1607658520040100|канале проекта>' 
 				return
 			}
