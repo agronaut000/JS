@@ -46,9 +46,9 @@ function openSlackSocket() {
 	function openSocket(url) {
 		socket = new WebSocket(url)
 		socket.onmessage = function(event) {
-				message = event.data
+				message = JSON.parse(event.data)
 			if(message.type == "view_opened" && message.app_id == 'AU3S9KSPL' && flagReadMessage == 1) {
-				view = JSON.parse(event.data)
+				view = message.view
 				console.log(message)
 				//fillForm(message.view)
 				flagReadMessage = 0
