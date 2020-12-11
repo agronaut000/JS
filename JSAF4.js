@@ -74,15 +74,6 @@ function createSlackView() {
 	document.getElementById('sendResponse').click()
 }
 
-	view.blocks[0].answer = 'тестовое описание'
-	view.blocks[1].answer = 'тестовый юрл'
-	view.blocks[2].answer = 0
-	view.blocks[3].answer = 3
-	view.blocks[4].answer = 'тестовые шаги'
-	view.blocks[5].answer = 'тестовый фр'
-	view.blocks[6].answer = 'тестовый ор'
-	view.blocks[7].answer = 'тестовая доп инфа'
-	view.blocks[8].answer = 'список пользователей'
 function submitSlackView(view) {
 	let client_token = Number(new Date())
 	let view_id = view.id
