@@ -12,8 +12,8 @@ function getSlackToken() {
 			setTimeout(tokenToLocalStorage, 1000)
 		else {
 			try {
-			localStorage.setItem('token', result.match(/"token":"(.*?)"/)[1])
-			console.log('Токен Slack получен и установлен')
+				localStorage.setItem('token', result.match(/"token":"(.*?)"/)[1])
+				console.log('Токен Slack получен и установлен')
 			} catch (e) {
 				console.log('Ошибка при получении токена: ' + e)
 			}
