@@ -546,8 +546,12 @@ function move_again_AF() {
 					var div = document.getElementsByClassName('expert-chat-display-inner')[0].children[i]
 					var img = document.createElement('img')
 					img.src = div.querySelector('a').href
-					img.setAttribute('onclick', "this.style.width='500px'")
-					img.setAttribute('onmouseout', "this.style.width='100px'")
+					img.onclick = function() {
+						if(this.style.width == '500px')
+							this.style.width='100px'
+						else
+							this.style.width='500px'
+					}
 					img.style.width = '100px'
 					div.querySelector('a').replaceWith(img)
 				}
@@ -2279,18 +2283,21 @@ function include(url) {
 
 
 function firstLoadPage() {
-	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') === -1) {
+	if(window.location.href.indexOf('skyeng.autofaq.ai') === -1) {
 		document.getElementById('AF_helper').style.display = 'none';
 		document.getElementById('testUsers').style.display = 'none';
 	} else {
 		setTimeout(move_again_AF, 3500)
 		
+		
 		setTimeout(function() {
 			btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 			btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
 			btnAdd1.insertBefore(maskBack, btnAdd1.children[0])
-			include("https://rawgit.com/agronaut000/JS/master/JSAF4.js");
 		}, 2000)
+		
+		//Модуль wallentine в АФ
+		include("https://rawgit.com/agronaut000/JS/master/JSAF4.js");
 		
 		setTimeout(function() {
 			if(localStorage.getItem('inspector') == 'yes') {
