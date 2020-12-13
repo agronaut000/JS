@@ -1,3 +1,4 @@
+// Файл JSAF4.js
 var socketOpened = 0
 var flagReadMessage = 0
 function getSlackToken() {
