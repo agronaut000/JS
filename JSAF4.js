@@ -115,7 +115,7 @@ function fillForm(view) {
 			for(let j = 0; j < blocks[i].element.options.length; j++) {
 				let option = document.createElement('option')
 				option.textContent = blocks[i].element.options[j].text.text
-				option.setAttribute('value', blocks[i].element.options[j].value)
+				option.setAttribute('value', j)
 				select.append(option)
 			}
 			newDiv.append(select)
