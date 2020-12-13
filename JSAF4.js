@@ -48,6 +48,9 @@ function openSlackSocket() {
 			}
 			if(message.type == "message" && message.channel == 'D01FYK6G25U') {
 				console.log(message.text) //'Ваше обращение к QA опубликовано в <https://skyeng.slack.com/archives/C013Q9J3KH8/p1607658520040100|канале проекта>' 
+				socket.close()
+				socketOpened = 0
+				console.log('Закрыли сокет')
 				return
 			}
 		}
