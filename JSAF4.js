@@ -1,19 +1,11 @@
+// Файл JSAF4.js
+setTimeout(function() {
+	if(localStorage.getItem('token') == undefined)
+		getSlackToken()
+	openSlackSocket()	
+}, 2500)
+
 flagReadMessage = 0
-let but1 = document.createElement('button')
-but1.onclick = 'getSlackToken()'
-but1.id = 'testBut1'
-let but2 = document.createElement('button')
-but2.onclick = 'openSlackSocket()'
-but2.id = 'testBut2'
-let but3 = document.createElement('button')
-but3.onclick = 'createSlackView()'
-but3.id = 'testBut3'
-let div = document.createElement('div')
-div.style.display = 'none'
-div.append(but1)
-div.append(but2)
-div.append(but3)
-document.body.append(div)
 function getSlackToken() {
 	document.getElementById('responseTextarea1').value = '{}'
 	document.getElementById('responseTextarea2').value = 'https://app.slack.com/auth?app=client&return_to=%2Fclient%2FT03A3SUFB&teams=&iframe=1'
@@ -50,13 +42,12 @@ function openSlackSocket() {
 			if(message.type == "view_opened" && message.app_id == 'AU3S9KSPL' && flagReadMessage == 1) {
 				view = message.view
 				console.log(message)
-				//fillForm(message.view)
+				fillForm(JSON.stringify(message.view))
 				flagReadMessage = 0
 				return
 			}
 			if(message.type == "message" && message.channel == 'D01FYK6G25U') {
-				slackLink = JSON.parse(event.data).text
-				//message.text == 'Ваше обращение к QA опубликовано в <https://skyeng.slack.com/archives/C013Q9J3KH8/p1607658520040100|канале проекта>' 
+				console.log(message.text) //'Ваше обращение к QA опубликовано в <https://skyeng.slack.com/archives/C013Q9J3KH8/p1607658520040100|канале проекта>' 
 				return
 			}
 		}
@@ -79,6 +70,108 @@ function createSlackView() {
 	document.getElementById('sendResponse').click()
 }
 
+function fillForm(view) {
+	view = JSON.parse(view)
+	div = document.createElement('div')
+	document.body.append(div)
+	if (localStorage.getItem('viewToSlackFormAFTop') == null) {
+		localStorage.setItem('viewToSlackFormAFTop', '120');
+		localStorage.setItem('viewToSlackFormAFLeft', '295');
+	}
+	div.style = 'cursor: -webkit-grab;background: #464451; top: ' + localStorage.getItem('viewToSlackFormAFTop') + 'px; left: ' + localStorage.getItem('viewToSlackFormAFLeft') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black; width: 18%'
+	div.id = 'formToSlack'
+	
+	let div2 = document.createElement('div')
+	div2.style.textAlign = 'center'
+	div2.style.color = 'white'
+	div2.textContent = 'Форма'
+	let blocks = view.blocks
+	div.append(div2)
+	var listener4 = function(e , a) {
+        div.style.left = Number(e.clientX - myX4) + "px";
+        div.style.top = Number(e.clientY - myY4) + "px";
+        localStorage.setItem('viewToSlackFormAFTop', String(Number(e.clientY - myY4)));
+        localStorage.setItem('viewToSlackFormAFLeft', String(Number(e.clientX - myX4)));
+    };
+
+    div.firstElementChild.onmousedown = function (a) {
+        window.myX4 = a.layerX; 
+        window.myY4 = a.layerY; 
+        document.addEventListener('mousemove', listener4);
+    }
+    div.onmouseup = function () {document.removeEventListener('mousemove', listener4);}
+	for(let i = 0; i < blocks.length; i++) {
+		let newDiv = document.createElement('div')
+		newDiv.style = 'margin:5px'
+		if(blocks[i].element.options != undefined) {
+			let select = document.createElement('select')
+			select.style.width = '100%'
+			select.placeholder = blocks[i].element.placeholder.text
+			for(let j = 0; j < blocks[i].element.options.length; j++) {
+				let option = document.createElement('option')
+				option.textContent = blocks[i].element.options[j].text.text
+				option.setAttribute('value', blocks[i].element.options[j].value)
+				select.append(option)
+			}
+			newDiv.append(select)
+		} else {
+			if(blocks[i].label.text == 'URL')
+				var input = document.createElement('input')
+			else
+				var input = document.createElement('textarea')
+			input.style.width = '100%'
+			input.placeholder = blocks[i].label.text
+			newDiv.append(input)
+		}
+		div.append(newDiv)
+	}
+	let newDiv = document.createElement('div')
+	newDiv.style = 'margin:5px'
+	newDiv.style.textAlign = 'center'
+	let button = document.createElement('button')
+	button.textContent = "Отправить"
+	let button2 = document.createElement('button')
+	button2.textContent = "Скрыть"
+	button2.style.marginLeft = '5px'
+	button2.onclick = function() {
+		this.parentElement.parentElement.style.display = 'none'
+		document.getElementById('buttonOpenForm').style.display = ''
+		document.getElementById('buttonOpenForm').textContent = 'Развернуть'
+	}
+	button.onclick = function() {
+		this.setAttribute('disabled')
+		view.blocks[0].answer = document.getElementById('formToSlack').children[1].children[0].value
+		view.blocks[1].answer = document.getElementById('formToSlack').children[2].children[0].value
+		view.blocks[2].answer = document.getElementById('formToSlack').children[3].children[0].value
+		view.blocks[3].answer = document.getElementById('formToSlack').children[4].children[0].value
+		view.blocks[4].answer = document.getElementById('formToSlack').children[5].children[0].value
+		view.blocks[5].answer = document.getElementById('formToSlack').children[6].children[0].value
+		view.blocks[6].answer = document.getElementById('formToSlack').children[7].children[0].value
+		view.blocks[7].answer = document.getElementById('formToSlack').children[8].children[0].value
+		view.blocks[8].answer = document.getElementById('formToSlack').children[9].children[0].value
+		submitSlackView(view)
+		document.getElementById('formToSlack').remove()
+	}
+	newDiv.append(button)
+	newDiv.append(button2)
+	div.append(newDiv)
+}
+
+let buttonOpenForm = document.createElement('div');
+buttonOpenForm.id = 'buttonOpenForm';
+buttonOpenForm.textContent = "Баг-репорт";
+buttonOpenForm.style.marginRight = "15px";
+buttonOpenForm.onclick = function() {
+	if(document.getElementById('formToSlack') != undefined) 
+		document.getElementById('formToSlack').style.display = ''
+	else
+		createSlackView()
+	
+	this.textContent = 'Баг-репорт'
+	this.style.display = 'none'
+}
+var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+btnAdd.insertBefore(buttonOpenForm, btnAdd.children[0])
 function submitSlackView(view) {
 	let client_token = Number(new Date())
 	let view_id = view.id
