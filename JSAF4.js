@@ -15,7 +15,7 @@ function getSlackToken() {
 			console.log('Токен Slack получен и установлен')
 		}
 	}
-	setTimeout(tokenToLocalStorage, 1000)
+	setTimeout(tokenToLocalStorage, 2500)
 }
 
 function openSlackSocket() {
@@ -145,13 +145,13 @@ function fillForm(view) {
 		document.getElementById('buttonOpenForm').style.display = ''
 	}
 	let button3 = document.createElement('button')
-	button3.textContent = "закрыть"
+	button3.textContent = "Закрыть"
 	button3.style.marginLeft = '5px'
 	button3.onclick = function() {
 		socket.close()
 		socketOpened = 0
 		console.log('Закрыли сокет')
-		this.parentElement.parentElement.style.display = 'none'
+		this.parentElement.parentElement.remove()
 		document.getElementById('buttonOpenForm').style.display = ''
 	}
 	
@@ -202,10 +202,10 @@ function submitSlackView(view) {
 		if(i > 0)
 			answer += ','
 		answer += "\"" + view.blocks[i].block_id
-		answer += "\":{\"" + view.blocks[i].element.action_id 
+		answer += "\":{\"" + view.blocks[i].element.action_id
 		answer += "\":{\"type\":\"" + view.blocks[i].element.type 
 		if(view.blocks[i].element.options != undefined)
-		answer += "\",\"selected_option\":{\"text\":{\"type\":\"" + view.blocks[i].element.options[view.blocks[i].answer].text.type + "\",\"text\":\"" + view.blocks[i].element.options[view.blocks[i].answer].text.text + "\",\"emoji\":" + view.blocks[i].element.options[view.blocks[i].answer].text.emoji.toString() + "},\"value\":\"" + view.blocks[i].element.options[view.blocks[i].answer].value + "\"}}}"
+			answer += "\",\"selected_option\":{\"text\":{\"type\":\"" + view.blocks[i].element.options[view.blocks[i].answer].text.type + "\",\"text\":\"" + view.blocks[i].element.options[view.blocks[i].answer].text.text + "\",\"emoji\":" + view.blocks[i].element.options[view.blocks[i].answer].text.emoji.toString() + "},\"value\":\"" + view.blocks[i].element.options[view.blocks[i].answer].value + "\"}}}"
 		else
 			answer += "\",\"value\":\"" + view.blocks[i].answer + "\"}}"
 	}
