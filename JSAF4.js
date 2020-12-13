@@ -1,11 +1,5 @@
-// Файл JSAF4.js
-setTimeout(function() {
-	if(localStorage.getItem('token') == undefined)
-		getSlackToken()
-	openSlackSocket()	
-}, 2500)
-
-flagReadMessage = 0
+var socketOpened = 0
+var flagReadMessage = 0
 function getSlackToken() {
 	document.getElementById('responseTextarea1').value = '{}'
 	document.getElementById('responseTextarea2').value = 'https://app.slack.com/auth?app=client&return_to=%2Fclient%2FT03A3SUFB&teams=&iframe=1'
@@ -40,6 +34,7 @@ function openSlackSocket() {
 	setTimeout(getUrlAndOpenSocket, 1000)
 	
 	function openSocket(url) {
+		socketOpened = 1
 		socket = new WebSocket(url)
 		socket.onmessage = function(event) {
 				message = JSON.parse(event.data)
@@ -169,6 +164,11 @@ buttonOpenForm.id = 'buttonOpenForm';
 buttonOpenForm.textContent = "Баг-репорт";
 buttonOpenForm.style.marginRight = "15px";
 buttonOpenForm.onclick = function() {
+	if(socketOpened == 0) {
+		if(localStorage.getItem('token') == undefined)
+			getSlackToken()
+		openSlackSocket()
+	}
 	if(document.getElementById('formToSlack') != undefined) 
 		document.getElementById('formToSlack').style.display = ''
 	else
