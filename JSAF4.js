@@ -47,7 +47,8 @@ function openSlackSocket() {
 				return
 			}
 			if(message.type == "message" && message.channel == 'D01FYK6G25U') {
-				console.log(message.text) //'Ваше обращение к QA опубликовано в <https://skyeng.slack.com/archives/C013Q9J3KH8/p1607658520040100|канале проекта>' 
+				console.log('Ссылка на тред: ' + message.text.split('<')[1].split('|')[0])
+				sendComment('Ссылка на тред: ' + message.text.split('<')[1].split('|')[0])
 				socket.close()
 				socketOpened = 0
 				console.log('Закрыли сокет')
