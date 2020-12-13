@@ -11,11 +11,15 @@ function getSlackToken() {
 		if(result == '{}')
 			setTimeout(tokenToLocalStorage, 1000)
 		else {
+			try {
 			localStorage.setItem('token', result.match(/"token":"(.*?)"/)[1])
 			console.log('Токен Slack получен и установлен')
+			} catch (e) {
+				console.log('Ошибка при получении токена: ' + e)
+			}
 		}
 	}
-	setTimeout(tokenToLocalStorage, 2500)
+	setTimeout(tokenToLocalStorage, 2000)
 }
 
 function openSlackSocket() {
@@ -26,7 +30,7 @@ function openSlackSocket() {
 		var result = JSON.parse(document.getElementById('responseTextarea1').value)
 		var url = result.url
 		if(result == '{}')
-			setTimeout(getUrl, 1000)
+			setTimeout(getUrlAndOpenSocket, 1000)
 		else {
 			openSocket(url)
 			console.log('URL для связи с Slack получен')
