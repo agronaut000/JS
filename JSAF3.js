@@ -1406,6 +1406,7 @@ function startTimer() {
 				groupId = document.getElementById('responseTextarea1').value.split('/admin/student/view/')[1].split('<td>')[4].split('</td')[0]
 				let button = document.createElement('a')
 				button.href = 'https://cabinet.skyeng.ru/admin/group/edit?id=' + groupId
+				button.target = '_blank'
 				button.textContent = ' ' + groupId
 				document.getElementsByClassName('expert-user_details-list')[1].childNodes[nextClassModeId].childNodes[1].append(button)
 			}
