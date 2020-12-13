@@ -1368,6 +1368,8 @@ function startTimer() {
 		
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1 && document.getElementsByClassName('expert-user_details-list')[1] !== undefined) {
 		vertical = user = ""
+		nextClassMode = nextClassstudentId = ""
+		nextClassModeId = ""
 		for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "supportVertical" || document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "teacherVertical")
 				vertical = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
@@ -1386,6 +1388,27 @@ function startTimer() {
 							tmrs[k][4] = ""
 					}
 				}
+			
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-mode") {
+				nextClassMode = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent
+				nextClassModeId = i
+			}
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-studentId")
+				nextClassstudentId = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent
+		}
+		if(nextClassMode == 'group') {
+			nextClassstudentId = nextClassstudentId.split(',')[0]
+			document.getElementById('responseTextarea1').value = '{}'
+			document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + nextClassstudentId
+			document.getElementById('sendResponse').click()
+			setTimeout(generateGroupLink, 1000)
+			function generateGroupLink() {
+				groupId = document.getElementById('responseTextarea1').value.split('/admin/student/view/')[1].split('<td>')[4].split('</td')[0]
+				let button = document.createElement('a')
+				button.href = 'https://cabinet.skyeng.ru/admin/group/edit?id=' + groupId
+				button.textContent = ' ' + groupId
+				document.getElementsByClassName('expert-user_details-list')[1].childNodes[nextClassModeId].childNodes[1].append(button)
+			}
 		}
 		addInfoUser.innerHTML = vertical + " + " + user 
 		if(document.getElementById('NS') != undefined) {
