@@ -211,11 +211,6 @@ maskBack.id = "maskBack"
 maskBack.innerHTML = "Вернуть"
 maskBack.style.marginRight = "15px";
 maskBack.style.display = "none";
-setTimeout(function() {
-btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
-btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
-btnAdd1.insertBefore(maskBack, btnAdd1.children[0])
-}, 2000)
 
 maskBack.onclick = function () {
 	name = document.getElementById('maskBack').getAttribute('name')
@@ -648,7 +643,7 @@ function move_again_AF() {
 	getText()
 }
 
-setTimeout(move_again_AF, 3500)
+
 function pageClick(pageId) {
 	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 	for(i = 0; i < b.childElementCount; i++) {
@@ -1445,7 +1440,7 @@ function startTimer() {
 
 	
 }
-setInterval(startTimer, 1000)
+
 
 function requestsRed () {
 	document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].addEventListener("DOMSubtreeModified", function() {
@@ -1457,7 +1452,6 @@ function requestsRed () {
 	});
 }
 
-setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 200)
 
 const copyToClipboard1 = str => {
     const el = document.createElement('textarea');
@@ -2147,30 +2141,7 @@ function customTemplates(language = '') {
 }
 
 
-setTimeout(function() {
-if(localStorage.getItem('inspector') == 'yes') {
-	var but = document.createElement('button')
-	but.style.marginLeft = '5px'
-	but.textContent = "Нотгуды"
-	but.id = 'buttonForNotgoods'
-	var newinput = document.createElement('input')	
-	newinput.style.marginLeft = '5px'
-	newinput.style.textAlign = "center"
-	newinput.id = 'inputForNotgoods'
-	var curDate = new Date()
-	curDate.setTime(curDate - 24 * 60 * 60 * 1000)
-	newinput.placeholder = curDate.getDate() + "." + (curDate.getMonth() + 1) + "." + curDate.getFullYear()
-	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(newinput)
-	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(but)
-	
-	document.getElementById('buttonForNotgoods').onclick = function () {
-		if(document.getElementById('inputForNotgoods').value != "")
-			getNotGoods(document.getElementById('inputForNotgoods').value)
-		else
-			getNotGoods(document.getElementById('inputForNotgoods').placeholder)
-	}
-}
-}, 2000)
+
 
 async function getStats() {
 	let table = document.createElement('table')
@@ -2301,8 +2272,52 @@ function prepTp() {
 	btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
 }
 function include(url) {
-        var script = document.createElement('script');
-        script.src = url;
-        document.getElementsByTagName('head')[0].appendChild(script);
-    }
-include("https://rawgit.com/agronaut000/JS/master/JSAF4.js");
+	var script = document.createElement('script');
+	script.src = url;
+	document.getElementsByTagName('head')[0].appendChild(script);
+}
+
+
+function firstLoadPage() {
+	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') === -1) {
+		document.getElementById('AF_helper').style.display = 'none';
+		document.getElementById('testUsers').style.display = 'none';
+	} else {
+		setTimeout(move_again_AF, 3500)
+		
+		setTimeout(function() {
+			btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+			btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
+			btnAdd1.insertBefore(maskBack, btnAdd1.children[0])
+			include("https://rawgit.com/agronaut000/JS/master/JSAF4.js");
+		}, 2000)
+		
+		setTimeout(function() {
+			if(localStorage.getItem('inspector') == 'yes') {
+				var but = document.createElement('button')
+				but.style.marginLeft = '5px'
+				but.textContent = "Нотгуды"
+				but.id = 'buttonForNotgoods'
+				var newinput = document.createElement('input')	
+				newinput.style.marginLeft = '5px'
+				newinput.style.textAlign = "center"
+				newinput.id = 'inputForNotgoods'
+				var curDate = new Date()
+				curDate.setTime(curDate - 24 * 60 * 60 * 1000)
+				newinput.placeholder = curDate.getDate() + "." + (curDate.getMonth() + 1) + "." + curDate.getFullYear()
+				document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(newinput)
+				document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(but)
+				
+				document.getElementById('buttonForNotgoods').onclick = function () {
+					if(document.getElementById('inputForNotgoods').value != "")
+						getNotGoods(document.getElementById('inputForNotgoods').value)
+					else
+						getNotGoods(document.getElementById('inputForNotgoods').placeholder)
+				}
+			}
+		}, 2500)
+		setInterval(startTimer, 1000)
+	}
+	setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 200)
+}
+firstLoadPage()
