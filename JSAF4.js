@@ -144,6 +144,17 @@ function fillForm(view) {
 		this.parentElement.parentElement.style.display = 'none'
 		document.getElementById('buttonOpenForm').style.display = ''
 	}
+	let button3 = document.createElement('button')
+	button3.textContent = "закрыть"
+	button3.style.marginLeft = '5px'
+	button3.onclick = function() {
+		socket.close()
+		socketOpened = 0
+		console.log('Закрыли сокет')
+		this.parentElement.parentElement.style.display = 'none'
+		document.getElementById('buttonOpenForm').style.display = ''
+	}
+	
 	button.onclick = function() {
 		this.setAttribute('disabled', 'disabled')
 		view.blocks[0].answer = document.getElementById('formToSlack').children[1].children[0].value
@@ -160,6 +171,7 @@ function fillForm(view) {
 	}
 	newDiv.append(button)
 	newDiv.append(button2)
+	newDiv.append(button3)
 	div.append(newDiv)
 	console.log("Форма получена и заплонена успешно")
 }
