@@ -15,8 +15,10 @@ function getSlackToken() {
 		var result = document.getElementById('responseTextarea1').value
 		if(result == '{}')
 			setTimeout(tokenToLocalStorage, 1000)
-		else
+		else {
 			localStorage.setItem('token', result.match(/"token":"(.*?)"/)[1])
+			console.log('Токен Slack получен и установлен')
+		}
 	}
 	setTimeout(tokenToLocalStorage, 1000)
 }
@@ -30,8 +32,10 @@ function openSlackSocket() {
 		var url = result.url
 		if(result == '{}')
 			setTimeout(getUrl, 1000)
-		else
+		else {
 			openSocket(url)
+			console.log('URL для связи с Slack получен')
+		}
 	}
 	setTimeout(getUrlAndOpenSocket, 1000)
 	
@@ -41,7 +45,7 @@ function openSlackSocket() {
 				message = JSON.parse(event.data)
 			if(message.type == "view_opened" && message.app_id == 'AU3S9KSPL' && flagReadMessage == 1) {
 				view = message.view
-				console.log(message)
+				console.log('Форма получена: ' + message.view)
 				fillForm(JSON.stringify(message.view))
 				flagReadMessage = 0
 				return
@@ -51,6 +55,7 @@ function openSlackSocket() {
 				return
 			}
 		}
+		console.log('socket подключен')
 	}
 }
 
@@ -64,6 +69,7 @@ function createSlackView() {
 	  "method": "POST",
 	  "credentials": "include"
 	}
+	console.log('Запрашиваем создание формы')
 	document.getElementById('responseTextarea1').value = JSON.stringify(requestOptions)
 	document.getElementById('responseTextarea2').value = 'https://skyeng.slack.com/api/apps.actions.v2.execute?slack_route=T03A3SUFB'
 	flagReadMessage = 1
@@ -139,7 +145,7 @@ function fillForm(view) {
 		document.getElementById('buttonOpenForm').textContent = 'Развернуть'
 	}
 	button.onclick = function() {
-		this.setAttribute('disabled')
+		this.setAttribute('disabled', 'disabled')
 		view.blocks[0].answer = document.getElementById('formToSlack').children[1].children[0].value
 		view.blocks[1].answer = document.getElementById('formToSlack').children[2].children[0].value
 		view.blocks[2].answer = document.getElementById('formToSlack').children[3].children[0].value
@@ -155,6 +161,7 @@ function fillForm(view) {
 	newDiv.append(button)
 	newDiv.append(button2)
 	div.append(newDiv)
+	console.log("Форма получена и заплонена успешно")
 }
 
 let buttonOpenForm = document.createElement('div');
@@ -200,4 +207,5 @@ function submitSlackView(view) {
 	document.getElementById('responseTextarea2').value = 'https://skyeng.slack.com/api/views.submit?slack_route=T03A3SUFB&_x_version_ts=1607639215&_x_gantry=true'
 
 	document.getElementById('sendResponse').click()
+	console.log("Отправили форму")
 }
