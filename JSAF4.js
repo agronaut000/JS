@@ -52,7 +52,7 @@ function openSlackSocket() {
 				socket.close()
 				socketOpened = 0
 				console.log('Закрыли сокет')
-				document.getElementById('formToSlack').style.display = ''
+				document.getElementById('buttonOpenForm').style.display = ''
 				return
 			}
 		}
