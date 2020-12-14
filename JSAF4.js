@@ -166,6 +166,9 @@ function fillForm(view) {
 	
 	button.onclick = function() {
 		this.setAttribute('disabled', 'disabled')
+		setTimeout(function() {
+			this.removeAttribute('disabled')
+		}, 500)
 		view.blocks[0].answer = document.getElementById('formToSlack').children[1].children[0].value
 		view.blocks[1].answer = document.getElementById('formToSlack').children[2].children[0].value
 		view.blocks[2].answer = document.getElementById('formToSlack').children[3].children[0].value
@@ -177,6 +180,7 @@ function fillForm(view) {
 		view.blocks[8].answer = document.getElementById('formToSlack').children[9].children[0].value
 		submitSlackView(view)
 		document.getElementById('formToSlack').remove()
+		document.getElementById('buttonOpenForm').style.display = ''
 	}
 	newDiv.append(button)
 	newDiv.append(button2)
