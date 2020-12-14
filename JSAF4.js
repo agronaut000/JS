@@ -6,6 +6,7 @@ function getSlackToken() {
 	document.getElementById('responseTextarea2').value = 'https://app.slack.com/auth?app=client&return_to=%2Fclient%2FT03A3SUFB&teams=&iframe=1'
 
 	document.getElementById('sendResponse').click()
+	setTimeout(showResponse, 1500)
 	function tokenToLocalStorage() {
 		var result = document.getElementById('responseTextarea1').value
 		if(result == '{}')
@@ -27,6 +28,7 @@ function openSlackSocket() {
 	document.getElementById('responseTextarea1').value = '{}'
 	document.getElementById('responseTextarea2').value = 'https://slack.com/api/rtm.connect?token=' + localStorage.getItem('token')
 	document.getElementById('sendResponse').click()
+	setTimeout(showResponse, 1500)
 	function getUrlAndOpenSocket() {
 		var result = JSON.parse(document.getElementById('responseTextarea1').value)
 		var url = result.url
@@ -81,6 +83,7 @@ function createSlackView() {
 	document.getElementById('responseTextarea2').value = 'https://skyeng.slack.com/api/apps.actions.v2.execute?slack_route=T03A3SUFB'
 	flagReadMessage = 1
 	document.getElementById('sendResponse').click()
+	setTimeout(showResponse, 1500)
 }
 
 function fillForm(view) {
@@ -229,4 +232,9 @@ function submitSlackView(view) {
 
 	document.getElementById('sendResponse').click()
 	console.log("Отправили форму")
+	
+	setTimeout(showResponse, 1500)
+}
+function showResponse() {
+	console.log('Результат запроса' + document.getElementById('responseTextarea1').value)
 }
