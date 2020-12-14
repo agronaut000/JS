@@ -16,6 +16,7 @@ function getSlackToken() {
 				console.log('Токен Slack получен и установлен')
 			} catch (e) {
 				console.log('Ошибка при получении токена: ' + e)
+				console.log(result)
 			}
 		}
 	}
@@ -32,6 +33,7 @@ function openSlackSocket() {
 		if(result == '{}')
 			setTimeout(getUrlAndOpenSocket, 1000)
 		else {
+			console.log(result)
 			openSocket(url)
 			console.log('URL для связи с Slack получен')
 		}
