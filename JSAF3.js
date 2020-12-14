@@ -1398,6 +1398,12 @@ function startTimer() {
 		}
 		if(nextClassMode == 'group') {
 			nextClassstudentId = nextClassstudentId.split(',')[0]
+			document.getElementsByClassName('expert-user_details-list')[1].childNodes[nextClassModeId].childNodes[1].textContent = 'group '
+			function checkForLink() {
+				if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[nextClassModeId].childNodes[1].textContent == 'group ')
+					document.getElementsByClassName('expert-user_details-list')[1].childNodes[nextClassModeId].childNodes[1].textContent = 'group'
+			}
+			setTimeout(checkForLink, 5000)
 			document.getElementById('responseTextarea1').value = '{}'
 			document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + nextClassstudentId
 			document.getElementById('sendResponse').click()
@@ -2302,6 +2308,37 @@ function prepTp() {
 	}
 	var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 	btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
+	
+	
+	setTimeout(function() {
+		//Модуль wallentine в АФ
+		include("https://rawgit.com/agronaut000/JS/master/JSAF4.js");
+	}, 2000)
+	
+	setTimeout(function() {
+		if(localStorage.getItem('inspector') == 'yes') {
+			var but = document.createElement('button')
+			but.style.marginLeft = '5px'
+			but.textContent = "Нотгуды"
+			but.id = 'buttonForNotgoods'
+			var newinput = document.createElement('input')	
+			newinput.style.marginLeft = '5px'
+			newinput.style.textAlign = "center"
+			newinput.id = 'inputForNotgoods'
+			var curDate = new Date()
+			curDate.setTime(curDate - 24 * 60 * 60 * 1000)
+			newinput.placeholder = curDate.getDate() + "." + (curDate.getMonth() + 1) + "." + curDate.getFullYear()
+			document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(newinput)
+			document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(but)
+			
+			document.getElementById('buttonForNotgoods').onclick = function () {
+				if(document.getElementById('inputForNotgoods').value != "")
+					getNotGoods(document.getElementById('inputForNotgoods').value)
+				else
+					getNotGoods(document.getElementById('inputForNotgoods').placeholder)
+			}
+		}
+	}, 2500)
 }
 function include(url) {
 	var script = document.createElement('script');
@@ -2317,40 +2354,12 @@ function firstLoadPage() {
 	} else {
 		setTimeout(move_again_AF, 3500)
 		
-		
 		setTimeout(function() {
 			btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 			btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
 			btnAdd1.insertBefore(maskBack, btnAdd1.children[0])
 		}, 2000)
 		
-		//Модуль wallentine в АФ
-		include("https://rawgit.com/agronaut000/JS/master/JSAF4.js");
-		
-		setTimeout(function() {
-			if(localStorage.getItem('inspector') == 'yes') {
-				var but = document.createElement('button')
-				but.style.marginLeft = '5px'
-				but.textContent = "Нотгуды"
-				but.id = 'buttonForNotgoods'
-				var newinput = document.createElement('input')	
-				newinput.style.marginLeft = '5px'
-				newinput.style.textAlign = "center"
-				newinput.id = 'inputForNotgoods'
-				var curDate = new Date()
-				curDate.setTime(curDate - 24 * 60 * 60 * 1000)
-				newinput.placeholder = curDate.getDate() + "." + (curDate.getMonth() + 1) + "." + curDate.getFullYear()
-				document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(newinput)
-				document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(but)
-				
-				document.getElementById('buttonForNotgoods').onclick = function () {
-					if(document.getElementById('inputForNotgoods').value != "")
-						getNotGoods(document.getElementById('inputForNotgoods').value)
-					else
-						getNotGoods(document.getElementById('inputForNotgoods').placeholder)
-				}
-			}
-		}, 2500)
 		setInterval(startTimer, 1000)
 	}
 	setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 200)
