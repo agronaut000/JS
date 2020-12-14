@@ -233,10 +233,11 @@ maskBack.onclick = function () {
 
 
 
-let maskBackHide = document.createElement('div')
+let maskBackHide = document.createElement('span')
 maskBackHide.id = "maskBackHide"
 maskBackHide.innerHTML = "Скрыть"
 maskBackHide.style.marginRight = "15px";
+maskBackHide.style.marginLeft = "15px";
 maskBackHide.style.display = "";
 
 maskBackHide.onclick = function () {
@@ -1473,10 +1474,8 @@ function startTimer() {
 	}
 	
 	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined) {
-		document.getElementsByClassName('ant-modal-content')[0].childNodes[1].appendChild(maskBackHide)
+		document.getElementsByClassName('ant-modal-content')[0].childNodes[1].children[0].appendChild(maskBackHide)
 	}
-
-	
 }
 
 
