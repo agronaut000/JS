@@ -54,7 +54,7 @@ function openSlackSocket() {
 				flagReadMessage = 0
 				return
 			}
-			if(message.type == "message" && message.channel == 'D01FYK6G25U') {
+			if(message.type == "message" && message.bot_id == 'BUS628294') {
 				console.log('Ссылка на тред: ' + message.text.split('<')[1].split('|')[0])
 				sendComment('Ссылка на тред: ' + message.text.split('<')[1].split('|')[0])
 				socket.close()
