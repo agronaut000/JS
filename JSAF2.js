@@ -1351,8 +1351,6 @@ function startTimer() {
 				refCurTimer('10:00')
 			}
 		refreshTimer()
-	if(document.getElementsByClassName('ant-btn ant-btn-icon-only')[3] !== undefined)
-		document.getElementsByClassName('ant-btn ant-btn-icon-only')[3].style.display = 'none'
 
 	}
 	
