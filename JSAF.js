@@ -2265,6 +2265,8 @@ function prepTp() {
 	buttonGetStat.style.marginRight = "15px";
 	buttonGetStat.onclick = function() {
 		if(this.textContent == 'Скрыть стату') {
+			if(this.getAttribute('disabled') != null)
+				return
 			if(document.getElementById('tableStats') != undefined) {
 				document.getElementById('tableStats').remove()
 			}
