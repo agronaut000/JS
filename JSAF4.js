@@ -147,6 +147,7 @@ function fillForm(view) {
 	newDiv.style.textAlign = 'center'
 	let button = document.createElement('button')
 	button.textContent = "Отправить"
+	button.id = 'formToSlackSend'
 	let button2 = document.createElement('button')
 	button2.textContent = "Скрыть"
 	button2.style.marginLeft = '5px'
@@ -168,17 +169,22 @@ function fillForm(view) {
 	button.onclick = function() {
 		this.setAttribute('disabled', 'disabled')
 		setTimeout(function() {
-			this.removeAttribute('disabled')
+			if(document.getElementById('formToSlackSend') != undefined)
+				document.getElementById('formToSlackSend').removeAttribute('disabled')
 		}, 500)
-		view.blocks[0].answer = document.getElementById('formToSlack').children[1].children[0].value
-		view.blocks[1].answer = document.getElementById('formToSlack').children[2].children[0].value
-		view.blocks[2].answer = document.getElementById('formToSlack').children[3].children[0].value
-		view.blocks[3].answer = document.getElementById('formToSlack').children[4].children[0].value
-		view.blocks[4].answer = document.getElementById('formToSlack').children[5].children[0].value
-		view.blocks[5].answer = document.getElementById('formToSlack').children[6].children[0].value
-		view.blocks[6].answer = document.getElementById('formToSlack').children[7].children[0].value
-		view.blocks[7].answer = document.getElementById('formToSlack').children[8].children[0].value
-		view.blocks[8].answer = document.getElementById('formToSlack').children[9].children[0].value
+		if(document.getElementById('formToSlack') == undefined) {
+			console.log("Не вижу форму")
+			return;
+		}
+		for(i = 0; i < 9; i++) {
+			view.blocks[i].answer = document.getElementById('formToSlack').children[(i + 1)].children[0].value
+			console.log('view.blocks[i].answer = ' + view.blocks[i].answer)
+			if(view.blocks[i].answer == undefined) {
+				console.log(i + ' не нахожу текст поля')
+				return
+			}
+		}
+		console.log(view)
 		submitSlackView(view)
 		document.getElementById('formToSlack').remove()
 		document.getElementById('buttonOpenForm').style.display = ''
@@ -209,6 +215,7 @@ buttonOpenForm.onclick = function() {
 var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 btnAdd.insertBefore(buttonOpenForm, btnAdd.children[0])
 function submitSlackView(view) {
+	console.log(view)
 	let client_token = Number(new Date())
 	let view_id = view.id
 	let answer = 'Content-Disposition: form-data; name=\"state\"\r\n\r\n{\"values\":{'
