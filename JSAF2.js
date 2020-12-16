@@ -2172,7 +2172,7 @@ if(localStorage.getItem('inspector') == 'yes') {
 
 async function getStats() {
 	let table = document.createElement('table')
-	table.style = 'table-layout: auto; width:45%; min-width: 550px'
+	table.style = 'table-layout: auto; width:750px'
 	table.style.textAlign = 'center'
 	table.id = 'tableStats'
 	let columnNames = ["Оператор", "Закрыл запросов", "Среднее время ожидания", "Среднее время работы"]
@@ -2265,6 +2265,8 @@ function prepTp() {
 	buttonGetStat.style.marginRight = "15px";
 	buttonGetStat.onclick = function() {
 		if(this.textContent == 'Скрыть стату') {
+			if(this.getAttribute('disabled') != null)
+				return
 			if(document.getElementById('tableStats') != undefined) {
 				document.getElementById('tableStats').remove()
 			}
@@ -2284,10 +2286,12 @@ function prepTp() {
 				document.getElementById('root').children[0].children[1].children[0].children[1].children[0].style.display = "none"
 			} else {
 				this.textContent = 'Неверная страница'
-				setTimeout(function() { document.getElementById('buttonGetStat').textContent = Статистика }, 2000)
+				setTimeout(function() { document.getElementById('buttonGetStat').textContent = Статистика }, 1000)
 				return
 			}
 			getStats()
+			document.getElementById('buttonGetStat').setAttribute('disabled', 'disabled')
+			setTimeout(function() {document.getElementById('buttonGetStat').removeAttribute('disabled')}, 2500)
 			this.textContent = 'Скрыть стату'
 		}
 	}
