@@ -2286,7 +2286,7 @@ function prepTp() {
 				document.getElementById('root').children[0].children[1].children[0].children[1].children[0].style.display = "none"
 			} else {
 				this.textContent = 'Неверная страница'
-				setTimeout(function() { document.getElementById('buttonGetStat').textContent = Статистика }, 1000)
+				setTimeout(function() { document.getElementById('buttonGetStat').textContent = Статистика }, 500)
 				return
 			}
 			getStats()
