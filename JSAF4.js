@@ -179,7 +179,7 @@ function fillForm(view) {
 		}
 		for(i = 0; i < 9; i++) {
 			view.blocks[i].answer = document.getElementById('formToSlack').children[(i + 1)].children[0].value
-			vview.blocks[i].answer = view.blocks[i].answer.split("\"").join("\\\"")
+			view.blocks[i].answer = view.blocks[i].answer.split("\"").join("\\\"")
 			console.log('view.blocks[i].answer = ' + view.blocks[i].answer)
 			if(view.blocks[i].answer == undefined) {
 				console.log(i + ' не нахожу текст поля')
