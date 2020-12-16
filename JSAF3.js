@@ -2292,12 +2292,12 @@ function prepTp() {
 				document.getElementById('root').children[0].children[1].children[0].children[1].children[0].style.display = "none"
 			} else {
 				this.textContent = 'Неверная страница'
-				setTimeout(function() { document.getElementById('buttonGetStat').textContent = "Статистика" }, 1000)
+				setTimeout(function() { document.getElementById('buttonGetStat').textContent = "Статистика" }, 500)
 				return
 			}
 			getStats()
 			document.getElementById('buttonGetStat').setAttribute('disabled', 'disabled')
-			setTimeout(function() {document.getElementById('buttonGetStat').removeAttribute('disabled')}, 2500)
+			setTimeout(function() {document.getElementById('buttonGetStat').removeAttribute('disabled')}, 500)
 			this.textContent = 'Скрыть стату'
 		}
 	}
