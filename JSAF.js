@@ -2291,7 +2291,7 @@ function prepTp() {
 			}
 			getStats()
 			document.getElementById('buttonGetStat').setAttribute('disabled', 'disabled')
-			setTimeout(function() {document.getElementById('buttonGetStat').removeAttribute('disabled')}, 1000)
+			setTimeout(function() {document.getElementById('buttonGetStat').removeAttribute('disabled')}, 500)
 			this.textContent = 'Скрыть стату'
 		}
 	}
