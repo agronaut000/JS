@@ -55,6 +55,7 @@ function openSlackSocket() {
 				return
 			}
 			if(message.type == "message" && message.bot_id == 'BUS628294') {
+				message = JSON.stringify(message)
 				console.log('Ссылка на тред: ' + message.match('http.*>')[0].split('|')[0])
 				sendComment('Ссылка на тред: ' + message.match('http.*>')[0].split('|')[0])
 				console.log(JSON.parse(message))
@@ -178,6 +179,7 @@ function fillForm(view) {
 		}
 		for(i = 0; i < 9; i++) {
 			view.blocks[i].answer = document.getElementById('formToSlack').children[(i + 1)].children[0].value
+			vview.blocks[i].answer = view.blocks[i].answer.split("\"").join("\\\"")
 			console.log('view.blocks[i].answer = ' + view.blocks[i].answer)
 			if(view.blocks[i].answer == undefined) {
 				console.log(i + ' не нахожу текст поля')
