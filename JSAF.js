@@ -353,16 +353,8 @@ function move_again_AF() {
 		getText()
 	}
     document.getElementById('type_TP').onclick = function () {
-		flagLangBut = 1
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec')
-		document.getElementById('msg1').style.display = ''
-		document.getElementById('snd').style.marginLeft = '16px'
-		document.getElementById('testUsers').style.display = ''
-		document.getElementById('takeNewChat').style.display = ''
-		document.getElementById('howManyChats').style.display = ''
-		whoAmI()
-		customTemplates()
-		getText()
+		prepTp()
 	}
     document.getElementById('type_TS').onclick = function () {
 		localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec')
@@ -382,14 +374,7 @@ function move_again_AF() {
 		document.getElementById('takeNewChat').style.display = 'none'
 		document.getElementById('howManyChats').style.display = 'none'
 	} else {
-		document.getElementById('msg1').style.display = ''
-		document.getElementById('snd').style.marginLeft = '16px'
-		document.getElementById('testUsers').style.display = ''
-		document.getElementById('takeNewChat').style.display = ''
-		document.getElementById('howManyChats').style.display = ''
-		flagLangBut = 1
-		customTemplates()
-		whoAmI()
+		prepTp()
 	}
 	
     document.getElementById('hideMenu').onclick = function () {
@@ -554,8 +539,10 @@ function move_again_AF() {
 		document.getElementById('AF_helper').style.display = 'flex'
 		this.style.display = 'none'
 	}
-	btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+	var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 	btnAdd.insertBefore(button1, btnAdd.children[0])
+	
+	
 	
 	function screenshots(){
 		if(document.getElementsByClassName('expert-chat-display-inner')[0] != undefined)
@@ -571,6 +558,7 @@ function move_again_AF() {
 				}
 			}
 	}
+	screenshots()
 	setInterval(screenshots, 5000)
 	function screenshots2(){
 	if(document.getElementsByClassName('chat-messages')[0] != undefined)
@@ -586,6 +574,7 @@ function move_again_AF() {
 			}
 		}
 	}
+	screenshots2()
 	setInterval(screenshots2, 5000)
 	
     document.getElementById('switcher').onclick = function () {
@@ -2180,3 +2169,130 @@ if(localStorage.getItem('inspector') == 'yes') {
 	}
 }
 }, 2000)
+
+async function getStats() {
+	let table = document.createElement('table')
+	table.style = 'table-layout: auto; width:750px'
+	table.style.textAlign = 'center'
+	table.id = 'tableStats'
+	let columnNames = ["Оператор", "Закрыл запросов", "Среднее время ожидания", "Среднее время работы"]
+	let trHead = document.createElement('tr')
+	for(let i = 0; i < columnNames.length; i++) {
+		var th = document.createElement('th')
+		trHead.append(th)
+		th.textContent = columnNames[i]
+	}
+
+	var time = new Date()
+	var time2 = new Date()
+	time2.setTime(time - 24 * 60 * 60 * 1000)
+	var date1 = time.getDate() < 10 ? '0' + time.getDate() : time.getDate()
+	var date2 = time2.getDate() < 10 ? '0' + time2.getDate() : time2.getDate()
+	var month1 = Number(time.getMonth() + 1) < 10 ? '0' + Number(time.getMonth() + 1) : Number(time.getMonth() + 1)
+	var month2 = Number(time2.getMonth() + 1) < 10 ? '0' + Number(time2.getMonth() + 1) : Number(time2.getMonth() + 1)
+	var str1 = time.getFullYear() + "-" + month1 + "-" + date1 + "T21%3A00%3A00Z"
+	var str2 = time2.getFullYear() + "-" + month2 + "-" + date2 + "T21%3A00%3A00Z"
+	var array = []
+	await fetch("https://skyeng.autofaq.ai/api/reason8/reports/operatorActivityTable?dateFrom=" + str2 + "&dateTo=" + str1, {
+	  "headers": {
+		"accept": "*/*",
+		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+		"cache-control": "max-age=0",
+		"sec-fetch-dest": "empty",
+		"sec-fetch-mode": "cors",
+		"sec-fetch-site": "same-origin"
+	  },
+	  "referrer": "https://skyeng.autofaq.ai/reports/operator-activity",
+	  "referrerPolicy": "strict-origin-when-cross-origin",
+	  "body": null,
+	  "method": "GET",
+	  "mode": "cors",
+	  "credentials": "include"
+	}).then(response => b = response.json().then(b => b.rows.forEach(k => {
+		if(k.operator.indexOf('ТП') != -1) {
+			 array.push(k)
+		}
+	})))
+	array.sort(function (a, b) {
+		return b.conversationClosed - a.conversationClosed;
+	});
+	let tbody = document.createElement('tbody')
+	for(let i = 0; i < array.length; i++) {
+		var tr = document.createElement('tr')
+		for(let j = 0; j < 4; j++) {
+			var td = document.createElement('td')
+			switch(j) {
+				case 0:
+					td.textContent = array[i].operator;
+					td.style = 'text-align: left; padding-left: 50px'
+					break;
+				case 1:
+					td.textContent = array[i].conversationClosed;
+					break;
+				case 2:
+					var averageAnswerTime = Math.floor(array[i].averageAnswerTime / 1000)
+					averageAnswerTime = averageAnswerTime < 60 ? '00:' + averageAnswerTime : Math.floor(averageAnswerTime / 60) + ':' + ((averageAnswerTime % 60) < 10 ? '0' + (averageAnswerTime % 60) : (averageAnswerTime % 60))
+					td.textContent = averageAnswerTime;
+					break;
+				case 3:
+					var averageHandlingTime = Math.floor(array[i].averageHandlingTime / 1000)
+					averageHandlingTime = averageHandlingTime < 60 ? averageHandlingTime : Math.floor(averageHandlingTime / 60) + ':' + ((averageHandlingTime % 60) < 10 ? '0' + (averageHandlingTime % 60) : (averageHandlingTime % 60))
+					td.textContent = averageHandlingTime;
+					break;
+			}
+			tr.append(td)
+		}
+		tbody.append(tr)
+	}
+	table.append(trHead)
+	table.append(tbody)
+	document.getElementById('root').children[0].children[1].children[0].children[1].append(table)
+}
+
+function prepTp() {
+	document.getElementById('msg1').style.display = ''
+	document.getElementById('snd').style.marginLeft = '16px'
+	document.getElementById('testUsers').style.display = ''
+	document.getElementById('takeNewChat').style.display = ''
+	document.getElementById('howManyChats').style.display = ''
+	flagLangBut = 1
+	customTemplates()
+	whoAmI()
+		
+	let buttonGetStat = document.createElement('div');
+	buttonGetStat.id = 'buttonGetStat';
+	buttonGetStat.innerHTML = "Статистика";
+	buttonGetStat.style.marginRight = "15px";
+	buttonGetStat.onclick = function() {
+		if(this.textContent == 'Скрыть стату') {
+			if(document.getElementById('tableStats') != undefined) {
+				document.getElementById('tableStats').remove()
+			}
+			this.textContent = 'Статистика'
+			
+			
+			if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') != -1) {
+				document.getElementById('root').children[0].children[1].children[0].children[1].children[1].style.display = ""
+			}
+			if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/archive') != -1) {
+				document.getElementById('root').children[0].children[1].children[0].children[1].children[0].style.display = ""
+			}
+		} else {
+			if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') != -1) {
+				document.getElementById('root').children[0].children[1].children[0].children[1].children[1].style.display = "none"
+			} else if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/archive') != -1) {
+				document.getElementById('root').children[0].children[1].children[0].children[1].children[0].style.display = "none"
+			} else {
+				this.textContent = 'Неверная страница'
+				setTimeout(function() { document.getElementById('buttonGetStat').textContent = Статистика }, 1000)
+				return
+			}
+			getStats()
+			document.getElementById('buttonGetStat').setAttribute('disabled', 'disabled')
+			setTimeout(function() {document.getElementById('buttonGetStat').removeAttribute('disabled')}, 2500)
+			this.textContent = 'Скрыть стату'
+		}
+	}
+	var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+	btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
+}
