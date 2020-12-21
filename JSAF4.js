@@ -55,10 +55,10 @@ function openSlackSocket() {
 				return
 			}
 			if(message.type == "message" && message.bot_id == 'BUS628294') {
+				console.log(message)
 				message = JSON.stringify(message)
-				console.log('Ссылка на тред: ' + message.match('https://skyeng.slack.com.*>')[0].split('|')[0])
-				sendComment('Ссылка на тред: ' + message.match('https://skyeng.slack.com.*>')[0].split('|')[0])
-				console.log(JSON.parse(message))
+				console.log('Ссылка на тред: ' + message.match('https://skyeng.slack.*>')[0].split('|')[0])
+				sendComment('Ссылка на тред: ' + message.match('https://skyeng.slack.*>')[0].split('|')[0])
 				socket.close()
 				socketOpened = 0
 				console.log('Закрыли сокет')
