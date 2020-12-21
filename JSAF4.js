@@ -129,11 +129,11 @@ function fillForm(viewStringify) {
 	for(let i = 0; i < blocks.length; i++) {
 		let newDiv = document.createElement('div')
 		newDiv.style = 'margin:5px'
-		newDiv.id = 'formToSlackField' + i
 		if(blocks[i].element.options != undefined) {
 			let select = document.createElement('select')
 			select.style.width = '100%'
 			select.placeholder = blocks[i].element.placeholder.text
+			select.id = 'formToSlackField' + i
 			for(let j = 0; j < blocks[i].element.options.length; j++) {
 				let option = document.createElement('option')
 				option.textContent = blocks[i].element.options[j].text.text
@@ -148,6 +148,7 @@ function fillForm(viewStringify) {
 				var input = document.createElement('textarea')
 			input.style.width = '100%'
 			input.placeholder = blocks[i].label.text
+			input.id = 'formToSlackField' + i
 			newDiv.append(input)
 		}
 		div.append(newDiv)
