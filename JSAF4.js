@@ -177,14 +177,11 @@ function fillForm(viewStringify) {
 	
 	button.onclick = function() {
 		this.setAttribute('disabled', 'disabled')
-		setTimeout(function() {
-			if(document.getElementById('formToSlackSend') != undefined)
-				document.getElementById('formToSlackSend').removeAttribute('disabled')
-		}, 500)
 		if(document.getElementById('formToSlack') == undefined) {
 			console.log("Не вижу форму")
 			return;
 		}
+		console.log("Заполняем view")
 		for(let i = 0; i < 9; i++) {
 			view.blocks[i].answer = document.getElementById('formToSlack').children[(i + 1)].children[0].value
 			view.blocks[i].answer = view.blocks[i].answer.split("\"").join("\\\"")
@@ -198,6 +195,11 @@ function fillForm(viewStringify) {
 		submitSlackView(view)
 		document.getElementById('formToSlack').remove()
 		document.getElementById('buttonOpenForm').style.display = ''
+		
+		setTimeout(function() {
+			if(document.getElementById('formToSlackSend') != null)
+				document.getElementById('formToSlackSend').removeAttribute('disabled')
+		}, 500)
 	}
 	newDiv.append(button)
 	newDiv.append(button2)
