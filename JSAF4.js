@@ -95,7 +95,7 @@ function createSlackView() {
 	document.getElementById('sendResponse').click()
 	setTimeout(showResponse, 1500)
 }
-
+flagFormSubmited = 0
 function fillForm(viewStringify) {
 	view = JSON.parse(viewStringify)
 	div = document.createElement('div')
@@ -129,6 +129,7 @@ function fillForm(viewStringify) {
 	for(let i = 0; i < blocks.length; i++) {
 		let newDiv = document.createElement('div')
 		newDiv.style = 'margin:5px'
+		newDiv.id = 'formToSlackField' + i
 		if(blocks[i].element.options != undefined) {
 			let select = document.createElement('select')
 			select.style.width = '100%'
@@ -177,13 +178,14 @@ function fillForm(viewStringify) {
 	
 	button.onclick = function() {
 		this.setAttribute('disabled', 'disabled')
+		flagFormSubmited = 0
 		if(document.getElementById('formToSlack') == undefined) {
 			console.log("Не вижу форму")
 			return;
 		}
 		console.log("Заполняем view")
 		for(let i = 0; i < 9; i++) {
-			view.blocks[i].answer = document.getElementById('formToSlack').children[(i + 1)].children[0].value
+			view.blocks[i].answer = document.getElementById('formToSlackField' + i).value
 			view.blocks[i].answer = view.blocks[i].answer.split("\"").join("\\\"")
 			console.log('view.blocks[i].answer = ' + view.blocks[i].answer)
 			if(view.blocks[i].answer == undefined || view.blocks[i].answer == "undefined") {
@@ -193,6 +195,7 @@ function fillForm(viewStringify) {
 		}
 		console.log(view)
 		submitSlackView(view)
+		flagFormSubmited = 1
 		document.getElementById('formToSlack').remove()
 		document.getElementById('buttonOpenForm').style.display = ''
 		
