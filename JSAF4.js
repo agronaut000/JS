@@ -177,7 +177,7 @@ function fillForm(view) {
 			console.log("Не вижу форму")
 			return;
 		}
-		for(i = 0; i < 9; i++) {
+		for(let i = 0; i < 9; i++) {
 			view.blocks[i].answer = document.getElementById('formToSlack').children[(i + 1)].children[0].value
 			view.blocks[i].answer = view.blocks[i].answer.split("\"").join("\\\"")
 			console.log('view.blocks[i].answer = ' + view.blocks[i].answer)
@@ -221,7 +221,7 @@ function submitSlackView(view) {
 	let client_token = Number(new Date())
 	let view_id = view.id
 	let answer = 'Content-Disposition: form-data; name=\"state\"\r\n\r\n{\"values\":{'
-	for(i = 0; i < view.blocks.length; i++) {
+	for(let i = 0; i < view.blocks.length; i++) {
 		if(i > 0)
 			answer += ','
 		answer += "\"" + view.blocks[i].block_id
