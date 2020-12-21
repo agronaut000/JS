@@ -43,10 +43,9 @@ function openSlackSocket() {
 	setTimeout(getUrlAndOpenSocket, 1000)
 	
 	function openSocket(url) {
-		socketOpened = 1
 		socket = new WebSocket(url)
 		socket.onmessage = function(event) {
-				message = JSON.parse(event.data)
+			message = JSON.parse(event.data)
 			if(message.type == "view_opened" && message.app_id == 'AU3S9KSPL' && flagReadMessage == 1) {
 				view = message.view
 				console.log('Форма получена: ' + message.view)
@@ -57,16 +56,25 @@ function openSlackSocket() {
 			if(message.type == "message" && message.bot_id == 'BUS628294') {
 				console.log(message)
 				message = JSON.stringify(message)
+				if(message.match('https://skyeng.slack.*>') == null) {
+					console.log("В этом ответе нет нужный ссылки")
+					return
+				}
 				console.log('Ссылка на тред: ' + message.match('https://skyeng.slack.*>')[0].split('|')[0])
 				sendComment('Ссылка на тред: ' + message.match('https://skyeng.slack.*>')[0].split('|')[0])
-				socket.close()
-				socketOpened = 0
-				console.log('Закрыли сокет')
 				document.getElementById('buttonOpenForm').style.display = ''
+				socket.close()
 				return
 			}
 		}
-		console.log('socket подключен')
+		socket.onopen = function(event) {
+			socketOpened = 1
+			console.log('socket подключен')
+		}
+		socket.onclose = function(event) {
+			socketOpened = 0
+			console.log('Закрыли сокет')
+		}
 	}
 }
 
@@ -88,8 +96,8 @@ function createSlackView() {
 	setTimeout(showResponse, 1500)
 }
 
-function fillForm(view) {
-	view = JSON.parse(view)
+function fillForm(viewStringify) {
+	view = JSON.parse(viewStringify)
 	div = document.createElement('div')
 	document.body.append(div)
 	if (localStorage.getItem('viewToSlackFormAFTop') == null) {
@@ -181,7 +189,7 @@ function fillForm(view) {
 			view.blocks[i].answer = document.getElementById('formToSlack').children[(i + 1)].children[0].value
 			view.blocks[i].answer = view.blocks[i].answer.split("\"").join("\\\"")
 			console.log('view.blocks[i].answer = ' + view.blocks[i].answer)
-			if(view.blocks[i].answer == undefined) {
+			if(view.blocks[i].answer == undefined || view.blocks[i].answer == "undefined") {
 				console.log(i + ' не нахожу текст поля')
 				return
 			}
