@@ -178,7 +178,7 @@ function fillForm(view) {
 			return;
 		}
 		for(let i = 0; i < 9; i++) {
-			view.blocks[i].answer = document.getElementById('formToSlack').children[(i + 1)].children[0].value
+			view.blocks[i].answer = document.getElementById('formToSlack').children[(i + 1)].textContent
 			view.blocks[i].answer = view.blocks[i].answer.split("\"").join("\\\"")
 			console.log('view.blocks[i].answer = ' + view.blocks[i].answer)
 			if(view.blocks[i].answer == undefined) {
