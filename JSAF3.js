@@ -1025,7 +1025,7 @@ function msgFromTable(btnName) {
 
 var templatesAF = []
 async function loadTemplates(template, word) {
-	await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
+	return await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
 	  "headers": {
 		"content-type": "application/json",
 	  },
