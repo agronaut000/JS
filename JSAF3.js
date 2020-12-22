@@ -959,7 +959,6 @@ function refreshTemplates() {
 							newBut.style.marginTop = '4px'
 							document.getElementById('addTmp').children[0].appendChild(newBut)
 						}
-						loadTemplates(c[2], c[3])
 						break
 					case 'Переводы':
 						var newBut = document.createElement('button')
