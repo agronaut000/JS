@@ -303,7 +303,7 @@ document.body.append(wintAF);
 wintAF.style = 'min-height: 25px; min-width: 65px; background: #464451; top: ' + localStorage.getItem('winTopAF') + 'px; left: ' + localStorage.getItem('winLeftAF') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black;';
 wintAF.setAttribute('id' ,'AF_helper');
 wintAF.innerHTML = win_AFhelper; 
-
+var chatsArray = []
 var TS_addr = 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec'
 var KC_addr = 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec'
 var TP_addr = 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec'
@@ -1146,32 +1146,25 @@ async function sendAnswer(txt, flag = 1, time = "10:00") {
 			}
 }
 async function getInfo(flag1 = 1) {
-		adr = document.location.href
-		adr1 = document.location.pathname
-		adr1 = adr1.split('/')
-		adr1 = adr1[3]
-		if(adr1 == undefined)
-			adr1 = ""
-		sessionId = ""
-		if(document.getElementById('msg1').innerHTML != "Доработать" || flag1 == 0) {
-			a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
-	  "headers": {
-		"accept": "*/*",
-		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-		"cache-control": "max-age=0",
-		"sec-fetch-dest": "empty",
-		"sec-fetch-mode": "cors",
-		"sec-fetch-site": "same-origin"
-	  },
-	  "referrer": adr,
-	  "referrerPolicy": "no-referrer-when-downgrade",
-	  "body": null,
-	  "method": "GET",
-	  "mode": "cors",
-	  "credentials": "include"
-	}).then(a => b = a.json()).then(b => {sessionId = b.sessionId; localStorage.setItem('serviceIdGlob', b.serviceId)});
+	var adr = document.location.href
+	var adr1 = document.location.pathname
+	adr1 = adr1.split('/')
+	adr1 = adr1[3]
+	var sessionId = ""
+	for(let i = 0; i < chatsArray.length; i++) {
+		if(chatsArray[i].id == adr1) {
+			sessionId = chatsArray[i].sessionId
+			return [adr, adr1, sessionId]
 		}
-		return [adr, adr1, sessionId]
+	}
+	if(adr1 == undefined)
+		adr1 = ""
+	if(document.getElementById('msg1').innerHTML != "Доработать" || flag1 == 0) {
+		await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1)
+		.then(response => response.json())
+		.then(result => {sessionId = result.sessionId; chatsArray.push(result); localStorage.setItem('serviceIdGlob', result.serviceId)});
+	}
+	return [adr, adr1, sessionId]
 }
 async function sendComment(txt){ 
 		var values = await getInfo(0)
@@ -1478,7 +1471,7 @@ function startTimer() {
 			for(i = 1; i < document.getElementsByClassName('ant-modal-content')[0].children[2].childElementCount - 1; i++)
 				if(document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Тех. поддержка V1" && document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Уроки V2" && document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Группа КМ" && document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Продажи 1Л")
 					document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].style.display = 'none'
-			
+
 		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Закрыть запрос?')
 			for(i = 1; i < document.getElementsByClassName('ant-modal-content')[0].children[2].childElementCount - 1; i++)
 				if(document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Тех. поддержка V1")
