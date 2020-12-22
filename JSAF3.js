@@ -1059,8 +1059,8 @@ async function loadTemplates(template, word) {
 				title = title.split("\"").join("\\\"")
 				accuracy = b.accuracy
 				
-				templatesAF.push([template, serviceId, queryId, AFsessionId, tmpText, title, accuracy])
-				return [template, documentId, serviceId, queryId, AFsessionId, tmpText, title, accuracy]
+				templatesAF.push([template, documentId, serviceId, queryId, AFsessionId, tmpText, title, accuracy])
+				return ([template, documentId, serviceId, queryId, AFsessionId, tmpText, title, accuracy])
 			}
 		}
 	})
@@ -1076,7 +1076,6 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 	}
 	if(curTemplate == undefined)
 		curTemplate = await loadTemplates(template, word)
-	loadTemplates()
 	//addTimer()
 	time = "10:00"
 	if(flag == 1) {
