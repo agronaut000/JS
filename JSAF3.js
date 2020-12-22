@@ -810,6 +810,7 @@ function getText() {
    
 }
 function refreshTemplates() {
+	templatesAF = []
 	while(document.getElementById('pages').children[0] != undefined)
 		document.getElementById('pages').children[0].remove()
 	for(i = 0; document.getElementById(i + 'page') != undefined; i++)
@@ -958,6 +959,7 @@ function refreshTemplates() {
 							newBut.style.marginTop = '4px'
 							document.getElementById('addTmp').children[0].appendChild(newBut)
 						}
+						loadTemplates(c[2], c[3])
 						break
 					case 'Переводы':
 						var newBut = document.createElement('button')
@@ -1022,7 +1024,58 @@ function msgFromTable(btnName) {
 	}
 }
 
+var templatesAF = []
+async function loadTemplate(template, word) {
+	await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
+	  "headers": {
+		"content-type": "application/json",
+	  },
+	  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646,121303,121343,121388,121162,121158,121346,121151,121341,121152,121342,121156,121347,121079,121163,121155,121344,121157,121345,121304,121340,121384]}",
+	  "method": "POST",
+	})
+	.then(response => response.json())
+	.then(result => {
+		var serviceId = ""
+		var queryId = ""
+		var AFsessionId = ""
+		var tmpText = ""
+		var title = ""
+		var accuracy = ""
+		for(let i = 0; i < result.length; i++) {
+			if(result[i].title == template) {
+				var b = result[i]
+				serviceId = b.serviceId
+				queryId = b.queryId
+				AFsessionId = b.sessionId
+				tmpText = b.text
+				tmpText = tmpText.split("<br>↵").join('\n')
+				tmpText = tmpText.split("&nbsp;").join(' ')
+				tmpText = tmpText.split("<br />").join('\n')
+				tmpText = tmpText.split('<a').join('TMPaTMP').split('</a').join('TMPENDaTMEPEND')
+				tmpText = tmpText.replace(/<\/?[^>]+>/g,'')
+				tmpText = tmpText.split('TMPaTMP').join('<a').split('TMPENDaTMEPEND').join('</a')
+				title = b.title
+				title = title.split("\"").join("\\\"")
+				accuracy = b.accuracy
+				
+				templatesAF.push([template, serviceId, queryId, AFsessionId, tmpText, title, accuracy])
+				return [template, serviceId, queryId, AFsessionId, tmpText, title, accuracy]
+			}
+		}
+	})
+}
+
 async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 = 0) {
+	var curTemplate
+	for(let i = 0; i < templatesAF.length; i++) {
+		if(template == templatesAF[i][0]) {
+			curTemplate = templatesAF[i]
+			break
+		}
+		if(i == templatesAF.length - 1)
+			curTemplate = loadTemplates(template, word)
+	}
+	loadTemplates()
 	//addTimer()
 	time = "10:00"
 	if(flag == 1) {
@@ -1032,81 +1085,37 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 	var tmpText = ""
 	var values = await getInfo(0)
 	var adr = values[0]; var adr1 = values[1]; var uid = values[2]
-	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
-  "headers": {
-    "accept": "*/*", 
-    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-    "cache-control": "max-age=0",
-    "content-type": "application/json",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-origin"
-  },
-  "referrer": adr,
-  "referrerPolicy": "no-referrer-when-downgrade",
-  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646,121303,121343,121388,121162,121158,121346,121151,121341,121152,121342,121156,121347,121079,121163,121155,121344,121157,121345,121304,121340,121384]}",
-  "method": "POST",
-  "mode": "cors",
-  "credentials": "include"
-});
-b = a.json()
-serviceId = queryId = sessionId = tmpText = title = accuracy = ""
-b.then(b => {b.forEach(b => {if (b.title == template) {documentId = b.documentId
-serviceId = b.serviceId
-queryId = b.queryId
-AFsessionId = b.sessionId
-tmpText = b.text
-tmpText = tmpText.split("<br>↵").join('\n')
-tmpText = tmpText.split("&nbsp;").join(' ')
-tmpText = tmpText.split("<br />").join('\n')
-tmpText = tmpText.split('<a').join('TMPaTMP').split('</a').join('TMPENDaTMEPEND')
-tmpText = tmpText.replace(/<\/?[^>]+>/g,'')
-tmpText = tmpText.split('TMPaTMP').join('<a').split('TMPENDaTMEPEND').join('</a')
-title = b.title
-title = title.split("\"").join("\\\"")
-accuracy = b.accuracy
-}});}).then(k => {
-		if(document.getElementById('msg1').innerHTML == "Доработать" && flag2 == 0) {
-			document.getElementById('inp').value = tmpText
-			template_text = template
-			word_text = word
-			template_flag = 1
-		}
-		else if(tmpText == "")
-				console.log('Шаблон не найден')
-			else {
-				if(flag == 1) {
-					tmpText = newText
-				}
-				tmpText = tmpText.split("\"").join("\\\"")
-				txt2 = tmpText.split('\n')
-				txt3 = ""
-				txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
-				tmpText = txt3
-				tmpText = tmpText.split('<p></p>').join("<p><br></p>")
-				tmpText = tmpText.substr(0, tmpText.length - 2)
-				
-				resetFlags()
-				refCurTimer(time)
-				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
-					  "headers": {
-						"accept": "*/*",
-						"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-						"cache-control": "max-age=0",
-						"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryZ3ivsA3aU80QEBST",
-						"sec-fetch-dest": "empty",
-						"sec-fetch-mode": "cors",
-						"sec-fetch-site": "same-origin"
-					  },
-					  "referrer": adr,
-					  "referrerPolicy": "no-referrer-when-downgrade",
-					  "body": "------WebKitFormBoundaryZ3ivsA3aU80QEBST\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + tmpText + "\",\"ext\":null,\"files\":[],\"suggestedAnswerDocId\":" + documentId + ",\"autoFaqServiceId\":" + serviceId + ",\"autoFaqSessionId\":\"" + AFsessionId + "\",\"autoFaqQueryId\":\"" + queryId + "\",\"autoFaqTitle\":\"" + title + "\",\"autoFaqQuery\":\"" + word + "\",\"autoFaqAccuracy\":" + accuracy + "}\r\n------WebKitFormBoundaryZ3ivsA3aU80QEBST--\r\n",
-					  "method": "POST",
-					  "mode": "cors",
-					  "credentials": "include"
-					});
+	if(document.getElementById('msg1').innerHTML == "Доработать" && flag2 == 0) {
+		document.getElementById('inp').value = tmpText
+		template_text = template
+		word_text = word
+		template_flag = 1
+	}
+	else if(tmpText == "")
+			console.log('Шаблон не найден')
+		else {
+			if(flag == 1) {
+				tmpText = newText
 			}
-			});
+			tmpText = tmpText.split("\"").join("\\\"")
+			txt2 = tmpText.split('\n')
+			txt3 = ""
+			txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
+			tmpText = txt3
+			tmpText = tmpText.split('<p></p>').join("<p><br></p>")
+			tmpText = tmpText.substr(0, tmpText.length - 2)
+			
+			resetFlags()
+			refCurTimer(time)
+			fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+				  "headers": {
+					"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryZ3ivsA3aU80QEBST",
+				  },
+				  "body": "------WebKitFormBoundaryZ3ivsA3aU80QEBST\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + tmpText + "\",\"ext\":null,\"files\":[],\"suggestedAnswerDocId\":" + documentId + ",\"autoFaqServiceId\":" + serviceId + ",\"autoFaqSessionId\":\"" + AFsessionId + "\",\"autoFaqQueryId\":\"" + queryId + "\",\"autoFaqTitle\":\"" + title + "\",\"autoFaqQuery\":\"" + word + "\",\"autoFaqAccuracy\":" + accuracy + "}\r\n------WebKitFormBoundaryZ3ivsA3aU80QEBST--\r\n",
+				  "method": "POST",
+				  "credentials": "include"
+				});
+		}
 }
 async function sendAnswer(txt, flag = 1, time = "10:00") {
 		//addTimer()
@@ -1127,19 +1136,10 @@ async function sendAnswer(txt, flag = 1, time = "10:00") {
 				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
-						"accept": "*/*",
-						"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-						"cache-control": "max-age=0",
 						"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryFeIiMdHaxAteNUHd",
-						"sec-fetch-dest": "empty",
-						"sec-fetch-mode": "cors",
-						"sec-fetch-site": "same-origin"
 					  },
-					  "referrer": adr,
-					  "referrerPolicy": "no-referrer-when-downgrade",
 					  "body": "------WebKitFormBoundaryFeIiMdHaxAteNUHd\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt3 + "\"}\r\n------WebKitFormBoundaryFeIiMdHaxAteNUHd--\r\n",
 					  "method": "POST",
-					  "mode": "cors",
 					  "credentials": "include"
 				});
 				resetFlags()
@@ -1174,19 +1174,10 @@ async function sendComment(txt){
 		resetFlags()
 	fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 	  "headers": {
-		"accept": "*/*",
-		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-		"cache-control": "max-age=0",
 		"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryH2CK1t5M3Dc3ziNW",
-		"sec-fetch-dest": "empty",
-		"sec-fetch-mode": "cors",
-		"sec-fetch-site": "same-origin"
 	  },
-	  "referrer": adr,
-	  "referrerPolicy": "no-referrer-when-downgrade",
 	  "body": "------WebKitFormBoundaryH2CK1t5M3Dc3ziNW\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt2 + "\",\"isComment\":true}\r\n------WebKitFormBoundaryH2CK1t5M3Dc3ziNW--\r\n",
 	  "method": "POST",
-	  "mode": "cors",
 	  "credentials": "include"
 	});
 }
