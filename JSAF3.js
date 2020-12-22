@@ -1034,6 +1034,7 @@ async function loadTemplates(template, word) {
 	})
 	.then(response => response.json())
 	.then(result => {
+		var documentId = ""
 		var serviceId = ""
 		var queryId = ""
 		var AFsessionId = ""
@@ -1043,6 +1044,7 @@ async function loadTemplates(template, word) {
 		for(let i = 0; i < result.length; i++) {
 			if(result[i].title == template) {
 				var b = result[i]
+				documentId = b.documentId
 				serviceId = b.serviceId
 				queryId = b.queryId
 				AFsessionId = b.sessionId
@@ -1058,7 +1060,7 @@ async function loadTemplates(template, word) {
 				accuracy = b.accuracy
 				
 				templatesAF.push([template, serviceId, queryId, AFsessionId, tmpText, title, accuracy])
-				return [template, serviceId, queryId, AFsessionId, tmpText, title, accuracy]
+				return [template, documentId, serviceId, queryId, AFsessionId, tmpText, title, accuracy]
 			}
 		}
 	})
@@ -1081,7 +1083,13 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 		template = template_text
 		word = word_text
 	}
-	var tmpText = ""
+	var documentId = curTemplate[1]
+	var serviceId = curTemplate[2]
+	var queryId = curTemplate[3]
+	var AFsessionId = curTemplate[4]
+	var tmpText = curTemplate[5]
+	var title = curTemplate[6]
+	var accuracy = curTemplate[7]
 	var values = await getInfo(0)
 	var adr = values[0]; var adr1 = values[1]; var uid = values[2]
 	if(document.getElementById('msg1').innerHTML == "Доработать" && flag2 == 0) {
