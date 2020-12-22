@@ -1073,9 +1073,9 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 			curTemplate = templatesAF[i]
 			break
 		}
-		if(i == templatesAF.length - 1)
-			curTemplate = await loadTemplates(template, word)
 	}
+	if(curTemplate == undefined)
+		curTemplate = await loadTemplates(template, word)
 	loadTemplates()
 	//addTimer()
 	time = "10:00"
