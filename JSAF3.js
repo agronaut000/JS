@@ -1074,7 +1074,7 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 			break
 		}
 		if(i == templatesAF.length - 1)
-			curTemplate = loadTemplates(template, word)
+			curTemplate = await loadTemplates(template, word)
 	}
 	loadTemplates()
 	//addTimer()
