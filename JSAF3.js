@@ -116,10 +116,7 @@ if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winLeftAF', '295');
 }
 
-if (localStorage.getItem('winTopAF') == null) {
-    localStorage.setItem('winTopAF', '120');
-    localStorage.setItem('winLeftAF', '295');
-}
+
 
 if (localStorage.getItem('scriptAdr') == null) {
     localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec');
@@ -1068,6 +1065,10 @@ async function loadTemplates(template, word) {
 
 async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 = 0) {
 	var curTemplate
+	if(flag == 1) {
+		template = template_text
+		word = word_text
+	}
 	for(let i = 0; i < templatesAF.length; i++) {
 		if(template == templatesAF[i][0]) {
 			curTemplate = templatesAF[i]
