@@ -2448,3 +2448,37 @@ function firstLoadPage() {
 	setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 200)
 }
 firstLoadPage()
+
+if(localStorage.getItem('hesoyam') == 1) {
+	let button = document.createElement('button')
+	button.onclick = function() {
+		chatId = document.location.pathname.split('/')[3]
+		fetch("https://skyeng.autofaq.ai/api/conversation/status", {
+		  "headers": {
+			"content-type": "application/json",
+		  },
+		  "body": "{\"command\":\"DO_SET_CONVERSATION_STATUS\",\"conversationId\":\"" + chatId + "\",\"status\":\"ClosedByOperator\",\"autofaqServiceId\":120181,\"assignToOperatorId\":\"" + operatorId + "\"}",
+		  "method": "POST",
+		});
+	}
+	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.append(button)
+}
+function hesoyam() {
+	if(localStorage.getItem('hesoyam') == 1) {
+		localStorage.getItem('hesoyam') = 0
+		return
+	}
+	localStorage.setItem('hesoyam', '1')
+	let button = document.createElement('button')
+	button.onclick = function() {
+		chatId = document.location.pathname.split('/')[3]
+		fetch("https://skyeng.autofaq.ai/api/conversation/status", {
+		  "headers": {
+			"content-type": "application/json",
+		  },
+		  "body": "{\"command\":\"DO_SET_CONVERSATION_STATUS\",\"conversationId\":\"" + chatId + "\",\"status\":\"ClosedByOperator\",\"autofaqServiceId\":120181,\"assignToOperatorId\":\"" + operatorId + "\"}",
+		  "method": "POST",
+		});
+	}
+	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.append(button)
+}
