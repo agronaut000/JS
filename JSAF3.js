@@ -1478,7 +1478,7 @@ function startTimer() {
 	
 	
 	if(localStorage.getItem('scriptAdr') == TP_addr) {
-		if(document.getElementsByClassName('expert-user_details-list') != undefined) {
+		if(document.getElementsByClassName('expert-user_details-list')[1] != undefined) {
 			if(document.getElementsByClassName('expert-user_details-list')[1].children[0].classList != "") {
 				let c = document.createElement('div')
 				let a = document.createElement('span')
