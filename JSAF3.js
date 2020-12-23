@@ -2467,7 +2467,7 @@ if(localStorage.getItem('hesoyam') == 1) {
 }
 function hesoyam() {
 	if(localStorage.getItem('hesoyam') == 1) {
-		localStorage.getItem('hesoyam') = 0
+		localStorage.setItem('hesoyam', '0')
 		document.getElementById('easyCloseChat').remove()
 		return
 	}
