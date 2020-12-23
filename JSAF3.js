@@ -1462,20 +1462,6 @@ function startTimer() {
 		}
 	}
 	
-	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined) {
-		document.getElementsByClassName('ant-modal-content')[0].childNodes[1].children[0].appendChild(maskBackHide)
-		
-		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Указать тему')
-			for(i = 1; i < document.getElementsByClassName('ant-modal-content')[0].children[2].childElementCount - 1; i++)
-				if(document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Тех. поддержка V1" && document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Уроки V2" && document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Группа КМ" && document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Продажи 1Л")
-					document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].style.display = 'none'
-
-		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Закрыть запрос?')
-			for(i = 1; i < document.getElementsByClassName('ant-modal-content')[0].children[2].childElementCount - 1; i++)
-				if(document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Тех. поддержка V1")
-					document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].style.display = 'none'
-	}
-	
 	
 	if(localStorage.getItem('scriptAdr') == TP_addr) {
 		if(document.getElementsByClassName('expert-user_details-list')[1] != undefined) {
@@ -1566,6 +1552,23 @@ function startTimer() {
 	}
 }
 
+
+function timerHideButtons() {
+		if(document.getElementsByClassName('ant-modal-content')[0] !== undefined) {
+		document.getElementsByClassName('ant-modal-content')[0].childNodes[1].children[0].appendChild(maskBackHide)
+		
+		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Указать тему')
+			for(i = 1; i < document.getElementsByClassName('ant-modal-content')[0].children[2].childElementCount - 1; i++)
+				if(document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Тех. поддержка V1" && document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Уроки V2" && document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Группа КМ" && document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Продажи 1Л")
+					document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].style.display = 'none'
+
+		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Закрыть запрос?')
+			for(i = 1; i < document.getElementsByClassName('ant-modal-content')[0].children[2].childElementCount - 1; i++)
+				if(document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Тех. поддержка V1")
+					document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].style.display = 'none'
+	}
+}
+setInterval(timerHideButtons, 300)
 
 function requestsRed () {
 	document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].addEventListener("DOMSubtreeModified", function() {
