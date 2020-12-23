@@ -31,11 +31,15 @@ function openSlackSocket() {
 	setTimeout(showResponse, 1500)
 	function getUrlAndOpenSocket() {
 		var result = JSON.parse(document.getElementById('responseTextarea1').value)
-		var url = result.url
 		if(result == '{}')
 			setTimeout(getUrlAndOpenSocket, 1000)
 		else {
+			var url = result.url
 			console.log(result)
+			if(url == undefined) {
+				openSlackSocket()
+				return
+			}
 			openSocket(url)
 			console.log('URL для связи с Slack получен')
 		}
