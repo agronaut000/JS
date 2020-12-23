@@ -2455,6 +2455,8 @@ function firstLoadPage() {
 firstLoadPage()
 
 if(localStorage.getItem('hesoyam') == 1) {
+	let newDiv = document.createElement('div')
+	newDiv.style.margin = '5px'
 	let button = document.createElement('button')
 	button.textContent = 'Закрыть чат'
 	button.id = 'easyCloseChat'
@@ -2468,7 +2470,8 @@ if(localStorage.getItem('hesoyam') == 1) {
 		  "method": "POST",
 		});
 	}
-	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.append(button)
+	newDiv.append(button)
+	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.append(newDiv)
 }
 function hesoyam() {
 	if(localStorage.getItem('hesoyam') == 1) {
