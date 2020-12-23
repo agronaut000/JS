@@ -2456,6 +2456,8 @@ firstLoadPage()
 
 if(localStorage.getItem('hesoyam') == 1) {
 	let button = document.createElement('button')
+	button.textContent = 'Закрыть чат'
+	button.id = 'easyCloseChat'
 	button.onclick = function() {
 		chatId = document.location.pathname.split('/')[3]
 		fetch("https://skyeng.autofaq.ai/api/conversation/status", {
