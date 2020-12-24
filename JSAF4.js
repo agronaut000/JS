@@ -60,15 +60,15 @@ function openSlackSocket() {
 			}
 			if(message.type == "message" && message.bot_id == 'BUS628294') {
 				console.log(message)
-				message = JSON.stringify(message)
-				if(message.match('https://skyeng.slack.*>') == null) {
+				let message2 = JSON.stringify(message)
+				if(message2.match('https://skyeng.slack.*>') == null) {
 					console.log("В этом ответе нет нужный ссылки")
 					let slackUrl = 'https://skyeng.slack.com/archives/' + message.channel + '/' + Number(message.ts * 1000000)
 					console.log('Предполагаемая ссылка: ' + slackUrl)
 					return
 				}
-				console.log('Ссылка на тред: ' + message.match('https://skyeng.slack.*>')[0].split('|')[0])
-				sendComment('Ссылка на тред: ' + message.match('https://skyeng.slack.*>')[0].split('|')[0])
+				console.log('Ссылка на тред: ' + message2.match('https://skyeng.slack.*>')[0].split('|')[0])
+				sendComment('Ссылка на тред: ' + message2.match('https://skyeng.slack.*>')[0].split('|')[0])
 				document.getElementById('buttonOpenForm').style.display = ''
 				socket.close()
 				return
