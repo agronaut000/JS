@@ -63,7 +63,7 @@ function openSlackSocket() {
 				message = JSON.stringify(message)
 				if(message.match('https://skyeng.slack.*>') == null) {
 					console.log("В этом ответе нет нужный ссылки")
-					let slackUrl = 'https://skyeng.slack.com/archives/' + message.channel + '/' + (Number(message.ts * 1000000)
+					let slackUrl = 'https://skyeng.slack.com/archives/' + message.channel + '/' + Number(message.ts * 1000000)
 					console.log('Предполагаемая ссылка: ' + slackUrl)
 					return
 				}
