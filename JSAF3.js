@@ -778,15 +778,7 @@ async function buttonsFromDoc(butName) {
 	if(butName == "Серверные")
 		if(document.getElementById('msg1').innerHTML != "Доработать") {
 			sendComment(document.getElementById('serversInp').value)
-			chatId = document.location.pathname.split('/')[3]
-			fetch("https://skyeng.autofaq.ai/api/conversation/" + chatId + "/payload", {
-			  "headers": {
-				"content-type": "application/json",
-			  },
-			  "body": "{\"conversationId\":\"" + chatId + "\",\"elements\":[{\"name\":\"topicId\",\"value\":\"1370\"}]}",
-			  "method": "POST",
-			  "credentials": "include"
-			});
+			newTag(1370)
 		}
 }
 
@@ -1499,7 +1491,7 @@ function startTimer() {
 		}
 	}
 	
-	
+	var studentIdSearch = 0
 	if(localStorage.getItem('scriptAdr') == TP_addr) {
 		if(document.getElementsByClassName('expert-user_details-list')[1] != undefined) {
 			if(document.getElementsByClassName('expert-user_details-list')[1].children[0].classList != "") {
@@ -1508,6 +1500,13 @@ function startTimer() {
 				a.textContent = 'Найти группу'
 				a.style.marginRight='10px'
 				function generateGroupLink() {
+					if(document.getElementById('responseTextarea1').value.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0] == 'Нет') {
+										studentIdSearch++
+										document.getElementById('responseTextarea1').value = '{}'
+										document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[studentIdSearch]
+										document.getElementById('sendResponse').click()
+										setTimeout(generateGroupLink, 1000)
+					}
 					groupId = document.getElementById('responseTextarea1').value.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0]
 					let button = document.createElement('a')
 					button.href = 'https://cabinet.skyeng.ru/admin/group/edit?id=' + groupId
@@ -1526,6 +1525,7 @@ function startTimer() {
 							if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent == 'student') {
 								for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
 									if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "id") {
+										studentIdSearch = 0
 										document.getElementById('responseTextarea1').value = '{}'
 										document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
 										document.getElementById('sendResponse').click()
