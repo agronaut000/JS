@@ -1503,10 +1503,15 @@ function startTimer() {
 					if(document.getElementById('responseTextarea1').value.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0] == 'Нет') {
 						studentIdSearch++
 						document.getElementById('responseTextarea1').value = '{}'
-						document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[studentIdSearch]
-						document.getElementById('sendResponse').click()
-						setTimeout(generateGroupLink, 1000)
-						return
+						for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
+							if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "nextClass-studentId") {
+								document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[studentIdSearch]
+								document.getElementById('sendResponse').click()
+								setTimeout(generateGroupLink, 1000)
+								return
+						
+							}
+						}
 					}
 					groupId = document.getElementById('responseTextarea1').value.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0]
 					let button = document.createElement('a')
