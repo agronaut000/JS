@@ -37,6 +37,7 @@ function openSlackSocket() {
 			var url = result.url
 			console.log(result)
 			if(url == undefined) {
+				console.log("Не нашёл юрл, повторно запрашиваем юрл")
 				openSlackSocket()
 				return
 			}
@@ -62,6 +63,8 @@ function openSlackSocket() {
 				message = JSON.stringify(message)
 				if(message.match('https://skyeng.slack.*>') == null) {
 					console.log("В этом ответе нет нужный ссылки")
+					let slackUrl = 'https://skyeng.slack.com/archives/' + message.channel + '/' + (Number(message.ts * 1000000)
+					console.log('Предполагаемая ссылка: ' + slackUrl)
 					return
 				}
 				console.log('Ссылка на тред: ' + message.match('https://skyeng.slack.*>')[0].split('|')[0])
@@ -176,7 +179,6 @@ function fillForm(viewStringify) {
 	button3.onclick = function() {
 		socket.close()
 		socketOpened = 0
-		console.log('Закрыли сокет')
 		this.parentElement.parentElement.remove()
 		document.getElementById('buttonOpenForm').style.display = ''
 	}
