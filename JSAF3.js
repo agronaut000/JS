@@ -1327,6 +1327,8 @@ else
 	audio = new Audio("https://drive.google.com/u/0/uc?id=1832JE2IuK7AnfgkljLYytEeFL99Mt2Gv&export=download");	
 
 var timeStart = new Date()
+var studentIdSearch2 = 0
+var studentIdSearch = 0
 function startTimer() {
 	var timeNow = new Date()
 	if(timeNow - timeStart > 60 * 60 * 1000) {
@@ -1423,15 +1425,31 @@ function startTimer() {
 				document.getElementById('responseTextarea1').value = '{}'
 				document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + nextClassstudentId
 				document.getElementById('sendResponse').click()
+				studentIdSearch2 = 0
 				setTimeout(generateGroupLink, 1000)
+				
 				function generateGroupLink() {
-					console.log(document.getElementById('responseTextarea1').value)
+					if(document.getElementById('responseTextarea1').value.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0] == 'Нет') {
+						studentIdSearch2++
+						document.getElementById('responseTextarea1').value = '{}'
+						for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
+							if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "nextClass-studentId") {
+								document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[studentIdSearch2]
+								document.getElementById('sendResponse').click()
+								setTimeout(generateGroupLink, 1000)
+								return
+							}
+						}
+					}
 					groupId = document.getElementById('responseTextarea1').value.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0]
 					let button = document.createElement('a')
 					button.href = 'https://cabinet.skyeng.ru/admin/group/edit?id=' + groupId
 					button.target = '_blank'
-					button.textContent = ' ' + groupId
-					document.getElementsByClassName('expert-user_details-list')[1].childNodes[nextClassModeId].childNodes[1].append(button)
+					button.textContent = groupId
+					button.style.marginRight = '15px'
+					
+					document.getElementsByClassName('expert-user_details-list')[1].children[0].children[0].replaceWith(button)
+					document.getElementsByClassName('expert-user_details-list')[1].children[0].children[1].remove()
 				}
 			}
 		}
@@ -1491,7 +1509,6 @@ function startTimer() {
 		}
 	}
 	
-	var studentIdSearch = 0
 	if(localStorage.getItem('scriptAdr') == TP_addr) {
 		if(document.getElementsByClassName('expert-user_details-list')[1] != undefined) {
 			if(document.getElementsByClassName('expert-user_details-list')[1].children[0].classList != "") {
@@ -1509,7 +1526,6 @@ function startTimer() {
 								document.getElementById('sendResponse').click()
 								setTimeout(generateGroupLink, 1000)
 								return
-						
 							}
 						}
 					}
