@@ -1501,11 +1501,12 @@ function startTimer() {
 				a.style.marginRight='10px'
 				function generateGroupLink() {
 					if(document.getElementById('responseTextarea1').value.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0] == 'Нет') {
-										studentIdSearch++
-										document.getElementById('responseTextarea1').value = '{}'
-										document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[studentIdSearch]
-										document.getElementById('sendResponse').click()
-										setTimeout(generateGroupLink, 1000)
+						studentIdSearch++
+						document.getElementById('responseTextarea1').value = '{}'
+						document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[studentIdSearch]
+						document.getElementById('sendResponse').click()
+						setTimeout(generateGroupLink, 1000)
+						return
 					}
 					groupId = document.getElementById('responseTextarea1').value.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0]
 					let button = document.createElement('a')
