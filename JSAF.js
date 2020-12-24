@@ -962,6 +962,13 @@ function refreshTemplates() {
 						newBut.setAttribute('onclick', 'transfPageButtons(this.innerText)')
 						b.lastElementChild.lastElementChild.appendChild(newBut)
 						break
+					case 'Темы':
+						var newBut = document.createElement('button')
+						newBut.innerText = c[0]
+						newBut.style.marginRight = '4px'
+						newBut.setAttribute('onclick', 'tagToChat(this.innerText)')
+						b.lastElementChild.lastElementChild.appendChild(newBut)
+						break
 					default:
 						break
 				}
@@ -977,6 +984,25 @@ function refreshTemplates() {
 	document.getElementById('0page_button').click()
 }
 
+function tagToChat(btnName) {
+	for(var l = 0; l < table.length; l++) {
+		if(btnName == table[l][0]) {
+			newTag(table[l][1])
+			return
+		}
+	}
+}
+function newTag(valueId) {
+	var chatId = document.location.pathname.split('/')[3]
+	fetch("https://skyeng.autofaq.ai/api/conversation/" + chatId + "/payload", {
+	  "headers": {
+		"content-type": "application/json",
+	  },
+	  "body": "{\"conversationId\":\"" + chatId + "\",\"elements\":[{\"name\":\"topicId\",\"value\":\"" + valueId + "\"}]}",
+	  "method": "POST",
+	  "credentials": "include"
+	});
+}
 function msgFromTable(btnName) {
 	for(var l = 0; l < table.length; l++) {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
