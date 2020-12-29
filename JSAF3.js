@@ -540,7 +540,7 @@ function move_again_AF() {
 	function screenshots(){
 		if(document.getElementsByClassName('expert-chat-display-inner')[0] != undefined)
 			for(i = 0; document.getElementsByClassName('expert-chat-display-inner')[0].children[i] != undefined; i++) {
-				if(document.getElementsByClassName('expert-chat-display-inner')[0].children[i].textContent.indexOf('vimbox-resource-chat-prod') != -1) {
+				if(document.getElementsByClassName('expert-chat-display-inner')[0].children[i].textContent.indexOf('vimbox-resource') != -1) {
 					var div = document.getElementsByClassName('expert-chat-display-inner')[0].children[i]
 					var img = document.createElement('img')
 					img.src = div.querySelector('a').href
@@ -560,7 +560,7 @@ function move_again_AF() {
 	function screenshots2(){
 	if(document.getElementsByClassName('chat-messages')[0] != undefined)
 		for(i = 0; document.getElementsByClassName('chat-messages')[0].children[i] != undefined; i++) {
-			if(document.getElementsByClassName('chat-messages')[0].children[i].textContent.indexOf('vimbox-resource-chat-prod') != -1) {
+			if(document.getElementsByClassName('chat-messages')[0].children[i].textContent.indexOf('vimbox-resource') != -1) {
 				var div = document.getElementsByClassName('chat-messages')[0].children[i]
 				var img = document.createElement('img')
 				img.src = div.querySelector('a').href
