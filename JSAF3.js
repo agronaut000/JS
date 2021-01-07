@@ -2442,14 +2442,14 @@ async function getStats() {
 					td.textContent = array[i].operator;
 					td.style = 'text-align: left; padding-left: 50px'
 					break;
-				case 1:
+				case 2:
 					for(let j = 0; j < operatorNames.length; j++)
 						if(array[i].operator == operatorNames[j]) {
 							td.textContent = operatorChatCount[j]
 							break
 						}
 					break;
-				case 2:
+				case 1:
 					td.textContent = array[i].conversationClosed;
 					break;
 				case 3:
@@ -2481,6 +2481,7 @@ async function getStats() {
 	table.append(trHead)
 	table.append(tbody)
 	document.getElementById('root').children[0].children[1].children[0].children[1].append(table)
+	document.getElementById('buttonGetStat').removeAttribute('disabled')
 }
 
 function prepTp() {
@@ -2507,7 +2508,6 @@ function prepTp() {
 			this.textContent = 'Статистика'
 			
 			document.getElementById('buttonGetStat').setAttribute('disabled', 'disabled')
-			setTimeout(function() {document.getElementById('buttonGetStat').removeAttribute('disabled')}, 500)
 			
 			if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') != -1) {
 				document.getElementById('root').children[0].children[1].children[0].children[1].children[1].style.display = ""
@@ -2527,7 +2527,6 @@ function prepTp() {
 			}
 			getStats()
 			document.getElementById('buttonGetStat').setAttribute('disabled', 'disabled')
-			setTimeout(function() {document.getElementById('buttonGetStat').removeAttribute('disabled')}, 500)
 			this.textContent = 'Скрыть стату'
 		}
 	}
