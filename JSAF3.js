@@ -2435,7 +2435,7 @@ async function getStats() {
 	let tbody = document.createElement('tbody')
 	for(let i = 0; i < array.length; i++) {
 		var tr = document.createElement('tr')
-		for(let j = 0; j < 4; j++) {
+		for(let j = 0; j < 5; j++) {
 			var td = document.createElement('td')
 			switch(j) {
 				case 0:
@@ -2444,7 +2444,7 @@ async function getStats() {
 					break;
 				case 1:
 					for(let j = 0; j < operatorNames.length; j++)
-						if(array[i].operator == operatorNames.length) {
+						if(array[i].operator == operatorNames[j]) {
 							td.textContent = operatorChatCount[j]
 							break
 						}
