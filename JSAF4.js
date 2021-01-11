@@ -49,6 +49,8 @@ function openSlackSocket() {
 	
 	function openSocket(url) {
 		socket = new WebSocket(url)
+		var slackUrlMsg1 = ''
+		var slackUrlMsg2 = ''
 		socket.onmessage = function(event) {
 			message = JSON.parse(event.data)
 			if(message.type == "view_opened" && message.app_id == 'AU3S9KSPL' && flagReadMessage == 1) {
@@ -63,15 +65,39 @@ function openSlackSocket() {
 				let message2 = JSON.stringify(message)
 				if(message2.match('https://skyeng.slack.*>') == null) {
 					console.log("В этом ответе нет нужный ссылки")
-					let slackUrl = 'https://skyeng.slack.com/archives/' + message.channel + '/' + Number(message.ts * 1000000)
-					console.log('Предполагаемая ссылка: ' + slackUrl)
+					slackUrlMsg1 = 'https://skyeng.slack.com/archives/' + message.channel + '/' + Number(message.ts * 1000000)
+					console.log('Предполагаемая ссылка: ' + slackUrlMsg1)
+					setTimeout(checkForLink, 5 * 1000)
 					return
 				}
-				console.log('Ссылка на тред: ' + message2.match('https://skyeng.slack.*>')[0].split('|')[0])
-				sendComment('Ссылка на тред: ' + message2.match('https://skyeng.slack.*>')[0].split('|')[0])
+				slackUrlMsg2 = message2.match('https://skyeng.slack.*>')[0].split('|')[0]
+				console.log('Ссылка на тред: ' + slackUrlMsg2)
+				sendComment('Ссылка на тред: ' + slackUrlMsg2)
 				document.getElementById('buttonOpenForm').style.display = ''
 				socket.close()
 				return
+			}
+		}
+		function checkForLink() {
+			let oper = textToUTF8String(document.querySelector('.user_menu-dropdown-user_name').textContent)
+			let ye = slackUrlMsg1 == slackUrlMsg2 ? 'yes' : 'no'
+			ye = slackUrlMsg2 == '' ? 'idk' : ye 
+			var body = 'entry.1566561060=' + oper + '&entry.1523645757=' + slackUrlMsg1 + '&entry.626388165=' + slackUrlMsg2 + '&entry.181839927=' + ye
+			let options = {
+				  "headers": {
+					"content-type": "application/x-www-form-urlencoded",
+				  },
+				  "body": body,
+				  "method": "POST",
+				}
+				
+			document.getElementById('responseTextarea1').value = JSON.stringify(options)
+			document.getElementById('responseTextarea2').value = 'https://docs.google.com/forms/d/e/1FAIpQLSfhK9cT1l3ZSkbIr6YSNkm4nXIwMMX9E0k_wkPCiiHp7NgzuA/formResponse'
+			document.getElementById('sendResponse').click()
+			
+			if(socketOpened == 1) {
+				sendComment('Ссылка на тред (?): ' + slackUrlMsg1)
+				socket.close()
 			}
 		}
 		socket.onopen = function(event) {
@@ -271,4 +297,53 @@ function submitSlackView(view) {
 }
 function showResponse() {
 	console.log('Результат запроса' + document.getElementById('responseTextarea1').value)
+}
+
+function toUTF8Array(str) {
+    var utf8 = [];
+    for (var i=0; i < str.length; i++) {
+        var charcode = str.charCodeAt(i);
+        if (charcode < 0x80) utf8.push(charcode);
+        else if (charcode < 0x800) {
+            utf8.push(0xc0 | (charcode >> 6), 
+                      0x80 | (charcode & 0x3f));
+        }
+        else if (charcode < 0xd800 || charcode >= 0xe000) {
+            utf8.push(0xe0 | (charcode >> 12), 
+                      0x80 | ((charcode>>6) & 0x3f), 
+                      0x80 | (charcode & 0x3f));
+        }
+        // surrogate pair
+        else {
+            i++;
+            // UTF-16 encodes 0x10000-0x10FFFF by
+            // subtracting 0x10000 and splitting the
+            // 20 bits of 0x0-0xFFFFF into two halves
+            charcode = 0x10000 + (((charcode & 0x3ff)<<10)
+                      | (str.charCodeAt(i) & 0x3ff))
+            utf8.push(0xf0 | (charcode >>18), 
+                      0x80 | ((charcode>>12) & 0x3f), 
+                      0x80 | ((charcode>>6) & 0x3f), 
+                      0x80 | (charcode & 0x3f));
+        }
+    }
+    return utf8;
+}
+
+function decToHex(dec)
+{
+	var hexStr = '0123456789ABCDEF';
+	var low = dec % 16;
+	var high = (dec - low)/16;
+	hex = '' + hexStr.charAt(high) + hexStr.charAt(low);
+	return hex;
+}
+
+function textToUTF8String(string) {
+	string = toUTF8Array(string)
+	let string2 = ""
+	for(i = 0; i < string.length; i++) {
+		string2 += "%" + decToHex(string[i])
+	}
+	return string2
 }
