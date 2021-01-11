@@ -2544,7 +2544,7 @@ function prepTp() {
 	
 	setTimeout(function() {
 		//Модуль wallentine в АФ
-		include("https://rawgit.com/agronaut000/JS/master/JSAF4.js");
+		include("https://rawgit.com/agronaut000/JS/master/viewSlack.js");
 	}, 2000)
 	
 	setTimeout(function() {
