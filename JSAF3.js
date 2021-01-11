@@ -514,7 +514,7 @@ function move_again_AF() {
 					bool = 1;
 			}
 			if(e.key == 'Enter' && bool == 1) {
-				refCurTimer('10:00')
+				refCurTimer('12:00')
 			}
 		}
 	window.onkeyup = function(e) {
@@ -1107,7 +1107,7 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 	if(curTemplate == undefined)
 		curTemplate = await loadTemplates(template, word)
 	//addTimer()
-	time = "10:00"
+	time = "12:00"
 	var documentId = curTemplate[1]
 	var serviceId = curTemplate[2]
 	var queryId = curTemplate[3]
@@ -1149,7 +1149,7 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 				});
 		}
 }
-async function sendAnswer(txt, flag = 1, time = "10:00") {
+async function sendAnswer(txt, flag = 1, time = "12:00") {
 		//addTimer()
 		var values = await getInfo(flag)
 		var adr = values[0]; var adr1 = values[1]; var uid = values[2]
@@ -1222,9 +1222,9 @@ function addTimer() {
 		let serv2 = document.createElement('div')
 		tm.childNodes[0].appendChild(serv)
 		tm.childNodes[1].appendChild(serv2)
-		tm.childNodes[0].childNodes[2].innerHTML = "10:00"
+		tm.childNodes[0].childNodes[2].innerHTML = "12:00"
 		let d = new Date()
-		tmrs[idk] = ["10:00", tm.childNodes[1].childNodes[0].innerText, 1, number(d), ""]
+		tmrs[idk] = ["12:00", tm.childNodes[1].childNodes[0].innerText, 1, number(d), ""]
 		idk++
 	}
 }
@@ -1247,7 +1247,7 @@ function addTimers() {
 			}
 		}
 		if(flag == 0)
-			tmrs[idk++] = ["10:00", nm, 1, Number(d), ""]
+			tmrs[idk++] = ["12:00", nm, 1, Number(d), ""]
 
 		k++
 	}	
@@ -1370,7 +1370,7 @@ function startTimer() {
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1) {
 		if(document.getElementsByClassName('ant-btn ant-btn-primary')[0] !== undefined)
 			document.getElementsByClassName('ant-btn ant-btn-primary')[0].onclick = function () {
-				refCurTimer('10:00')
+				refCurTimer('12:00')
 			}
 		refreshTimer()
 
@@ -1811,7 +1811,7 @@ async function sendAnswerTemplate2(word, flag = 0) {
 		tmpTxt = tmpTxt.split('<p></p>').join("<p><br></p>")
 		tmpTxt = tmpTxt.substr(0, tmpTxt.length - 2)
 		var values = await getInfo(0)
-		refCurTimer("10:00")
+		refCurTimer("12:00")
 		var adr = values[0]; var adr1 = values[1]; var uid = values[2]
 		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 			  "headers": {
