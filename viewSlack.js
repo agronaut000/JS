@@ -38,6 +38,7 @@ function openSlackSocket() {
 		if(result == null)
 			setTimeout(getUrlAndOpenSocket, 1000)
 		else {
+			result = JSON.parse(result)
 			document.getElementById('responseTextarea1').removeAttribute('openSlackSocket')
 			var url = result.url
 			console.log(result)
