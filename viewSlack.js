@@ -55,6 +55,7 @@ function openSlackSocket() {
 	
 	function openSocket(url) {
 		socket = new WebSocket(url)
+		var flagSlack = 0
 		var slackUrlMsg1 = ''
 		var slackUrlMsg2 = ''
 		socket.onmessage = function(event) {
@@ -69,22 +70,25 @@ function openSlackSocket() {
 			if(message.type == "message" && message.bot_id == 'BUS628294') {
 				console.log(message)
 				let message2 = JSON.stringify(message)
+				if(flagSlack == 0) {
+					setTimeout(checkForLink, 5 * 1000)
+					flagSlack = 1
+				}
 				if(message2.match(/<https:\/\/skyeng.slack.*\|.*>/) == null) {
 					console.log("В этом ответе нет нужный ссылки")
 					slackUrlMsg1 = 'https://skyeng.slack.com/archives/' + message.channel + '/p' + Number(message.ts * 1000000)
 					console.log('Предполагаемая ссылка: ' + slackUrlMsg1)
-					setTimeout(checkForLink, 5 * 1000)
 					return
 				}
-				slackUrlMsg2 = message2.match(/<https:\/\/skyeng.slack.*\|.*>/)[0].split('|')[0]
+				slackUrlMsg2 = message2.match(/https:\/\/skyeng.slack.*\|.*>/)[0].split('|')[0]
 				console.log('Ссылка на тред: ' + slackUrlMsg2)
 				sendComment('Ссылка на тред: ' + slackUrlMsg2)
 				document.getElementById('buttonOpenForm').style.display = ''
-				socket.close()
 				return
 			}
 		}
 		function checkForLink() {
+			flagSlack = 0
 			let oper = textToUTF8String(document.querySelector('.user_menu-dropdown-user_name').textContent)
 			let ye = slackUrlMsg1 == slackUrlMsg2 ? 'yes' : 'no'
 			ye = slackUrlMsg2 == '' ? 'idk' : ye 
@@ -102,10 +106,10 @@ function openSlackSocket() {
 			document.getElementById('responseTextarea3').value = ''
 			document.getElementById('sendResponse').click()
 			
-			if(socketOpened == 1) {
+			if(ye == 'idk') {
 				sendComment('Ссылка на тред (?): ' + slackUrlMsg1)
-				socket.close()
 			}
+			socket.close()
 		}
 		socket.onopen = function(event) {
 			socketOpened = 1
