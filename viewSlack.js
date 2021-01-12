@@ -303,10 +303,15 @@ function submitSlackView(view) {
 	document.getElementById('sendResponse').click()
 	console.log("Отправили форму")
 	
-	setTimeout(showResponse, 1500, submitSlackView)
+	setTimeout(showResponse, 1500, 'submitSlackView')
 }
 function showResponse(attr) {
-	console.log('Результат запроса' + document.getElementById('responseTextarea1').getAttribute(attr))
+	res = document.getElementById('responseTextarea1').getAttribute(attr)
+	if(res == null) {
+		setTimeout(showResponse, 1000, attr)
+		return
+	}	
+	console.log('Результат запроса' + res)
 	document.getElementById('responseTextarea1').removeAttribute(attr)
 }
 
