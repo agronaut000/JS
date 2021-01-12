@@ -1581,7 +1581,8 @@ function startTimer() {
 				b.style.marginRight='10px'
 				function generateTalksInfo() {
 					console.log('here')
-					var talks = JSON.parse(document.getElementById('responseTextarea1').value).data.talks
+					var talks = JSON.parse(document.getElementById('responseTextarea1').getAttribute('talks').data.talks)
+					document.getElementById('responseTextarea1').removeAttribute('talks')
 					var userId = ""
 					var stringInfo = ""
 					for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
@@ -1607,6 +1608,7 @@ function startTimer() {
 					this.parentElement.children[0].textContent = ''
 					document.getElementById('responseTextarea1').value = '{ "credentials": "include" }'
 					document.getElementById('responseTextarea2').value = "https://talks-platform.skyeng.ru/api/v1/talks/stats"
+					document.getElementById('responseTextarea3').value = 'talks'
 					document.getElementById('sendResponse').click()
 					setTimeout(generateTalksInfo, 1000)
 				}
@@ -2489,7 +2491,7 @@ async function getStats() {
 	table.append(trHead)
 	table.append(tbody)
 	document.getElementById('root').children[0].children[1].children[0].children[1].append(table)
-	document.getElementById('buttonGetStat').textContent = 'Скрыть статистику'
+	document.getElementById('buttonGetStat').textContent = 'Скрыть стату'
 	document.getElementById('buttonGetStat').removeAttribute('disabled')
 }
 
