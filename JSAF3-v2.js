@@ -1581,7 +1581,7 @@ function startTimer() {
 				b.style.marginRight='10px'
 				function generateTalksInfo() {
 					console.log('here')
-					var talks = JSON.parse(document.getElementById('responseTextarea1').getAttribute('talks').data.talks)
+					var talks = JSON.parse(document.getElementById('responseTextarea1').getAttribute('talks')).data.talks
 					document.getElementById('responseTextarea1').removeAttribute('talks')
 					var userId = ""
 					var stringInfo = ""
