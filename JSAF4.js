@@ -74,7 +74,7 @@ function openSlackSocket() {
 					console.log('Предполагаемая ссылка: ' + slackUrlMsg1)
 					return
 				}
-				slackUrlMsg2 = message2.match((/<https:\/\/skyeng.slack.*\|.*>/))[0].split('|')[0]
+				slackUrlMsg2 = message2.match((/https:\/\/skyeng.slack.*\|.*>/))[0].split('|')[0]
 				console.log('Ссылка на тред: ' + slackUrlMsg2)
 				sendComment('Ссылка на тред: ' + slackUrlMsg2)
 				document.getElementById('buttonOpenForm').style.display = ''
