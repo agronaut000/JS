@@ -189,7 +189,8 @@ async function createReportForm() {
 			
 		document.getElementById('responseTextarea1').value = JSON.stringify(options)
 		document.getElementById('responseTextarea2').value = 'https://docs.google.com/forms/d/e/1FAIpQLSecIM_o5yLkleW330KKEn-0pXN0Hcg6iXWXd85ZBKf4wgbqPA/formResponse'
-		document.getElementById('responseTextarea3').value = ''
+		if(document.getElementById('responseTextarea3') != null)
+			document.getElementById('responseTextarea3').value = ''
 		document.getElementById('sendResponse').click()
 		document.getElementById('reportAF').remove()
 		document.getElementById('buttonSendReport').style.display = ''
