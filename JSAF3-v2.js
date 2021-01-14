@@ -2546,8 +2546,10 @@ function prepTp() {
 	
 	
 	setTimeout(function() {
-		//Модуль wallentine в АФ
+		// Модуль wallentine в АФ
 		include("https://rawgit.com/agronaut000/JS/master/viewSlack.js");
+		// Модуль репорта на жалобы
+		include("https://rawgit.com/agronaut000/JS/master/reportForm.js");
 	}, 2000)
 	
 	setTimeout(function() {
