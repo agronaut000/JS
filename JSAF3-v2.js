@@ -2156,7 +2156,7 @@ function customTemplates(language = '') {
 		var newInputTmpName = document.createElement('input')
 		newInputTmpName.value = template == undefined ? "" : template
 		newInputTmpName.style.marginRight = '5px'
-		newInputTmpName.style.width = '50px'
+		newInputTmpName.style.width = '150px'
 		
 		var newButton = document.createElement('button')
 		newButton.style.marginRight = '5px'
