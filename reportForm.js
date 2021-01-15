@@ -37,6 +37,7 @@ async function createReportForm() {
 	newDiv.style = 'margin: 5px'
 
 	let input = document.createElement('input')
+	input.id = 'reportInput1'
 	input.style.width = '300px'
 	input.style.borderRadius = '3px'
 	let Data = new Date()
@@ -44,6 +45,7 @@ async function createReportForm() {
 
 
 	let input2 = document.createElement('input')
+	input2.id = 'reportInput2'
 	input2.style.width = '300px'
 	input2.style.marginTop = '5px'
 	input2.style.borderRadius = '3px'
@@ -100,6 +102,7 @@ async function createReportForm() {
 	});
 
 	let select = document.createElement('select')
+	select.id = 'reportSelect'
 	select.style.width = '300px'
 	select.style.marginTop = '5px'
 	select.style.borderRadius = '3px'
@@ -114,6 +117,7 @@ async function createReportForm() {
 		select.append(option)
 	}
 	let select2 = document.createElement('select')
+	select2.id = 'reportSelect2'
 	select2.placeholder = 'Выберите оператора'
 	select2.style.marginTop = '5px'
 	select2.style.width = '300px'
@@ -129,12 +133,14 @@ async function createReportForm() {
 	}
 
 	let input3 = document.createElement('textarea')
+	input3.id = 'reportInput3'
 	input3.placeholder = 'https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1
 	input3.style.width = '300px'
 	input3.style.marginTop = '5px'
 	input3.style.borderRadius = '3px'
 
 	let input4 = document.createElement('textarea')
+	input4.id = 'reportInput4'
 	input4.placeholder = 'Комментарий'
 	input4.style.width = '300px'
 	input4.style.marginTop = '5px'
@@ -145,38 +151,38 @@ async function createReportForm() {
 	let but = document.createElement('button')
 	but.textContent = 'Отправить'
 	but.onclick = function() {
-		let date = textToUTF8String(document.getElementById('reportAF').children[0].children[0].value == "" ? document.getElementById('reportAF').children[0].children[0].placeholder : document.getElementById('reportAF').children[0].children[0].value)
-		let client = textToUTF8String(document.getElementById('reportAF').children[0].children[1].value == "" ? document.getElementById('reportAF').children[0].children[1].placeholder : document.getElementById('reportAF').children[0].children[1].value)
+		let date = textToUTF8String(document.getElementById('reportInput').value == "" ? document.getElementById('reportInput').placeholder : document.getElementById('reportInput').value)
+		let client = textToUTF8String(document.getElementById('reportInput2').value == "" ? document.getElementById('reportInput2').placeholder.split(' ') : document.getElementById('reportInput2').value)
 		if(!validate())
 			return
 			
 		function validate() {
 			let flag = 0
-			if(document.getElementById('reportAF').children[0].children[2].value == "Кто перевел") {
-				document.getElementById('reportAF').children[0].children[2].style.border = '1px solid red';
+			if(document.getElementById('reportSelect').value == "Кто перевел") {
+				document.getElementById('reportSelect').style.border = '1px solid red';
 				flag = 1
 			} else
-				document.getElementById('reportAF').children[0].children[2].style.border = '0px solid red';
+				document.getElementById('reportSelect').style.border = '0px solid red';
 			
-			if(document.getElementById('reportAF').children[0].children[3].value == "Кому перевел") {
-				document.getElementById('reportAF').children[0].children[3].style.border = '1px solid red';
+			if(document.getElementById('reportSelect2').value == "Кому перевел") {
+				document.getElementById('reportSelect2').style.border = '1px solid red';
 				flag = 1
 			} else
-				document.getElementById('reportAF').children[0].children[3].style.border = '0px solid red';
+				document.getElementById('reportSelect2').style.border = '0px solid red';
 				
-			if(document.getElementById('reportAF').children[0].children[5].value == "") {
-				document.getElementById('reportAF').children[0].children[5].style.border = '1px solid red';
+			if(document.getElementById('reportInput4').value == "") {
+				document.getElementById('reportInput4').style.border = '1px solid red';
 				flag = 1
 			} else
-				document.getElementById('reportAF').children[0].children[5].style.border = '0px solid red';
+				document.getElementById('reportInput4').style.border = '0px solid red';
 			
 			return flag == 1 ? false : true
 		}
-		let kto = textToUTF8String(document.getElementById('reportAF').children[0].children[2].value)
-		let komu = textToUTF8String(document.getElementById('reportAF').children[0].children[3].value)
-		let link = textToUTF8String(document.getElementById('reportAF').children[0].children[4].value == "" ? document.getElementById('reportAF').children[0].children[4].placeholder : document.getElementById('reportAF').children[0].children[4].value)
+		let kto = textToUTF8String(document.getElementById('reportSelect').value)
+		let komu = textToUTF8String(document.getElementById('reportSelect2').value)
+		let link = textToUTF8String(document.getElementById('reportInput3').value == "" ? document.getElementById('reportInput3').placeholder : document.getElementById('reportInput3').value)
 		
-		let comment = textToUTF8String(document.getElementById('reportAF').children[0].children[5].value)
+		let comment = textToUTF8String(document.getElementById('reportInput4').value)
 		
 		var body = 'entry.2042676744=' + date + '&entry.1008946388=' + client + '&entry.743061035=' + kto + '&entry.285857150=' + komu + '&entry.1292433844=' + link + '&entry.1679550503=' + comment
 		let options = {
