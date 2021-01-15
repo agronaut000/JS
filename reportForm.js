@@ -151,8 +151,8 @@ async function createReportForm() {
 	let but = document.createElement('button')
 	but.textContent = 'Отправить'
 	but.onclick = function() {
-		let date = textToUTF8String(document.getElementById('reportInput1').value == "" ? document.getElementById('reportInput1').placeholder : document.getElementById('reportInput1').value)
-		let client = textToUTF8String(document.getElementById('reportInput2').value == "" ? document.getElementById('reportInput2').placeholder.split(' ') : document.getElementById('reportInput2').value)
+		let date = document.getElementById('reportInput1').value == "" ? document.getElementById('reportInput1').placeholder : document.getElementById('reportInput1').value
+		let client = document.getElementById('reportInput2').value == "" ? document.getElementById('reportInput2').placeholder.split(' ') : document.getElementById('reportInput2').value
 		if(!validate())
 			return
 			
@@ -180,7 +180,7 @@ async function createReportForm() {
 		}
 		let kto = textToUTF8String(document.getElementById('reportSelect').value)
 		let komu = textToUTF8String(document.getElementById('reportSelect2').value)
-		let link = textToUTF8String(document.getElementById('reportInput3').value == "" ? document.getElementById('reportInput3').placeholder : document.getElementById('reportInput3').value)
+		let link = document.getElementById('reportInput3').value == "" ? document.getElementById('reportInput3').placeholder : document.getElementById('reportInput3').value
 		
 		let comment = textToUTF8String(document.getElementById('reportInput4').value)
 		
