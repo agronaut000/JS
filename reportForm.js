@@ -151,7 +151,7 @@ async function createReportForm() {
 	let but = document.createElement('button')
 	but.textContent = 'Отправить'
 	but.onclick = function() {
-		let date = textToUTF8String(document.getElementById('reportInput').value == "" ? document.getElementById('reportInput').placeholder : document.getElementById('reportInput').value)
+		let date = textToUTF8String(document.getElementById('reportInput1').value == "" ? document.getElementById('reportInput1').placeholder : document.getElementById('reportInput1').value)
 		let client = textToUTF8String(document.getElementById('reportInput2').value == "" ? document.getElementById('reportInput2').placeholder.split(' ') : document.getElementById('reportInput2').value)
 		if(!validate())
 			return
