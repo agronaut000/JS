@@ -177,11 +177,11 @@ function fillForm(viewStringify) {
 		if(blocks[i].element.options != undefined) {
 			let select = document.createElement('select')
 			select.style.width = '100%'
-			select.placeholder = blocks[i].element.placeholder.text + ' *'
+			select.placeholder = blocks[i].element.placeholder.text
 			select.id = 'formToSlackField' + i
 			if(i == 2 || i == 3) {
 				let option = document.createElement('option')
-				option.textContent = i == 2 ? 'Выберите канал' : 'Приоритет'
+				option.textContent = i == 2 ? 'Выберите канал *' : 'Приоритет *'
 				select.append(option)
 			}
 			for(let j = 0; j < blocks[i].element.options.length; j++) {
@@ -197,7 +197,7 @@ function fillForm(viewStringify) {
 			else
 				var input = document.createElement('textarea')
 			input.style.width = '100%'
-			input.placeholder = blocks[i].label.text
+			input.placeholder = blocks[i].label.text + ' *'
 			input.id = 'formToSlackField' + i
 			newDiv.append(input)
 		}
