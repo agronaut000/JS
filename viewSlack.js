@@ -179,6 +179,11 @@ function fillForm(viewStringify) {
 			select.style.width = '100%'
 			select.placeholder = blocks[i].element.placeholder.text
 			select.id = 'formToSlackField' + i
+			if(i == 2 || i == 3) {
+				let option = document.createElement('option')
+				option.textContent = i == 2 ? 'Выберите канал' : 'Приоритет'
+				select.append(option)
+			}
 			for(let j = 0; j < blocks[i].element.options.length; j++) {
 				let option = document.createElement('option')
 				option.textContent = blocks[i].element.options[j].text.text
@@ -229,6 +234,8 @@ function fillForm(viewStringify) {
 			return;
 		}
 		console.log("Заполняем view")
+		if(!validateSlackForm())
+			return
 		for(let i = 0; i < 9; i++) {
 			view.blocks[i].answer = document.getElementById('formToSlackField' + i).value
 			view.blocks[i].answer = view.blocks[i].answer.split("\"").join("\\\"")
@@ -248,6 +255,34 @@ function fillForm(viewStringify) {
 			if(document.getElementById('formToSlackSend') != null)
 				document.getElementById('formToSlackSend').removeAttribute('disabled')
 		}, 500)
+	}
+	function validateSlackForm() {
+		let flag = 0
+		for(let i = 0; i < 7; i++) {
+			if(i == 3 || i == 2) {
+				if(i == 2) {
+					if(document.getElementById('formToSlackField' + i).value == 'Выберите канал') {
+						document.getElementById('formToSlackField' + i).style.border = '1px solid red';
+						flag = 1
+					} else 
+						document.getElementById('formToSlackField' + i).style.border = '0px solid red';
+				}
+				if (i == 3) {
+					if(document.getElementById('formToSlackField' + i).value == 'Приоритет') {
+						document.getElementById('formToSlackField' + i).style.border = '1px solid red';
+						flag = 1
+					} else 
+						document.getElementById('formToSlackField' + i).style.border = '0px solid red';
+				}
+				continue
+			} 
+			if(document.getElementById('formToSlackField' + i).value == '') {
+				document.getElementById('formToSlackField' + i).style.border = '1px solid red';
+				flag = 1
+			} else
+				document.getElementById('formToSlackField' + i).style.border = '0px solid red';
+		}
+		return flag == 1 ? false : true
 	}
 	newDiv.append(button)
 	newDiv.append(button2)
