@@ -50,10 +50,11 @@ async function createReportForm() {
 	input2.style.marginTop = '5px'
 	input2.style.borderRadius = '3px'
 
-
-	for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
-		if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id") {
-			input2.placeholder = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].children[1].textContent
+	if(document.getElementsByClassName('expert-user_details-list')[1] != undefined) {
+		for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
+			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id") {
+				input2.placeholder = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].children[1].textContent
+			}
 		}
 	}
 
@@ -176,6 +177,12 @@ async function createReportForm() {
 				flag = 1
 			} else
 				document.getElementById('reportInput4').style.border = '0px solid red';
+				
+			if(document.getElementById('reportInput2').value == "" && document.getElementById('reportInput2').placeholder) {
+				document.getElementById('reportInput2').style.border = '1px solid red';
+				flag = 1
+			} else
+				document.getElementById('reportInput2').style.border = '0px solid red';
 			
 			return flag == 1 ? false : true
 		}
