@@ -551,8 +551,12 @@ function move_again_AF() {
 					var div = document.getElementsByClassName('expert-chat-display-inner')[0].children[i]
 					var img = document.createElement('img')
 					img.src = div.querySelector('a').href
-					img.setAttribute('onclick', "this.style.width='500px'")
-					img.setAttribute('onmouseout', "this.style.width='100px'")
+					img.onclick = function() {
+						if(this.style.width == '500px')
+							this.style.width='100px'
+						else
+							this.style.width='500px'
+					}
 					img.style.width = '100px'
 					div.querySelector('a').replaceWith(img)
 				}
@@ -567,8 +571,12 @@ function move_again_AF() {
 				var div = document.getElementsByClassName('chat-messages')[0].children[i]
 				var img = document.createElement('img')
 				img.src = div.querySelector('a').href
-				img.setAttribute('onclick', "this.style.width='500px'")
-				img.setAttribute('onmouseout', "this.style.width='100px'")
+					img.onclick = function() {
+						if(this.style.width == '500px')
+							this.style.width='100px'
+						else
+							this.style.width='500px'
+					}
 				img.style.width = '100px'
 				div.querySelector('a').replaceWith(img)
 			}
