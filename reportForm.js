@@ -4,7 +4,13 @@ buttonOpenReport.textContent = "Жалоба";
 buttonOpenReport.style.marginRight = "15px";
 buttonOpenReport.onclick = function() {
     createReportForm()
-	this.style.display = 'none'
+	this.setAttribute('disabled', 'disabled')
+	document.getElementById('buttonSendReport').textContent = 'loading'
+	setTimeout(removeDsbl, 1500)
+	function removeDsbl() {
+		document.getElementById('buttonSendReport').removeAttribute('disabled')
+		document.getElementById('buttonSendReport').textContent = 'Жалоба'
+	}
 }
 var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 btnAdd.insertBefore(buttonOpenReport, btnAdd.children[0])
@@ -230,6 +236,7 @@ async function createReportForm() {
 	newDiv.append(input3)
 	newDiv.append(input4)
 	newDiv.append(newDiv2)
+	this.style.display = 'none'
 }
 function toUTF8Array(str) {
 	var utf8 = [];
