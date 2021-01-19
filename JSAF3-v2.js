@@ -2697,10 +2697,10 @@ function textToUTF8String(string) {
 	}
 	return string2
 }
-
+var flagGetCountTickets = 0
 function checkTicketCountsCrm() {
 	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined) {
-		if(flagGetCountTickets == 0
+		if(flagGetCountTickets == 0)
 			flagGetCountTickets = 1
 		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Создать задачу') {
 			document.getElementsByClassName('ant-modal-content')[0].querySelectorAll('button')[1].onclick = function() {
