@@ -2703,7 +2703,7 @@ function checkTicketCountsCrm() {
 	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined && flagGetCountTickets == 0) {
 		flagGetCountTickets = 1
 		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Создать задачу') {
-			document.getElementsByClassName('ant-modal-content')[0].querySelectorAll('button')[1].onclick = function() {
+			document.getElementsByClassName('ant-modal-content')[0].querySelectorAll('button')[2].onclick = function() {
 				if(document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].children[0].children[1].textContent == 'Критический' && document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].children[1].children[1].textContent == 'Техподдержка 1-я линия crm2') {
 					let me = textToUTF8String(document.querySelector('.user_menu-dropdown-user_name').innerText)
 					var adr1 = document.location.pathname
