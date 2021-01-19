@@ -2728,7 +2728,7 @@ function checkTicketCountsCrm() {
 		}
 		getInfoGoogleDoc()
 	} 
-	document.getElementsByClassName('ant-modal-content')[0] === undefined	{
+	document.getElementsByClassName('ant-modal-content')[0] === undefined) {
 		flagGetCountTickets = 0
 	}
 }
