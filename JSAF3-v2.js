@@ -2726,38 +2726,13 @@ function checkTicketCountsCrm() {
 			}
 		}
 		getInfoGoogleDoc()
-		let curDate = new Date()
-		let curH = (curDate.getUTCHours() + 3) % 24
-		let prevH = (curDate.getUTCHours() + 2) % 24
-		let nextH = (curDate.getUTCHours() + 4) % 24
-		let curM = curDate.curDate.getUTCMinutes()
-		let time1 = ''
-		let time2 = ''
-		let count = 0
-		if(curM > 50) {
-			time1 = Number(curH.toString() + '50')
-			time2 = Number(nextH.toString() + '50')
-		} else {
-			time1 = Number(prevH.toString() + '50')
-			time2 = Number(curH.toString() + '50')
-		}
-		for(i = 0; i < allTickets.length; i++) {
-			let t = Number(allTickets[i][0].split(' ').split(':')[0] + allTickets[i][0].split(' ').split(':')[1])
-			if(t > time1 && t < time2)
-				count++
-		}
-		
-		let newDiv = document.createElement('div')
-		newDiv.textContent = 'Передано чатов: ' + count
-		document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].append(newDiv)
 	} else {
 		flagGetCountTickets = 0
 	}
 }
 setInterval(checkTicketCountsCrm, 300)
-var allTickets = ''
 function getInfoGoogleDoc() {
-   var app = 'https://script.google.com/macros/s/AKfycbwaY_Iw1jybVvubQaKIJZ5KwMssBNmcJt7taug-Jb9LU2faY0EG/exec',
+   var app = localStorage.getItem('tableCRM2'),
 	  xhr = new XMLHttpRequest();
    xhr.open('GET', app);
    xhr.onreadystatechange = function() {
@@ -2768,9 +2743,57 @@ function getInfoGoogleDoc() {
 			var r = JSON.parse(xhr.responseText),
 			   result = r["result"];
 			   
-			allTickets = result;
+			let allTickets = result;
+			let curDate = new Date()
+			let curH = (curDate.getUTCHours() + 3) % 24
+			let prevH = (curDate.getUTCHours() + 2) % 24
+			let nextH = (curDate.getUTCHours() + 4) % 24
+			let curM = curDate.getUTCMinutes()
+			let time1 = ''
+			let time2 = ''
+			let count = 0
+			if(curM > 50) {
+				time1 = Number(curH.toString() + '50')
+				time2 = Number(nextH.toString() + '50')
+			} else {
+				time1 = Number(prevH.toString() + '50')
+				time2 = Number(curH.toString() + '50')
+			}
+			for(i = 0; i < allTickets.length; i++) {
+				let t = Number(allTickets[i][0].split(' ').split(':')[0] + allTickets[i][0].split(' ').split(':')[1])
+				if(t > time1 && t < time2)
+					count++
+			}
+			
+			let newDiv = document.createElement('div')
+			newDiv.textContent = 'Передано чатов: ' + count
+			document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].append(newDiv)
 		} catch(e) {console.log(e)}
 	 }
+   }
+   xhr.send()
+}
+
+function getText() {
+   var app = localStorage.getItem('scriptAdr'),
+      xhr = new XMLHttpRequest();
+   xhr.open('GET', app);
+   xhr.onreadystatechange = function() {
+     if (xhr.readyState !== 4) return;
+
+     if (xhr.status == 200) {
+        try {
+            var r = JSON.parse(xhr.responseText),
+               result = r["result"];
+			   
+			table = result;
+			console.log('Обновили шаблоны')
+			refreshTemplates()
+
+        } catch(e) {console.log(e)}
+     }
+   
+
    }
    xhr.send()
 }
