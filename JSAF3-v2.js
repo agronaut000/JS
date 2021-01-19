@@ -2732,7 +2732,7 @@ function checkTicketCountsCrm() {
 }
 setInterval(checkTicketCountsCrm, 300)
 function getInfoGoogleDoc() {
-   var app = localStorage.getItem('tableCRM2'),
+   var app = 'https://script.google.com/macros/s/AKfycbzoean4smRm2nSrOxprmHT5c1Pt8h_mv9ypoJImJ-AwD6QOSI4/exec',
 	  xhr = new XMLHttpRequest();
    xhr.open('GET', app);
    xhr.onreadystatechange = function() {
@@ -2770,30 +2770,6 @@ function getInfoGoogleDoc() {
 			document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].append(newDiv)
 		} catch(e) {console.log(e)}
 	 }
-   }
-   xhr.send()
-}
-
-function getText() {
-   var app = localStorage.getItem('scriptAdr'),
-      xhr = new XMLHttpRequest();
-   xhr.open('GET', app);
-   xhr.onreadystatechange = function() {
-     if (xhr.readyState !== 4) return;
-
-     if (xhr.status == 200) {
-        try {
-            var r = JSON.parse(xhr.responseText),
-               result = r["result"];
-			   
-			table = result;
-			console.log('Обновили шаблоны')
-			refreshTemplates()
-
-        } catch(e) {console.log(e)}
-     }
-   
-
    }
    xhr.send()
 }
