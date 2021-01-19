@@ -1636,7 +1636,6 @@ function timerHideButtons() {
 					document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].style.display = 'none'
 	}
 }
-setInterval(timerHideButtons, 300)
 
 function requestsRed () {
 	document.getElementsByClassName('expert-sidebar-button')[0].childNodes[1].childNodes[0].addEventListener("DOMSubtreeModified", function() {
@@ -2545,6 +2544,8 @@ function prepTp() {
 	// var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 	// btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
 	
+	setInterval(checkTicketCountsCrm, 300)
+	setInterval(timerHideButtons, 300)
 	
 	setTimeout(function() {
 		// Модуль wallentine в АФ
@@ -2726,11 +2727,11 @@ function checkTicketCountsCrm() {
 			}
 		}
 		getInfoGoogleDoc()
-	} else {
+	} 
+	document.getElementsByClassName('ant-modal-content')[0] === undefined	{
 		flagGetCountTickets = 0
 	}
 }
-setInterval(checkTicketCountsCrm, 300)
 function getInfoGoogleDoc() {
    var app = 'https://script.google.com/macros/s/AKfycbzoean4smRm2nSrOxprmHT5c1Pt8h_mv9ypoJImJ-AwD6QOSI4/exec',
 	  xhr = new XMLHttpRequest();
@@ -2766,7 +2767,7 @@ function getInfoGoogleDoc() {
 			}
 			
 			let newDiv = document.createElement('div')
-			newDiv.textContent = 'Передано чатов: ' + count
+			newDiv.textContent = 'Передано чатов CRM2 1Л: ' + count
 			document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].append(newDiv)
 		} catch(e) {console.log(e)}
 	 }
