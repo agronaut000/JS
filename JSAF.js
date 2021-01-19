@@ -1390,7 +1390,7 @@ function startTimer() {
 	
 	if(document.getElementById('switcher').innerHTML == "ВКЛ")
 		if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1) {
-			txt = document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].innerHTML
+			txt = document.getElementsByClassName('expert-sidebar-button')[0].childNodes[1].childNodes[0].innerHTML
 			if(txt != "Взять запрос (0)")
 				audio.play()
 		}
@@ -1480,12 +1480,12 @@ function startTimer() {
 setInterval(startTimer, 1000)
 
 function requestsRed () {
-	document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].addEventListener("DOMSubtreeModified", function() {
-			txt = document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].innerHTML
+	document.getElementsByClassName('expert-sidebar-button')[0].childNodes[1].childNodes[0].addEventListener("DOMSubtreeModified", function() {
+			txt = document.getElementsByClassName('expert-sidebar-button')[0].childNodes[1].childNodes[0].innerHTML
 			if(txt != "Взять запрос (0)")
-				document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].style.backgroundColor = "#F34723"
+				document.getElementsByClassName('expert-sidebar-button')[0].childNodes[1].style.backgroundColor = "#F34723"
 			else
-				document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].style.backgroundColor = "white"
+				document.getElementsByClassName('expert-sidebar-button')[0].childNodes[1].style.backgroundColor = "white"
 	});
 }
 
