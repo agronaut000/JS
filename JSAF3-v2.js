@@ -2701,7 +2701,7 @@ function textToUTF8String(string) {
 }
 var flagGetCountTickets = 0
 function checkTicketCountsCrm() {
-	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined && flagGetCountTickets == 0) {
+	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined && flagGetCountTickets == 0 && document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Создать задачу') {
 		flagGetCountTickets = 1
 		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Создать задачу') {
 			document.getElementsByClassName('ant-modal-content')[0].querySelectorAll('button')[2].onclick = function() {
