@@ -514,7 +514,7 @@ function move_again_AF() {
 					bool = 1;
 			}
 			if(e.key == 'Enter' && bool == 1) {
-				refCurTimer('15:00')
+				refCurTimer('12:00')
 			}
 		}
 	window.onkeyup = function(e) {
@@ -1107,7 +1107,7 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 	if(curTemplate == undefined)
 		curTemplate = await loadTemplates(template, word)
 	//addTimer()
-	time = "15:00"
+	time = "12:00"
 	var documentId = curTemplate[1]
 	var serviceId = curTemplate[2]
 	var queryId = curTemplate[3]
@@ -1149,7 +1149,7 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 				});
 		}
 }
-async function sendAnswer(txt, flag = 1, time = "15:00") {
+async function sendAnswer(txt, flag = 1, time = "12:00") {
 		//addTimer()
 		var values = await getInfo(flag)
 		var adr = values[0]; var adr1 = values[1]; var uid = values[2]
@@ -1222,9 +1222,9 @@ function addTimer() {
 		let serv2 = document.createElement('div')
 		tm.childNodes[0].appendChild(serv)
 		tm.childNodes[1].appendChild(serv2)
-		tm.childNodes[0].childNodes[2].innerHTML = "15:00"
+		tm.childNodes[0].childNodes[2].innerHTML = "12:00"
 		let d = new Date()
-		tmrs[idk] = ["15:00", tm.childNodes[1].childNodes[0].innerText, 1, number(d), ""]
+		tmrs[idk] = ["12:00", tm.childNodes[1].childNodes[0].innerText, 1, number(d), ""]
 		idk++
 	}
 }
@@ -1247,7 +1247,7 @@ function addTimers() {
 			}
 		}
 		if(flag == 0)
-			tmrs[idk++] = ["15:00", nm, 1, Number(d), ""]
+			tmrs[idk++] = ["12:00", nm, 1, Number(d), ""]
 
 		k++
 	}	
@@ -1343,7 +1343,7 @@ function startTimer() {
 		if(tmrs[i][2] == 0)
 			t = 1
 		else 
-			t = 15
+			t = 12
 		var curTime3 = (t * 60) - Math.floor((curTime2 - curTime1) / 1000);
 		if(curTime3 < 0)
 			continue
@@ -1370,7 +1370,7 @@ function startTimer() {
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1) {
 		if(document.getElementsByClassName('ant-btn ant-btn-primary')[0] !== undefined)
 			document.getElementsByClassName('ant-btn ant-btn-primary')[0].onclick = function () {
-				refCurTimer('15:00')
+				refCurTimer('12:00')
 			}
 		refreshTimer()
 
@@ -1378,7 +1378,7 @@ function startTimer() {
 	
 	if(document.getElementById('switcher').innerHTML == "ВКЛ")
 		if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1) {
-			txt = document.getElementsByClassName('expert-sidebar-button')[0].childNodes[1].childNodes[0].innerHTML
+			txt = document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].innerHTML
 			if(txt != "Взять запрос (0)")
 				audio.play()
 		}
@@ -1640,12 +1640,12 @@ function timerHideButtons() {
 setInterval(timerHideButtons, 300)
 
 function requestsRed () {
-	document.getElementsByClassName('expert-sidebar-button')[0].childNodes[1].childNodes[0].addEventListener("DOMSubtreeModified", function() {
-			txt = document.getElementsByClassName('expert-sidebar-button')[0].childNodes[1].childNodes[0].innerHTML
+	document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].addEventListener("DOMSubtreeModified", function() {
+			txt = document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].childNodes[0].innerHTML
 			if(txt != "Взять запрос (0)")
-				document.getElementsByClassName('expert-sidebar-button')[0].childNodes[1].style.backgroundColor = "#F34723"
+				document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].style.backgroundColor = "#F34723"
 			else
-				document.getElementsByClassName('expert-sidebar-button')[0].childNodes[1].style.backgroundColor = "white"
+				document.getElementsByClassName('expert-sidebar-button')[0].childNodes[0].style.backgroundColor = "white"
 	});
 }
 
@@ -1821,7 +1821,7 @@ async function sendAnswerTemplate2(word, flag = 0) {
 		tmpTxt = tmpTxt.split('<p></p>').join("<p><br></p>")
 		tmpTxt = tmpTxt.substr(0, tmpTxt.length - 2)
 		var values = await getInfo(0)
-		refCurTimer("15:00")
+		refCurTimer("12:00")
 		var adr = values[0]; var adr1 = values[1]; var uid = values[2]
 		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 			  "headers": {
@@ -2509,7 +2509,7 @@ function prepTp() {
 	let buttonGetStat = document.createElement('div');
 	buttonGetStat.id = 'buttonGetStat';
 	buttonGetStat.innerHTML = "Статистика";
-	buttonGetStat.style.marginRight = "15px";
+	buttonGetStat.style.marginLeft = "15px";
 	buttonGetStat.onclick = function() {
 		if(this.textContent == 'Скрыть стату') {
 			if(this.getAttribute('disabled') != null)
@@ -2542,8 +2542,9 @@ function prepTp() {
 			this.textContent = 'Загрузка'
 		}
 	}
-	var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
-	btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
+	document.getElementById('app-header').append(buttonGetStat11)
+	// var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+	// btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
 	
 	
 	setTimeout(function() {
