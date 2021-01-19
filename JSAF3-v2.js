@@ -514,7 +514,7 @@ function move_again_AF() {
 					bool = 1;
 			}
 			if(e.key == 'Enter' && bool == 1) {
-				refCurTimer('12:00')
+				refCurTimer('15:00')
 			}
 		}
 	window.onkeyup = function(e) {
@@ -806,7 +806,6 @@ function getText() {
 
    }
    xhr.send()
-   
 }
 function refreshTemplates() {
 	templatesAF = []
@@ -1107,7 +1106,7 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 	if(curTemplate == undefined)
 		curTemplate = await loadTemplates(template, word)
 	//addTimer()
-	time = "12:00"
+	time = "15:00"
 	var documentId = curTemplate[1]
 	var serviceId = curTemplate[2]
 	var queryId = curTemplate[3]
@@ -1149,7 +1148,7 @@ async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 
 				});
 		}
 }
-async function sendAnswer(txt, flag = 1, time = "12:00") {
+async function sendAnswer(txt, flag = 1, time = "15:00") {
 		//addTimer()
 		var values = await getInfo(flag)
 		var adr = values[0]; var adr1 = values[1]; var uid = values[2]
@@ -1222,9 +1221,9 @@ function addTimer() {
 		let serv2 = document.createElement('div')
 		tm.childNodes[0].appendChild(serv)
 		tm.childNodes[1].appendChild(serv2)
-		tm.childNodes[0].childNodes[2].innerHTML = "12:00"
+		tm.childNodes[0].childNodes[2].innerHTML = "15:00"
 		let d = new Date()
-		tmrs[idk] = ["12:00", tm.childNodes[1].childNodes[0].innerText, 1, number(d), ""]
+		tmrs[idk] = ["15:00", tm.childNodes[1].childNodes[0].innerText, 1, number(d), ""]
 		idk++
 	}
 }
@@ -1247,7 +1246,7 @@ function addTimers() {
 			}
 		}
 		if(flag == 0)
-			tmrs[idk++] = ["12:00", nm, 1, Number(d), ""]
+			tmrs[idk++] = ["15:00", nm, 1, Number(d), ""]
 
 		k++
 	}	
@@ -1343,7 +1342,7 @@ function startTimer() {
 		if(tmrs[i][2] == 0)
 			t = 1
 		else 
-			t = 12
+			t = 15
 		var curTime3 = (t * 60) - Math.floor((curTime2 - curTime1) / 1000);
 		if(curTime3 < 0)
 			continue
@@ -1370,7 +1369,7 @@ function startTimer() {
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1) {
 		if(document.getElementsByClassName('ant-btn ant-btn-primary')[0] !== undefined)
 			document.getElementsByClassName('ant-btn ant-btn-primary')[0].onclick = function () {
-				refCurTimer('12:00')
+				refCurTimer('15:00')
 			}
 		refreshTimer()
 
@@ -1623,7 +1622,7 @@ function startTimer() {
 
 
 function timerHideButtons() {
-		if(document.getElementsByClassName('ant-modal-content')[0] !== undefined) {
+	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined) {
 		document.getElementsByClassName('ant-modal-content')[0].childNodes[1].children[0].appendChild(maskBackHide)
 		
 		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Указать тему')
@@ -1821,7 +1820,7 @@ async function sendAnswerTemplate2(word, flag = 0) {
 		tmpTxt = tmpTxt.split('<p></p>').join("<p><br></p>")
 		tmpTxt = tmpTxt.substr(0, tmpTxt.length - 2)
 		var values = await getInfo(0)
-		refCurTimer("12:00")
+		refCurTimer("15:00")
 		var adr = values[0]; var adr1 = values[1]; var uid = values[2]
 		fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 			  "headers": {
@@ -2648,4 +2647,130 @@ function hesoyam() {
 	}
 	newDiv.append(button)
 	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.append(newDiv)
+}
+
+function toUTF8Array(str) {
+	var utf8 = [];
+	for (var i=0; i < str.length; i++) {
+		var charcode = str.charCodeAt(i);
+		if (charcode < 0x80) utf8.push(charcode);
+		else if (charcode < 0x800) {
+			utf8.push(0xc0 | (charcode >> 6), 
+					  0x80 | (charcode & 0x3f));
+		}
+		else if (charcode < 0xd800 || charcode >= 0xe000) {
+			utf8.push(0xe0 | (charcode >> 12), 
+					  0x80 | ((charcode>>6) & 0x3f), 
+					  0x80 | (charcode & 0x3f));
+		}
+		// surrogate pair
+		else {
+			i++;
+			// UTF-16 encodes 0x10000-0x10FFFF by
+			// subtracting 0x10000 and splitting the
+			// 20 bits of 0x0-0xFFFFF into two halves
+			charcode = 0x10000 + (((charcode & 0x3ff)<<10)
+					  | (str.charCodeAt(i) & 0x3ff))
+			utf8.push(0xf0 | (charcode >>18), 
+					  0x80 | ((charcode>>12) & 0x3f), 
+					  0x80 | ((charcode>>6) & 0x3f), 
+					  0x80 | (charcode & 0x3f));
+		}
+	}
+	return utf8;
+}
+
+function decToHex(dec)
+{
+	var hexStr = '0123456789ABCDEF';
+	var low = dec % 16;
+	var high = (dec - low)/16;
+	hex = '' + hexStr.charAt(high) + hexStr.charAt(low);
+	return hex;
+}
+
+function textToUTF8String(string) {
+	string = toUTF8Array(string)
+	let string2 = ""
+	for(i = 0; i < string.length; i++) {
+		string2 += "%" + decToHex(string[i])
+	}
+	return string2
+}
+
+function checkTicketCountsCrm() {
+	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined && flagGetCountTickets = 0) {
+		flagGetCountTickets = 1
+		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Создать задачу') {
+			document.getElementsByClassName('ant-modal-content')[0].querySelectorAll('button')[1].onclick = function() {
+				if(document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].children[0].children[1].textContent == 'Критический' && document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].children[1].children[1].textContent == 'Техподдержка 1-я линия crm2') {
+					let me = textToUTF8String(document.querySelector('.user_menu-dropdown-user_name').innerText)
+					var adr1 = document.location.pathname
+					adr1 = adr1.split('/')
+					adr1 = adr1[3]
+					link = 'https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1
+					let body = 'entry.1213932=' + me + '&entry.1439163622=' + link
+					let options = {
+						  "headers": {
+							"content-type": "application/x-www-form-urlencoded",
+						  },
+						  "body": body,
+						  "method": "POST",
+						}
+					document.getElementById('responseTextarea1').value = JSON.stringify(options)
+					document.getElementById('responseTextarea2').value = 'https://docs.google.com/forms/d/e/1FAIpQLSft6Oyu3LRGsyG3-IicG7m5bMr1cdK0oZXnXgk7Aid4AdpB2Q/formResponse'
+					if(document.getElementById('responseTextarea3') != null)
+						document.getElementById('responseTextarea3').value = ''
+					document.getElementById('sendResponse').click()
+				}
+			}
+		}
+		getInfoGoogleDoc()
+		let curDate = new Date()
+		let curH = (curDate.getUTCHours() + 3) % 24
+		let prevH = (curDate.getUTCHours() + 2) % 24
+		let nextH = (curDate.getUTCHours() + 4) % 24
+		let curM = curDate.curDate.getUTCMinutes()
+		let time1 = ''
+		let time2 = ''
+		let count = 0
+		if(curM > 50) {
+			time1 = Number(curH.toString() + '50')
+			time2 = Number(nextH.toString() + '50')
+		} else {
+			time1 = Number(prevH.toString() + '50')
+			time2 = Number(curH.toString() + '50')
+		}
+		for(i = 0; i < allTickets.length; i++) {
+			let t = Number(allTickets[i][0].split(' ').split(':')[0] + allTickets[i][0].split(' ').split(':')[1])
+			if(t > time1 && t < time2)
+				count++
+		}
+		
+		let newDiv = document.createElement('div')
+		newDiv.textContent = 'Передано чатов: ' + count
+		document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].append(newDiv)
+	} else {
+		flagGetCountTickets = 0
+	}
+}
+setInterval(checkTicketCountsCrm, 300)
+var allTickets = ''
+function getInfoGoogleDoc() {
+   var app = 'https://script.google.com/macros/s/AKfycbwaY_Iw1jybVvubQaKIJZ5KwMssBNmcJt7taug-Jb9LU2faY0EG/exec',
+	  xhr = new XMLHttpRequest();
+   xhr.open('GET', app);
+   xhr.onreadystatechange = function() {
+	 if (xhr.readyState !== 4) return;
+
+	 if (xhr.status == 200) {
+		try {
+			var r = JSON.parse(xhr.responseText),
+			   result = r["result"];
+			   
+			allTickets = result;
+		} catch(e) {console.log(e)}
+	 }
+   }
+   xhr.send()
 }
