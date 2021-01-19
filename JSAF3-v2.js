@@ -1987,11 +1987,10 @@ async function getNotGoods(stringDate) {
 	  "credentials": "include"
 	}).then(result => b = result.json()).then(b => b.rows.forEach(k => {
 		if(k.operator != null)
-			if(k.operator.kbs != null)
-				if(k.operator.kbs.indexOf(120181) != -1 && k.operator.fullName.split('-')[0] == "ТП") {
-					operatorId.push(k.operator.id)
-					operatorNames.push(k.operator.fullName.split('-')[1])
-				}
+			if(k.operator.kbs.indexOf(120181) != -1 && k.operator.fullName.split('-')[0] == "ТП") {
+				operatorId.push(k.operator.id)
+				operatorNames.push(k.operator.fullName.split('-')[1])
+			}
 	}))
 
 	list = operatorId
@@ -2388,10 +2387,11 @@ async function getStats() {
 	await fetch("https://skyeng.autofaq.ai/api/operators/statistic/currentState", {
 	  "credentials": "include"
 	}).then(result => b = result.json()).then(b => b.rows.forEach(k => {
-		if(k.operator.kbs.indexOf(120181) != -1 && k.operator.fullName.split('-')[0] == "ТП") {
-			operatorId.push(k.operator.id)
-			operatorNames.push(k.operator.fullName)
-		}
+		if(k.operator != null)
+			if(k.operator.kbs.indexOf(120181) != -1 && k.operator.fullName.split('-')[0] == "ТП") {
+				operatorId.push(k.operator.id)
+				operatorNames.push(k.operator.fullName)
+			}
 	}))
 
 	var date = new Date()
