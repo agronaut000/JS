@@ -2699,8 +2699,9 @@ function textToUTF8String(string) {
 }
 
 function checkTicketCountsCrm() {
-	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined && flagGetCountTickets == 0) {
-		flagGetCountTickets = 1
+	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined) {
+		if(flagGetCountTickets == 0
+			flagGetCountTickets = 1
 		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Создать задачу') {
 			document.getElementsByClassName('ant-modal-content')[0].querySelectorAll('button')[1].onclick = function() {
 				if(document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].children[0].children[1].textContent == 'Критический' && document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].children[1].children[1].textContent == 'Техподдержка 1-я линия crm2') {
@@ -2760,7 +2761,7 @@ function getInfoGoogleDoc() {
 				time2 = Number(curH.toString() + '50')
 			}
 			for(i = 0; i < allTickets.length; i++) {
-				let t = Number(allTickets[i][0].split(' ').split(':')[0] + allTickets[i][0].split(' ').split(':')[1])
+				let t = Number(allTickets[i][0].split('T')[0].split(':')[0] + allTickets[i][0].split('T')[0].split(':')[1])
 				if(t > time1 && t < time2)
 					count++
 			}
