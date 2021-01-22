@@ -102,7 +102,7 @@ async function createReportForm() {
 	res = result
 		for(let i = 0; i < ids.length; i++) {
 			for(let j = 0; j < result.rows.length; j++) {
-				if(k.operator != null)
+				if(result.rows[j].operator.operator != null)
 					if(ids[i] == result.rows[j].operator.id)
 						setOperators.push(result.rows[j].operator.fullName)
 			}
@@ -124,21 +124,12 @@ async function createReportForm() {
 		option.setAttribute('value', setOperators[j])
 		select.append(option)
 	}
-	let select2 = document.createElement('select')
+	let select2 = document.createElement('input')
 	select2.id = 'reportSelect2'
-	select2.placeholder = 'Выберите оператора'
+	select2.placeholder = document.querySelector('.user_menu-dropdown-user_name').innerText
 	select2.style.marginTop = '5px'
 	select2.style.width = '300px'
 	select2.style.borderRadius = '3px'
-	let option2 = document.createElement('option')
-	option2.textContent = 'Кому перевел'
-	select2.append(option2)
-	for(let j = 0; j < setOperators.length; j++) {
-		let option = document.createElement('option')
-		option.textContent = setOperators[j]
-		option.setAttribute('value', setOperators[j])
-		select2.append(option)
-	}
 
 	let input3 = document.createElement('textarea')
 	input3.id = 'reportInput3'
@@ -171,12 +162,6 @@ async function createReportForm() {
 				flag = 1
 			} else
 				document.getElementById('reportSelect').style.border = '0px solid red';
-			
-			if(document.getElementById('reportSelect2').value == "Кому перевел") {
-				document.getElementById('reportSelect2').style.border = '1px solid red';
-				flag = 1
-			} else
-				document.getElementById('reportSelect2').style.border = '0px solid red';
 				
 			if(document.getElementById('reportInput4').value == "") {
 				document.getElementById('reportInput4').style.border = '1px solid red';
@@ -193,7 +178,7 @@ async function createReportForm() {
 			return flag == 1 ? false : true
 		}
 		let kto = textToUTF8String(document.getElementById('reportSelect').value)
-		let komu = textToUTF8String(document.getElementById('reportSelect2').value)
+		let komu = textToUTF8String(document.getElementById('reportSelect2').value == "" ? document.getElementById('reportSelect2').placeholder : document.getElementById('reportSelect2').value)
 		let link = document.getElementById('reportInput3').value == "" ? document.getElementById('reportInput3').placeholder : document.getElementById('reportInput3').value
 		
 		let comment = textToUTF8String(document.getElementById('reportInput4').value)
