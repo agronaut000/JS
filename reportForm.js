@@ -151,7 +151,7 @@ async function createReportForm() {
 	but.textContent = 'Отправить'
 	but.onclick = function() {
 		let date = document.getElementById('reportInput1').value == "" ? document.getElementById('reportInput1').placeholder : document.getElementById('reportInput1').value
-		let client = document.getElementById('reportInput2').value == "" ? document.getElementById('reportInput2').placeholder.split(' ') : document.getElementById('reportInput2').value
+		let client = document.getElementById('reportInput2').value == "" ? document.getElementById('reportInput2').placeholder.split(' ')[0] : document.getElementById('reportInput2').value
 		if(!validate())
 			return
 			
@@ -169,7 +169,7 @@ async function createReportForm() {
 			} else
 				document.getElementById('reportInput4').style.border = '0px solid red';
 				
-			if(document.getElementById('reportInput2').value == "" && document.getElementById('reportInput2').placeholder) {
+			if(document.getElementById('reportInput2').value == "" && document.getElementById('reportInput2').placeholder == "") {
 				document.getElementById('reportInput2').style.border = '1px solid red';
 				flag = 1
 			} else
