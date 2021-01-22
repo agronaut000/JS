@@ -221,7 +221,7 @@ async function createReportForm() {
 	newDiv.append(input3)
 	newDiv.append(input4)
 	newDiv.append(newDiv2)
-	this.style.display = 'none'
+	document.getElementById('buttonSendReport').style.display = 'none'
 }
 function toUTF8Array(str) {
 	var utf8 = [];
