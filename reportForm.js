@@ -59,7 +59,7 @@ async function createReportForm() {
 	if(document.getElementsByClassName('expert-user_details-list')[1] != undefined) {
 		for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id") {
-				input2.placeholder = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].children[1].textContent
+				input2.placeholder = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].children[1].textContent.split(' ')[0]
 			}
 		}
 	}
@@ -151,7 +151,7 @@ async function createReportForm() {
 	but.textContent = 'Отправить'
 	but.onclick = function() {
 		let date = document.getElementById('reportInput1').value == "" ? document.getElementById('reportInput1').placeholder : document.getElementById('reportInput1').value
-		let client = document.getElementById('reportInput2').value == "" ? document.getElementById('reportInput2').placeholder.split(' ')[0] : document.getElementById('reportInput2').value
+		let client = document.getElementById('reportInput2').value == "" ? document.getElementById('reportInput2').placeholder : document.getElementById('reportInput2').value
 		if(!validate())
 			return
 			
