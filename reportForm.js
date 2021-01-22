@@ -102,7 +102,7 @@ async function createReportForm() {
 	res = result
 		for(let i = 0; i < ids.length; i++) {
 			for(let j = 0; j < result.rows.length; j++) {
-				if(result.rows[j].operator.operator != null)
+				if(result.rows[j].operator != null)
 					if(ids[i] == result.rows[j].operator.id)
 						setOperators.push(result.rows[j].operator.fullName)
 			}
