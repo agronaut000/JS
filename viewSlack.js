@@ -197,7 +197,7 @@ function fillForm(viewStringify) {
 			else
 				var input = document.createElement('textarea')
 			input.style.width = '100%'
-			input.placeholder = blocks[i].label.text + ' *'
+			input.placeholder = blocks[i].label.text + i < 7 ? ' *' : ''
 			input.id = 'formToSlackField' + i
 			newDiv.append(input)
 		}
