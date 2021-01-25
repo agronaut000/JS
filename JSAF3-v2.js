@@ -1514,107 +1514,109 @@ function startTimer() {
 	
 	if(localStorage.getItem('scriptAdr') == TP_addr) {
 		if(document.getElementsByClassName('expert-user_details-list')[1] != undefined) {
-			if(document.getElementsByClassName('expert-user_details-list')[1].children[0].classList != "") {
-				let c = document.createElement('div')
-				let a = document.createElement('span')
-				a.textContent = 'Найти группу'
-				a.style.marginRight='10px'
-				function generateGroupLink() {
-					let res = document.getElementById('responseTextarea1').getAttribute('groupLessons')
-					if(res.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0] == 'Нет') {
-						studentIdSearch++
+			if(document.getElementsByClassName('expert-user_details-list')[1].children[0] != undefined) {
+				if(document.getElementsByClassName('expert-user_details-list')[1].children[0].classList != "") {
+					let c = document.createElement('div')
+					let a = document.createElement('span')
+					a.textContent = 'Найти группу'
+					a.style.marginRight='10px'
+					function generateGroupLink() {
+						let res = document.getElementById('responseTextarea1').getAttribute('groupLessons')
+						if(res.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0] == 'Нет') {
+							studentIdSearch++
+							for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
+								if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "nextClass-studentId") {
+									document.getElementById('responseTextarea1').value = '{}'
+									document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[studentIdSearch]
+									document.getElementById('responseTextarea3').value = 'groupLessons'
+									document.getElementById('sendResponse').click()
+									setTimeout(generateGroupLink, 1000)
+									return
+								}
+							}
+						}
+						groupId = res.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0]
+						let button = document.createElement('a')
+						button.href = 'https://cabinet.skyeng.ru/admin/group/edit?id=' + groupId
+						button.target = '_blank'
+						button.textContent = groupId
+						button.style.marginRight = '15px'
+						
+						document.getElementsByClassName('expert-user_details-list')[1].children[0].children[0].replaceWith(button)
+						document.getElementsByClassName('expert-user_details-list')[1].children[0].children[1].remove()
+					}
+					a.onclick = function() {
+						this.textContent = ''
+						this.parentElement.children[1].textContent = ''
 						for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
-							if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "nextClass-studentId") {
-								document.getElementById('responseTextarea1').value = '{}'
-								document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[studentIdSearch]
-								document.getElementById('responseTextarea3').value = 'groupLessons'
-								document.getElementById('sendResponse').click()
-								setTimeout(generateGroupLink, 1000)
-								return
-							}
-						}
-					}
-					groupId = res.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0]
-					let button = document.createElement('a')
-					button.href = 'https://cabinet.skyeng.ru/admin/group/edit?id=' + groupId
-					button.target = '_blank'
-					button.textContent = groupId
-					button.style.marginRight = '15px'
-					
-					document.getElementsByClassName('expert-user_details-list')[1].children[0].children[0].replaceWith(button)
-					document.getElementsByClassName('expert-user_details-list')[1].children[0].children[1].remove()
-				}
-				a.onclick = function() {
-					this.textContent = ''
-					this.parentElement.children[1].textContent = ''
-					for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
-						if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "userType") {
-							if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent == 'student') {
-								for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
-									if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "id") {
-										studentIdSearch = 0
-										document.getElementById('responseTextarea1').value = '{}'
-										document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
-										document.getElementById('responseTextarea3').value = 'groupLessons'
-										document.getElementById('sendResponse').click()
-										setTimeout(generateGroupLink, 1000)
+							if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "userType") {
+								if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent == 'student') {
+									for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
+										if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "id") {
+											studentIdSearch = 0
+											document.getElementById('responseTextarea1').value = '{}'
+											document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
+											document.getElementById('responseTextarea3').value = 'groupLessons'
+											document.getElementById('sendResponse').click()
+											setTimeout(generateGroupLink, 1000)
+										}
 									}
-								}
-							} else {
-								for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
-									if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "nextClass-studentId") {
-										document.getElementById('responseTextarea1').value = '{}'
-										document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[0]
-										document.getElementById('responseTextarea3').value = 'groupLessons'
-										document.getElementById('sendResponse').click()
-										setTimeout(generateGroupLink, 1000)
+								} else {
+									for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
+										if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "nextClass-studentId") {
+											document.getElementById('responseTextarea1').value = '{}'
+											document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[0]
+											document.getElementById('responseTextarea3').value = 'groupLessons'
+											document.getElementById('sendResponse').click()
+											setTimeout(generateGroupLink, 1000)
+										}
 									}
 								}
 							}
 						}
 					}
-				}
 
-				let b = document.createElement('span')
-				b.textContent = 'Найти Talks'
-				b.style.marginRight='10px'
-				function generateTalksInfo() {
-					console.log('here')
-					var talks = JSON.parse(document.getElementById('responseTextarea1').getAttribute('talks')).data.talks
-					document.getElementById('responseTextarea1').removeAttribute('talks')
-					var userId = ""
-					var stringInfo = ""
-					for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
-						if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "id") {
-							userId = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(' ')[0]
-							break
+					let b = document.createElement('span')
+					b.textContent = 'Найти Talks'
+					b.style.marginRight='10px'
+					function generateTalksInfo() {
+						console.log('here')
+						var talks = JSON.parse(document.getElementById('responseTextarea1').getAttribute('talks')).data.talks
+						document.getElementById('responseTextarea1').removeAttribute('talks')
+						var userId = ""
+						var stringInfo = ""
+						for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
+							if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "id") {
+								userId = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(' ')[0]
+								break
+							}
+						}
+						for(i = 0; i < talks.length; i++) {
+							if(userId == talks[i].studentId || userId == talks[i].teacherId) {
+								stringInfo = "student: " + talks[i].studentId + "|teacher: " + talks[i].teacherId + "|hash: " + talks[i].roomHash + "|status: " + talks[i].currentStatus
+								document.getElementsByClassName('expert-user_details-list')[1].children[0].children[0].remove()
+
+								let newSpan = document.createElement('span')
+								newSpan.textContent = stringInfo
+								document.getElementsByClassName('expert-user_details-list')[1].children[0].children[0].replaceWith(newSpan)
+								break
+							}
 						}
 					}
-					for(i = 0; i < talks.length; i++) {
-						if(userId == talks[i].studentId || userId == talks[i].teacherId) {
-							stringInfo = "student: " + talks[i].studentId + "|teacher: " + talks[i].teacherId + "|hash: " + talks[i].roomHash + "|status: " + talks[i].currentStatus
-							document.getElementsByClassName('expert-user_details-list')[1].children[0].children[0].remove()
-
-							let newSpan = document.createElement('span')
-							newSpan.textContent = stringInfo
-							document.getElementsByClassName('expert-user_details-list')[1].children[0].children[0].replaceWith(newSpan)
-							break
-						}
+					b.onclick = function() {
+						this.textContent = ''
+						this.parentElement.children[0].textContent = ''
+						document.getElementById('responseTextarea1').value = '{ "credentials": "include" }'
+						document.getElementById('responseTextarea2').value = "https://talks-platform.skyeng.ru/api/v1/talks/stats"
+						document.getElementById('responseTextarea3').value = 'talks'
+						document.getElementById('sendResponse').click()
+						setTimeout(generateTalksInfo, 1000)
 					}
-				}
-				b.onclick = function() {
-					this.textContent = ''
-					this.parentElement.children[0].textContent = ''
-					document.getElementById('responseTextarea1').value = '{ "credentials": "include" }'
-					document.getElementById('responseTextarea2').value = "https://talks-platform.skyeng.ru/api/v1/talks/stats"
-					document.getElementById('responseTextarea3').value = 'talks'
-					document.getElementById('sendResponse').click()
-					setTimeout(generateTalksInfo, 1000)
-				}
-				c.append(a)
-				c.append(b)
+					c.append(a)
+					c.append(b)
 
-				document.getElementsByClassName('expert-user_details-list')[1].prepend(c)
+					document.getElementsByClassName('expert-user_details-list')[1].prepend(c)
+				}
 			}
 		}
 	}
