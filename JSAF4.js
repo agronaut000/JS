@@ -1,6 +1,7 @@
 // Файл JSAF4.js
 var socketOpened = 0
 var flagReadMessage = 0
+var problemText = ''
 function getSlackToken() {
 	document.getElementById('responseTextarea1').value = '{}'
 	document.getElementById('responseTextarea2').value = 'https://app.slack.com/auth?app=client&return_to=%2Fclient%2FT03A3SUFB&teams=&iframe=1'
@@ -69,6 +70,10 @@ function openSlackSocket() {
 					flagSlack = 1
 				}
 				if(message2.match((/<https:\/\/skyeng.slack.*\|.*>/)) == null) {
+					if(message2.indexOf(problemText) == -1) {
+						console.log("Чужой тред")
+						return
+					}
 					console.log("В этом ответе нет нужный ссылки")
 					slackUrlMsg1 = 'https://skyeng.slack.com/archives/' + message.channel + '/p' + Number(message.ts * 1000000)
 					console.log('Предполагаемая ссылка: ' + slackUrlMsg1)
@@ -134,6 +139,7 @@ function createSlackView() {
 }
 flagFormSubmited = 0
 function fillForm(viewStringify) {
+	problemText = ''
 	view = JSON.parse(viewStringify)
 	div = document.createElement('div')
 	document.body.append(div)
@@ -230,6 +236,7 @@ function fillForm(viewStringify) {
 				return
 			}
 		}
+		problemText = document.getElementById('formToSlackField' + 0).value
 		console.log(view)
 		submitSlackView(view)
 		flagFormSubmited = 1
