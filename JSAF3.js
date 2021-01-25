@@ -1622,21 +1622,21 @@ function startTimer() {
 	}
 	
 	
-	if(localStorage.getItem('scriptAdr') == TP_addr && document.getElementById('continue_chat_button') == null) {
+	if(localStorage.getItem('scriptAdr') == TP_addr && document.getElementById('continue_chat_button') == null && document.getElementsByClassName('expert-user_info_panel-footer-inner')[0] != undefined) {
 		let btn1 = document.createElement('span');
 		document.getElementsByClassName('expert-user_info_panel-footer-inner')[0].append(btn1)
-		btn1.innerHTML = '<a style="float: left; margin-right: 15px; margin-top: 10px; color: black; cursor: pointer;">Нецелевой</a>';
+		btn1.innerHTML = '<a style="float: left; margin-right: 5px; margin-top: 10px; color: black; cursor: pointer;">Нецелевой</a>';
 		btn1.setAttribute('onClick', 'newTaggg("untargeted");')
 
 		let btn2 = document.createElement('span');
 		document.getElementsByClassName('expert-user_info_panel-footer-inner')[0].append(btn2)
-		btn2.innerHTML = '<a style="float: left; margin-right: 15px; margin-top: 10px; color: black; cursor: pointer;">Спасен</a>';
+		btn2.innerHTML = '<a style="float: left; margin-right: 5px; margin-top: 10px; color: black; cursor: pointer;">Спасен</a>';
 		btn2.setAttribute('onClick', 'newTaggg("saved_lesson_platform");')
 
 		let btn3 = document.createElement('span');
 		btn3.id = 'continue_chat_button'
 		document.getElementsByClassName('expert-user_info_panel-footer-inner')[0].append(btn3)
-		btn3.innerHTML = '<a style="float: left; margin-right: 15px; margin-top: 10px; color: black; cursor: pointer;">Продолжение</a>';
+		btn3.innerHTML = '<a style="float: left; margin-top: 10px; color: black; cursor: pointer;">Продолжение</a>';
 		btn3.setAttribute('onClick', 'newTaggg("continue_chat");')
 	}
 }
