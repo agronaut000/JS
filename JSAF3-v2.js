@@ -1638,21 +1638,20 @@ function startTimer() {
 		document.getElementsByClassName('expert-user_info_panel-footer-inner')[0].append(btn3)
 		btn3.innerHTML = '<a style="float: left; margin-right: 15px; margin-top: 10px; color: black; cursor: pointer;">Продолжение</a>';
 		btn3.setAttribute('onClick', 'newTaggg("continue_chat");')
-
-		function newTaggg(tagName) {
-			var chatId = document.location.pathname.split('/')[3]
-			fetch("https://skyeng.autofaq.ai/api/conversation/" + chatId + "/payload", {
-			  "headers": {
-				"content-type": "application/json",
-			  },
-			  "body": "{\"conversationId\":\"" + chatId + "\",\"elements\":[{\"name\":\"tags\",\"value\":[\"" + tagName + "\"]}]}",
-			  "method": "POST",
-			  "credentials": "include"
-			});
-		}
 	}
 }
 
+function newTaggg(tagName) {
+	var chatId = document.location.pathname.split('/')[3]
+	fetch("https://skyeng.autofaq.ai/api/conversation/" + chatId + "/payload", {
+	  "headers": {
+		"content-type": "application/json",
+	  },
+	  "body": "{\"conversationId\":\"" + chatId + "\",\"elements\":[{\"name\":\"tags\",\"value\":[\"" + tagName + "\"]}]}",
+	  "method": "POST",
+	  "credentials": "include"
+	});
+}
 
 function timerHideButtons() {
 	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined) {
