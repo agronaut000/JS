@@ -1622,7 +1622,7 @@ function startTimer() {
 	}
 	
 	
-	if(localStorage.getItem('scriptAdr') == TP_addr && document.getElementById('continue_chat_button') == null) {
+	if(localStorage.getItem('scriptAdr') == TP_addr && document.getElementById('continue_chat_button') == null && document.getElementsByClassName('expert-user_info_panel-footer-inner')[0] != undefined) {
 		let btn1 = document.createElement('span');
 		document.getElementsByClassName('expert-user_info_panel-footer-inner')[0].append(btn1)
 		btn1.innerHTML = '<a style="float: left; margin-right: 15px; margin-top: 10px; color: black; cursor: pointer;">Нецелевой</a>';
