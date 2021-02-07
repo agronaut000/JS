@@ -154,13 +154,13 @@ async function createReportForm() {
 				option.textContent = 'Выберите шаблон'
 				break
 			case 1:
-				option.textContent = 'Факап SLA'
+				option.textContent = 'Факап SLA. '
 				break
 			case 2:
-				option.textContent = 'Нет первичной обработки'
+				option.textContent = 'Нет первичной обработки. '
 				break
 			case 3:
-				option.textContent = 'Понимание системы'
+				option.textContent = 'Понимание системы. '
 				break
 			default:
 				flagTmp = 1
@@ -198,7 +198,7 @@ async function createReportForm() {
 			} else
 				document.getElementById('reportSelect').style.border = '0px solid red';
 				
-			if(document.getElementById('reportInput4').value == "") {
+			if(document.getElementById('reportInput4').value == "" && document.getElementById('reportSelectTmp').value == "Выберите шаблон") {
 				document.getElementById('reportInput4').style.border = '1px solid red';
 				flag = 1
 			} else
