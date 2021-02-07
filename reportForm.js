@@ -137,6 +137,41 @@ async function createReportForm() {
 	input3.style.width = '300px'
 	input3.style.marginTop = '5px'
 	input3.style.borderRadius = '3px'
+	
+	
+	let select3 = document.createElement('select')
+	select3.id = 'reportSelectTmp'
+	select3.style.width = '300px'
+	select3.style.marginTop = '5px'
+	select3.style.borderRadius = '3px'
+	select3.placeholder = 'Шаблон комментария'
+	let selectTmpIterator = 0
+	while(true) {
+		let flagTmp = 0
+		let option = document.createElement('option')
+		switch(selectTmpIterator) {
+			case 0:
+				option.textContent = 'Выберите шаблон'
+				break
+			case 1:
+				option.textContent = 'Факап SLA'
+				break
+			case 2:
+				option.textContent = 'Нет первичной обработки'
+				break
+			case 3:
+				option.textContent = 'Понимание системы'
+				break
+			default:
+				flagTmp = 1
+				break
+		}
+		if(flagTmp == 1)
+			break
+		select3.append(option)
+		selectTmpIterator++
+	}
+		
 
 	let input4 = document.createElement('textarea')
 	input4.id = 'reportInput4'
@@ -220,6 +255,7 @@ async function createReportForm() {
 	newDiv.append(select2)
 	newDiv.append(input3)
 	newDiv.append(input4)
+	newDiv.append(select3)
 	newDiv.append(newDiv2)
 	document.getElementById('buttonSendReport').style.display = 'none'
 }
