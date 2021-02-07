@@ -234,6 +234,10 @@ function fillForm(viewStringify) {
 	
 	button.onclick = function() {
 		this.setAttribute('disabled', 'disabled')
+		setTimeout(function() {
+			if(document.getElementById('formToSlackSend') != null)
+				document.getElementById('formToSlackSend').removeAttribute('disabled')
+		}, 500)
 		flagFormSubmited = 0
 		if(document.getElementById('formToSlack') == undefined) {
 			console.log("Не вижу форму")
@@ -258,10 +262,6 @@ function fillForm(viewStringify) {
 		document.getElementById('formToSlack').remove()
 		document.getElementById('buttonOpenForm').style.display = ''
 		
-		setTimeout(function() {
-			if(document.getElementById('formToSlackSend') != null)
-				document.getElementById('formToSlackSend').removeAttribute('disabled')
-		}, 500)
 	}
 	function validateSlackForm() {
 		let flag = 0
