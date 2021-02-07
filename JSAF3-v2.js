@@ -995,6 +995,7 @@ function tagToChat(btnName) {
 		}
 	}
 }
+
 function newTag(valueId) {
 	let chatId = ''
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/archive') === -1)
