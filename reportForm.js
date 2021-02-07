@@ -216,7 +216,11 @@ async function createReportForm() {
 		let komu = textToUTF8String(document.getElementById('reportSelect2').value == "" ? document.getElementById('reportSelect2').placeholder : document.getElementById('reportSelect2').value)
 		let link = document.getElementById('reportInput3').value == "" ? document.getElementById('reportInput3').placeholder : document.getElementById('reportInput3').value
 		
-		let comment = textToUTF8String(document.getElementById('reportInput4').value)
+		let addComment = ''
+		if(document.getElementById('reportSelectTmp').value != "Выберите шаблон")
+			addComment = textToUTF8String(document.getElementById('reportSelectTmp').value)
+			
+		let comment = addComment + textToUTF8String(document.getElementById('reportInput4').value)
 		
 		var body = 'entry.2042676744=' + date + '&entry.1008946388=' + client + '&entry.743061035=' + kto + '&entry.285857150=' + komu + '&entry.1292433844=' + link + '&entry.1679550503=' + comment
 		let options = {
@@ -254,8 +258,8 @@ async function createReportForm() {
 	newDiv.append(select)
 	newDiv.append(select2)
 	newDiv.append(input3)
-	newDiv.append(input4)
 	newDiv.append(select3)
+	newDiv.append(input4)
 	newDiv.append(newDiv2)
 	document.getElementById('buttonSendReport').style.display = 'none'
 }
