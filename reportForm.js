@@ -218,7 +218,7 @@ async function createReportForm() {
 		
 		let addComment = ''
 		if(document.getElementById('reportSelectTmp').value != "Выберите шаблон")
-			addComment = textToUTF8String(document.getElementById('reportSelectTmp').value)
+			addComment = textToUTF8String(document.getElementById('reportSelectTmp').value) + ' '
 			
 		let comment = addComment + textToUTF8String(document.getElementById('reportInput4').value)
 		
