@@ -21,8 +21,9 @@ if (localStorage.getItem('reportAF') == null) {
 }
 
 async function createReportForm() {
+	let newDiv2 = document.createElement('div')
 	let div = document.createElement('div')
-	div.style = 'cursor: -webkit-grab;background: #464451; top: ' + localStorage.getItem('reportAFTop') + 'px; left: ' + localStorage.getItem('reportAFLeft') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black;'
+	div.style = 'top: ' + localStorage.getItem('reportAFTop') + 'px; left: ' + localStorage.getItem('reportAFLeft') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black;'
 	div.style.width = '310px'
 	div.id = 'reportAF'
     var listener = function(e , a) {
@@ -32,12 +33,12 @@ async function createReportForm() {
         localStorage.setItem('reportAFLeft', String(Number(e.clientX - myX)));
     };
 
-    div.onmousedown = function (a) {
+    newDiv2.onmousedown = function (a) {
         window.myX = a.layerX; 
         window.myY = a.layerY; 
         document.addEventListener('mousemove', listener);
     }
-    div.onmouseup = function () {document.removeEventListener('mousemove', listener);}
+    newDiv2.onmouseup = function () {document.removeEventListener('mousemove', listener);}
 
 	let newDiv = document.createElement('div')
 	newDiv.style = 'margin: 5px'
@@ -180,7 +181,7 @@ async function createReportForm() {
 	input4.style.marginTop = '5px'
 	input4.style.borderRadius = '3px'
 
-	let newDiv2 = document.createElement('div')
+	newDiv2.style = 'cursor: -webkit-grab;background: #464451; '
 	newDiv2.style.textAlign = 'center'
 	let but = document.createElement('button')
 	but.textContent = 'Отправить'
