@@ -1647,7 +1647,11 @@ function startTimer() {
 }
 
 function newTaggg(tagName) {
-	var chatId = document.location.pathname.split('/')[3]
+	let chatId = ''
+	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/archive') === -1)
+		chatId = document.location.pathname.split('/')[3]
+	else 
+		chatId = document.getElementsByClassName('ant-tabs-tabpane expert-sider-tabs-panel_scrollable')[0].children[0].children[0].children[0].textContent.split(' ')[1]
 	fetch("https://skyeng.autofaq.ai/api/conversation/" + chatId + "/payload", {
 	  "headers": {
 		"content-type": "application/json",
