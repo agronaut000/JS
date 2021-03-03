@@ -127,7 +127,7 @@ async function createReportForm() {
 	}
 	
 	function getText() {
-	   var app = localStorage.getItem('https://script.google.com/macros/s/AKfycbyxVfHhEZo5eYeCg5ieubGO8LFJEMDtkbYwRsemRiyiklN7DOVp/exec'),
+	   var app = 'https://script.google.com/macros/s/AKfycbyxVfHhEZo5eYeCg5ieubGO8LFJEMDtkbYwRsemRiyiklN7DOVp/exec',
 		  xhr = new XMLHttpRequest();
 	   xhr.open('GET', app);
 	   xhr.onreadystatechange = function() {
