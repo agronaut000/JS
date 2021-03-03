@@ -285,7 +285,6 @@ async function createReportForm() {
 
 	document.body.append(div)
 	div.append(newDiv)
-	newDiv.append(input2)
 	newDiv.append(select)
 	newDiv.append(selectKtoPerevelRG)
 	newDiv.append(select2)
