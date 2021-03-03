@@ -261,7 +261,7 @@ async function createReportForm() {
 			
 		let comment = addComment + textToUTF8String(document.getElementById('reportInput4').value)
 		
-		var body = 'entry.1612783902=' + komu + '&entry.1471118405=' + link + 'entry.1856505864=' + comment + 'entry.486614058=' + kto + 'entry.989345812=' + Отдел\группа менеджера, который допустил ошибку + 'entry.127512002=' + Из какого вы отдела
+		var body = 'entry.1612783902=' + komu + '&entry.1471118405=' + link + 'entry.1856505864=' + comment + 'entry.486614058=' + kto + 'entry.989345812='// + Отдел\группа менеджера, который допустил ошибку + 'entry.127512002=' + Из какого вы отдела
 		//'entry.2042676744=' + date + '&entry.1008946388=' + client + '&entry.743061035=' + kto + '&entry.285857150=' + komu + '&entry.1292433844=' + link + '&entry.1679550503=' + comment
 		let options = {
 			  "headers": {
