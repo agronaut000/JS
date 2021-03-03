@@ -122,21 +122,10 @@ async function createReportForm() {
 	for(let j = 0; j < setOperators.length; j++) {
 		let option = document.createElement('option')
 		option.textContent = setOperators[j]
-		option.setAttribute('value', table[j][2])
+		option.setAttribute('value', setOperators[j])
 		select.append(option)
 	}
 	
-	let selectKtoPerevelRG = document.createElement('select')
-	selectKtoPerevelRG.id = 'reportSelect'
-	selectKtoPerevelRG.style.width = '300px'
-	selectKtoPerevelRG.style.marginTop = '5px'
-	selectKtoPerevelRG.style.borderRadius = '3px'
-	selectKtoPerevelRG.placeholder = 'Выберите оператора'
-	let optionKtoPerevelRG = document.createElement('option')
-	optionKtoPerevelRG.textContent = 'РГ того кто перевел'
-	selectKtoPerevelRG.append(optionKtoPerevelRG)
-	
-	var table
 	function getText() {
 	   var app = localStorage.getItem('https://script.google.com/macros/s/AKfycbyxVfHhEZo5eYeCg5ieubGO8LFJEMDtkbYwRsemRiyiklN7DOVp/exec'),
 		  xhr = new XMLHttpRequest();
@@ -148,17 +137,28 @@ async function createReportForm() {
 			try {
 				var r = JSON.parse(xhr.responseText),
 				result = r["result"];
-				table = result;
+				tableReports = result;
 			} catch(e) {console.log(e)}
 		 }
 	   }
 	   xhr.send()
 	}
 	getText()
+	let selectKtoPerevelRG = document.createElement('select')
+	selectKtoPerevelRG.id = 'reportSelect'
+	selectKtoPerevelRG.style.width = '300px'
+	selectKtoPerevelRG.style.marginTop = '5px'
+	selectKtoPerevelRG.style.borderRadius = '3px'
+	selectKtoPerevelRG.placeholder = 'Выберите оператора'
+	let optionKtoPerevelRG = document.createElement('option')
+	optionKtoPerevelRG.textContent = 'РГ того кто перевел'
+	selectKtoPerevelRG.append(optionKtoPerevelRG)
+	
+	var tableReports
 	for(let j = 0; j < 6; j++) {
 		let option = document.createElement('option')
-		option.textContent = table[j][2]
-		option.setAttribute('value', setOperators[j])
+		option.textContent = tableReports[j][2]
+		option.setAttribute('value', tableReports[j][2])
 		selectKtoPerevelRG.append(option)
 	}
 	
@@ -173,8 +173,8 @@ async function createReportForm() {
 	selectKomuPerevelRG.append(optionKomuPerevelRG)
 	for(let j = 0; j < 7; j++) {
 		let option = document.createElement('option')
-		option.textContent = table[j][2]
-		option.setAttribute('value', table[j][2])
+		option.textContent = tableReports[j][2]
+		option.setAttribute('value', tableReports[j][2])
 		selectKomuPerevelRG.append(option)
 	}
 	
