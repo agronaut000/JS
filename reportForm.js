@@ -122,10 +122,9 @@ async function createReportForm() {
 	for(let j = 0; j < setOperators.length; j++) {
 		let option = document.createElement('option')
 		option.textContent = setOperators[j]
-		option.setAttribute('value', setOperators[j])
+		option.setAttribute('value', table[j][2])
 		select.append(option)
 	}
-	
 	
 	let selectKtoPerevelRG = document.createElement('select')
 	selectKtoPerevelRG.id = 'reportSelect'
@@ -163,6 +162,21 @@ async function createReportForm() {
 		selectKtoPerevelRG.append(option)
 	}
 	
+	let selectKomuPerevelRG = document.createElement('select')
+	selectKomuPerevelRG.id = 'reportSelect'
+	selectKomuPerevelRG.style.width = '300px'
+	selectKomuPerevelRG.style.marginTop = '5px'
+	selectKomuPerevelRG.style.borderRadius = '3px'
+	selectKomuPerevelRG.placeholder = 'Выберите оператора'
+	let optionKomuPerevelRG = document.createElement('option')
+	optionKomuPerevelRG.textContent = 'РГ того кто перевел'
+	selectKomuPerevelRG.append(optionKomuPerevelRG)
+	for(let j = 0; j < 7; j++) {
+		let option = document.createElement('option')
+		option.textContent = table[j][2]
+		option.setAttribute('value', table[j][2])
+		selectKomuPerevelRG.append(option)
+	}
 	
 	let select2 = document.createElement('input')
 	select2.id = 'reportSelect2'
@@ -272,7 +286,7 @@ async function createReportForm() {
 			}
 			
 		document.getElementById('responseTextarea1').value = JSON.stringify(options)
-		document.getElementById('responseTextarea2').value = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdwL8MOAh0F_byUEIuFmTdsq_COOYgdhZZ1hDj91v_kwKEt2w/formResponse'
+		//document.getElementById('responseTextarea2').value = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdwL8MOAh0F_byUEIuFmTdsq_COOYgdhZZ1hDj91v_kwKEt2w/formResponse'
 		if(document.getElementById('responseTextarea3') != null)
 			document.getElementById('responseTextarea3').value = ''
 		document.getElementById('sendResponse').click()
@@ -296,6 +310,7 @@ async function createReportForm() {
 	newDiv.append(input)
 	newDiv.append(input2)
 	newDiv.append(select)
+	newDiv.append(selectKtoPerevelRG)
 	newDiv.append(select2)
 	newDiv.append(input3)
 	newDiv.append(select3)
