@@ -126,25 +126,6 @@ async function createReportForm() {
 		select.append(option)
 	}
 	
-	var tableReports
-	function getText() {
-	   var app = 'https://script.google.com/macros/s/AKfycbyxVfHhEZo5eYeCg5ieubGO8LFJEMDtkbYwRsemRiyiklN7DOVp/exec',
-		  xhr = new XMLHttpRequest();
-	   xhr.open('GET', app);
-	   xhr.onreadystatechange = function() {
-		 if (xhr.readyState !== 4) return;
-
-		 if (xhr.status == 200) {
-			try {
-				var r = JSON.parse(xhr.responseText),
-				result = r["result"];
-				tableReports = result;
-			} catch(e) {console.log(e)}
-		 }
-	   }
-	   xhr.send()
-	}
-	getText()
 	let selectKtoPerevelRG = document.createElement('select')
 	selectKtoPerevelRG.id = 'reportSelect'
 	selectKtoPerevelRG.style.width = '300px'
@@ -366,3 +347,23 @@ function textToUTF8String(string) {
 	}
 	return string2
 }
+
+var tableReports
+function getText() {
+   var app = 'https://script.google.com/macros/s/AKfycbyxVfHhEZo5eYeCg5ieubGO8LFJEMDtkbYwRsemRiyiklN7DOVp/exec',
+	  xhr = new XMLHttpRequest();
+   xhr.open('GET', app);
+   xhr.onreadystatechange = function() {
+	 if (xhr.readyState !== 4) return;
+
+	 if (xhr.status == 200) {
+		try {
+			var r = JSON.parse(xhr.responseText),
+			result = r["result"];
+			tableReports = result;
+		} catch(e) {console.log(e)}
+	 }
+   }
+   xhr.send()
+}
+getText()
