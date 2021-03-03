@@ -43,21 +43,6 @@ async function createReportForm() {
 	let newDiv = document.createElement('div')
 	newDiv.style = 'margin: 5px'
 
-
-	let input2 = document.createElement('input')
-	input2.id = 'reportInput2'
-	input2.style.width = '300px'
-	input2.style.marginTop = '5px'
-	input2.style.borderRadius = '3px'
-
-	if(document.getElementsByClassName('expert-user_details-list')[1] != undefined) {
-		for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
-			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id") {
-				input2.placeholder = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].children[1].textContent.split(' ')[0]
-			}
-		}
-	}
-
 	var adr1 = document.location.pathname
 	adr1 = adr1.split('/')
 	adr1 = adr1[3]
@@ -226,7 +211,6 @@ async function createReportForm() {
 	let but = document.createElement('button')
 	but.textContent = 'Отправить'
 	but.onclick = function() {
-		let client = document.getElementById('reportInput2').value == "" ? document.getElementById('reportInput2').placeholder : document.getElementById('reportInput2').value
 		if(!validate())
 			return
 			
@@ -255,12 +239,6 @@ async function createReportForm() {
 				flag = 1
 			} else
 				document.getElementById('reportInput4').style.border = '0px solid red';
-				
-			if(document.getElementById('reportInput2').value == "" && document.getElementById('reportInput2').placeholder == "") {
-				document.getElementById('reportInput2').style.border = '1px solid red';
-				flag = 1
-			} else
-				document.getElementById('reportInput2').style.border = '0px solid red';
 			
 			return flag == 1 ? false : true
 		}
