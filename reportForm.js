@@ -126,14 +126,6 @@ async function createReportForm() {
 			}
 		}
 	}
-	document.getElementById('reportSelect').onchange = function () {
-		for(i = 0; i < tableReports.length; i++) {
-			if(this.selectedOptions[0].value.indexOf(tableReports[i][0]) != -1) {
-				document.getElementById('reportSelect').parentElement.children[3].value = "Чаты КЦ (Мищенко)"
-				break
-			}
-		}
-	}
 	
 	let selectKtoPerevelRG = document.createElement('select')
 	selectKtoPerevelRG.id = 'selectKtoPerevelRG'
