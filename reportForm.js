@@ -43,13 +43,6 @@ async function createReportForm() {
 	let newDiv = document.createElement('div')
 	newDiv.style = 'margin: 5px'
 
-	let input = document.createElement('input')
-	input.id = 'reportInput1'
-	input.style.width = '300px'
-	input.style.borderRadius = '3px'
-	let Data = new Date()
-	input.placeholder = Data.getDate() + '.' + (Data.getMonth() + 1) + '.' + Data.getFullYear() + ' ' + Data.getHours() + ':' + Data.getMinutes() + ':' + Data.getSeconds()
-
 
 	let input2 = document.createElement('input')
 	input2.id = 'reportInput2'
@@ -278,7 +271,7 @@ async function createReportForm() {
 			
 		let comment = addComment + textToUTF8String(document.getElementById('reportInput4').value)
 		
-		var body = 'entry.1612783902=' + komu + '&entry.1471118405=' + link + 'entry.1856505864=' + comment + 'entry.486614058=' + kto + 'entry.989345812='// + Отдел\группа менеджера, который допустил ошибку + 'entry.127512002=' + Из какого вы отдела
+		var body = 'entry.1612783902=' + komu + '&entry.1471118405=' + link + 'entry.1856505864=' + comment + 'entry.486614058=' + kto + 'entry.989345812=' + selectKtoPerevelRG + 'entry.127512002=' + selectKomuPerevelRG
 		//'entry.2042676744=' + date + '&entry.1008946388=' + client + '&entry.743061035=' + kto + '&entry.285857150=' + komu + '&entry.1292433844=' + link + '&entry.1679550503=' + comment
 		let options = {
 			  "headers": {
@@ -310,11 +303,11 @@ async function createReportForm() {
 
 	document.body.append(div)
 	div.append(newDiv)
-	newDiv.append(input)
 	newDiv.append(input2)
 	newDiv.append(select)
 	newDiv.append(selectKtoPerevelRG)
 	newDiv.append(select2)
+	newDiv.append(selectKomuPerevelRG)
 	newDiv.append(input3)
 	newDiv.append(select3)
 	newDiv.append(input4)
