@@ -125,6 +125,45 @@ async function createReportForm() {
 		option.setAttribute('value', setOperators[j])
 		select.append(option)
 	}
+	
+	
+	let selectKtoPerevelRG = document.createElement('select')
+	selectKtoPerevelRG.id = 'reportSelect'
+	selectKtoPerevelRG.style.width = '300px'
+	selectKtoPerevelRG.style.marginTop = '5px'
+	selectKtoPerevelRG.style.borderRadius = '3px'
+	selectKtoPerevelRG.placeholder = 'Выберите оператора'
+	let optionKtoPerevelRG = document.createElement('option')
+	optionKtoPerevelRG.textContent = 'РГ того кто перевел'
+	selectKtoPerevelRG.append(optionKtoPerevelRG)
+	
+	var table
+	function getText() {
+	   var app = localStorage.getItem('https://script.google.com/macros/s/AKfycbyxVfHhEZo5eYeCg5ieubGO8LFJEMDtkbYwRsemRiyiklN7DOVp/exec'),
+		  xhr = new XMLHttpRequest();
+	   xhr.open('GET', app);
+	   xhr.onreadystatechange = function() {
+		 if (xhr.readyState !== 4) return;
+
+		 if (xhr.status == 200) {
+			try {
+				var r = JSON.parse(xhr.responseText),
+				result = r["result"];
+				table = result;
+			} catch(e) {console.log(e)}
+		 }
+	   }
+	   xhr.send()
+	}
+	getText()
+	for(let j = 0; j < 6; j++) {
+		let option = document.createElement('option')
+		option.textContent = table[j][2]
+		option.setAttribute('value', setOperators[j])
+		selectKtoPerevelRG.append(option)
+	}
+	
+	
 	let select2 = document.createElement('input')
 	select2.id = 'reportSelect2'
 	select2.placeholder = document.querySelector('.user_menu-dropdown-user_name').innerText
@@ -186,7 +225,6 @@ async function createReportForm() {
 	let but = document.createElement('button')
 	but.textContent = 'Отправить'
 	but.onclick = function() {
-		let date = document.getElementById('reportInput1').value == "" ? document.getElementById('reportInput1').placeholder : document.getElementById('reportInput1').value
 		let client = document.getElementById('reportInput2').value == "" ? document.getElementById('reportInput2').placeholder : document.getElementById('reportInput2').value
 		if(!validate())
 			return
@@ -223,7 +261,8 @@ async function createReportForm() {
 			
 		let comment = addComment + textToUTF8String(document.getElementById('reportInput4').value)
 		
-		var body = 'entry.2042676744=' + date + '&entry.1008946388=' + client + '&entry.743061035=' + kto + '&entry.285857150=' + komu + '&entry.1292433844=' + link + '&entry.1679550503=' + comment
+		var body = 'entry.1612783902=' + komu + '&entry.1471118405=' + link + 'entry.1856505864=' + comment + 'entry.486614058=' + kto + 'entry.989345812=' + Отдел\группа менеджера, который допустил ошибку + 'entry.127512002=' + Из какого вы отдела
+		//'entry.2042676744=' + date + '&entry.1008946388=' + client + '&entry.743061035=' + kto + '&entry.285857150=' + komu + '&entry.1292433844=' + link + '&entry.1679550503=' + comment
 		let options = {
 			  "headers": {
 				"content-type": "application/x-www-form-urlencoded",
@@ -233,7 +272,7 @@ async function createReportForm() {
 			}
 			
 		document.getElementById('responseTextarea1').value = JSON.stringify(options)
-		document.getElementById('responseTextarea2').value = 'https://docs.google.com/forms/d/e/1FAIpQLSecIM_o5yLkleW330KKEn-0pXN0Hcg6iXWXd85ZBKf4wgbqPA/formResponse'
+		document.getElementById('responseTextarea2').value = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdwL8MOAh0F_byUEIuFmTdsq_COOYgdhZZ1hDj91v_kwKEt2w/formResponse'
 		if(document.getElementById('responseTextarea3') != null)
 			document.getElementById('responseTextarea3').value = ''
 		document.getElementById('sendResponse').click()
