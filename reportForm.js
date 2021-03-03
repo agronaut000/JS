@@ -125,9 +125,25 @@ async function createReportForm() {
 		option.setAttribute('value', setOperators[j])
 		select.append(option)
 	}
+	select.onchange = function () {
+		for(i = 0; i < tableReports.length; i++) {
+			if(this.selectedOptions[0].value.indexOf(tableReports[i][0]) != -1) {
+				document.getElementById('selectKtoPerevelRG').parentElement.children[3].value = tableReports[i][1]
+				break
+			}
+		}
+	}
+	document.getElementById('reportSelect').onchange = function () {
+		for(i = 0; i < tableReports.length; i++) {
+			if(this.selectedOptions[0].value.indexOf(tableReports[i][0]) != -1) {
+				document.getElementById('reportSelect').parentElement.children[3].value = "Чаты КЦ (Мищенко)"
+				break
+			}
+		}
+	}
 	
 	let selectKtoPerevelRG = document.createElement('select')
-	selectKtoPerevelRG.id = 'reportSelect'
+	selectKtoPerevelRG.id = 'selectKtoPerevelRG'
 	selectKtoPerevelRG.style.width = '300px'
 	selectKtoPerevelRG.style.marginTop = '5px'
 	selectKtoPerevelRG.style.borderRadius = '3px'
@@ -144,7 +160,7 @@ async function createReportForm() {
 	}
 	
 	let selectKomuPerevelRG = document.createElement('select')
-	selectKomuPerevelRG.id = 'reportSelect'
+	selectKomuPerevelRG.id = 'selectKomuPerevelRG'
 	selectKomuPerevelRG.style.width = '300px'
 	selectKomuPerevelRG.style.marginTop = '5px'
 	selectKomuPerevelRG.style.borderRadius = '3px'
@@ -158,7 +174,12 @@ async function createReportForm() {
 		option.setAttribute('value', tableReports[j][2])
 		selectKomuPerevelRG.append(option)
 	}
-	
+	selectKomuPerevelRG.onchange = function() {
+		localStorage.setItem('selectKomuPerevelRG', this.value)
+	}
+	if(localStorage.getItem('selectKomuPerevelRG') != null)
+		selectKomuPerevelRG.value = localStorage.getItem('selectKomuPerevelRG')
+		
 	let select2 = document.createElement('input')
 	select2.id = 'reportSelect2'
 	select2.placeholder = document.querySelector('.user_menu-dropdown-user_name').innerText
@@ -249,7 +270,8 @@ async function createReportForm() {
 		let kto = textToUTF8String(document.getElementById('reportSelect').value)
 		let komu = textToUTF8String(document.getElementById('reportSelect2').value == "" ? document.getElementById('reportSelect2').placeholder : document.getElementById('reportSelect2').value)
 		let link = document.getElementById('reportInput3').value == "" ? document.getElementById('reportInput3').placeholder : document.getElementById('reportInput3').value
-		
+		let selectKomuPerevelRG = textToUTF8String(document.getElementById('selectKomuPerevelRG').value)
+		let selectKtoPerevelRG = textToUTF8String(document.getElementById('selectKtoPerevelRG').value)
 		let addComment = ''
 		if(document.getElementById('reportSelectTmp').value != "Выберите шаблон")
 			addComment = textToUTF8String(document.getElementById('reportSelectTmp').value) + ' '
