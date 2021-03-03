@@ -137,7 +137,7 @@ async function createReportForm() {
 	optionKtoPerevelRG.textContent = 'РГ того кто перевел'
 	selectKtoPerevelRG.append(optionKtoPerevelRG)
 	
-	for(let j = 0; j < 6; j++) {
+	for(let j = 0; j < 5; j++) {
 		let option = document.createElement('option')
 		option.textContent = tableReports[j][2]
 		option.setAttribute('value', tableReports[j][2])
@@ -153,7 +153,7 @@ async function createReportForm() {
 	let optionKomuPerevelRG = document.createElement('option')
 	optionKomuPerevelRG.textContent = 'РГ того кому перевели (твой РГ)'
 	selectKomuPerevelRG.append(optionKomuPerevelRG)
-	for(let j = 0; j < 7; j++) {
+	for(let j = 0; j < 6; j++) {
 		let option = document.createElement('option')
 		option.textContent = tableReports[j][2]
 		option.setAttribute('value', tableReports[j][2])
