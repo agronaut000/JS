@@ -121,7 +121,7 @@ async function createReportForm() {
 	select.onchange = function () {
 		for(i = 0; i < tableReports.length; i++) {
 			if(this.selectedOptions[0].value.indexOf(tableReports[i][0]) != -1) {
-				document.getElementById('selectKtoPerevelRG').parentElement.children[3].value = tableReports[i][1]
+				document.getElementById('selectKtoPerevelRG').value = tableReports[i][1]
 				break
 			}
 		}
