@@ -151,7 +151,7 @@ async function createReportForm() {
 	selectKomuPerevelRG.style.borderRadius = '3px'
 	selectKomuPerevelRG.placeholder = 'Выберите оператора'
 	let optionKomuPerevelRG = document.createElement('option')
-	optionKomuPerevelRG.textContent = 'РГ того кто перевел'
+	optionKomuPerevelRG.textContent = 'РГ того кому перевели (твой РГ)'
 	selectKomuPerevelRG.append(optionKomuPerevelRG)
 	for(let j = 0; j < 7; j++) {
 		let option = document.createElement('option')
@@ -237,6 +237,18 @@ async function createReportForm() {
 				flag = 1
 			} else
 				document.getElementById('reportSelect').style.border = '0px solid red';
+				
+			if(document.getElementById('selectKomuPerevelRG').value == "РГ того кому перевели (твой РГ)") {
+				document.getElementById('selectKomuPerevelRG').style.border = '1px solid red';
+				flag = 1
+			} else
+				document.getElementById('selectKomuPerevelRG').style.border = '0px solid red';
+				
+			if(document.getElementById('selectKtoPerevelRG').value == "РГ того кто перевел") {
+				document.getElementById('selectKtoPerevelRG').style.border = '1px solid red';
+				flag = 1
+			} else
+				document.getElementById('selectKtoPerevelRG').style.border = '0px solid red';
 				
 			if(document.getElementById('reportInput4').value == "" && document.getElementById('reportSelectTmp').value == "Выберите шаблон") {
 				document.getElementById('reportInput4').style.border = '1px solid red';
