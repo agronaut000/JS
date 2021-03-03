@@ -126,6 +126,7 @@ async function createReportForm() {
 		select.append(option)
 	}
 	
+	var tableReports
 	function getText() {
 	   var app = 'https://script.google.com/macros/s/AKfycbyxVfHhEZo5eYeCg5ieubGO8LFJEMDtkbYwRsemRiyiklN7DOVp/exec',
 		  xhr = new XMLHttpRequest();
@@ -154,7 +155,6 @@ async function createReportForm() {
 	optionKtoPerevelRG.textContent = 'РГ того кто перевел'
 	selectKtoPerevelRG.append(optionKtoPerevelRG)
 	
-	var tableReports
 	for(let j = 0; j < 6; j++) {
 		let option = document.createElement('option')
 		option.textContent = tableReports[j][2]
