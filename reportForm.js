@@ -253,7 +253,7 @@ async function createReportForm() {
 			
 		let comment = addComment + textToUTF8String(document.getElementById('reportInput4').value)
 		
-		var body = 'entry.1612783902=' + komu + '&entry.1471118405=' + link + 'entry.1856505864=' + comment + 'entry.486614058=' + kto + 'entry.989345812=' + selectKtoPerevelRG + 'entry.127512002=' + selectKomuPerevelRG
+		var body = 'entry.1612783902=' + kto + '&entry.1471118405=' + link + 'entry.1856505864=' + comment + 'entry.486614058=' + komu + 'entry.989345812=' + selectKtoPerevelRG + 'entry.127512002=' + selectKomuPerevelRG
 		//'entry.2042676744=' + date + '&entry.1008946388=' + client + '&entry.743061035=' + kto + '&entry.285857150=' + komu + '&entry.1292433844=' + link + '&entry.1679550503=' + comment
 		let options = {
 			  "headers": {
@@ -264,7 +264,7 @@ async function createReportForm() {
 			}
 			
 		document.getElementById('responseTextarea1').value = JSON.stringify(options)
-		//document.getElementById('responseTextarea2').value = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdwL8MOAh0F_byUEIuFmTdsq_COOYgdhZZ1hDj91v_kwKEt2w/formResponse'
+		document.getElementById('responseTextarea2').value = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdwL8MOAh0F_byUEIuFmTdsq_COOYgdhZZ1hDj91v_kwKEt2w/formResponse'
 		if(document.getElementById('responseTextarea3') != null)
 			document.getElementById('responseTextarea3').value = ''
 		document.getElementById('sendResponse').click()
