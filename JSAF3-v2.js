@@ -2531,9 +2531,80 @@ async function getStats() {
 	
 	table.append(trHead)
 	table.append(tbody)
+	
+	let str = document.createElement('button')
+	str.textContent = 'Проверить CSAT'
+	str.onclick = checkCSAT
+	document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.append(str)
+	
 	document.getElementById('root').children[0].children[1].children[0].children[1].append(table)
 	document.getElementById('buttonGetStat').textContent = 'Скрыть стату'
 	document.getElementById('buttonGetStat').removeAttribute('disabled')
+}
+
+async function checkCSAT() {
+	let str = document.createElement('p')
+	str.textContent = 'Загрузка'
+	document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.lastElementChild.remove()
+	document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.append(str)
+	var date = new Date()
+	day = month = ""
+	if(date.getMonth() < 9)
+		month = "0" + (date.getMonth() + 1)
+	else 
+		month = (date.getMonth() + 1)
+	if(date.getDate() < 10)
+		day = "0" + date.getDate()
+	else
+		day = date.getDate()
+
+	secondDate = date.getFullYear() + "-" + month + "-" + day + "T20:59:59.059z"
+	date = date - 24 * 60 * 60 * 1000
+	var date2 = new Date()
+	date2.setTime(date)
+
+	if(date2.getMonth() < 9)
+	month2 = "0" + (date2.getMonth() + 1)
+	else 
+	month2 = (date2.getMonth() + 1)
+	if(date2.getDate() < 10)
+	day2 = "0" + date2.getDate()
+	else
+	day2 = date2.getDate()
+
+	firstDate = date2.getFullYear() + "-" + month2 + "-" + day2 + "T21:00:00.000z"
+
+
+
+	test = ''
+	await fetch("https://skyeng.autofaq.ai/api/conversations/queues/archive", {
+	  "headers": {
+		"content-type": "application/json",
+	  },
+	  "body": "{\"serviceId\":\"361c681b-340a-4e47-9342-c7309e27e7b5\",\"mode\":\"Json\",\"tsFrom\":\"" + firstDate + "\",\"tsTo\":\"" + secondDate + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":100}",
+	  "method": "POST",
+	}).then(r => r.json()).then(r => test = r)
+	csatScore = 0
+	csatCount = 0
+	for(let i = 0; i < test.items.length; i ++) {
+		let flagCsat = 0
+		await fetch('https://skyeng.autofaq.ai/api/conversations/' + test.items[i].conversationId)
+	.then(r => r.json())
+	.then(r => {
+		if(r.operatorId == operatorId) {
+			flagCsat = 1
+		}
+		if(flagCsat == 1)
+			if(test.items[i].stats.rate != undefined)
+				if(test.items[i].stats.rate.rate != undefined) {
+					csatScore += test.items[i].stats.rate.rate
+					csatCount++
+				}
+		
+		})
+	}
+	
+	str.textContent = 'Оценка: ' + Math.round(csatScore/csatCount * 100) / 100
 }
 
 function prepTp() {
