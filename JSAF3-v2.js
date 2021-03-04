@@ -2532,12 +2532,14 @@ async function getStats() {
 	table.append(trHead)
 	table.append(tbody)
 	
+	
+	document.getElementById('root').children[0].children[1].children[0].children[1].append(table)
+	
 	let str = document.createElement('button')
 	str.textContent = 'Проверить CSAT'
 	str.onclick = checkCSAT
 	document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.append(str)
 	
-	document.getElementById('root').children[0].children[1].children[0].children[1].append(table)
 	document.getElementById('buttonGetStat').textContent = 'Скрыть стату'
 	document.getElementById('buttonGetStat').removeAttribute('disabled')
 }
