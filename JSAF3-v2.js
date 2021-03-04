@@ -2534,8 +2534,9 @@ async function getStats() {
 	table.append(trHead)
 	table.append(tbody)
 	
-	
-	document.getElementById('root').children[0].children[1].children[0].children[1].append(table)
+	let newDivForStats = document.createElement('div')
+	newDivForStats.append(table)
+	document.getElementById('root').children[0].children[1].children[0].children[1].append(newDivForStats)
 	
 	let str = document.createElement('button')
 	str.textContent = 'Проверить CSAT'
