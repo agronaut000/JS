@@ -1,7 +1,7 @@
 // Файл JSAF4.js
 var socketOpened = 0
 var flagReadMessage = 0
-var problemText = ''
+var problemText = 'justStarted'
 function getSlackToken() {
 	document.getElementById('responseTextarea1').value = '{}'
 	document.getElementById('responseTextarea2').value = 'https://app.slack.com/auth?app=client&return_to=%2Fclient%2FT03A3SUFB&teams=&iframe=1'
@@ -147,7 +147,7 @@ function createSlackView() {
 }
 flagFormSubmited = 0
 function fillForm(viewStringify) {
-	problemText = ''
+	problemText = 'justStarted'
 	view = JSON.parse(viewStringify)
 	div = document.createElement('div')
 	document.body.append(div)
