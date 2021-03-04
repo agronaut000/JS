@@ -2540,6 +2540,8 @@ async function getStats() {
 	
 	let str = document.createElement('button')
 	str.textContent = 'Проверить CSAT + тематики чатов'
+	str.id = 'buttonCheckStats'
+	str.style.paddingLeft = '50px'
 	str.onclick = checkCSAT
 	document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.append(str)
 	
@@ -2549,8 +2551,10 @@ async function getStats() {
 
 async function checkCSAT() {
 	let str = document.createElement('p')
-	str.textContent = 'Загрузка'
-	document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.lastElementChild.remove()
+	str.style.paddingLeft = '50px'
+	if(document.getElementById('buttonCheckStats').textContent == 'Повторить проверку')
+		document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.lastElementChild.remove()
+	document.getElementById('buttonCheckStats').textContent = 'Загрузка'
 	document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.append(str)
 	var date = new Date()
 	day = month = ""
@@ -2579,45 +2583,51 @@ async function checkCSAT() {
 
 	firstDate = date2.getFullYear() + "-" + month2 + "-" + day2 + "T21:00:00.000z"
 
-
-
-	test = ''
-	await fetch("https://skyeng.autofaq.ai/api/conversations/queues/archive", {
-	  "headers": {
-		"content-type": "application/json",
-	  },
-	  "body": "{\"serviceId\":\"361c681b-340a-4e47-9342-c7309e27e7b5\",\"mode\":\"Json\",\"tsFrom\":\"" + firstDate + "\",\"tsTo\":\"" + secondDate + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":100}",
-	  "method": "POST",
-	}).then(r => r.json()).then(r => test = r)
-	csatScore = 0
-	csatCount = 0
-	let stringChatsWithoutTopic = ""
-	for(let i = 0; i < test.items.length; i ++) {
-		let flagCsat = 0
-		let flagTopic = 0
-		await fetch('https://skyeng.autofaq.ai/api/conversations/' + test.items[i].conversationId)
-	.then(r => r.json())
-	.then(r => {
-		if(r.operatorId == operatorId) {
-			flagCsat = 1
-			if(r.payload != undefined)
-				if(r.payload.topicId != undefined)
-					if(r.payload.topicId.value == "")
-						flagTopic = 1
+	try {
+		test = ''
+		await fetch("https://skyeng.autofaq.ai/api/conversations/queues/archive", {
+		  "headers": {
+			"content-type": "application/json",
+		  },
+		  "body": "{\"serviceId\":\"361c681b-340a-4e47-9342-c7309e27e7b5\",\"mode\":\"Json\",\"tsFrom\":\"" + firstDate + "\",\"tsTo\":\"" + secondDate + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":1,\"limit\":100}",
+		  "method": "POST",
+		}).then(r => r.json()).then(r => test = r)
+		csatScore = 0
+		csatCount = 0
+		let stringChatsWithoutTopic = ""
+		for(let i = 0; i < test.items.length; i ++) {
+			let flagCsat = 0
+			let flagTopic = 0
+			await fetch('https://skyeng.autofaq.ai/api/conversations/' + test.items[i].conversationId)
+		.then(r => r.json())
+		.then(r => {
+			if(r.operatorId == operatorId) {
+				flagCsat = 1
+				if(r.payload != undefined)
+					if(r.payload.topicId != undefined)
+						if(r.payload.topicId.value == "")
+							flagTopic = 1
+			}
+			})
+			if(flagCsat == 1)
+				if(test.items[i].stats.rate != undefined)
+					if(test.items[i].stats.rate.rate != undefined) {
+						csatScore += test.items[i].stats.rate.rate
+						csatCount++
+					}
+			if(flagTopic == 1)
+				stringChatsWithoutTopic += '<a href="https://hdi.skyeng.ru/autofaq/conversation/-11/' + test.items[i].conversationId + '" onclick="">https://hdi.skyeng.ru/autofaq/conversation/-11/' + test.items[i].conversationId + '</a></br>'
 		}
-		})
-		if(flagCsat == 1)
-			if(test.items[i].stats.rate != undefined)
-				if(test.items[i].stats.rate.rate != undefined) {
-					csatScore += test.items[i].stats.rate.rate
-					csatCount++
-				}
-		if(flagTopic == 1)
-			stringChatsWithoutTopic += 'https://hdi.skyeng.ru/autofaq/conversation/-11/' + test.items[i].conversationId + '\n'
+		
+		if(stringChatsWithoutTopic == "")
+			stringChatsWithoutTopic = ' нет таких'
+		str.innerHTML = 'Оценка: ' + Math.round(csatScore/csatCount * 100) / 100 + '<br>' + 'Чаты без тематики (открывайте в инкогнито, чтобы не вылететь с текущей сессии): <br>' + stringChatsWithoutTopic
+	} catch {
+		str.textContent = 'Что-то пошло не так. Сделайте скрин консоли и отправьте в канал chm-dev, пожалуйста'
 	}
-	
-	str.textContent = 'Оценка: ' + Math.round(csatScore/csatCount * 100) / 100 + '\n' + 'Чаты без тематики: \n' + stringChatsWithoutTopic
+	document.getElementById('buttonCheckStats').textContent = 'Повторить проверку'
 }
+checkCSAT()
 
 function prepTp() {
 	document.getElementById('msg1').style.display = ''
@@ -2638,7 +2648,7 @@ function prepTp() {
 			if(this.getAttribute('disabled') != null)
 				return
 			if(document.getElementById('tableStats') != undefined) {
-				document.getElementById('tableStats').remove()
+				document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.remove()
 			}
 			this.textContent = 'Статистика'
 			
