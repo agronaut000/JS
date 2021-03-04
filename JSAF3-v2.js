@@ -2600,8 +2600,10 @@ async function checkCSAT() {
 	.then(r => {
 		if(r.operatorId == operatorId) {
 			flagCsat = 1
-			if(r.payload.topicId.value == "")
-				flagTopic = 1
+			if(r.payload != undefined)
+				if(r.payload.topicId != undefined)
+					if(r.payload.topicId.value == "")
+						flagTopic = 1
 		}
 		})
 		if(flagCsat == 1)
