@@ -2539,7 +2539,7 @@ async function getStats() {
 	document.getElementById('root').children[0].children[1].children[0].children[1].append(newDivForStats)
 	
 	let str = document.createElement('button')
-	str.textContent = 'Проверить CSAT'
+	str.textContent = 'Проверить CSAT + тематики чатов'
 	str.onclick = checkCSAT
 	document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.append(str)
 	
