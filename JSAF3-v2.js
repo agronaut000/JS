@@ -2541,7 +2541,7 @@ async function getStats() {
 	let str = document.createElement('button')
 	str.textContent = 'Проверить CSAT + тематики чатов'
 	str.id = 'buttonCheckStats'
-	str.style.paddingLeft = '50px'
+	str.style.marginLeft = '50px'
 	str.onclick = checkCSAT
 	document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.append(str)
 	
