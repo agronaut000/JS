@@ -253,7 +253,7 @@ async function createReportForm() {
 			
 		let comment = addComment + textToUTF8String(document.getElementById('reportInput4').value)
 		
-		var body = 'entry.1612783902=' + kto + '&entry.1471118405=' + link + 'entry.1856505864=' + comment + 'entry.486614058=' + komu + 'entry.989345812=' + selectKtoPerevelRG + 'entry.127512002=' + selectKomuPerevelRG
+		var body = 'entry.1612783902=' + kto + '&entry.1471118405=' + link + '&entry.1856505864=' + comment + '&entry.486614058=' + komu + '&entry.989345812=' + selectKtoPerevelRG + '&entry.127512002=' + selectKomuPerevelRG
 		//'entry.2042676744=' + date + '&entry.1008946388=' + client + '&entry.743061035=' + kto + '&entry.285857150=' + komu + '&entry.1292433844=' + link + '&entry.1679550503=' + comment
 		let options = {
 			  "headers": {
