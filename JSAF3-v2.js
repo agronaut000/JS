@@ -2591,25 +2591,30 @@ async function checkCSAT() {
 	}).then(r => r.json()).then(r => test = r)
 	csatScore = 0
 	csatCount = 0
+	let stringChatsWithoutTopic = ""
 	for(let i = 0; i < test.items.length; i ++) {
 		let flagCsat = 0
+		let flagTopic = 0
 		await fetch('https://skyeng.autofaq.ai/api/conversations/' + test.items[i].conversationId)
 	.then(r => r.json())
 	.then(r => {
 		if(r.operatorId == operatorId) {
 			flagCsat = 1
+			if(r.payload.topicId.value == "")
+				flagTopic = 1
 		}
+		})
 		if(flagCsat == 1)
 			if(test.items[i].stats.rate != undefined)
 				if(test.items[i].stats.rate.rate != undefined) {
 					csatScore += test.items[i].stats.rate.rate
 					csatCount++
 				}
-		
-		})
+		if(flagTopic == 1)
+			stringChatsWithoutTopic += 'https://hdi.skyeng.ru/autofaq/conversation/-11/' + test.items[i].conversationId + '\n'
 	}
 	
-	str.textContent = 'Оценка: ' + Math.round(csatScore/csatCount * 100) / 100
+	str.textContent = 'Оценка: ' + Math.round(csatScore/csatCount * 100) / 100 + '\n' + 'Чаты без тематики: \n' + stringChatsWithoutTopic
 }
 
 function prepTp() {
