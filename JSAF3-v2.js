@@ -1,4 +1,63 @@
 
+
+function mystyles() {
+	let mstl = document.createElement('style');
+	document.body.append(mstl);
+	var style = `.win_btn {
+		background-color: #768d87;
+		border-radius: 10px;
+		border: 1px solid #566963;
+		color: #ffffff;
+		font-size: 12px;
+		padding: 3px 2px;
+		margin: -2px 1px;
+	}
+	button {
+		background-color:#768d87;
+		border-radius:5px; 
+		border:1px solid #566963; 
+		color:#ffffff; 
+		padding:2px 2px;
+	}
+
+	.switch-btn {
+		display: inline-block;
+		width: 62px; /* ширина переключателя */
+		height: 24px; /* высота переключателя */
+		border-radius: 12px; /* радиус скругления */
+		background: #bfbfbf; /* цвет фона */
+		z-index: 0;
+		margin: 0;
+		padding: 0;
+		border: none;
+		cursor: pointer;
+		position: relative;
+		transition-duration: 300ms; /* анимация */
+	}
+	.switch-btn::after {
+		content: "";
+		height: 36px; /* высота кнопки */
+		width: 36px; /* ширина кнопки */
+		border-radius: 18px; /* радиус кнопки */
+		background: #fff; /* цвет кнопки */
+		top: -6px; /* положение кнопки по вертикали относительно основы */
+		left: -6px; /* положение кнопки по горизонтали относительно основы */
+		transition-duration: 300ms; /* анимация */
+		box-shadow: 0 0 10px 0 #999999; /* тень */
+		position: absolute;
+		z-index: 1;
+	}
+	.switch-on {
+		background: #fff;
+		box-shadow: inset 0 0 10px 0 #999999; /* тень */
+	}
+	.switch-on::after {
+		left: 30px;
+		background: #118c4e;
+	}`
+	mstl.innerHTML = style;
+}
+
 var win_AFhelper =  
     `<div style="display: flex; width: 301px;">
         <span style="width: 301px">
@@ -250,62 +309,6 @@ var KC_addr = 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE
 var TP_addr = 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec'
 var flagLangBut = 0
 function move_again_AF() {
-	
-	let mstl = document.createElement('style');
-	document.body.append(mstl);
-	var style = `.win_btn {
-		background-color: #768d87;
-		border-radius: 10px;
-		border: 1px solid #566963;
-		color: #ffffff;
-		font-size: 12px;
-		padding: 3px 2px;
-		margin: -2px 1px;
-	}
-	button {
-		background-color:#768d87;
-		border-radius:5px; 
-		border:1px solid #566963; 
-		color:#ffffff; 
-		padding:2px 2px;
-	}
-
-	.switch-btn {
-		display: inline-block;
-		width: 62px; /* ширина переключателя */
-		height: 24px; /* высота переключателя */
-		border-radius: 12px; /* радиус скругления */
-		background: #bfbfbf; /* цвет фона */
-		z-index: 0;
-		margin: 0;
-		padding: 0;
-		border: none;
-		cursor: pointer;
-		position: relative;
-		transition-duration: 300ms; /* анимация */
-	}
-	.switch-btn::after {
-		content: "";
-		height: 36px; /* высота кнопки */
-		width: 36px; /* ширина кнопки */
-		border-radius: 18px; /* радиус кнопки */
-		background: #fff; /* цвет кнопки */
-		top: -6px; /* положение кнопки по вертикали относительно основы */
-		left: -6px; /* положение кнопки по горизонтали относительно основы */
-		transition-duration: 300ms; /* анимация */
-		box-shadow: 0 0 10px 0 #999999; /* тень */
-		position: absolute;
-		z-index: 1;
-	}
-	.switch-on {
-		background: #fff;
-		box-shadow: inset 0 0 10px 0 #999999; /* тень */
-	}
-	.switch-on::after {
-		left: 30px;
-		background: #118c4e;
-	}`
-	mstl.innerHTML = style;
 
     if(window.location.href.indexOf('autofaq') === -1) {
 		document.getElementById('AF_helper').style.display = 'none';
@@ -2725,6 +2728,7 @@ function firstLoadPage() {
 	if(window.location.href.indexOf('skyeng.autofaq.ai') === -1) {
 		document.getElementById('AF_helper').style.display = 'none';
 		document.getElementById('testUsers').style.display = 'none';
+		mystyles()
 	} else {
 		setTimeout(move_again_AF, 3500)
 		
