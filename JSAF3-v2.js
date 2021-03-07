@@ -2628,7 +2628,6 @@ async function checkCSAT() {
 	}
 	document.getElementById('buttonCheckStats').textContent = 'Повторить проверку'
 }
-checkCSAT()
 
 function prepTp() {
 	document.getElementById('msg1').style.display = ''
