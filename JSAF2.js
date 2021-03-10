@@ -1,62 +1,59 @@
 
-
-function mystyles() {
-	let mstl = document.createElement('style');
-	document.body.append(mstl);
-	var style = `.win_btn {
-		background-color: #768d87;
-		border-radius: 10px;
-		border: 1px solid #566963;
-		color: #ffffff;
-		font-size: 12px;
-		padding: 3px 2px;
-		margin: -2px 1px;
-	}
-	button {
-		background-color:#768d87;
-		border-radius:5px; 
-		border:1px solid #566963; 
-		color:#ffffff; 
-		padding:2px 2px;
-	}
-
-	.switch-btn {
-		display: inline-block;
-		width: 62px; /* ширина переключателя */
-		height: 24px; /* высота переключателя */
-		border-radius: 12px; /* радиус скругления */
-		background: #bfbfbf; /* цвет фона */
-		z-index: 0;
-		margin: 0;
-		padding: 0;
-		border: none;
-		cursor: pointer;
-		position: relative;
-		transition-duration: 300ms; /* анимация */
-	}
-	.switch-btn::after {
-		content: "";
-		height: 36px; /* высота кнопки */
-		width: 36px; /* ширина кнопки */
-		border-radius: 18px; /* радиус кнопки */
-		background: #fff; /* цвет кнопки */
-		top: -6px; /* положение кнопки по вертикали относительно основы */
-		left: -6px; /* положение кнопки по горизонтали относительно основы */
-		transition-duration: 300ms; /* анимация */
-		box-shadow: 0 0 10px 0 #999999; /* тень */
-		position: absolute;
-		z-index: 1;
-	}
-	.switch-on {
-		background: #fff;
-		box-shadow: inset 0 0 10px 0 #999999; /* тень */
-	}
-	.switch-on::after {
-		left: 30px;
-		background: #118c4e;
-	}`
-	mstl.innerHTML = style;
+let mstl = document.createElement('style');
+document.body.append(mstl);
+var style = `.win_btn {
+    background-color: #768d87;
+    border-radius: 10px;
+    border: 1px solid #566963;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 3px 2px;
+    margin: -2px 1px;
 }
+button {
+    background-color:#768d87;
+    border-radius:5px; 
+    border:1px solid #566963; 
+    color:#ffffff; 
+    padding:2px 2px;
+}
+
+.switch-btn {
+    display: inline-block;
+    width: 62px; /* ширина переключателя */
+    height: 24px; /* высота переключателя */
+    border-radius: 12px; /* радиус скругления */
+    background: #bfbfbf; /* цвет фона */
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition-duration: 300ms; /* анимация */
+}
+.switch-btn::after {
+    content: "";
+    height: 36px; /* высота кнопки */
+    width: 36px; /* ширина кнопки */
+    border-radius: 18px; /* радиус кнопки */
+    background: #fff; /* цвет кнопки */
+    top: -6px; /* положение кнопки по вертикали относительно основы */
+    left: -6px; /* положение кнопки по горизонтали относительно основы */
+    transition-duration: 300ms; /* анимация */
+    box-shadow: 0 0 10px 0 #999999; /* тень */
+    position: absolute;
+    z-index: 1;
+}
+.switch-on {
+    background: #fff;
+    box-shadow: inset 0 0 10px 0 #999999; /* тень */
+}
+.switch-on::after {
+    left: 30px;
+    background: #118c4e;
+}`
+mstl.innerHTML = style;
 
 var win_AFhelper =  
     `<div style="display: flex; width: 301px;">
@@ -119,7 +116,10 @@ if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winLeftAF', '295');
 }
 
-
+if (localStorage.getItem('winTopAF') == null) {
+    localStorage.setItem('winTopAF', '120');
+    localStorage.setItem('winLeftAF', '295');
+}
 
 if (localStorage.getItem('scriptAdr') == null) {
     localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec');
@@ -211,6 +211,11 @@ maskBack.id = "maskBack"
 maskBack.innerHTML = "Вернуть"
 maskBack.style.marginRight = "15px";
 maskBack.style.display = "none";
+setTimeout(function() {
+btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
+btnAdd1.insertBefore(maskBack, btnAdd1.children[0])
+}, 2000)
 
 maskBack.onclick = function () {
 	name = document.getElementById('maskBack').getAttribute('name')
@@ -233,11 +238,10 @@ maskBack.onclick = function () {
 
 
 
-let maskBackHide = document.createElement('span')
+let maskBackHide = document.createElement('div')
 maskBackHide.id = "maskBackHide"
 maskBackHide.innerHTML = "Скрыть"
 maskBackHide.style.marginRight = "15px";
-maskBackHide.style.marginLeft = "15px";
 maskBackHide.style.display = "";
 
 maskBackHide.onclick = function () {
@@ -303,13 +307,12 @@ document.body.append(wintAF);
 wintAF.style = 'min-height: 25px; min-width: 65px; background: #464451; top: ' + localStorage.getItem('winTopAF') + 'px; left: ' + localStorage.getItem('winLeftAF') + 'px; font-size: 14px; z-index: 20; position: fixed; border: 1px solid rgb(56, 56, 56); color: black;';
 wintAF.setAttribute('id' ,'AF_helper');
 wintAF.innerHTML = win_AFhelper; 
-var chatsArray = []
+
 var TS_addr = 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec'
 var KC_addr = 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec'
 var TP_addr = 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec'
 var flagLangBut = 0
 function move_again_AF() {
-
     if(window.location.href.indexOf('autofaq') === -1) {
 		document.getElementById('AF_helper').style.display = 'none';
 	}
@@ -653,7 +656,7 @@ function move_again_AF() {
 	getText()
 }
 
-
+setTimeout(move_again_AF, 3500)
 function pageClick(pageId) {
 	b = document.getElementById('AF_helper').childNodes[0].childNodes[1].childNodes[1]
 	for(i = 0; i < b.childElementCount; i++) {
@@ -780,10 +783,8 @@ async function buttonsFromDoc(butName) {
 	
 	msgFromTable(butName)
 	if(butName == "Серверные")
-		if(document.getElementById('msg1').innerHTML != "Доработать") {
+		if(document.getElementById('msg1').innerHTML != "Доработать")
 			sendComment(document.getElementById('serversInp').value)
-			newTag(1370)
-		}
 }
 
 var bool = 0;	
@@ -810,9 +811,9 @@ function getText() {
 
    }
    xhr.send()
+   
 }
 function refreshTemplates() {
-	templatesAF = []
 	while(document.getElementById('pages').children[0] != undefined)
 		document.getElementById('pages').children[0].remove()
 	for(i = 0; document.getElementById(i + 'page') != undefined; i++)
@@ -999,15 +1000,8 @@ function tagToChat(btnName) {
 		}
 	}
 }
-
 function newTag(valueId) {
-	let chatId = ''
-	if(window.location.href.indexOf('skyeng.autofaq.ai/logs') !== -1)
-		chatId = document.location.pathname.split('/')[2]
-	else if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/archive') === -1)
-		chatId = document.location.pathname.split('/')[3]
-	else
-		chatId = document.getElementsByClassName('ant-tabs-tabpane expert-sider-tabs-panel_scrollable')[0].children[0].children[0].children[0].textContent.split(' ')[1]
+	var chatId = document.location.pathname.split('/')[3]
 	fetch("https://skyeng.autofaq.ai/api/conversation/" + chatId + "/payload", {
 	  "headers": {
 		"content-type": "application/json",
@@ -1017,7 +1011,6 @@ function newTag(valueId) {
 	  "credentials": "include"
 	});
 }
-
 function msgFromTable(btnName) {
 	for(var l = 0; l < table.length; l++) {
 		if(document.getElementById('languageAF').innerHTML == "Русский") {
@@ -1059,105 +1052,91 @@ function msgFromTable(btnName) {
 	}
 }
 
-var templatesAF = []
-async function loadTemplates(template, word) {
-	return await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
-	  "headers": {
-		"content-type": "application/json",
-	  },
-	  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646,121303,121343,121388,121162,121158,121346,121151,121341,121152,121342,121156,121347,121079,121163,121155,121344,121157,121345,121304,121340,121384]}",
-	  "method": "POST",
-	})
-	.then(response => response.json())
-	.then(result => {
-		var documentId = ""
-		var serviceId = ""
-		var queryId = ""
-		var AFsessionId = ""
-		var tmpText = ""
-		var title = ""
-		var accuracy = ""
-		for(let i = 0; i < result.length; i++) {
-			if(result[i].title == template) {
-				var b = result[i]
-				documentId = b.documentId
-				serviceId = b.serviceId
-				queryId = b.queryId
-				AFsessionId = b.sessionId
-				tmpText = b.text
-				tmpText = tmpText.split("<br>↵").join('\n')
-				tmpText = tmpText.split("&nbsp;").join(' ')
-				tmpText = tmpText.split("<br />").join('\n')
-				tmpText = tmpText.split('<a').join('TMPaTMP').split('</a').join('TMPENDaTMEPEND')
-				tmpText = tmpText.replace(/<\/?[^>]+>/g,'')
-				tmpText = tmpText.split('TMPaTMP').join('<a').split('TMPENDaTMEPEND').join('</a')
-				title = b.title
-				title = title.split("\"").join("\\\"")
-				accuracy = b.accuracy
-				
-				templatesAF.push([template, documentId, serviceId, queryId, AFsessionId, tmpText, title, accuracy])
-				return ([template, documentId, serviceId, queryId, AFsessionId, tmpText, title, accuracy])
-			}
-		}
-	})
-}
-
 async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 = 0) {
-	var curTemplate
+	//addTimer()
+	time = "15:00"
 	if(flag == 1) {
 		template = template_text
 		word = word_text
 	}
-	for(let i = 0; i < templatesAF.length; i++) {
-		if(template == templatesAF[i][0]) {
-			curTemplate = templatesAF[i]
-			break
-		}
-	}
-	if(curTemplate == undefined)
-		curTemplate = await loadTemplates(template, word)
-	//addTimer()
-	time = "15:00"
-	var documentId = curTemplate[1]
-	var serviceId = curTemplate[2]
-	var queryId = curTemplate[3]
-	var AFsessionId = curTemplate[4]
-	var tmpText = curTemplate[5]
-	var title = curTemplate[6]
-	var accuracy = curTemplate[7]
+	var tmpText = ""
 	var values = await getInfo(0)
 	var adr = values[0]; var adr1 = values[1]; var uid = values[2]
-	if(document.getElementById('msg1').innerHTML == "Доработать" && flag2 == 0) {
-		document.getElementById('inp').value = tmpText
-		template_text = template
-		word_text = word
-		template_flag = 1
-	}
-	else if(tmpText == "")
-			console.log('Шаблон не найден')
-		else {
-			if(flag == 1) {
-				tmpText = newText
-			}
-			tmpText = tmpText.split("\"").join("\\\"")
-			txt2 = tmpText.split('\n')
-			txt3 = ""
-			txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
-			tmpText = txt3
-			tmpText = tmpText.split('<p></p>').join("<p><br></p>")
-			tmpText = tmpText.substr(0, tmpText.length - 2)
-			
-			resetFlags()
-			refCurTimer(time)
-			fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
-				  "headers": {
-					"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryZ3ivsA3aU80QEBST",
-				  },
-				  "body": "------WebKitFormBoundaryZ3ivsA3aU80QEBST\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + tmpText + "\",\"ext\":null,\"files\":[],\"suggestedAnswerDocId\":" + documentId + ",\"autoFaqServiceId\":" + serviceId + ",\"autoFaqSessionId\":\"" + AFsessionId + "\",\"autoFaqQueryId\":\"" + queryId + "\",\"autoFaqTitle\":\"" + title + "\",\"autoFaqQuery\":\"" + word + "\",\"autoFaqAccuracy\":" + accuracy + "}\r\n------WebKitFormBoundaryZ3ivsA3aU80QEBST--\r\n",
-				  "method": "POST",
-				  "credentials": "include"
-				});
+	a = await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
+  "headers": {
+    "accept": "*/*", 
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "cache-control": "max-age=0",
+    "content-type": "application/json",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrer": adr,
+  "referrerPolicy": "no-referrer-when-downgrade",
+  "body": "{\"query\":\"" + word + "\",\"answersLimit\":10,\"autoFaqServiceIds\":[119638,121385,121300,119843,118980,120969,121387,121348,121386,119636,119844,119649,121286,121381,119841,120181,119646,121303,121343,121388,121162,121158,121346,121151,121341,121152,121342,121156,121347,121079,121163,121155,121344,121157,121345,121304,121340,121384]}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+});
+b = a.json()
+serviceId = queryId = sessionId = tmpText = title = accuracy = ""
+b.then(b => {b.forEach(b => {if (b.title == template) {documentId = b.documentId
+serviceId = b.serviceId
+queryId = b.queryId
+AFsessionId = b.sessionId
+tmpText = b.text
+tmpText = tmpText.split("<br>↵").join('\n')
+tmpText = tmpText.split("&nbsp;").join(' ')
+tmpText = tmpText.split("<br />").join('\n')
+tmpText = tmpText.split('<a').join('TMPaTMP').split('</a').join('TMPENDaTMEPEND')
+tmpText = tmpText.replace(/<\/?[^>]+>/g,'')
+tmpText = tmpText.split('TMPaTMP').join('<a').split('TMPENDaTMEPEND').join('</a')
+title = b.title
+title = title.split("\"").join("\\\"")
+accuracy = b.accuracy
+}});}).then(k => {
+		if(document.getElementById('msg1').innerHTML == "Доработать" && flag2 == 0) {
+			document.getElementById('inp').value = tmpText
+			template_text = template
+			word_text = word
+			template_flag = 1
 		}
+		else if(tmpText == "")
+				console.log('Шаблон не найден')
+			else {
+				if(flag == 1) {
+					tmpText = newText
+				}
+				tmpText = tmpText.split("\"").join("\\\"")
+				txt2 = tmpText.split('\n')
+				txt3 = ""
+				txt2.forEach(el => txt3 += "<p>" + el + "</p>\\n")
+				tmpText = txt3
+				tmpText = tmpText.split('<p></p>').join("<p><br></p>")
+				tmpText = tmpText.substr(0, tmpText.length - 2)
+				
+				resetFlags()
+				refCurTimer(time)
+				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
+					  "headers": {
+						"accept": "*/*",
+						"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+						"cache-control": "max-age=0",
+						"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryZ3ivsA3aU80QEBST",
+						"sec-fetch-dest": "empty",
+						"sec-fetch-mode": "cors",
+						"sec-fetch-site": "same-origin"
+					  },
+					  "referrer": adr,
+					  "referrerPolicy": "no-referrer-when-downgrade",
+					  "body": "------WebKitFormBoundaryZ3ivsA3aU80QEBST\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + tmpText + "\",\"ext\":null,\"files\":[],\"suggestedAnswerDocId\":" + documentId + ",\"autoFaqServiceId\":" + serviceId + ",\"autoFaqSessionId\":\"" + AFsessionId + "\",\"autoFaqQueryId\":\"" + queryId + "\",\"autoFaqTitle\":\"" + title + "\",\"autoFaqQuery\":\"" + word + "\",\"autoFaqAccuracy\":" + accuracy + "}\r\n------WebKitFormBoundaryZ3ivsA3aU80QEBST--\r\n",
+					  "method": "POST",
+					  "mode": "cors",
+					  "credentials": "include"
+					});
+			}
+			});
 }
 async function sendAnswer(txt, flag = 1, time = "15:00") {
 		//addTimer()
@@ -1178,35 +1157,51 @@ async function sendAnswer(txt, flag = 1, time = "15:00") {
 				refCurTimer(time)
 				fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 					  "headers": {
+						"accept": "*/*",
+						"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+						"cache-control": "max-age=0",
 						"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryFeIiMdHaxAteNUHd",
+						"sec-fetch-dest": "empty",
+						"sec-fetch-mode": "cors",
+						"sec-fetch-site": "same-origin"
 					  },
+					  "referrer": adr,
+					  "referrerPolicy": "no-referrer-when-downgrade",
 					  "body": "------WebKitFormBoundaryFeIiMdHaxAteNUHd\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt3 + "\"}\r\n------WebKitFormBoundaryFeIiMdHaxAteNUHd--\r\n",
 					  "method": "POST",
+					  "mode": "cors",
 					  "credentials": "include"
 				});
 				resetFlags()
 			}
 }
 async function getInfo(flag1 = 1) {
-	var adr = document.location.href
-	var adr1 = document.location.pathname
-	adr1 = adr1.split('/')
-	adr1 = adr1[3]
-	var sessionId = ""
-	for(let i = 0; i < chatsArray.length; i++) {
-		if(chatsArray[i].id == adr1) {
-			sessionId = chatsArray[i].sessionId
-			return [adr, adr1, sessionId]
+		adr = document.location.href
+		adr1 = document.location.pathname
+		adr1 = adr1.split('/')
+		adr1 = adr1[3]
+		if(adr1 == undefined)
+			adr1 = ""
+		sessionId = ""
+		if(document.getElementById('msg1').innerHTML != "Доработать" || flag1 == 0) {
+			a = await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1, {
+	  "headers": {
+		"accept": "*/*",
+		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+		"cache-control": "max-age=0",
+		"sec-fetch-dest": "empty",
+		"sec-fetch-mode": "cors",
+		"sec-fetch-site": "same-origin"
+	  },
+	  "referrer": adr,
+	  "referrerPolicy": "no-referrer-when-downgrade",
+	  "body": null,
+	  "method": "GET",
+	  "mode": "cors",
+	  "credentials": "include"
+	}).then(a => b = a.json()).then(b => {sessionId = b.sessionId; localStorage.setItem('serviceIdGlob', b.serviceId)});
 		}
-	}
-	if(adr1 == undefined)
-		adr1 = ""
-	if(document.getElementById('msg1').innerHTML != "Доработать" || flag1 == 0) {
-		await fetch("https://skyeng.autofaq.ai/api/conversations/"+adr1)
-		.then(response => response.json())
-		.then(result => {sessionId = result.sessionId; chatsArray.push(result); localStorage.setItem('serviceIdGlob', result.serviceId)});
-	}
-	return [adr, adr1, sessionId]
+		return [adr, adr1, sessionId]
 }
 async function sendComment(txt){ 
 		var values = await getInfo(0)
@@ -1216,10 +1211,19 @@ async function sendComment(txt){
 		resetFlags()
 	fetch("https://skyeng.autofaq.ai/api/reason8/answers", {
 	  "headers": {
+		"accept": "*/*",
+		"accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+		"cache-control": "max-age=0",
 		"content-type": "multipart/form-data; boundary=----WebKitFormBoundaryH2CK1t5M3Dc3ziNW",
+		"sec-fetch-dest": "empty",
+		"sec-fetch-mode": "cors",
+		"sec-fetch-site": "same-origin"
 	  },
+	  "referrer": adr,
+	  "referrerPolicy": "no-referrer-when-downgrade",
 	  "body": "------WebKitFormBoundaryH2CK1t5M3Dc3ziNW\r\nContent-Disposition: form-data; name=\"payload\"\r\n\r\n{\"sessionId\":\"" + uid + "\",\"conversationId\":\"" + adr1 + "\",\"text\":\"" + txt2 + "\",\"isComment\":true}\r\n------WebKitFormBoundaryH2CK1t5M3Dc3ziNW--\r\n",
 	  "method": "POST",
+	  "mode": "cors",
 	  "credentials": "include"
 	});
 }
@@ -1337,8 +1341,6 @@ else
 	audio = new Audio("https://drive.google.com/u/0/uc?id=1832JE2IuK7AnfgkljLYytEeFL99Mt2Gv&export=download");	
 
 var timeStart = new Date()
-var studentIdSearch2 = 0
-var studentIdSearch = 0
 function startTimer() {
 	var timeNow = new Date()
 	if(timeNow - timeStart > 60 * 60 * 1000) {
@@ -1395,8 +1397,6 @@ function startTimer() {
 		
 	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/assigned') !== -1 && document.getElementsByClassName('expert-user_details-list')[1] !== undefined) {
 		vertical = user = ""
-		nextClassMode = nextClassstudentId = ""
-		nextClassModeId = ""
 		for(i = 0; document.getElementsByClassName('expert-user_details-list')[1].childNodes[i] != undefined; i++) {
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "supportVertical" || document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "teacherVertical")
 				vertical = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
@@ -1415,59 +1415,7 @@ function startTimer() {
 							tmrs[k][4] = ""
 					}
 				}
-			
-			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-mode") {
-				nextClassMode = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent
-				nextClassModeId = i
-			}
-			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-studentId")
-				nextClassstudentId = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent
 		}
-		if(localStorage.getItem('scriptAdr') == TP_addr) {
-			if(nextClassMode == 'group') {
-				nextClassstudentId = nextClassstudentId.split(',')[0]
-				document.getElementsByClassName('expert-user_details-list')[1].childNodes[nextClassModeId].childNodes[1].textContent = 'group '
-				function checkForLink() {
-					if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[nextClassModeId].childNodes[1].textContent == 'group ')
-						document.getElementsByClassName('expert-user_details-list')[1].childNodes[nextClassModeId].childNodes[1].textContent = 'group'
-				}
-				setTimeout(checkForLink, 5000)
-				document.getElementById('responseTextarea1').value = '{}'
-				document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + nextClassstudentId
-				document.getElementById('responseTextarea3').value = 'groupLessons1'
-				document.getElementById('sendResponse').click()
-				studentIdSearch2 = 0
-				setTimeout(generateGroupLink, 1000)
-				
-				function generateGroupLink() {
-					let res = document.getElementById('responseTextarea1').getAttribute('groupLessons1')
-					if(res.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0] == 'Нет') {
-						studentIdSearch2++
-						document.getElementById('responseTextarea1').removeAttribute('groupLessons1')
-						for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
-							if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "nextClass-studentId") {
-								document.getElementById('responseTextarea1').value = '{}'
-								document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[studentIdSearch2]
-								document.getElementById('responseTextarea3').value = 'groupLessons1'
-								document.getElementById('sendResponse').click()
-								setTimeout(generateGroupLink, 1000)
-								return
-							}
-						}
-					}
-					groupId = res.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0]
-					let button = document.createElement('a')
-					button.href = 'https://cabinet.skyeng.ru/admin/group/edit?id=' + groupId
-					button.target = '_blank'
-					button.textContent = groupId
-					button.style.marginRight = '15px'
-					
-					document.getElementsByClassName('expert-user_details-list')[1].children[0].children[0].replaceWith(button)
-					document.getElementsByClassName('expert-user_details-list')[1].children[0].children[1].remove()
-				}
-			}
-		}
-		
 		addInfoUser.innerHTML = vertical + " + " + user 
 		if(document.getElementById('NS') != undefined) {
 			if(vertical == "Math" || "math_flow") {
@@ -1523,115 +1471,10 @@ function startTimer() {
 		}
 	}
 	
-	if(localStorage.getItem('scriptAdr') == TP_addr) {
-		if(document.getElementsByClassName('expert-user_details-list')[1] != undefined) {
-			if(document.getElementsByClassName('expert-user_details-list')[1].children[0] != undefined) {
-				if(document.getElementsByClassName('expert-user_details-list')[1].children[0].classList != "") {
-					let c = document.createElement('div')
-					let a = document.createElement('span')
-					a.textContent = 'Найти группу'
-					a.style.marginRight='10px'
-					function generateGroupLink() {
-						let res = document.getElementById('responseTextarea1').getAttribute('groupLessons')
-						if(res.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0] == 'Нет') {
-							studentIdSearch++
-							for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
-								if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "nextClass-studentId") {
-									document.getElementById('responseTextarea1').value = '{}'
-									document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[studentIdSearch]
-									document.getElementById('responseTextarea3').value = 'groupLessons'
-									document.getElementById('sendResponse').click()
-									setTimeout(generateGroupLink, 1000)
-									return
-								}
-							}
-						}
-						groupId = res.split('/admin/student/view/')[1].split('<td>')[3].split('</td')[0]
-						let button = document.createElement('a')
-						button.href = 'https://cabinet.skyeng.ru/admin/group/edit?id=' + groupId
-						button.target = '_blank'
-						button.textContent = groupId
-						button.style.marginRight = '15px'
-						
-						document.getElementsByClassName('expert-user_details-list')[1].children[0].children[0].replaceWith(button)
-						document.getElementsByClassName('expert-user_details-list')[1].children[0].children[1].remove()
-					}
-					a.onclick = function() {
-						this.textContent = ''
-						this.parentElement.children[1].textContent = ''
-						for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
-							if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "userType") {
-								if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent == 'student') {
-									for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
-										if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "id") {
-											studentIdSearch = 0
-											document.getElementById('responseTextarea1').value = '{}'
-											document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].innerText
-											document.getElementById('responseTextarea3').value = 'groupLessons'
-											document.getElementById('sendResponse').click()
-											setTimeout(generateGroupLink, 1000)
-										}
-									}
-								} else {
-									for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
-										if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "nextClass-studentId") {
-											document.getElementById('responseTextarea1').value = '{}'
-											document.getElementById('responseTextarea2').value = "https://grouplessons-api.skyeng.ru/admin/student?studentListFilter%5Bid%5D=" + document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(',')[0]
-											document.getElementById('responseTextarea3').value = 'groupLessons'
-											document.getElementById('sendResponse').click()
-											setTimeout(generateGroupLink, 1000)
-										}
-									}
-								}
-							}
-						}
-					}
-
-					let b = document.createElement('span')
-					b.textContent = 'Найти Talks'
-					b.style.marginRight='10px'
-					function generateTalksInfo() {
-						console.log('here')
-						var talks = JSON.parse(document.getElementById('responseTextarea1').getAttribute('talks')).data.talks
-						document.getElementById('responseTextarea1').removeAttribute('talks')
-						var userId = ""
-						var stringInfo = ""
-						for(let i = 0; i < document.getElementsByClassName('expert-user_details-list')[1].childElementCount; i++) {
-							if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.textContent == "id") {
-								userId = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].childNodes[1].textContent.split(' ')[0]
-								break
-							}
-						}
-						for(i = 0; i < talks.length; i++) {
-							if(userId == talks[i].studentId || userId == talks[i].teacherId) {
-								stringInfo = "student: " + talks[i].studentId + "|teacher: " + talks[i].teacherId + "|hash: " + talks[i].roomHash + "|status: " + talks[i].currentStatus
-								document.getElementsByClassName('expert-user_details-list')[1].children[0].children[0].remove()
-
-								let newSpan = document.createElement('span')
-								newSpan.textContent = stringInfo
-								document.getElementsByClassName('expert-user_details-list')[1].children[0].children[0].replaceWith(newSpan)
-								break
-							}
-						}
-					}
-					b.onclick = function() {
-						this.textContent = ''
-						this.parentElement.children[0].textContent = ''
-						document.getElementById('responseTextarea1').value = '{ "credentials": "include" }'
-						document.getElementById('responseTextarea2').value = "https://talks-platform.skyeng.ru/api/v1/talks/stats"
-						document.getElementById('responseTextarea3').value = 'talks'
-						document.getElementById('sendResponse').click()
-						setTimeout(generateTalksInfo, 1000)
-					}
-					c.append(a)
-					c.append(b)
-
-					document.getElementsByClassName('expert-user_details-list')[1].prepend(c)
-				}
-			}
-		}
+	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined) {
+		document.getElementsByClassName('ant-modal-content')[0].childNodes[1].appendChild(maskBackHide)
 	}
-	
+
 	
 	if(localStorage.getItem('scriptAdr') == TP_addr && document.getElementById('continue_chat_button') == null && document.getElementsByClassName('expert-user_info_panel-footer-inner')[0] != undefined) {
 		let btn1 = document.createElement('span');
@@ -1653,11 +1496,7 @@ function startTimer() {
 }
 
 function newTaggg(tagName) {
-	let chatId = ''
-	if(window.location.href.indexOf('skyeng.autofaq.ai/tickets/archive') === -1)
-		chatId = document.location.pathname.split('/')[3]
-	else 
-		chatId = document.getElementsByClassName('ant-tabs-tabpane expert-sider-tabs-panel_scrollable')[0].children[0].children[0].children[0].textContent.split(' ')[1]
+	var chatId = document.location.pathname.split('/')[3]
 	fetch("https://skyeng.autofaq.ai/api/conversation/" + chatId + "/payload", {
 	  "headers": {
 		"content-type": "application/json",
@@ -1667,22 +1506,7 @@ function newTaggg(tagName) {
 	  "credentials": "include"
 	});
 }
-
-function timerHideButtons() {
-	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined) {
-		document.getElementsByClassName('ant-modal-content')[0].childNodes[1].children[0].appendChild(maskBackHide)
-		
-		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Указать тему')
-			for(i = 1; i < document.getElementsByClassName('ant-modal-content')[0].children[2].childElementCount - 1; i++)
-				if(document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Тех. поддержка V1" && document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Уроки V2" && document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Группа КМ" && document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Продажи 1Л")
-					document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].style.display = 'none'
-
-		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Закрыть запрос?')
-			for(i = 1; i < document.getElementsByClassName('ant-modal-content')[0].children[2].childElementCount - 1; i++)
-				if(document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].textContent != "Тех. поддержка V1")
-					document.getElementsByClassName('ant-modal-content')[0].children[2].children[i].style.display = 'none'
-	}
-}
+setInterval(startTimer, 1000)
 
 function requestsRed () {
 	document.getElementsByClassName('expert-sidebar-button')[0].childNodes[1].childNodes[0].addEventListener("DOMSubtreeModified", function() {
@@ -1694,6 +1518,7 @@ function requestsRed () {
 	});
 }
 
+setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 200)
 
 const copyToClipboard1 = str => {
     const el = document.createElement('textarea');
@@ -1907,6 +1732,7 @@ async function checkHistory(id) {
 		day = "0" + date.getDate()
 	else
 		day = date.getDate()
+
 	if(date.getHours() < 10)
 		hours = '0' + date.getHours()
 	else
@@ -2382,6 +2208,32 @@ function customTemplates(language = '') {
 	}
 }
 
+
+setTimeout(function() {
+if(localStorage.getItem('inspector') == 'yes') {
+	var but = document.createElement('button')
+	but.style.marginLeft = '5px'
+	but.textContent = "Нотгуды"
+	but.id = 'buttonForNotgoods'
+	var newinput = document.createElement('input')	
+	newinput.style.marginLeft = '5px'
+	newinput.style.textAlign = "center"
+	newinput.id = 'inputForNotgoods'
+	var curDate = new Date()
+	curDate.setTime(curDate - 24 * 60 * 60 * 1000)
+	newinput.placeholder = curDate.getDate() + "." + (curDate.getMonth() + 1) + "." + curDate.getFullYear()
+	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(newinput)
+	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(but)
+	
+	document.getElementById('buttonForNotgoods').onclick = function () {
+		if(document.getElementById('inputForNotgoods').value != "")
+			getNotGoods(document.getElementById('inputForNotgoods').value)
+		else
+			getNotGoods(document.getElementById('inputForNotgoods').placeholder)
+	}
+}
+}, 2000)
+
 async function getStats() {
 	let table = document.createElement('table')
 	table.style = 'table-layout: auto; width:750px;'
@@ -2438,7 +2290,7 @@ async function getStats() {
 			if(k.operator.kbs.indexOf(120181) != -1 && k.operator.fullName.split('-')[0] == "ТП") {
 				operatorId.push(k.operator.id)
 				operatorNames.push(k.operator.fullName)
-			}
+		}
 	}))
 
 	var date = new Date()
@@ -2537,108 +2389,8 @@ async function getStats() {
 	
 	table.append(trHead)
 	table.append(tbody)
-	
-	let newDivForStats = document.createElement('div')
-	newDivForStats.append(table)
-	document.getElementById('root').children[0].children[1].children[0].children[1].append(newDivForStats)
-	
-	let str = document.createElement('button')
-	str.textContent = 'Проверить CSAT + тематики чатов'
-	str.id = 'buttonCheckStats'
-	str.style.marginLeft = '50px'
-	str.onclick = checkCSAT
-	document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.append(str)
-	
-	document.getElementById('buttonGetStat').textContent = 'Скрыть стату'
+	document.getElementById('root').children[0].children[1].children[0].children[1].append(table)
 	document.getElementById('buttonGetStat').removeAttribute('disabled')
-}
-
-async function checkCSAT() {
-	let str = document.createElement('p')
-	str.style.paddingLeft = '50px'
-	if(document.getElementById('buttonCheckStats').textContent == 'Повторить проверку')
-		document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.lastElementChild.remove()
-	document.getElementById('buttonCheckStats').textContent = 'Загрузка'
-	document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.append(str)
-	var date = new Date()
-	day = month = ""
-	if(date.getMonth() < 9)
-		month = "0" + (date.getMonth() + 1)
-	else 
-		month = (date.getMonth() + 1)
-	if(date.getDate() < 10)
-		day = "0" + date.getDate()
-	else
-		day = date.getDate()
-
-	secondDate = date.getFullYear() + "-" + month + "-" + day + "T20:59:59.059z"
-	date = date - 24 * 60 * 60 * 1000
-	var date2 = new Date()
-	date2.setTime(date)
-
-	if(date2.getMonth() < 9)
-	month2 = "0" + (date2.getMonth() + 1)
-	else 
-	month2 = (date2.getMonth() + 1)
-	if(date2.getDate() < 10)
-	day2 = "0" + date2.getDate()
-	else
-	day2 = date2.getDate()
-
-	firstDate = date2.getFullYear() + "-" + month2 + "-" + day2 + "T21:00:00.000z"
-
-	try {
-		page = 1
-		let stringChatsWithoutTopic = ""
-		while(true) {
-			test = ''
-			await fetch("https://skyeng.autofaq.ai/api/conversations/queues/archive", {
-			  "headers": {
-				"content-type": "application/json",
-			  },
-			  "body": "{\"serviceId\":\"361c681b-340a-4e47-9342-c7309e27e7b5\",\"mode\":\"Json\",\"tsFrom\":\"" + firstDate + "\",\"tsTo\":\"" + secondDate + "\",\"orderBy\":\"ts\",\"orderDirection\":\"Asc\",\"page\":" + page + ",\"limit\":100}",
-			  "method": "POST",
-			}).then(r => r.json()).then(r => test = r)
-			csatScore = 0
-			csatCount = 0
-			for(let i = 0; i < test.items.length; i ++) {
-				let flagCsat = 0
-				let flagTopic = 0
-				await fetch('https://skyeng.autofaq.ai/api/conversations/' + test.items[i].conversationId)
-			.then(r => r.json())
-			.then(r => {
-				if(r.operatorId == operatorId) {
-					flagCsat = 1
-					if(r.payload != undefined)
-						if(r.payload.topicId != undefined)
-							if(r.payload.topicId.value == "")
-								flagTopic = 1
-				}
-				})
-				if(flagCsat == 1)
-					if(test.items[i].stats.rate != undefined)
-						if(test.items[i].stats.rate.rate != undefined) {
-							csatScore += test.items[i].stats.rate.rate
-							csatCount++
-						}
-				if(flagTopic == 1)
-					stringChatsWithoutTopic += '<a href="https://hdi.skyeng.ru/autofaq/conversation/-11/' + test.items[i].conversationId + '" onclick="">https://hdi.skyeng.ru/autofaq/conversation/-11/' + test.items[i].conversationId + '</a></br>'
-			}
-			
-			if(stringChatsWithoutTopic == "")
-				stringChatsWithoutTopic = ' нет таких'
-			str.innerHTML = 'Оценка: ' + Math.round(csatScore/csatCount * 100) / 100 + '<br>' + 'Чаты без тематики (открывайте в инкогнито, чтобы не вылететь с текущей сессии): <br>' + stringChatsWithoutTopic
-			
-			if(test.total > 100 && page == 1) {
-				page = 2
-			} else {
-				break
-			}
-		}
-	} catch {
-		str.textContent = 'Что-то пошло не так. Сделайте скрин консоли и отправьте в канал chm-dev, пожалуйста'
-	}
-	document.getElementById('buttonCheckStats').textContent = 'Повторить проверку'
 }
 
 function prepTp() {
@@ -2654,13 +2406,13 @@ function prepTp() {
 	let buttonGetStat = document.createElement('div');
 	buttonGetStat.id = 'buttonGetStat';
 	buttonGetStat.innerHTML = "Статистика";
-	buttonGetStat.style.marginLeft = "15px";
+	buttonGetStat.style.marginRight = "15px";
 	buttonGetStat.onclick = function() {
 		if(this.textContent == 'Скрыть стату') {
 			if(this.getAttribute('disabled') != null)
 				return
 			if(document.getElementById('tableStats') != undefined) {
-				document.getElementById('root').children[0].children[1].children[0].children[1].lastElementChild.remove()
+				document.getElementById('tableStats').remove()
 			}
 			this.textContent = 'Статистика'
 			
@@ -2684,241 +2436,9 @@ function prepTp() {
 			}
 			getStats()
 			document.getElementById('buttonGetStat').setAttribute('disabled', 'disabled')
-			this.textContent = 'Загрузка'
+			this.textContent = 'Скрыть стату'
 		}
 	}
-	document.getElementById('app-header').append(buttonGetStat)
-	// var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
-	// btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
-	
-	//setInterval(checkTicketCountsCrm, 300)
-	setInterval(timerHideButtons, 300)
-	
-	setTimeout(function() {
-		// Модуль wallentine в АФ
-		include("https://rawgit.com/agronaut000/JS/master/viewSlack.js");
-		// Модуль репорта на жалобы
-		include("https://rawgit.com/agronaut000/JS/master/reportForm.js");
-	}, 2000)
-	
-	setTimeout(function() {
-		if(localStorage.getItem('inspector') == 'yes') {
-			var but = document.createElement('button')
-			but.style.marginLeft = '5px'
-			but.textContent = "Нотгуды"
-			but.id = 'buttonForNotgoods'
-			var newinput = document.createElement('input')	
-			newinput.style.marginLeft = '5px'
-			newinput.style.textAlign = "center"
-			newinput.id = 'inputForNotgoods'
-			var curDate = new Date()
-			curDate.setTime(curDate - 24 * 60 * 60 * 1000)
-			newinput.placeholder = curDate.getDate() + "." + (curDate.getMonth() + 1) + "." + curDate.getFullYear()
-			document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(newinput)
-			document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.appendChild(but)
-			
-			document.getElementById('buttonForNotgoods').onclick = function () {
-				if(document.getElementById('inputForNotgoods').value != "")
-					getNotGoods(document.getElementById('inputForNotgoods').value)
-				else
-					getNotGoods(document.getElementById('inputForNotgoods').placeholder)
-			}
-		}
-	}, 2500)
-}
-function include(url) {
-	var script = document.createElement('script');
-	script.src = url;
-	document.getElementsByTagName('head')[0].appendChild(script);
-}
-
-
-function firstLoadPage() {
-	if(window.location.href.indexOf('skyeng.autofaq.ai') === -1) {
-		document.getElementById('AF_helper').style.display = 'none';
-		document.getElementById('testUsers').style.display = 'none';
-	} else {
-		mystyles()
-		setTimeout(move_again_AF, 3500)
-		
-		setTimeout(function() {
-			btnAdd1 = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
-			btnAdd1.insertBefore(hashBut, btnAdd1.children[0])
-			btnAdd1.insertBefore(maskBack, btnAdd1.children[0])
-		}, 2000)
-		
-		setInterval(startTimer, 1000)
-	}
-	setTimeout(function () {document.getElementById('testUsers').style.background = "#464451"}, 200)
-}
-firstLoadPage()
-
-if(localStorage.getItem('hesoyam') == 1) {
-	let newDiv = document.createElement('div')
-	newDiv.style.margin = '5px'
-	let button = document.createElement('button')
-	button.textContent = 'Закрыть чат'
-	button.id = 'easyCloseChat'
-	button.onclick = function() {
-		var chatId = document.location.pathname.split('/')[3]
-		fetch("https://skyeng.autofaq.ai/api/conversation/status", {
-		  "headers": {
-			"content-type": "application/json",
-		  },
-		  "body": "{\"command\":\"DO_SET_CONVERSATION_STATUS\",\"conversationId\":\"" + chatId + "\",\"status\":\"ClosedByOperator\",\"autofaqServiceId\":120181,\"assignToOperatorId\":\"" + operatorId + "\"}",
-		  "method": "POST",
-		});
-	}
-	newDiv.append(button)
-	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.append(newDiv)
-}
-function hesoyam() {
-	if(localStorage.getItem('hesoyam') == 1) {
-		localStorage.setItem('hesoyam', '0')
-		document.getElementById('easyCloseChat').remove()
-		return
-	}
-	localStorage.setItem('hesoyam', '1')
-	let newDiv = document.createElement('div')
-	newDiv.style.margin = '5px'
-	let button = document.createElement('button')
-	button.textContent = 'Закрыть чат'
-	button.id = 'easyCloseChat'
-	button.onclick = function() {
-		chatId = document.location.pathname.split('/')[3]
-		fetch("https://skyeng.autofaq.ai/api/conversation/status", {
-		  "headers": {
-			"content-type": "application/json",
-		  },
-		  "body": "{\"command\":\"DO_SET_CONVERSATION_STATUS\",\"conversationId\":\"" + chatId + "\",\"status\":\"ClosedByOperator\",\"autofaqServiceId\":120181,\"assignToOperatorId\":\"" + operatorId + "\"}",
-		  "method": "POST",
-		});
-	}
-	newDiv.append(button)
-	document.getElementById('AF_helper').lastElementChild.lastElementChild.lastElementChild.append(newDiv)
-}
-
-function toUTF8Array(str) {
-	var utf8 = [];
-	for (var i=0; i < str.length; i++) {
-		var charcode = str.charCodeAt(i);
-		if (charcode < 0x80) utf8.push(charcode);
-		else if (charcode < 0x800) {
-			utf8.push(0xc0 | (charcode >> 6), 
-					  0x80 | (charcode & 0x3f));
-		}
-		else if (charcode < 0xd800 || charcode >= 0xe000) {
-			utf8.push(0xe0 | (charcode >> 12), 
-					  0x80 | ((charcode>>6) & 0x3f), 
-					  0x80 | (charcode & 0x3f));
-		}
-		// surrogate pair
-		else {
-			i++;
-			// UTF-16 encodes 0x10000-0x10FFFF by
-			// subtracting 0x10000 and splitting the
-			// 20 bits of 0x0-0xFFFFF into two halves
-			charcode = 0x10000 + (((charcode & 0x3ff)<<10)
-					  | (str.charCodeAt(i) & 0x3ff))
-			utf8.push(0xf0 | (charcode >>18), 
-					  0x80 | ((charcode>>12) & 0x3f), 
-					  0x80 | ((charcode>>6) & 0x3f), 
-					  0x80 | (charcode & 0x3f));
-		}
-	}
-	return utf8;
-}
-
-function decToHex(dec)
-{
-	var hexStr = '0123456789ABCDEF';
-	var low = dec % 16;
-	var high = (dec - low)/16;
-	hex = '' + hexStr.charAt(high) + hexStr.charAt(low);
-	return hex;
-}
-
-function textToUTF8String(string) {
-	string = toUTF8Array(string)
-	let string2 = ""
-	for(i = 0; i < string.length; i++) {
-		string2 += "%" + decToHex(string[i])
-	}
-	return string2
-}
-var flagGetCountTickets = 0
-function checkTicketCountsCrm() {
-	if(document.getElementsByClassName('ant-modal-content')[0] !== undefined && flagGetCountTickets == 0 && document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Создать задачу') {
-		flagGetCountTickets = 1
-		if(document.getElementsByClassName('ant-modal-content')[0].children[1].children[0].childNodes[0].textContent == 'Создать задачу') {
-			document.getElementsByClassName('ant-modal-content')[0].querySelectorAll('button')[2].onclick = function() {
-				if(document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].children[0].children[1].textContent == 'Критический' && document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].children[1].children[1].textContent == 'Техподдержка 1-я линия crm2') {
-					let me = textToUTF8String(document.querySelector('.user_menu-dropdown-user_name').innerText)
-					var adr1 = document.location.pathname
-					adr1 = adr1.split('/')
-					adr1 = adr1[3]
-					link = 'https://hdi.skyeng.ru/autofaq/conversation/-11/'+adr1
-					let body = 'entry.1213932=' + me + '&entry.1439163622=' + link
-					let options = {
-						  "headers": {
-							"content-type": "application/x-www-form-urlencoded",
-						  },
-						  "body": body,
-						  "method": "POST",
-						}
-					document.getElementById('responseTextarea1').value = JSON.stringify(options)
-					document.getElementById('responseTextarea2').value = 'https://docs.google.com/forms/d/e/1FAIpQLSft6Oyu3LRGsyG3-IicG7m5bMr1cdK0oZXnXgk7Aid4AdpB2Q/formResponse'
-					if(document.getElementById('responseTextarea3') != null)
-						document.getElementById('responseTextarea3').value = ''
-					document.getElementById('sendResponse').click()
-				}
-			}
-		}
-		getInfoGoogleDoc()
-	} 
-	if(document.getElementsByClassName('ant-modal-content')[0] === undefined) {
-		flagGetCountTickets = 0
-	}
-}
-function getInfoGoogleDoc() {
-   var app = 'https://script.google.com/macros/s/AKfycbzoean4smRm2nSrOxprmHT5c1Pt8h_mv9ypoJImJ-AwD6QOSI4/exec',
-	  xhr = new XMLHttpRequest();
-   xhr.open('GET', app);
-   xhr.onreadystatechange = function() {
-	 if (xhr.readyState !== 4) return;
-
-	 if (xhr.status == 200) {
-		try {
-			var r = JSON.parse(xhr.responseText),
-			   result = r["result"];
-			   
-			let allTickets = result;
-			let curDate = new Date()
-			let curH = (curDate.getUTCHours()) % 24
-			let prevH = (curDate.getUTCHours() - 1) % 24
-			let nextH = (curDate.getUTCHours() + 1) % 24
-			let curM = curDate.getUTCMinutes()
-			let time1 = ''
-			let time2 = ''
-			let count = 0
-			if(curM > 50) {
-				time1 = Number(curH.toString() + '50')
-				time2 = Number(nextH.toString() + '50')
-			} else {
-				time1 = Number(prevH.toString() + '50')
-				time2 = Number(curH.toString() + '50')
-			}
-			for(i = 0; i < allTickets.length; i++) {
-				let t = Number(allTickets[i][0].split('T')[1].split(':')[0] + allTickets[i][0].split('T')[1].split(':')[1])
-				if(t > time1 && t < time2)
-					count++
-			}
-			
-			let newDiv = document.createElement('div')
-			newDiv.textContent = 'Передано чатов CRM2 1Л: ' + count
-			document.getElementsByClassName('ant-modal-content')[0].children[2].children[0].children[0].children[0].children[0].append(newDiv)
-		} catch(e) {console.log(e)}
-	 }
-   }
-   xhr.send()
+	var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
+	btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
 }
