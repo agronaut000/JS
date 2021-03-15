@@ -1,3 +1,4 @@
+
 let mstl = document.createElement('style');
 document.body.append(mstl);
 var style = `.win_btn {
@@ -16,6 +17,7 @@ button {
     color:#ffffff; 
     padding:2px 2px;
 }
+
 .switch-btn {
     display: inline-block;
     width: 62px; /* ширина переключателя */
@@ -114,7 +116,10 @@ if (localStorage.getItem('winTopAF') == null) {
     localStorage.setItem('winLeftAF', '295');
 }
 
-
+if (localStorage.getItem('winTopAF') == null) {
+    localStorage.setItem('winTopAF', '120');
+    localStorage.setItem('winLeftAF', '295');
+}
 
 if (localStorage.getItem('scriptAdr') == null) {
     localStorage.setItem('scriptAdr', 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec');
@@ -954,6 +959,7 @@ function refreshTemplates() {
 							newBut.style.marginTop = '4px'
 							document.getElementById('addTmp').children[0].appendChild(newBut)
 						}
+						loadTemplates(c[2], c[3])
 						break
 					case 'Переводы':
 						var newBut = document.createElement('button')
@@ -1019,8 +1025,8 @@ function msgFromTable(btnName) {
 }
 
 var templatesAF = []
-async function loadTemplates(template, word) {
-	return await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
+async function loadTemplate(template, word) {
+	await fetch("https://skyeng.autofaq.ai/api/reason8/autofaq/top/batch", {
 	  "headers": {
 		"content-type": "application/json",
 	  },
@@ -1029,7 +1035,6 @@ async function loadTemplates(template, word) {
 	})
 	.then(response => response.json())
 	.then(result => {
-		var documentId = ""
 		var serviceId = ""
 		var queryId = ""
 		var AFsessionId = ""
@@ -1039,7 +1044,6 @@ async function loadTemplates(template, word) {
 		for(let i = 0; i < result.length; i++) {
 			if(result[i].title == template) {
 				var b = result[i]
-				documentId = b.documentId
 				serviceId = b.serviceId
 				queryId = b.queryId
 				AFsessionId = b.sessionId
@@ -1054,8 +1058,8 @@ async function loadTemplates(template, word) {
 				title = title.split("\"").join("\\\"")
 				accuracy = b.accuracy
 				
-				templatesAF.push([template, documentId, serviceId, queryId, AFsessionId, tmpText, title, accuracy])
-				return ([template, documentId, serviceId, queryId, AFsessionId, tmpText, title, accuracy])
+				templatesAF.push([template, serviceId, queryId, AFsessionId, tmpText, title, accuracy])
+				return [template, serviceId, queryId, AFsessionId, tmpText, title, accuracy]
 			}
 		}
 	})
@@ -1063,31 +1067,22 @@ async function loadTemplates(template, word) {
 
 async function sendAnswerTemplate(template, word, flag = 0, newText = "", flag2 = 0) {
 	var curTemplate
-	if(flag == 1) {
-		template = template_text
-		word = word_text
-	}
 	for(let i = 0; i < templatesAF.length; i++) {
 		if(template == templatesAF[i][0]) {
 			curTemplate = templatesAF[i]
 			break
 		}
+		if(i == templatesAF.length - 1)
+			curTemplate = loadTemplates(template, word)
 	}
-	if(curTemplate == undefined)
-		curTemplate = await loadTemplates(template, word)
+	loadTemplates()
 	//addTimer()
 	time = "10:00"
 	if(flag == 1) {
 		template = template_text
 		word = word_text
 	}
-	var documentId = curTemplate[1]
-	var serviceId = curTemplate[2]
-	var queryId = curTemplate[3]
-	var AFsessionId = curTemplate[4]
-	var tmpText = curTemplate[5]
-	var title = curTemplate[6]
-	var accuracy = curTemplate[7]
+	var tmpText = ""
 	var values = await getInfo(0)
 	var adr = values[0]; var adr1 = values[1]; var uid = values[2]
 	if(document.getElementById('msg1').innerHTML == "Доработать" && flag2 == 0) {
