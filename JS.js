@@ -377,7 +377,7 @@ function move_again() {
     }
 }
 move_again();
-let audio = new Audio("https://ustyugov.net/tmp/msg.mp3");
+let audio = new Audio("https://drive.google.com/u/0/uc?id=1832JE2IuK7AnfgkljLYytEeFL99Mt2Gv&export=download");
   function startTimer() {
     var time = localStorage.getItem('time');
     var cT = new Date();
