@@ -311,6 +311,7 @@ wintAF.innerHTML = win_AFhelper;
 var TS_addr = 'https://script.google.com/macros/s/AKfycbyuK-HoVzF2v66klEcqNyAKFFqtvVheEe4vLhRz/exec'
 var KC_addr = 'https://script.google.com/macros/s/AKfycbzNJgvbbgMIRzEuIMv2yR2VRE5lT7xrhouGVod0/exec'
 var TP_addr = 'https://script.google.com/macros/s/AKfycbydMLmE-OOY2MMshHopMe0prA5lS0CkaR7-rQ4p/exec'
+var TP_addr2 = 'https://script.google.com/macros/s/AKfycbxnGXdfgYTfmBiviW_sxBa2Q1YhhiutNv5FEk9ZVw/exec'
 var flagLangBut = 0
 function move_again_AF() {
     if(window.location.href.indexOf('autofaq') === -1) {
@@ -366,7 +367,7 @@ function move_again_AF() {
 		document.getElementById('howManyChats').style.display = 'none'
 		getText()
 	}
-	if(localStorage.getItem('scriptAdr') != TP_addr) {
+	if(localStorage.getItem('scriptAdr') != TP_addr && localStorage.getItem('scriptAdr') != TP_addr2) {
 		document.getElementById('msg1').style.display = 'none'
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
@@ -740,7 +741,7 @@ async function buttonsFromDoc(butName) {
 				if(document.getElementById('languageAF').innerHTML == "Русский") {
 					if(localStorage.getItem('scriptAdr') == TS_addr)
 						txt = 'Помогите мне'
-					if(localStorage.getItem('scriptAdr') == TP_addr)
+					if(localStorage.getItem('scriptAdr') == TP_addr || localStorage.getItem('scriptAdr') == TP_addr2)
 						txt = "Подождите ТП"
 					if(localStorage.getItem('scriptAdr') == KC_addr)
 						txt = "Сейчас я вам помогу"
@@ -748,7 +749,7 @@ async function buttonsFromDoc(butName) {
 				else {
 					if(localStorage.getItem('scriptAdr') == TS_addr)
 						txt = "I’m going to help you now."
-					if(localStorage.getItem('scriptAdr') == TP_addr)
+					if(localStorage.getItem('scriptAdr') == TP_addr || localStorage.getItem('scriptAdr') == TP_addr2)
 						txt = "Подождите (англ)"
 					if(localStorage.getItem('scriptAdr') == KC_addr)
 						txt = "Подождите (англ)"
@@ -1453,19 +1454,19 @@ function startTimer() {
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "id") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button2)
-				if(localStorage.getItem('scriptAdr') == TP_addr)
+				if(localStorage.getItem('scriptAdr') == TP_addr || localStorage.getItem('scriptAdr') == TP_addr2)
 					btn.appendChild(button22)
 			}
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-studentId") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button3)
-				if(localStorage.getItem('scriptAdr') == TP_addr)
+				if(localStorage.getItem('scriptAdr') == TP_addr || localStorage.getItem('scriptAdr') == TP_addr2)
 					btn.appendChild(button33)
 			}
 			if(document.getElementsByClassName('expert-user_details-list')[1].childNodes[i].firstChild.innerText == "nextClass-teacherId") {
 				btn = document.getElementsByClassName('expert-user_details-list')[1].childNodes[i]
 				btn.appendChild(button4)
-				if(localStorage.getItem('scriptAdr') == TP_addr)
+				if(localStorage.getItem('scriptAdr') == TP_addr || localStorage.getItem('scriptAdr') == TP_addr2)
 					btn.appendChild(button44)
 			}
 		}
@@ -1476,7 +1477,7 @@ function startTimer() {
 	}
 
 	
-	if(localStorage.getItem('scriptAdr') == TP_addr && document.getElementById('continue_chat_button') == null && document.getElementsByClassName('expert-user_info_panel-footer-inner')[0] != undefined) {
+	if((localStorage.getItem('scriptAdr') == TP_addr || localStorage.getItem('scriptAdr') == TP_addr2) && document.getElementById('continue_chat_button') == null && document.getElementsByClassName('expert-user_info_panel-footer-inner')[0] != undefined) {
 		let btn1 = document.createElement('span');
 		document.getElementsByClassName('expert-user_info_panel-footer-inner')[0].append(btn1)
 		btn1.innerHTML = '<a style="float: left; margin-right: 5px; margin-top: 10px; color: black; cursor: pointer;">Нецелевой</a>';
