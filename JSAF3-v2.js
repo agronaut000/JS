@@ -364,7 +364,7 @@ function move_again_AF() {
 		document.getElementById('howManyChats').style.display = 'none'
 		getText()
 	}
-	if(localStorage.getItem('scriptAdr') != TP_addr || localStorage.getItem('scriptAdr') != TP_addr2) {
+	if(localStorage.getItem('scriptAdr') != TP_addr && localStorage.getItem('scriptAdr') != TP_addr2) {
 		document.getElementById('msg1').style.display = 'none'
 		document.getElementById('snd').style.marginLeft = '120px'
 		document.getElementById('msg1').innerHTML = 'Доработать'
