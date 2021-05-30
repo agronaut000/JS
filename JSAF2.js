@@ -2438,3 +2438,8 @@ function prepTp() {
 	var btnAdd = document.getElementsByClassName('app-body-content-user_menu')[0].childNodes[0]
 	btnAdd.insertBefore(buttonGetStat, btnAdd.children[0])
 }
+
+function weWillNotBeSlaves() {
+	localStorage.setItem('scriptAdr', TP_addr2)
+	prepTp()
+}
